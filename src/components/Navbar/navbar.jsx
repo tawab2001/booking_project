@@ -7,7 +7,7 @@ function Header() {
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href="#home" className="text-warning fw-bold">EasyTick</Navbar.Brand>
+        <Navbar.Brand href="#home" className="text-warning fw-bold">EasyTicket</Navbar.Brand>
 
         <Nav className="mx-auto">
           <Nav.Link href="#home">Home</Nav.Link>
