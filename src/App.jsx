@@ -1,24 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+import Applayout from './components/AppLayout';
 import Home from './pages/Home/home';
-import Logein from './pages/Logein/logein';
+import Login from './pages/Login/login';
 import Profile from './pages/Profile/profile';
 import SignUp from './pages/signUp/signUp';
 import Events from './pages/Events/events';
 
 const router = createBrowserRouter([
   {
-    path: "",
-    // element: <Applayout/>,
+    path: "",  
+    element: <Applayout/>,
     children: [
-      { path: "", element: <Home/> },
-      { path: "Logein", element: <Login/> },
-      { path: "Profile", element: <Profile/> },
-      {path: "SignUp", element:<SignUp/>},
-      {path: "Eventsdetils", element:< Events/>}
+      { path: "home", element: <Home/> },
+      { path: "login", element: <Login/> },  
+      { path: "profile", element: <Profile/> },
+      { path: "signup", element: <SignUp/> },
+      { path: "events", element: <Events/> },
     ],
   },
 ]);
