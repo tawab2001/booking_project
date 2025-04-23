@@ -2,8 +2,11 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
+  const navigate = useNavigate();
+
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
@@ -20,7 +23,7 @@ function Header() {
 
         <div className="d-flex gap-2 align-items-center">
           <Button variant="warning">Login</Button>
-          <Button variant="outline-warning">Sign up</Button>
+          <Button variant="outline-warning" onClick={()=>{navigate('/signup') }}>Sign up</Button>
         </div>
       </Container>
     </Navbar>
