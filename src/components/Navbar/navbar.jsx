@@ -7,9 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 function Header() {
   const navigate = useNavigate();
 
-  const navigate = useNavigate();
-
-  return (
+   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
         <Navbar.Brand as={Link} to="/home" className="text-warning fw-bold">
