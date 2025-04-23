@@ -3,7 +3,7 @@ import "./home.module.css";
 import { Form, Button, Card, Col, Row, Container } from "react-bootstrap";
 import { FaStar } from "react-icons/fa";
 
-// استيراد الصور
+
 import booking from "../../assets/booking.jpg";
 import booking2 from "../../assets/booking2.jpg";
 import booking3 from "../../assets/booking3.jpg";
@@ -11,7 +11,7 @@ import booking4 from "../../assets/booking4.jpg";
 import booking5 from "../../assets/booking5.jpg";
 import booking6 from "../../assets/booking6.jpg";
 
-// الصور
+
 const images = [
     booking,
     booking2,
@@ -23,16 +23,14 @@ const images = [
 
 const Home = () => {
     const [currentImage, setCurrentImage] = useState(0);
-
-    // التبديل بين الصور في الهيرو سيكشن
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImage((prevIndex) => (prevIndex + 1) % images.length);
-        }, 4000); // كل 4 ثواني تتغير الصورة
+        }, 4000); 
         return () => clearInterval(interval);
     }, []);
 
-    // بيانات Featured Packages (ستتم إضافتها من API لاحقًا)
+ 
     const featuredPackages = [
         {
             id: 1,
@@ -78,7 +76,7 @@ const Home = () => {
 
     return (
         <div>
-            {/* الهيرو سيكشن */}
+            {}
             <div
                 className="hero-section d-flex align-items-center justify-content-center text-white"
                 style={{
@@ -147,7 +145,7 @@ const Home = () => {
             </div>
 
 
-            {/* قسم Featured Packages */}
+            
             <div className="featured-packages py-5 bg-white">
                 <Container>
                     <h2 className="text-center mb-4">Featured Packages</h2>
@@ -168,7 +166,7 @@ const Home = () => {
                 </Container>
             </div>
 
-            {/* قسم Best Price Guarantee & Other Info */}
+            
             <div className="info-section py-5">
                 <Container>
                     <Row>
