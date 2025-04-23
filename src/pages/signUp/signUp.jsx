@@ -270,7 +270,7 @@ const SignUp = () => {
         <div className="col-12 col-md-8 col-lg-6">
           <div className="bg-dark border border-secondary rounded-3 shadow">
             <div className="p-4 text-center border-bottom border-secondary">
-              <h1 className="h3 text-warning mb-2">easyTicket</h1>
+              <h1 className="h3 text-warning mb-2">EasyTicket</h1>
               <p className="text-secondary mb-0">Create your account</p>
             </div>
             {!userType ? <UserTypeSelector /> : <SignUpForm />}
