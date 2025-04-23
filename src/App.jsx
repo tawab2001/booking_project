@@ -1,6 +1,5 @@
 import './App.css'
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-
 import Applayout from './components/AppLayout';
 import Home from './pages/Home/home';
 import Login from './pages/Login/login';
@@ -26,6 +25,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+
     </>
   )
 }
