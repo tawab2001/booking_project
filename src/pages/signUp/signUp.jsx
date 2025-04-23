@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Building2, User, ArrowLeft, Eye, EyeOff } from 'lucide-react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
+// FormField component for reusable form inputs
 const FormField = React.memo(({ label, name, type, value, error, children, onChange }) => (
   <div className="mb-3">
     <label className="form-label text-white">{label}</label>
@@ -37,18 +39,18 @@ const SignUp = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    setFormData((prev) => ({ ...prev, type: userType }));
+    setFormData(prev => ({ ...prev, type: userType }));
   }, [userType]);
 
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       [name]: value
     }));
 
     if (errors[name]) {
-      setErrors((prev) => {
+      setErrors(prev => {
         const newErrors = { ...prev };
         delete newErrors[name];
         return newErrors;
@@ -134,20 +136,54 @@ const SignUp = () => {
       <form onSubmit={handleSubmit}>
         {userType === 'institution' ? (
           <>
-            <FormField label="Institution Name" name="name" type="text" value={formData.name} error={errors.name} onChange={handleChange} />
-            <FormField label="Email Address" name="email" type="email" value={formData.email} error={errors.email} onChange={handleChange} />
-            <FormField label="Password" name="password" type={showPassword ? "text" : "password"} value={formData.password} error={errors.password} onChange={handleChange}>
+            <FormField 
+              label="Institution Name" 
+              name="name" 
+              type="text" 
+              value={formData.name} 
+              error={errors.name} 
+              onChange={handleChange} 
+            />
+            <FormField 
+              label="Email Address" 
+              name="email" 
+              type="email" 
+              value={formData.email} 
+              error={errors.email} 
+              onChange={handleChange} 
+            />
+            <FormField 
+              label="Password" 
+              name="password" 
+              type={showPassword ? "text" : "password"} 
+              value={formData.password} 
+              error={errors.password} 
+              onChange={handleChange}
+            >
               <button
                 type="button"
-                onMouseDown={(e) => e.preventDefault()}
                 onClick={() => setShowPassword(!showPassword)}
                 className="btn btn-link position-absolute end-0 top-50 translate-middle-y text-secondary"
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </FormField>
-            <FormField label="Confirm Password" name="confirmPassword" type={showPassword ? "text" : "password"} value={formData.confirmPassword} error={errors.confirmPassword} onChange={handleChange} />
-            <FormField label="Country" name="country" type="text" value={formData.country} error={errors.country} onChange={handleChange} />
+            <FormField 
+              label="Confirm Password" 
+              name="confirmPassword" 
+              type={showPassword ? "text" : "password"} 
+              value={formData.confirmPassword} 
+              error={errors.confirmPassword} 
+              onChange={handleChange} 
+            />
+            <FormField 
+              label="Country" 
+              name="country" 
+              type="text" 
+              value={formData.country} 
+              error={errors.country} 
+              onChange={handleChange} 
+            />
             <div className="mb-3">
               <label className="form-label text-white">Company Description</label>
               <textarea
@@ -161,29 +197,68 @@ const SignUp = () => {
           </>
         ) : (
           <>
-            <FormField label="Username" name="username" type="text" value={formData.username} error={errors.username} onChange={handleChange} />
-            <FormField label="Email Address" name="email" type="email" value={formData.email} error={errors.email} onChange={handleChange} />
-            <FormField label="Password" name="password" type={showPassword ? "text" : "password"} value={formData.password} error={errors.password} onChange={handleChange}>
+            <FormField 
+              label="Username" 
+              name="username" 
+              type="text" 
+              value={formData.username} 
+              error={errors.username} 
+              onChange={handleChange} 
+            />
+            <FormField 
+              label="Email Address" 
+              name="email" 
+              type="email" 
+              value={formData.email} 
+              error={errors.email} 
+              onChange={handleChange} 
+            />
+            <FormField 
+              label="Password" 
+              name="password" 
+              type={showPassword ? "text" : "password"} 
+              value={formData.password} 
+              error={errors.password} 
+              onChange={handleChange}
+            >
               <button
                 type="button"
-                onMouseDown={(e) => e.preventDefault()}
                 onClick={() => setShowPassword(!showPassword)}
                 className="btn btn-link position-absolute end-0 top-50 translate-middle-y text-secondary"
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </FormField>
-            <FormField label="Confirm Password" name="confirmPassword" type={showPassword ? "text" : "password"} value={formData.confirmPassword} error={errors.confirmPassword} onChange={handleChange} />
-            <FormField label="Phone Number" name="phoneNumber" type="tel" value={formData.phoneNumber} error={errors.phoneNumber} onChange={handleChange} />
+            <FormField 
+              label="Confirm Password" 
+              name="confirmPassword" 
+              type={showPassword ? "text" : "password"} 
+              value={formData.confirmPassword} 
+              error={errors.confirmPassword} 
+              onChange={handleChange} 
+            />
+            <FormField 
+              label="Phone Number" 
+              name="phoneNumber" 
+              type="tel" 
+              value={formData.phoneNumber} 
+              error={errors.phoneNumber} 
+              onChange={handleChange} 
+            />
           </>
         )}
 
         <div className="mt-4">
-          <button type="submit" className="btn btn-warning w-100">Create Account</button>
+          <button type="submit" className="btn btn-warning w-100">
+            Create Account
+          </button>
         </div>
 
         <p className="text-center text-secondary small mt-4">
-          Already have an account? <a href="#" className="text-warning text-decoration-none">Sign in</a>
+          Already have an account?{' '}
+          <a href="/login" className="text-warning text-decoration-none">
+            Sign in
+          </a>
         </p>
       </form>
     </div>
