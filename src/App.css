@@ -1,0 +1,31 @@
+@media (max-width: 768px) {
+    .hero-section {
+      height: 50vh;
+    }
+  
+    .card {
+      margin-bottom: 20px;
+    }
+  
+    .navbar-brand {
+      font-size: 1.2rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .hero-section h1 {
+      font-size: 1.5rem;
+    }
+  
+    .btn {
+      font-size: 0.9rem;
+    }
+  
+    .table {
+      font-size: 0.8rem;
+    }
+  
+    .navbar-brand {
+      font-size: 1rem;
+    }
+  }
