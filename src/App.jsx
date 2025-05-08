@@ -8,6 +8,7 @@ import SignUp from './pages/signUp/signUp';
 import Events from './pages/Events/events';
 import AdminDashboard from './pages/AdminDashboard/admindashboard';
 import Booking from './pages/Booking/booking';
+import FristSection from './components/CreateEvent/FristSection';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,8 @@ const router = createBrowserRouter([
       { path: "signup", element: <SignUp/> },
       { path: "events", element: <Events/> },
       {path: "AdminDashboard", element: <AdminDashboard/>},
-      {path:"booking" , element: <Booking/>}
+      {path:"booking" , element: <Booking/>},
+      {path:"createEvent" , element: <FristSection/>}
     ],
   },
 ]);
