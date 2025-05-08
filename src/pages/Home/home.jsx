@@ -7,7 +7,7 @@ import { FaStar } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";import Carousel from "react-bootstrap/Carousel";
+import "swiper/css/navigation";
 
 
 import booking from "../../assets/booking.jpg";
