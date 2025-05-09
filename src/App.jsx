@@ -8,6 +8,7 @@ import SignUp from './pages/signUp/signUp';
 import Events from './pages/Events/events';
 import AdminDashboard from './pages/AdminDashboard/admindashboard';
 import Booking from './pages/Booking/booking';
+import SecondSection from './components/CreateEvent/SecondSection';
 
 const router = createBrowserRouter([
   {
@@ -15,12 +16,14 @@ const router = createBrowserRouter([
     element: <Applayout/>,
     children: [
       { path: "home", element: <Home/> },
+      { path: "", element: <Home/> },
       { path: "login", element: <Login/> },  
       { path: "profile", element: <Profile/> },
       { path: "signup", element: <SignUp/> },
       { path: "events", element: <Events/> },
       {path: "AdminDashboard", element: <AdminDashboard/>},
-      {path:"booking" , element: <Booking/>}
+      {path:"booking" , element: <Booking/>},
+      {path:"secondsection" , element: <SecondSection/>},
     ],
   },
 ]);
