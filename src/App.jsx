@@ -6,8 +6,7 @@ import Login from './pages/Login/login';
 import Profile from './pages/Profile/profile';
 import SignUp from './pages/signUp/signUp';
 import Events from './pages/Events/events';
-import Booking from './pages/Booking/booking';
-import AdminDashboard from './pages/AdminDashboard/admindashboard';
+
 
 const router = createBrowserRouter([
   {
@@ -15,12 +14,12 @@ const router = createBrowserRouter([
     element: <Applayout/>,
     children: [
       { path: "home", element: <Home/> },
+      { path: "", element: <Home/> },
       { path: "login", element: <Login/> },  
       { path: "profile", element: <Profile/> },
       { path: "signup", element: <SignUp/> },
       { path: "events", element: <Events/> },
-      {path: "booking",element: <Booking/>},
-      {path:"admaindashboard",element:<AdminDashboard/>}
+
     ],
   },
 ]);

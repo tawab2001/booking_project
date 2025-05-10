@@ -10,10 +10,7 @@
 // };
 
 // export default Events;
-import React from "react";
-import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
 
-const Events = () => {
   const events = [
     {
       id: 1,
