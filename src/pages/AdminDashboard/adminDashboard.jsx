@@ -13,7 +13,7 @@ const AdminDashboard = () => {
       <h2 className="text-warning mb-4 text-center">لوحة تحكم الأدمن</h2>
 
       <Row className="mb-4">
-        <Col md={4}>
+        <Col md={4} sm={12}>
           <Card bg="dark" text="white" className="shadow text-center">
             <Card.Body>
               <Card.Title className="text-warning">عدد الأحداث</Card.Title>
