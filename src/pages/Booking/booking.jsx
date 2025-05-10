@@ -3,75 +3,6 @@
 // import { Calendar, MapPin, Clock, Users, Minus, Plus, CreditCard, Smartphone, Wallet, CheckCircle } from 'lucide-react';
 
 
-// const Booking = () => {
-//   const location = useLocation();
-//   const match = location.state?.match;
-
-//   if (!match) {
-//     return (
-//       <Container className="py-5 text-center">
-//         <h2>لا توجد مباراة محددة للحجز</h2>
-//       </Container>
-//     );
-//   }
-
-//   const handleConfirmBooking = () => {
-//     alert(`تم حجز تذكرتك لمباراة ${match.teams} بنجاح!`);
-//   };
-
-//   return (
-//     <Container className="py-5">
-//       <h2 className="text-center mb-4">حجز المباراة</h2>
-//       <Card className="shadow">
-//         <Card.Img
-//           variant="top"
-//           src={match.image}
-//           alt={match.teams}
-//           style={{ height: "300px", objectFit: "cover" }}
-//         />
-//         <Card.Body>
-//           <h5 className="card-title text-primary">{match.teams}</h5>
-//           <p className="card-text mb-1">
-//             <strong>التاريخ:</strong> {match.date}
-//           </p>
-//           <p className="card-text mb-1">
-//             <strong>الساعة:</strong> {match.time}
-//           </p>
-//           <p className="card-text">
-//             <strong>الاستاد:</strong> {match.stadium}
-//           </p>
-//           <Form className="mt-4">
-//             <Form.Group className="mb-3">
-//               <Form.Label>عدد التذاكر</Form.Label>
-//               <Form.Control type="number" min="1" defaultValue="1" />
-//             </Form.Group>
-//             <Button variant="warning" onClick={handleConfirmBooking}>
-//               تأكيد الحجز
-//             </Button>
-//           </Form>
-//         </Card.Body>
-//       </Card>
-//     </Container>
-//   );
-// };
-
-// export default Booking;
-
-
-import React, { useState } from 'react';
-import { Container, Card, Button, Row, Col, Form, Alert } from 'react-bootstrap';
-import { Calendar, MapPin, Clock, Users, Minus, Plus, CreditCard, Smartphone, Wallet, CheckCircle } from 'lucide-react';
-
-const EVENT_DATA = {
-  id: '1',
-  title: 'Summer Music Festival 2023',
-  image: 'https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg',
-  date: 'June 15-17, 2023',
-  time: '12:00 PM - 11:00 PM',
-  location: 'Central Park, New York',
-  description: 'Join us for the biggest music festival of the summer featuring top artists from around the world. Three days of non-stop music, food, and fun!',
-  capacity: 'Limited to 5,000 attendees'
-};
 
 const TICKET_TYPES = [
   { id: 1, name: 'General Admission', price: 50, description: 'Basic entry to the event', max: 10 },
@@ -81,7 +12,7 @@ const TICKET_TYPES = [
 
 function Booking() {
   const [bookingData, setBookingData] = useState({
-    eventId: '1',
+
     tickets: TICKET_TYPES.map(type => ({
       id: type.id,
       name: type.name,
@@ -154,7 +85,7 @@ function Booking() {
   const handleConfirmBooking = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
-    
+
     if (form.checkValidity() === false) {
       e.stopPropagation();
       setValidated(true);
@@ -167,8 +98,7 @@ function Booking() {
     window.scrollTo(0, 0);
   };
 
-  const hasSelectedTickets = bookingData.tickets.some(ticket => ticket.quantity > 0);
-  const totalTickets = bookingData.tickets.reduce((sum, ticket) => sum + ticket.quantity, 0);
+
 
   return (
     <div className="min-vh-100 bg-light py-4">
@@ -181,49 +111,12 @@ function Booking() {
           {!isConfirmed ? (
             <Form noValidate validated={validated} onSubmit={handleConfirmBooking}>
               <div className="p-4">
-                {/* Event Details Section */}
-                <section className="mb-5">
-                  <h2 className="mb-4">Event Details</h2>
-                  <Card className="border-0 shadow-sm">
-                    <Card.Img variant="top" src={EVENT_DATA.image} style={{ height: '300px', objectFit: 'cover' }} />
-                    <Card.Body>
-                      <h2>{EVENT_DATA.title}</h2>
-                      <Row className="mt-4">
-                        <Col md={6}>
-                          <div className="d-flex align-items-center mb-3">
-                            <Calendar className="me-2 text-warning" size={20} />
-                            <span>{EVENT_DATA.date}</span>
-                          </div>
-                          <div className="d-flex align-items-center mb-3">
-                            <Clock className="me-2 text-warning" size={20} />
-                            <span>{EVENT_DATA.time}</span>
-                          </div>
-                        </Col>
-                        <Col md={6}>
-                          <div className="d-flex align-items-center mb-3">
-                            <MapPin className="me-2 text-warning" size={20} />
-                            <span>{EVENT_DATA.location}</span>
-                          </div>
-                          <div className="d-flex align-items-center mb-3">
-                            <Users className="me-2 text-warning" size={20} />
-                            <span>{EVENT_DATA.capacity}</span>
-                          </div>
-                        </Col>
-                      </Row>
-                      <Card.Text className="mt-3">{EVENT_DATA.description}</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </section>
 
                 {/* Ticket Selection Section */}
                 <section className="mb-5">
                   <h2 className="mb-4">Select Tickets</h2>
                   {TICKET_TYPES.map((ticketType) => (
-                    <div 
-                      key={ticketType.id} 
-                      className={`border rounded-3 p-3 mb-3 ${bookingData.tickets.find(t => t.id === ticketType.id)?.quantity ? 'border-warning bg-warning bg-opacity-10' : ''}`}
-                    >
-                      <Row>
+
                         <Col md={7}>
                           <h5>{ticketType.name}</h5>
                           <p className="text-muted">{ticketType.description}</p>
@@ -231,15 +124,12 @@ function Booking() {
                         </Col>
                         <Col md={5} className="d-flex align-items-center justify-content-end">
                           <div className="d-flex align-items-center">
-                            <Button 
-                              variant="light" 
-                              size="sm" 
+
                               onClick={() => handleQuantityChange(ticketType.id, -1)}
                               disabled={!bookingData.tickets.find(t => t.id === ticketType.id)?.quantity}
                               className="rounded-circle"
                             >
-                              <Minus size={16} />
-                            </Button>
+               </Button>
                             <Form.Control
                               type="number"
                               min="0"
@@ -249,17 +139,12 @@ function Booking() {
                               className="mx-2 text-center"
                               style={{ width: '60px' }}
                             />
-                            <Button 
-                              variant="light" 
-                              size="sm" 
-                              onClick={() => handleQuantityChange(ticketType.id, 1)}
+                 onClick={() => handleQuantityChange(ticketType.id, 1)}
                               disabled={
                                 (bookingData.tickets.find(t => t.id === ticketType.id)?.quantity || 0) >= ticketType.max
                               }
                               className="rounded-circle"
-                            >
-                              <Plus size={16} />
-                            </Button>
+             </Button>
                           </div>
                         </Col>
                       </Row>
@@ -270,7 +155,7 @@ function Booking() {
                 {/* Payment Options Section */}
                 <section className="mb-5">
                   <h2 className="mb-4">Payment Options</h2>
-                  <div 
+
                     className={`border rounded-3 p-3 mb-3 ${bookingData.paymentMethod === 'creditCard' ? 'border-warning bg-warning bg-opacity-10' : ''}`}
                     onClick={() => handlePaymentMethodChange('creditCard')}
                     style={{ cursor: 'pointer' }}
@@ -300,9 +185,7 @@ function Booking() {
             </Form>
           ) : (
             <div className="text-center p-4">
-              <CheckCircle size={80} className="text-warning mb-3" />
-              <h2>Booking Confirmed!</h2>
-              <p>Your booking reference is: {bookingReference}</p>
+
             </div>
           )}
         </div>
