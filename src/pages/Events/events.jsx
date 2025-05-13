@@ -1,15 +1,9 @@
-// import React from 'react';
+import React from "react";
+import { Container, Row, Col, Card, Button, Badge } from "react-bootstrap";
+import { useNavigate } from "react-router-dom"; // استيراد useNavigate
 
-// const Events = () => {
-//     return (
-//         <div>
-//             <h1>Events Page</h1>
-//             <p>Welcome to the Events page. Here you can find all the upcoming events.</p>
-//         </div>
-//     );
-// };
-
-// export default Events;
+const Events = () => {
+  const navigate = useNavigate(); // تعريف useNavigate
 
   const events = [
     {
@@ -67,7 +61,11 @@
                     عدد المقاعد المتوفرة: {event.seatsAvailable}
                   </Badge>
                 </Card.Text>
-                <Button variant="warning" className="w-100 mt-auto">
+                <Button
+                  variant="warning"
+                  className="w-100 mt-auto"
+                  onClick={() => navigate("/booking")} // التنقل إلى صفحة الحجز
+                >
                   احجز الآن
                 </Button>
               </Card.Body>
@@ -79,4 +77,4 @@
   );
 };
 
-export default Events;
+export default Events;

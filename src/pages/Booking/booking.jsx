@@ -1,8 +1,6 @@
-// import React, { useState } from 'react';
-// import { Container, Card, Button, Row, Col, Form, Alert } from 'react-bootstrap';
-// import { Calendar, MapPin, Clock, Users, Minus, Plus, CreditCard, Smartphone, Wallet, CheckCircle } from 'lucide-react';
-
-
+import React, { useState } from 'react';
+import { Container, Card, Button, Row, Col, Form } from 'react-bootstrap';
+import { Minus, Plus, CreditCard } from 'lucide-react';
 
 const TICKET_TYPES = [
   { id: 1, name: 'General Admission', price: 50, description: 'Basic entry to the event', max: 10 },
@@ -12,7 +10,6 @@ const TICKET_TYPES = [
 
 function Booking() {
   const [bookingData, setBookingData] = useState({
-
     tickets: TICKET_TYPES.map(type => ({
       id: type.id,
       name: type.name,
@@ -20,22 +17,8 @@ function Booking() {
       quantity: 0
     })),
     totalAmount: 0,
-    customer: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-    },
     paymentMethod: 'creditCard',
-    cardDetails: {
-      number: '',
-      name: '',
-      expiry: '',
-      cvv: '',
-    }
   });
-  const [isConfirmed, setIsConfirmed] = useState(false);
-  const [bookingReference, setBookingReference] = useState('');
   const [validated, setValidated] = useState(false);
 
   const handleQuantityChange = (ticketId, change) => {
@@ -53,33 +36,8 @@ function Booking() {
     setBookingData({ ...bookingData, tickets: updatedTickets, totalAmount });
   };
 
-  const handleCustomerChange = (e) => {
-    const { name, value } = e.target;
-    setBookingData({
-      ...bookingData,
-      customer: {
-        ...bookingData.customer,
-        [name]: value
-      }
-    });
-  };
-
   const handlePaymentMethodChange = (method) => {
-    setBookingData({
-      ...bookingData,
-      paymentMethod: method
-    });
-  };
-
-  const handleCardDetailsChange = (e) => {
-    const { name, value } = e.target;
-    setBookingData({
-      ...bookingData,
-      cardDetails: {
-        ...bookingData.cardDetails,
-        [name]: value
-      }
-    });
+    setBookingData({ ...bookingData, paymentMethod: method });
   };
 
   const handleConfirmBooking = (e) => {
@@ -92,13 +50,10 @@ function Booking() {
       return;
     }
 
-    const reference = `BK${Math.floor(Math.random() * 10000000).toString().padStart(7, '0')}`;
-    setBookingReference(reference);
-    setIsConfirmed(true);
-    window.scrollTo(0, 0);
+    alert('Booking confirmed!');
   };
 
-
+  const hasSelectedTickets = bookingData.tickets.some(ticket => ticket.quantity > 0);
 
   return (
     <div className="min-vh-100 bg-light py-4">
@@ -108,86 +63,87 @@ function Booking() {
             <h1>Event Booking</h1>
           </div>
 
-          {!isConfirmed ? (
-            <Form noValidate validated={validated} onSubmit={handleConfirmBooking}>
-              <div className="p-4">
+          <Form noValidate validated={validated} onSubmit={handleConfirmBooking}>
+            <div className="p-4">
 
-                {/* Ticket Selection Section */}
-                <section className="mb-5">
-                  <h2 className="mb-4">Select Tickets</h2>
-                  {TICKET_TYPES.map((ticketType) => (
-
-                        <Col md={7}>
-                          <h5>{ticketType.name}</h5>
-                          <p className="text-muted">{ticketType.description}</p>
-                          <h6>${ticketType.price.toFixed(2)}</h6>
-                        </Col>
-                        <Col md={5} className="d-flex align-items-center justify-content-end">
-                          <div className="d-flex align-items-center">
-
-                              onClick={() => handleQuantityChange(ticketType.id, -1)}
-                              disabled={!bookingData.tickets.find(t => t.id === ticketType.id)?.quantity}
-                              className="rounded-circle"
-                            >
-               </Button>
-                            <Form.Control
-                              type="number"
-                              min="0"
-                              max={ticketType.max}
-                              value={bookingData.tickets.find(t => t.id === ticketType.id)?.quantity || 0}
-                              onChange={(e) => handleQuantityChange(ticketType.id, parseInt(e.target.value) || 0)}
-                              className="mx-2 text-center"
-                              style={{ width: '60px' }}
-                            />
-                 onClick={() => handleQuantityChange(ticketType.id, 1)}
-                              disabled={
-                                (bookingData.tickets.find(t => t.id === ticketType.id)?.quantity || 0) >= ticketType.max
-                              }
-                              className="rounded-circle"
-             </Button>
-                          </div>
-                        </Col>
-                      </Row>
-                    </div>
-                  ))}
-                </section>
-
-                {/* Payment Options Section */}
-                <section className="mb-5">
-                  <h2 className="mb-4">Payment Options</h2>
-
-                    className={`border rounded-3 p-3 mb-3 ${bookingData.paymentMethod === 'creditCard' ? 'border-warning bg-warning bg-opacity-10' : ''}`}
-                    onClick={() => handlePaymentMethodChange('creditCard')}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    <div className="d-flex align-items-center">
-                      <Form.Check
-                        type="radio"
-                        id="creditCard"
-                        name="paymentMethod"
-                        value="creditCard"
-                        checked={bookingData.paymentMethod === 'creditCard'}
-                        onChange={(e) => handlePaymentMethodChange(e.target.value)}
-                        label=""
-                      />
-                      <CreditCard size={24} className="me-2 text-warning" />
-                      <h5 className="mb-0">Credit Card</h5>
-                    </div>
+              {/* Ticket Selection Section */}
+              <section className="mb-5">
+                <h2 className="mb-4">Select Tickets</h2>
+                {TICKET_TYPES.map((ticketType) => (
+                  <div key={ticketType.id} className="mb-3">
+                    <Row>
+                      <Col md={7}>
+                        <h5>{ticketType.name}</h5>
+                        <p className="text-muted">{ticketType.description}</p>
+                        <h6>${ticketType.price.toFixed(2)}</h6>
+                      </Col>
+                      <Col md={5} className="d-flex align-items-center justify-content-end">
+                        <div className="d-flex align-items-center">
+                          <Button
+                            variant="outline-warning"
+                            onClick={() => handleQuantityChange(ticketType.id, -1)}
+                            disabled={!bookingData.tickets.find(t => t.id === ticketType.id)?.quantity}
+                            className="rounded-circle"
+                          >
+                            <Minus />
+                          </Button>
+                          <Form.Control
+                            type="number"
+                            min="0"
+                            max={ticketType.max}
+                            value={bookingData.tickets.find(t => t.id === ticketType.id)?.quantity || 0}
+                            onChange={(e) => handleQuantityChange(ticketType.id, parseInt(e.target.value) || 0)}
+                            className="mx-2 text-center"
+                            style={{ width: '60px' }}
+                          />
+                          <Button
+                            variant="outline-warning"
+                            onClick={() => handleQuantityChange(ticketType.id, 1)}
+                            disabled={
+                              (bookingData.tickets.find(t => t.id === ticketType.id)?.quantity || 0) >= ticketType.max
+                            }
+                            className="rounded-circle"
+                          >
+                            <Plus />
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
                   </div>
-                </section>
+                ))}
+              </section>
 
-                <div className="d-flex justify-content-end">
-                  <Button variant="warning" type="submit" disabled={!hasSelectedTickets}>
-                    Confirm Booking
-                  </Button>
+              {/* Payment Options Section */}
+              <section className="mb-5">
+                <h2 className="mb-4">Payment Options</h2>
+                <div
+                  className={`border rounded-3 p-3 mb-3 ${bookingData.paymentMethod === 'creditCard' ? 'border-warning bg-warning bg-opacity-10' : ''}`}
+                  onClick={() => handlePaymentMethodChange('creditCard')}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <div className="d-flex align-items-center">
+                    <Form.Check
+                      type="radio"
+                      id="creditCard"
+                      name="paymentMethod"
+                      value="creditCard"
+                      checked={bookingData.paymentMethod === 'creditCard'}
+                      onChange={(e) => handlePaymentMethodChange(e.target.value)}
+                      label=""
+                    />
+                    <CreditCard size={24} className="me-2 text-warning" />
+                    <h5 className="mb-0">Credit Card</h5>
+                  </div>
                 </div>
-              </div>
-            </Form>
-          ) : (
-            <div className="text-center p-4">
+              </section>
 
+              <div className="d-flex justify-content-end">
+                <Button variant="warning" type="submit" disabled={!hasSelectedTickets}>
+                  Confirm Booking
+                </Button>
+              </div>
             </div>
-          )}
+          </Form>
         </div>
       </Container>
     </div>
