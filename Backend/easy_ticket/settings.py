@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'tickets',
     'users',
     'rest_framework',
+    'corsheaders',
 ]
 REST_FRAMEWORK = { }
 
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'easy_ticket.urls'
@@ -110,7 +112,18 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173' ,
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

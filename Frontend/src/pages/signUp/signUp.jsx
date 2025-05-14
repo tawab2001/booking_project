@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+
+import React, { useState } from 'react';
 import { Building2, User, ArrowLeft, Eye, EyeOff } from 'lucide-react';
+import axios from 'axios';
+import { ENDPOINTS } from '../../apiConfig/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// FormField component for reusable form inputs
-const FormField = React.memo(({ label, name, type, value, error, children, onChange }) => (
+const FormField = ({ label, name, type, value, error, children, onChange }) => (
   <div className="mb-3">
     <label className="form-label text-white">{label}</label>
     <div className="position-relative">
@@ -14,16 +16,200 @@ const FormField = React.memo(({ label, name, type, value, error, children, onCha
         value={value}
         onChange={onChange}
         className="form-control bg-dark text-white border-secondary"
+        autoComplete="off"
       />
       {children}
     </div>
     {error && <div className="text-danger small mt-1">{error}</div>}
   </div>
-));
+);
+
+const UserTypeSelector = ({ setUserTypeAndFormData }) => (
+  <div className="p-4">
+    <h2 className="text-center text-white mb-4 fs-4">I want to register as:</h2>
+    <div className="row g-4">
+      <div className="col-md-6">
+        <button
+          onClick={() => setUserTypeAndFormData('institution')}
+          className="btn btn-outline-warning w-100 h-100 p-4 d-flex flex-column align-items-center"
+        >
+          <div className="bg-dark rounded-circle p-4 mb-3">
+            <Building2 className="text-warning" size={32} />
+          </div>
+          <h3 className="fs-5 text-white mb-2">Institution</h3>
+          <p className="text-secondary small text-center mb-0">
+            Register your company or organization
+          </p>
+        </button>
+      </div>
+      <div className="col-md-6">
+        <button
+          onClick={() => setUserTypeAndFormData('individual')}
+          className="btn btn-outline-warning w-100 h-100 p-4 d-flex flex-column align-items-center"
+        >
+          <div className="bg-dark rounded-circle p-4 mb-3">
+            <User className="text-warning" size={32} />
+          </div>
+          <h3 className="fs-5 text-white mb-2">Individual</h3>
+          <p className="text-secondary small text-center mb-0">
+            Register as an individual user
+          </p>
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
+const SignUpForm = ({ userType, setUserType, formData, errors, showPassword, setShowPassword, isSubmitting, handleChange, handleSignupSubmit }) => (
+  <div className="p-4">
+    <button
+      onClick={() => setUserType(null)}
+      className="btn btn-link text-warning p-0 mb-4 text-decoration-none"
+    >
+      <ArrowLeft size={16} className="me-2" />
+      Back
+    </button>
+    <form onSubmit={handleSignupSubmit}>
+      {userType === 'institution' ? (
+        <>
+          <FormField
+            label="Institution Name"
+            name="name"
+            type="text"
+            value={formData.name}
+            error={errors.name}
+            onChange={handleChange}
+          />
+          <FormField
+            label="Email Address"
+            name="email"
+            type="email"
+            value={formData.email}
+            error={errors.email}
+            onChange={handleChange}
+          />
+          <FormField
+            label="Password"
+            name="password"
+            type={showPassword ? 'text' : 'password'}
+            value={formData.password}
+            error={errors.password}
+            onChange={handleChange}
+          >
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="btn btn-link position-absolute end-0 top-50 translate-middle-y text-secondary"
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </FormField>
+          <FormField
+            label="Confirm Password"
+            name="confirmPassword"
+            type={showPassword ? 'text' : 'password'}
+            value={formData.confirmPassword}
+            error={errors.confirmPassword}
+            onChange={handleChange}
+          />
+          <FormField
+            label="Country"
+            name="country"
+            type="text"
+            value={formData.country}
+            error={errors.country}
+            onChange={handleChange}
+          />
+          <div className="mb-3">
+            <label className="form-label text-white">Company Description</label>
+            <textarea
+              name="companyDescription"
+              value={formData.companyDescription}
+              onChange={handleChange}
+              className="form-control bg-dark text-white border-secondary"
+              rows={4}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <FormField
+            label="Username"
+            name="username"
+            type="text"
+            value={formData.username}
+            error={errors.username}
+            onChange={handleChange}
+          />
+          <FormField
+            label="Email Address"
+            name="email"
+            type="email"
+            value={formData.email}
+            error={errors.email}
+            onChange={handleChange}
+          />
+          <FormField
+            label="Password"
+            name="password"
+            type={showPassword ? 'text' : 'password'}
+            value={formData.password}
+            error={errors.password}
+            onChange={handleChange}
+          >
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="btn btn-link position-absolute end-0 top-50 translate-middle-y text-secondary"
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </FormField>
+          <FormField
+            label="Confirm Password"
+            name="confirmPassword"
+            type={showPassword ? 'text' : 'password'}
+            value={formData.confirmPassword}
+            error={errors.confirmPassword}
+            onChange={handleChange}
+          />
+          <FormField
+            label="Phone Number"
+            name="phoneNumber"
+            type="tel"
+            value={formData.phoneNumber}
+            error={errors.phoneNumber}
+            onChange={handleChange}
+          />
+        </>
+      )}
+      <div className="mt-4">
+        <button
+          type="submit"
+          className="btn btn-warning w-100"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Creating Account...' : 'Create Account'}
+        </button>
+      </div>
+      {errors.submit && (
+        <div className="alert alert-danger mt-3">{errors.submit}</div>
+      )}
+      {/* إضافة رابط تسجيل الدخول */}
+      <p className="text-center text-secondary small mt-4">
+        Already have an account?{' '}
+        <a href="/login" className="text-warning text-decoration-none">
+          Sign in
+        </a>
+      </p>
+    </form>
+  </div>
+);
 
 const SignUp = () => {
   const [userType, setUserType] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     type: '',
     email: '',
@@ -35,14 +221,14 @@ const SignUp = () => {
     username: '',
     phoneNumber: ''
   });
-
   const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    setFormData(prev => ({ ...prev, type: userType }));
-  }, [userType]);
+  const setUserTypeAndFormData = (type) => {
+    setUserType(type);
+    setFormData(prev => ({ ...prev, type }));
+  };
 
-  const handleChange = useCallback((e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -56,11 +242,10 @@ const SignUp = () => {
         return newErrors;
       });
     }
-  }, [errors]);
+  };
 
   const validateForm = () => {
     const newErrors = {};
-
     if (!formData.email) newErrors.email = 'Email is required';
     if (!formData.password) newErrors.password = 'Password is required';
     if (formData.password !== formData.confirmPassword) {
@@ -79,190 +264,72 @@ const SignUp = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      console.log('Submitting user data:', formData);
+  const signupUser = async (userData) => {
+    try {
+      setIsSubmitting(true);
+      const endpoint = formData.type === 'institution' 
+        ? ENDPOINTS.ORGANIZER_SIGNUP 
+        : ENDPOINTS.USER_SIGNUP;
+
+      console.log('Sending request to:', endpoint);
+      console.log('Request data:', userData);
+
+      const response = await axios.post(endpoint, userData, {
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
+
+      console.log('Signup successful:', response.data);
       alert('Sign up successful!');
+    } catch (error) {
+      console.error('Signup error:', error.response || error);
+      
+      const errorMessage = error.response?.data?.detail || 
+                          error.response?.data?.message ||
+                          'Sign up failed. Please try again.';
+                          
+      setErrors(prev => ({
+        ...prev,
+        submit: errorMessage
+      }));
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  const UserTypeSelector = () => (
-    <div className="p-4">
-      <h2 className="text-center text-white mb-4 fs-4">I want to register as:</h2>
-      <div className="row g-4">
-        <div className="col-md-6">
-          <button
-            onClick={() => setUserType('institution')}
-            className="btn btn-outline-warning w-100 h-100 p-4 d-flex flex-column align-items-center"
-          >
-            <div className="bg-dark rounded-circle p-4 mb-3">
-              <Building2 className="text-warning" size={32} />
-            </div>
-            <h3 className="fs-5 text-white mb-2">Institution</h3>
-            <p className="text-secondary small text-center mb-0">
-              Register your company or organization
-            </p>
-          </button>
-        </div>
-        <div className="col-md-6">
-          <button
-            onClick={() => setUserType('individual')}
-            className="btn btn-outline-warning w-100 h-100 p-4 d-flex flex-column align-items-center"
-          >
-            <div className="bg-dark rounded-circle p-4 mb-3">
-              <User className="text-warning" size={32} />
-            </div>
-            <h3 className="fs-5 text-white mb-2">Individual</h3>
-            <p className="text-secondary small text-center mb-0">
-              Register as an individual user
-            </p>
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-
-  const SignUpForm = () => (
-    <div className="p-4">
-      <button
-        onClick={() => setUserType(null)}
-        className="btn btn-link text-warning p-0 mb-4 text-decoration-none"
-      >
-        <ArrowLeft size={16} className="me-2" />
-        Back
-      </button>
-
-      <form onSubmit={handleSubmit}>
-        {userType === 'institution' ? (
-          <>
-            <FormField 
-              label="Institution Name" 
-              name="name" 
-              type="text" 
-              value={formData.name} 
-              error={errors.name} 
-              onChange={handleChange} 
-            />
-            <FormField 
-              label="Email Address" 
-              name="email" 
-              type="email" 
-              value={formData.email} 
-              error={errors.email} 
-              onChange={handleChange} 
-            />
-            <FormField 
-              label="Password" 
-              name="password" 
-              type={showPassword ? "text" : "password"} 
-              value={formData.password} 
-              error={errors.password} 
-              onChange={handleChange}
-            >
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="btn btn-link position-absolute end-0 top-50 translate-middle-y text-secondary"
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </FormField>
-            <FormField 
-              label="Confirm Password" 
-              name="confirmPassword" 
-              type={showPassword ? "text" : "password"} 
-              value={formData.confirmPassword} 
-              error={errors.confirmPassword} 
-              onChange={handleChange} 
-            />
-            <FormField 
-              label="Country" 
-              name="country" 
-              type="text" 
-              value={formData.country} 
-              error={errors.country} 
-              onChange={handleChange} 
-            />
-            <div className="mb-3">
-              <label className="form-label text-white">Company Description</label>
-              <textarea
-                name="companyDescription"
-                value={formData.companyDescription}
-                onChange={handleChange}
-                className="form-control bg-dark text-white border-secondary"
-                rows={4}
-              ></textarea>
-            </div>
-          </>
-        ) : (
-          <>
-            <FormField 
-              label="Username" 
-              name="username" 
-              type="text" 
-              value={formData.username} 
-              error={errors.username} 
-              onChange={handleChange} 
-            />
-            <FormField 
-              label="Email Address" 
-              name="email" 
-              type="email" 
-              value={formData.email} 
-              error={errors.email} 
-              onChange={handleChange} 
-            />
-            <FormField 
-              label="Password" 
-              name="password" 
-              type={showPassword ? "text" : "password"} 
-              value={formData.password} 
-              error={errors.password} 
-              onChange={handleChange}
-            >
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="btn btn-link position-absolute end-0 top-50 translate-middle-y text-secondary"
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </FormField>
-            <FormField 
-              label="Confirm Password" 
-              name="confirmPassword" 
-              type={showPassword ? "text" : "password"} 
-              value={formData.confirmPassword} 
-              error={errors.confirmPassword} 
-              onChange={handleChange} 
-            />
-            <FormField 
-              label="Phone Number" 
-              name="phoneNumber" 
-              type="tel" 
-              value={formData.phoneNumber} 
-              error={errors.phoneNumber} 
-              onChange={handleChange} 
-            />
-          </>
-        )}
-
-        <div className="mt-4">
-          <button type="submit" className="btn btn-warning w-100">
-            Create Account
-          </button>
-        </div>
-
-        <p className="text-center text-secondary small mt-4">
-          Already have an account?{' '}
-          <a href="/login" className="text-warning text-decoration-none">
-            Sign in
-          </a>
-        </p>
-      </form>
-    </div>
-  );
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (validateForm()) {
+    if (formData.type === 'institution') {
+      const organizerData = {
+        user: {
+          username: formData.email.split('@')[0], // إضافة username
+          email: formData.email,
+          password: formData.password,
+          password_confirm: formData.confirmPassword,
+          mobile_number: formData.phoneNumber || '0000000000'
+        },
+        company_name: formData.name,
+        country: formData.country,
+        description: formData.companyDescription || ''
+      };
+      console.log('Sending organizer data:', organizerData); // للتأكد من البيانات
+      await signupUser(organizerData);
+    } else {
+      const userData = {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+        password_confirm: formData.confirmPassword,
+        mobile_number: formData.phoneNumber
+      };
+      console.log('Sending user data:', userData); // للتأكد من البيانات
+      await signupUser(userData);
+    }
+  }
+};
 
   return (
     <div className="container-fluid py-5">
@@ -273,7 +340,21 @@ const SignUp = () => {
               <h1 className="h3 text-warning mb-2">EasyTicket</h1>
               <p className="text-secondary mb-0">Create your account</p>
             </div>
-            {!userType ? <UserTypeSelector /> : <SignUpForm />}
+            {!userType ? (
+              <UserTypeSelector setUserTypeAndFormData={setUserTypeAndFormData} />
+            ) : (
+              <SignUpForm
+                userType={userType}
+                setUserType={setUserType}
+                formData={formData}
+                errors={errors}
+                showPassword={showPassword}
+                setShowPassword={setShowPassword}
+                isSubmitting={isSubmitting}
+                handleChange={handleChange}
+                handleSignupSubmit={handleSubmit}
+              />
+            )}
           </div>
         </div>
       </div>
