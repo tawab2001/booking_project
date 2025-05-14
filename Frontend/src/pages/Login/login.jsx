@@ -1,28 +1,214 @@
+// import React, { useState } from "react";
+// import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { ENDPOINTS } from "../../apiConfig/api";
+// import "bootstrap/dist/css/bootstrap.min.css";
+
+// const Login = () => {
+//   const navigate = useNavigate();
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [error, setError] = useState("");
+//   const [isLoading, setIsLoading] = useState(false);
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setError("");
+
+//     if (!email || !password) {
+//       setError("Please fill in all fields");
+//       return;
+//     }
+
+//     try {
+//       setIsLoading(true);
+//       const response = await axios.post(
+//         ENDPOINTS.LOGIN,
+//         {
+//           email,
+//           password,
+//         },
+//         {
+//           headers: {
+//             "Content-Type": "application/json",
+//             Accept: "application/json",
+//           },
+//         }
+//       );
+
+//       // Store the token in localStorage
+//       localStorage.setItem("token", response.data.token);
+      
+//       // Log success and redirect
+//       console.log("Login successful:", response.data);
+//       navigate("/dashboard"); // or wherever you want to redirect after login
+
+//     } catch (err) {
+//       console.error("Login error:", err.response?.data || err.message);
+//       setError(
+//         err.response?.data?.detail || 
+//         err.response?.data?.message || 
+//         "An error occurred during login"
+//       );
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   };
+
+//   return (
+//     <Container
+//       fluid
+//       className="min-vh-100 d-flex align-items-center justify-content-center bg-light p-0"
+//       style={{ width: "100%", height: "100%" }}
+//     >
+//       <Row className="justify-content-center m-0" style={{ width: "100%" }}>
+//         <Col
+//           xs={11}
+//           sm={8}
+//           md={6}
+//           lg={4}
+//           className="d-flex align-items-center justify-content-center"
+//         >
+//           <div className="p-4 shadow rounded bg-dark text-light w-100">
+//             <div className="text-center mb-4">
+//               <h1 className="text-warning">easyTicket</h1>
+//               <p className="text-muted">Sign in to manage tickets</p>
+//             </div>
+
+//             {error && <Alert variant="danger">{error}</Alert>}
+
+//             <Form onSubmit={handleSubmit} className="d-flex flex-column gap-3">
+//               <Form.Group>
+//                 <Form.Label>Email Address</Form.Label>
+//                 <Form.Control
+//                   type="email"
+//                   placeholder="Enter email address"
+//                   value={email}
+//                   onChange={(e) => setEmail(e.target.value)}
+//                   className="bg-dark text-light border-secondary"
+//                 />
+//               </Form.Group>
+
+//               <Form.Group>
+//                 <Form.Label>Password</Form.Label>
+//                 <Form.Control
+//                   type="password"
+//                   placeholder="Enter password"
+//                   value={password}
+//                   onChange={(e) => setPassword(e.target.value)}
+//                   className="bg-dark text-light border-secondary"
+//                 />
+//               </Form.Group>
+
+//               <Button
+//                 variant="warning"
+//                 type="submit"
+//                 className="w-100 mt-2"
+//                 disabled={isLoading}
+//               >
+//                 {isLoading ? "Processing..." : "Sign In"}
+//               </Button>
+//             </Form>
+//           </div>
+//         </Col>
+//       </Row>
+//     </Container>
+//   );
+// };
+
+// export default Login;
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { ENDPOINTS } from "../../apiConfig/api";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    if (error) setError("");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
-    if (!email || !password) {
+    if (!formData.email || !formData.password) {
       setError("Please fill in all fields");
       return;
     }
 
     try {
       setIsLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Login successful:", { email, password });
+      const response = await axios.post(  // Changed from get to post
+        ENDPOINTS.LOGIN,
+        {
+          email: formData.email.trim(),
+          password: formData.password
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }
+      );
+
+      if (response.data.token) {
+        // Store auth data
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userType", response.data.user_type);
+        
+        console.log("Login successful");
+        
+        // Redirect based on user type
+        const redirectPath = response.data.user_type === 'organizer' 
+          ? '/organizer-dashboard'
+          : '/user-dashboard';
+        navigate(redirectPath);
+      } else {
+        throw new Error("Authentication failed");
+      }
+
     } catch (err) {
-      setError("An error occurred during login");
+      console.error("Login error:", err.response?.data || err);
+      
+      let errorMessage = "An error occurred during login";
+      
+      if (err.response?.data) {
+        if (err.response.status === 404) {
+          errorMessage = "This email is not registered. Please sign up first.";
+        } else if (err.response.status === 401) {
+          errorMessage = "Invalid email or password.";
+        } else if (typeof err.response.data === 'object') {
+          errorMessage = err.response.data.error || 
+                        err.response.data.detail ||
+                        err.response.data.message;
+        } else {
+          errorMessage = err.response.data;
+        }
+      }
+      
+      setError(errorMessage);
+      // Clear password on error
+      setFormData(prev => ({
+        ...prev,
+        password: ""
+      }));
     } finally {
       setIsLoading(false);
     }
@@ -32,16 +218,9 @@ const Login = () => {
     <Container
       fluid
       className="min-vh-100 d-flex align-items-center justify-content-center bg-light p-0"
-      style={{ width: "100%", height: "100%" }}
     >
       <Row className="justify-content-center m-0" style={{ width: "100%" }}>
-        <Col
-          xs={11}
-          sm={8}
-          md={6}
-          lg={4}
-          className="d-flex align-items-center justify-content-center"
-        >
+        <Col xs={11} sm={8} md={6} lg={4}>
           <div className="p-4 shadow rounded bg-dark text-light w-100">
             <div className="text-center mb-4">
               <h1 className="text-warning">easyTicket</h1>
@@ -55,9 +234,10 @@ const Login = () => {
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control
                   type="email"
+                  name="email"
                   placeholder="Enter email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={formData.email}
+                  onChange={handleChange}
                   className="bg-dark text-light border-secondary"
                 />
               </Form.Group>
@@ -66,9 +246,10 @@ const Login = () => {
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
+                  name="password"
                   placeholder="Enter password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={formData.password}
+                  onChange={handleChange}
                   className="bg-dark text-light border-secondary"
                 />
               </Form.Group>
@@ -81,6 +262,13 @@ const Login = () => {
               >
                 {isLoading ? "Processing..." : "Sign In"}
               </Button>
+
+              <p className="text-center text-muted mt-3">
+                Don't have an account?{' '}
+                <a href="/signup" className="text-warning text-decoration-none">
+                  Sign up
+                </a>
+              </p>
             </Form>
           </div>
         </Col>
