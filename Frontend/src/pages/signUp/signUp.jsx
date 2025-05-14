@@ -142,7 +142,7 @@ const SignUp = () => {
               type="text" 
               value={formData.name} 
               error={errors.name} 
-              onChange={handleChange} 
+              // onChange={handleChange} 
             />
             <FormField 
               label="Email Address" 
@@ -150,7 +150,7 @@ const SignUp = () => {
               type="email" 
               value={formData.email} 
               error={errors.email} 
-              onChange={handleChange} 
+              // onChange={handleChange} 
             />
             <FormField 
               label="Password" 
@@ -158,7 +158,7 @@ const SignUp = () => {
               type={showPassword ? "text" : "password"} 
               value={formData.password} 
               error={errors.password} 
-              onChange={handleChange}
+              // onChange={handleChange}
             >
               <button
                 type="button"
@@ -174,7 +174,7 @@ const SignUp = () => {
               type={showPassword ? "text" : "password"} 
               value={formData.confirmPassword} 
               error={errors.confirmPassword} 
-              onChange={handleChange} 
+              // onChange={handleChange} 
             />
             <FormField 
               label="Country" 
@@ -182,7 +182,7 @@ const SignUp = () => {
               type="text" 
               value={formData.country} 
               error={errors.country} 
-              onChange={handleChange} 
+              // onChange={handleChange} 
             />
             <div className="mb-3">
               <label className="form-label text-white">Company Description</label>
