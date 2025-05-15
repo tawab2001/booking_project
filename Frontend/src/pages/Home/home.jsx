@@ -200,14 +200,7 @@ function Home() {
   }, []);
 
   const handleView = (id) => {
-<<<<<<< HEAD
-    console.log(`View event ${id}`);
-  };
 
-  const handleBook = (id) => {
-    console.log(`Book event${id}`);
-=======
->>>>>>> 8ec029018d2f5e2612c48178633a258315daef69
   };
 
   return (
@@ -215,11 +208,6 @@ function Home() {
       {/* Hero Section */}
       <div
         style={{
-<<<<<<< HEAD
-          backgroundImage:  `url(${heroImages[currentImage]})`,
-=======
-
->>>>>>> 8ec029018d2f5e2612c48178633a258315daef69
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           height: '70vh',
