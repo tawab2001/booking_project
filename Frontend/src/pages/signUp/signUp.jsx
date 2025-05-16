@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Building2, User, ArrowLeft, Eye, EyeOff } from 'lucide-react';
-import axios from 'axios';
+import axiosInstance from '../../apiConfig/axiosConfig';
 import { ENDPOINTS } from '../../apiConfig/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
@@ -300,58 +300,59 @@ const SignUp = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const signupUser = async (userData) => {
-    try {
-      setIsSubmitting(true);
-      const endpoint = formData.type === 'institution' 
-        ? ENDPOINTS.ORGANIZER_SIGNUP 
-        : ENDPOINTS.USER_SIGNUP;
+const signupUser = async (userData) => {
+  try {
+    setIsSubmitting(true);
+    // Use the correct endpoint names from api.js
+    const endpoint = formData.type === 'institution' 
+      ? ENDPOINTS.ORGANIZER_SIGNUP 
+      : ENDPOINTS.USER_SIGNUP;
 
-      const response = await axios.post(endpoint, userData, {
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      });
+    console.log('Using endpoint:', endpoint); // Debug log
 
+    const response = await axiosInstance.post(endpoint, userData);
+
+    if (response.data) {
       console.log('Signup successful:', response.data);
-      alert('Sign up successful!');
+      localStorage.setItem('signupSuccess', 'true');
       navigate('/login');
-    } catch (error) {
-      console.error('Signup error:', error.response?.data || error);
-      
-      let errorMessage = 'Sign up failed. Please try again.';
-      
-      if (error.response?.data) {
-        if (typeof error.response.data === 'object') {
-          const fieldErrors = {};
-          Object.entries(error.response.data).forEach(([key, value]) => {
-            fieldErrors[key === 'mobile_number' ? 'phoneNumber' : key] = 
-              Array.isArray(value) ? value[0] : value;
-          });
-          setErrors(prev => ({ ...prev, ...fieldErrors }));
-          errorMessage = 'Please correct the errors in the form.';
-        } else {
-          errorMessage = error.response.data;
-        }
-      }
-      
-      setErrors(prev => ({
-        ...prev,
-        submit: errorMessage
-      }));
-    } finally {
-      setIsSubmitting(false);
     }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (validateForm()) {
+  } catch (error) {
+    console.error('Signup error:', error.response?.data || error.message);
+    
+    let errorMessage = 'Sign up failed. Please try again.';
+    
+    if (error.response?.data) {
+      if (error.response.data.user) {
+        const userErrors = error.response.data.user;
+        const fieldErrors = {};
+        
+        Object.entries(userErrors).forEach(([key, value]) => {
+          const errorMessage = Array.isArray(value) ? value[0] : value;
+          fieldErrors[key === 'mobile_number' ? 'phoneNumber' : key] = errorMessage;
+        });
+        
+        setErrors(prev => ({ ...prev, ...fieldErrors }));
+      }
+      errorMessage = 'Please correct the errors in the form.';
+    }
+    
+    setErrors(prev => ({
+      ...prev,
+      submit: errorMessage
+    }));
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (validateForm()) {
+    try {
       if (formData.type === 'institution') {
         const organizerData = {
           user: {
-            username: formData.email.split('@')[0],
+            username: formData.email.split('@')[0], // Generate username from email
             email: formData.email,
             password: formData.password,
             password_confirm: formData.confirmPassword,
@@ -372,8 +373,12 @@ const SignUp = () => {
         };
         await signupUser(userData);
       }
+    } catch (error) {
+      // Error is already handled in signupUser
+      console.log('Form submission failed');
     }
-  };
+  }
+};
 
   return (
     <div className="container-fluid py-5">

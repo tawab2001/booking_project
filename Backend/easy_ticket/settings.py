@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'reports',
     'seating',
     'tickets',
-    'users',
+    'users.apps.UsersConfig',  
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
@@ -64,7 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-     'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'easy_ticket.urls'
@@ -121,6 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173' ,
+     "http://127.0.0.1:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
@@ -157,7 +158,12 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 # JWT settings
 from datetime import timedelta
+from datetime import timedelta
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
 }
