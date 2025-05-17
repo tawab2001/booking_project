@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       { path: "events", element: <Events/> },
       {path: "addEvent", element: <AddEvent/>},
       {path:"admin", element: <AdminDashboard/>},
-      {path: "booking", element: <Booking/>},
+      {path: "booking/:eventId", element: <Booking/>},
 
     ],
   },

@@ -39,7 +39,7 @@
 
 //       // Store the token in localStorage
 //       localStorage.setItem("token", response.data.token);
-      
+
 //       // Log success and redirect
 //       console.log("Login successful:", response.data);
 //       navigate("/dashboard"); // or wherever you want to redirect after login
@@ -154,7 +154,7 @@ const Login = () => {
 
     try {
       setIsLoading(true);
-      const response = await axios.post(  // Changed from get to post
+      const response = await axios.post(
         ENDPOINTS.LOGIN,
         {
           email: formData.email.trim(),
@@ -168,41 +168,47 @@ const Login = () => {
         }
       );
 
-      if (response.data.token) {
+      // Check for token in the correct response structure
+      if (response.data?.access) {
         // Store auth data
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.data.access);
+        localStorage.setItem("refresh", response.data.refresh);
         localStorage.setItem("userType", response.data.user_type);
         
+        if (response.data.user_data) {
+          localStorage.setItem("user_id", response.data.user_data.id);
+          localStorage.setItem("user_data", JSON.stringify(response.data.user_data));
+        }
+
         console.log("Login successful");
-        
+
         // Redirect based on user type
-        const redirectPath = response.data.user_type === 'organizer' 
-          ? '/organizer-dashboard'
-          : '/user-dashboard';
-        navigate(redirectPath);
+        if (response.data.user_type === 'organizer') {
+          navigate('/admin');
+        } else {
+          navigate('/');
+        }
       } else {
-        throw new Error("Authentication failed");
+        throw new Error("Invalid response format");
       }
 
     } catch (err) {
       console.error("Login error:", err.response?.data || err);
-      
+
       let errorMessage = "An error occurred during login";
-      
-      if (err.response?.data) {
-        if (err.response.status === 404) {
-          errorMessage = "This email is not registered. Please sign up first.";
+
+      if (err.response) {
+        if (err.response.status === 500) {
+          errorMessage = "Server error. Please try again later.";
+        } else if (err.response.status === 404) {
+          errorMessage = "This email is not registered.";
         } else if (err.response.status === 401) {
           errorMessage = "Invalid email or password.";
-        } else if (typeof err.response.data === 'object') {
-          errorMessage = err.response.data.error || 
-                        err.response.data.detail ||
-                        err.response.data.message;
-        } else {
-          errorMessage = err.response.data;
+        } else if (err.response.data?.detail) {
+          errorMessage = err.response.data.detail;
         }
       }
-      
+
       setError(errorMessage);
       // Clear password on error
       setFormData(prev => ({
@@ -212,7 +218,7 @@ const Login = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+};
 
   return (
     <Container
