@@ -41,7 +41,7 @@ function Header() {
                 )}
               </>
             )}
-            <Nav.Link as={Link} to="/contact">Contact Us</Nav.Link>
+            <Nav.Link as={Link} to="/contactus">Contact Us</Nav.Link>
           </Nav>
           <div className="d-flex gap-2 align-items-center">
             {isLoggedIn ? (

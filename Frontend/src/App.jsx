@@ -10,6 +10,7 @@ import Events from './pages/Events/events';
 import AddEvent from './pages/AddEvent/addevent';
 import AdminDashboard from './pages/AdminDashboard/admindashboard';
 import Booking from './pages/Booking/booking';
+import Contact from './pages/ContactUs/contactus';
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       {path: "addEvent", element: <AddEvent/>},
       {path:"admin", element: <AdminDashboard/>},
       {path: "booking/:eventId", element: <Booking/>},
+      {path: "contactus", element:<Contact/> }
 
     ],
   },
