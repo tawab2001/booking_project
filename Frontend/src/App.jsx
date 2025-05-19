@@ -11,6 +11,8 @@ import AddEvent from './pages/AddEvent/addevent';
 import AdminDashboard from './pages/AdminDashboard/admindashboard';
 import Booking from './pages/Booking/booking';
 import Contact from './pages/ContactUs/contactus';
+import ResetPassword from './pages/ResetPassword/ResetPassword';
+import RequestReset from './pages/ResetPassword/RequestReset';
 
 
 const router = createBrowserRouter([
@@ -27,7 +29,9 @@ const router = createBrowserRouter([
       {path: "addEvent", element: <AddEvent/>},
       {path:"admin", element: <AdminDashboard/>},
       {path: "booking/:eventId", element: <Booking/>},
-      {path: "contactus", element:<Contact/> }
+      {path: "contactus", element:<Contact/> },
+      { path: "reset-password", element: <RequestReset/> },
+      { path: "reset-password/:token", element: <ResetPassword/> },
 
     ],
   },
