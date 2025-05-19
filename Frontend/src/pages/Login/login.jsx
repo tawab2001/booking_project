@@ -1,123 +1,3 @@
-// import React, { useState } from "react";
-// import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import { ENDPOINTS } from "../../apiConfig/api";
-// import "bootstrap/dist/css/bootstrap.min.css";
-
-// const Login = () => {
-//   const navigate = useNavigate();
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [error, setError] = useState("");
-//   const [isLoading, setIsLoading] = useState(false);
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setError("");
-
-//     if (!email || !password) {
-//       setError("Please fill in all fields");
-//       return;
-//     }
-
-//     try {
-//       setIsLoading(true);
-//       const response = await axios.post(
-//         ENDPOINTS.LOGIN,
-//         {
-//           email,
-//           password,
-//         },
-//         {
-//           headers: {
-//             "Content-Type": "application/json",
-//             Accept: "application/json",
-//           },
-//         }
-//       );
-
-//       // Store the token in localStorage
-//       localStorage.setItem("token", response.data.token);
-
-//       // Log success and redirect
-//       console.log("Login successful:", response.data);
-//       navigate("/dashboard"); // or wherever you want to redirect after login
-
-//     } catch (err) {
-//       console.error("Login error:", err.response?.data || err.message);
-//       setError(
-//         err.response?.data?.detail || 
-//         err.response?.data?.message || 
-//         "An error occurred during login"
-//       );
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-
-//   return (
-//     <Container
-//       fluid
-//       className="min-vh-100 d-flex align-items-center justify-content-center bg-light p-0"
-//       style={{ width: "100%", height: "100%" }}
-//     >
-//       <Row className="justify-content-center m-0" style={{ width: "100%" }}>
-//         <Col
-//           xs={11}
-//           sm={8}
-//           md={6}
-//           lg={4}
-//           className="d-flex align-items-center justify-content-center"
-//         >
-//           <div className="p-4 shadow rounded bg-dark text-light w-100">
-//             <div className="text-center mb-4">
-//               <h1 className="text-warning">easyTicket</h1>
-//               <p className="text-muted">Sign in to manage tickets</p>
-//             </div>
-
-//             {error && <Alert variant="danger">{error}</Alert>}
-
-//             <Form onSubmit={handleSubmit} className="d-flex flex-column gap-3">
-//               <Form.Group>
-//                 <Form.Label>Email Address</Form.Label>
-//                 <Form.Control
-//                   type="email"
-//                   placeholder="Enter email address"
-//                   value={email}
-//                   onChange={(e) => setEmail(e.target.value)}
-//                   className="bg-dark text-light border-secondary"
-//                 />
-//               </Form.Group>
-
-//               <Form.Group>
-//                 <Form.Label>Password</Form.Label>
-//                 <Form.Control
-//                   type="password"
-//                   placeholder="Enter password"
-//                   value={password}
-//                   onChange={(e) => setPassword(e.target.value)}
-//                   className="bg-dark text-light border-secondary"
-//                 />
-//               </Form.Group>
-
-//               <Button
-//                 variant="warning"
-//                 type="submit"
-//                 className="w-100 mt-2"
-//                 disabled={isLoading}
-//               >
-//                 {isLoading ? "Processing..." : "Sign In"}
-//               </Button>
-//             </Form>
-//           </div>
-//         </Col>
-//       </Row>
-//     </Container>
-//   );
-// };
-
-// export default Login;
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -174,7 +54,7 @@ const Login = () => {
         localStorage.setItem("token", response.data.access);
         localStorage.setItem("refresh", response.data.refresh);
         localStorage.setItem("userType", response.data.user_type);
-        
+
         if (response.data.user_data) {
           localStorage.setItem("user_id", response.data.user_data.id);
           localStorage.setItem("user_data", JSON.stringify(response.data.user_data));
@@ -218,7 +98,7 @@ const Login = () => {
     } finally {
       setIsLoading(false);
     }
-};
+  };
 
   return (
     <Container
@@ -273,6 +153,11 @@ const Login = () => {
                 Don't have an account?{' '}
                 <a href="/signup" className="text-warning text-decoration-none">
                   Sign up
+                </a>
+              </p>
+              <p className="text-center text-muted mt-3">
+                <a href="/reset-password" className="text-warning text-decoration-none">
+                  Forgot Password?
                 </a>
               </p>
             </Form>

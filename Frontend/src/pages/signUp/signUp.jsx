@@ -4,6 +4,8 @@ import axiosInstance from '../../apiConfig/axiosConfig';
 import { ENDPOINTS } from '../../apiConfig/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";  
 
 const FormField = ({ label, name, type, value, error, children, onChange }) => (
   <div className="mb-3">
@@ -59,8 +61,18 @@ const UserTypeSelector = ({ setUserTypeAndFormData }) => (
     </div>
   </div>
 );
-
-const SignUpForm = ({ userType, setUserType, formData, errors, showPassword, setShowPassword, isSubmitting, handleChange, handleSignupSubmit }) => (
+const SignUpForm = ({ 
+  userType, 
+  setUserType, 
+  formData, 
+  errors, 
+  showPassword, 
+  setShowPassword, 
+  isSubmitting, 
+  handleChange, 
+  handleSignupSubmit,
+  handleGoogleSuccess 
+}) => (
   <div className="p-4">
     <button
       onClick={() => setUserType(null)}
@@ -194,15 +206,37 @@ const SignUpForm = ({ userType, setUserType, formData, errors, showPassword, set
       <div className="mt-4">
         <button
           type="submit"
-          className="btn btn-warning w-100"
+          className="btn btn-warning w-100 mb-3"
           disabled={isSubmitting}
         >
           {isSubmitting ? 'Creating Account...' : 'Create Account'}
         </button>
+
+        <div className="position-relative mb-3">
+          <hr className="text-secondary" />
+          <span className="position-absolute top-50 start-50 translate-middle px-3 bg-dark text-secondary">
+            or
+          </span>
+        </div>
+
+        <div className="d-flex justify-content-center">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={() => {
+              console.log('Google Sign In Failed');
+            }}
+            theme="filled_black"
+            shape="pill"
+            text="signup_with"
+            size="large"
+          />
+        </div>
       </div>
+
       {errors.submit && (
         <div className="alert alert-danger mt-3">{errors.submit}</div>
       )}
+
       <p className="text-center text-secondary small mt-4">
         Already have an account?{' '}
         <a href="/login" className="text-warning text-decoration-none">
@@ -378,6 +412,51 @@ const handleSubmit = async (e) => {
       console.log('Form submission failed');
     }
   }
+    const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      setIsSubmitting(true);
+      const decoded = jwt_decode(credentialResponse.credential);
+      
+      // Prepare data from Google account
+      const googleData = {
+        user: {
+          email: decoded.email,
+          username: decoded.email.split('@')[0],
+          first_name: decoded.given_name,
+          last_name: decoded.family_name,
+          password: Math.random().toString(36).slice(-8), // Generate random password
+          mobile_number: '',
+          google_id: decoded.sub
+        }
+      };
+
+      if (formData.type === 'institution') {
+        googleData.company_name = decoded.name;
+        googleData.country = '';
+        googleData.description = '';
+      }
+
+      // Use the correct endpoint
+      const endpoint = formData.type === 'institution' 
+        ? ENDPOINTS.ORGANIZER_SIGNUP_GOOGLE 
+        : ENDPOINTS.USER_SIGNUP_GOOGLE;
+
+      const response = await axiosInstance.post(endpoint, googleData);
+
+      if (response.data) {
+        localStorage.setItem('signupSuccess', 'true');
+        navigate('/login');
+      }
+    } catch (error) {
+      console.error('Google signup error:', error);
+      setErrors(prev => ({
+        ...prev,
+        submit: error.response?.data?.error || 'Failed to sign up with Google. Please try again.'
+      }));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 };
 
   return (
