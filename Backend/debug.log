@@ -1,0 +1,90 @@
+INFO 2025-05-21 12:36:16,960 autoreload Watching for file changes with StatReloader
+ERROR 2025-05-21 12:37:44,193 views Token verification failed: Token expired, 1747823849 < 1747823864
+WARNING 2025-05-21 12:37:44,197 log Bad Request: /api/login/google/
+WARNING 2025-05-21 12:37:44,198 basehttp "POST /api/login/google/ HTTP/1.1" 400 77
+INFO 2025-05-21 12:38:13,774 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-21 12:43:05,976 autoreload Watching for file changes with StatReloader
+INFO 2025-05-21 12:43:11,387 basehttp "POST /api/login/ HTTP/1.1" 200 606
+ERROR 2025-05-21 12:43:28,893 views Token verification failed: Token expired, 1747824195 < 1747824208
+WARNING 2025-05-21 12:43:28,894 log Bad Request: /api/login/google/
+WARNING 2025-05-21 12:43:28,895 basehttp "POST /api/login/google/ HTTP/1.1" 400 50
+INFO 2025-05-21 12:46:03,664 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-21 12:46:04,929 autoreload Watching for file changes with StatReloader
+ERROR 2025-05-21 12:46:42,723 views Token verification failed: Token expired, 1747824399 < 1747824402
+WARNING 2025-05-21 12:46:42,725 log Bad Request: /api/login/google/
+WARNING 2025-05-21 12:46:42,725 basehttp "POST /api/login/google/ HTTP/1.1" 400 59
+INFO 2025-05-21 12:48:04,350 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-21 12:48:05,203 autoreload Watching for file changes with StatReloader
+INFO 2025-05-21 12:49:31,523 autoreload Watching for file changes with StatReloader
+INFO 2025-05-21 12:49:35,907 basehttp "POST /api/login/ HTTP/1.1" 200 606
+ERROR 2025-05-21 12:49:50,693 views Token verification failed: Token expired, 1747824586 < 1747824590
+WARNING 2025-05-21 12:49:50,694 log Bad Request: /api/login/google/
+WARNING 2025-05-21 12:49:50,695 basehttp "POST /api/login/google/ HTTP/1.1" 400 59
+INFO 2025-05-21 12:51:45,349 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-21 12:51:46,246 autoreload Watching for file changes with StatReloader
+INFO 2025-05-21 12:51:52,180 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-21 12:51:52,950 autoreload Watching for file changes with StatReloader
+INFO 2025-05-21 12:53:03,336 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-21 12:53:04,169 autoreload Watching for file changes with StatReloader
+INFO 2025-05-21 12:53:18,667 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-21 12:53:19,379 autoreload Watching for file changes with StatReloader
+INFO 2025-05-21 12:53:47,535 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-21 12:53:48,287 autoreload Watching for file changes with StatReloader
+INFO 2025-05-21 12:54:53,854 views Request started at 1747824893.8539877, server_time: 1747824893
+INFO 2025-05-21 12:54:54,406 views User ahmedtawab017@gmail.com logged in successfully, processing_time: 0.5525717735290527
+INFO 2025-05-21 12:54:54,409 basehttp "POST /api/login/google/ HTTP/1.1" 200 607
+INFO 2025-05-21 12:55:10,129 views Request started at 1747824910.129247, server_time: 1747824910
+INFO 2025-05-21 12:55:10,669 views User ahmedtawab017@gmail.com logged in successfully, processing_time: 0.5405969619750977
+INFO 2025-05-21 12:55:10,671 basehttp "POST /api/login/google/ HTTP/1.1" 200 607
+WARNING 2025-05-21 13:07:09,396 log Bad Request: /api/signup/user/google/
+WARNING 2025-05-21 13:07:09,398 basehttp "POST /api/signup/user/google/ HTTP/1.1" 400 47
+INFO 2025-05-21 13:07:24,356 views Request started at 1747825644.3560443, server_time: 1747825644
+INFO 2025-05-21 13:07:24,909 views User ahmedtawab017@gmail.com logged in successfully, processing_time: 0.5539050102233887
+INFO 2025-05-21 13:07:24,911 basehttp "POST /api/login/google/ HTTP/1.1" 200 607
+INFO 2025-05-21 13:07:39,725 basehttp "OPTIONS /api/password_reset/ HTTP/1.1" 200 0
+INFO 2025-05-21 13:07:42,495 basehttp "POST /api/password_reset/ HTTP/1.1" 200 60
+WARNING 2025-05-21 13:07:57,715 log Bad Request: /api/signup/user/google/
+WARNING 2025-05-21 13:07:57,716 basehttp "POST /api/signup/user/google/ HTTP/1.1" 400 47
+INFO 2025-05-21 13:08:08,250 views Request started at 1747825688.2506206, server_time: 1747825688
+INFO 2025-05-21 13:08:08,866 views User ahmedtawab017@gmail.com logged in successfully, processing_time: 0.6160445213317871
+INFO 2025-05-21 13:08:08,868 basehttp "POST /api/login/google/ HTTP/1.1" 200 607
+INFO 2025-05-21 13:08:21,058 basehttp "POST /api/password_reset/ HTTP/1.1" 200 60
+INFO 2025-05-21 13:39:23,437 basehttp "POST /api/login/ HTTP/1.1" 200 703
+INFO 2025-05-21 22:04:20,334 basehttp "OPTIONS /api/signup/organizer/google/ HTTP/1.1" 200 0
+WARNING 2025-05-21 22:04:21,044 log Bad Request: /api/signup/organizer/google/
+WARNING 2025-05-21 22:04:21,046 basehttp "POST /api/signup/organizer/google/ HTTP/1.1" 400 47
+INFO 2025-05-21 22:04:35,956 basehttp "OPTIONS /api/login/google/ HTTP/1.1" 200 0
+INFO 2025-05-21 22:04:35,970 views Request started at 1747857875.9642537, server_time: 1747857875
+ERROR 2025-05-21 22:04:38,769 views Token verification failed: Token expired, 1747857876 < 1747857878, token_payload: {'iss': 'https://accounts.google.com', 'azp': '30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com', 'aud': '30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com', 'sub': '110708318663984141792', 'email': 'ahmedtawab017@gmail.com', 'email_verified': True, 'nbf': 1747853961, 'name': 'Ahmed Tawab', 'picture': 'https://lh3.googleusercontent.com/a/ACg8ocK-tzKiZLDYmeYigczQc9L3swp7KIo4oSD5_Il5tTXFBBRQZCIe=s96-c', 'given_name': 'Ahmed', 'family_name': 'Tawab', 'iat': 1747854261, 'exp': 1747857861, 'jti': 'd711bb2aac3ff05807e857fe9a80d75c8b51c640'}, processing_time: 2.8052775859832764, server_time: 1747857878
+WARNING 2025-05-21 22:04:38,771 log Bad Request: /api/login/google/
+WARNING 2025-05-21 22:04:38,771 basehttp "POST /api/login/google/ HTTP/1.1" 400 59
+INFO 2025-05-21 22:04:58,087 views Request started at 1747857898.087408, server_time: 1747857898
+ERROR 2025-05-21 22:04:59,712 views Token verification failed: Token expired, 1747857897 < 1747857899, token_payload: {'iss': 'https://accounts.google.com', 'azp': '30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com', 'aud': '30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com', 'sub': '110708318663984141792', 'email': 'ahmedtawab017@gmail.com', 'email_verified': True, 'nbf': 1747853982, 'name': 'Ahmed Tawab', 'picture': 'https://lh3.googleusercontent.com/a/ACg8ocK-tzKiZLDYmeYigczQc9L3swp7KIo4oSD5_Il5tTXFBBRQZCIe=s96-c', 'given_name': 'Ahmed', 'family_name': 'Tawab', 'iat': 1747854282, 'exp': 1747857882, 'jti': '95447fc54588f59a9e70724679a872093d532ec9'}, processing_time: 1.625518798828125, server_time: 1747857899
+WARNING 2025-05-21 22:04:59,714 log Bad Request: /api/login/google/
+WARNING 2025-05-21 22:04:59,714 basehttp "POST /api/login/google/ HTTP/1.1" 400 59
+INFO 2025-05-21 22:05:29,746 autoreload Watching for file changes with StatReloader
+INFO 2025-05-21 22:05:54,067 views Request started at 1747857954.0676343, server_time: 1747857954
+INFO 2025-05-21 22:05:55,137 views User ahmedtawab017@gmail.com logged in successfully, processing_time: 1.069410800933838
+INFO 2025-05-21 22:05:55,140 basehttp "POST /api/login/google/ HTTP/1.1" 200 607
+INFO 2025-05-21 22:06:00,492 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-21 22:06:00,495 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-21 22:06:00,714 basehttp "GET /api/profile/ HTTP/1.1" 200 91
+INFO 2025-05-21 22:06:00,894 basehttp "GET /api/profile/ HTTP/1.1" 200 91
+INFO 2025-05-21 22:08:25,873 basehttp "OPTIONS /api/password_reset/ HTTP/1.1" 200 0
+INFO 2025-05-21 22:08:32,137 basehttp "POST /api/password_reset/ HTTP/1.1" 200 60
+INFO 2025-05-21 22:09:17,843 basehttp "OPTIONS /api/login/ HTTP/1.1" 200 0
+INFO 2025-05-21 22:09:19,371 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-21 22:09:23,857 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-21 22:09:23,857 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-21 22:09:24,044 basehttp "GET /api/profile/ HTTP/1.1" 200 91
+INFO 2025-05-21 22:09:24,206 basehttp "GET /api/profile/ HTTP/1.1" 200 91
+INFO 2025-05-21 22:10:32,473 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-21 22:10:37,204 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-21 22:10:37,206 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-21 22:10:37,406 basehttp "GET /api/profile/ HTTP/1.1" 200 91
+INFO 2025-05-21 22:10:37,586 basehttp "GET /api/profile/ HTTP/1.1" 200 91
+INFO 2025-05-21 22:10:52,512 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-21 22:10:53,301 basehttp "PUT /api/profile/ HTTP/1.1" 200 91
+INFO 2025-05-21 22:10:53,307 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-21 22:10:53,482 basehttp "GET /api/profile/ HTTP/1.1" 200 91
+INFO 2025-05-21 22:13:22,080 basehttp "POST /api/login/ HTTP/1.1" 200 703
