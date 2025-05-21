@@ -379,43 +379,10 @@ const signupUser = async (userData) => {
     setIsSubmitting(false);
   }
 };
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (validateForm()) {
-    try {
-      if (formData.type === 'institution') {
-        const organizerData = {
-          user: {
-            username: formData.email.split('@')[0], // Generate username from email
-            email: formData.email,
-            password: formData.password,
-            password_confirm: formData.confirmPassword,
-            mobile_number: formData.phoneNumber
-          },
-          company_name: formData.name,
-          country: formData.country,
-          description: formData.companyDescription || ''
-        };
-        await signupUser(organizerData);
-      } else {
-        const userData = {
-          username: formData.username,
-          email: formData.email,
-          password: formData.password,
-          password_confirm: formData.confirmPassword,
-          mobile_number: formData.phoneNumber
-        };
-        await signupUser(userData);
-      }
-    } catch (error) {
-      // Error is already handled in signupUser
-      console.log('Form submission failed');
-    }
-  }
-    const handleGoogleSuccess = async (credentialResponse) => {
+ const handleGoogleSuccess = async (credentialResponse) => {
     try {
       setIsSubmitting(true);
-      const decoded = jwt_decode(credentialResponse.credential);
+      const decoded = jwtDecode(credentialResponse.credential);
       
       // Prepare data from Google account
       const googleData = {
@@ -424,20 +391,19 @@ const handleSubmit = async (e) => {
           username: decoded.email.split('@')[0],
           first_name: decoded.given_name,
           last_name: decoded.family_name,
-          password: Math.random().toString(36).slice(-8), // Generate random password
+          password: Math.random().toString(36).slice(-8),
           mobile_number: '',
           google_id: decoded.sub
         }
       };
 
-      if (formData.type === 'institution') {
+      if (userType === 'institution') {
         googleData.company_name = decoded.name;
         googleData.country = '';
         googleData.description = '';
       }
 
-      // Use the correct endpoint
-      const endpoint = formData.type === 'institution' 
+      const endpoint = userType === 'institution' 
         ? ENDPOINTS.ORGANIZER_SIGNUP_GOOGLE 
         : ENDPOINTS.USER_SIGNUP_GOOGLE;
 
@@ -457,36 +423,70 @@ const handleSubmit = async (e) => {
       setIsSubmitting(false);
     }
   };
-};
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      try {
+        if (formData.type === 'institution') {
+          const organizerData = {
+            user: {
+              username: formData.email.split('@')[0],
+              email: formData.email,
+              password: formData.password,
+              password_confirm: formData.confirmPassword,
+              mobile_number: formData.phoneNumber
+            },
+            company_name: formData.name,
+            country: formData.country,
+            description: formData.companyDescription || ''
+          };
+          await signupUser(organizerData);
+        } else {
+          const userData = {
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+            password_confirm: formData.confirmPassword,
+            mobile_number: formData.phoneNumber
+          };
+          await signupUser(userData);
+        }
+      } catch (error) {
+        console.log('Form submission failed');
+      }
+    }
+  };
+ 
   return (
-    <div className="container-fluid py-5">
-      <div className="row justify-content-center">
-        <div className="col-12 col-md-8 col-lg-6">
-          <div className="bg-dark border border-secondary rounded-3 shadow">
-            <div className="p-4 text-center border-bottom border-secondary">
-              <h1 className="h3 text-warning mb-2">EasyTicket</h1>
-              <p className="text-secondary mb-0">Create your account</p>
-            </div>
-            {!userType ? (
-              <UserTypeSelector setUserTypeAndFormData={setUserTypeAndFormData} />
-            ) : (
-              <SignUpForm
-                userType={userType}
-                setUserType={setUserType}
-                formData={formData}
-                errors={errors}
-                showPassword={showPassword}
-                setShowPassword={setShowPassword}
-                isSubmitting={isSubmitting}
-                handleChange={handleChange}
-                handleSignupSubmit={handleSubmit}
-              />
-            )}
+ <div className="container-fluid py-5">
+    <div className="row justify-content-center">
+      <div className="col-12 col-md-8 col-lg-6">
+        <div className="bg-dark border border-secondary rounded-3 shadow">
+          <div className="p-4 text-center border-bottom border-secondary">
+            <h1 className="h3 text-warning mb-2">EasyTicket</h1>
+            <p className="text-secondary mb-0">Create your account</p>
           </div>
+          {!userType ? (
+            <UserTypeSelector setUserTypeAndFormData={setUserTypeAndFormData} />
+          ) : (
+      <SignUpForm
+        userType={userType}
+        setUserType={setUserType}
+        formData={formData}
+        errors={errors}
+        showPassword={showPassword}
+        setShowPassword={setShowPassword}
+        isSubmitting={isSubmitting}
+        handleChange={handleChange}
+        handleSignupSubmit={handleSubmit}
+        handleGoogleSuccess={handleGoogleSuccess}
+      />
+          )}
         </div>
       </div>
     </div>
+  </div>
   );
 };
 

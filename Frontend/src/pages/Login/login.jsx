@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import { ENDPOINTS } from "../../apiConfig/api";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -100,6 +102,54 @@ const Login = () => {
     }
   };
 
+const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+        setIsLoading(true);
+        setError("");
+        
+        // Only send the credential token
+        const response = await axios.post(
+            ENDPOINTS.GOOGLE_LOGIN,
+            {
+                credential: credentialResponse.credential
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            }
+        );
+
+        if (response.data?.access) {
+            // Store tokens
+            localStorage.setItem('token', response.data.access);
+            localStorage.setItem('refresh', response.data.refresh);
+            localStorage.setItem('userType', response.data.user_type);
+
+            // Store user data
+            if (response.data.user_data) {
+                localStorage.setItem('user_id', response.data.user_data.id);
+                localStorage.setItem('user_data', JSON.stringify(response.data.user_data));
+            }
+
+            // Redirect based on user type
+            if (response.data.user_type === 'organizer') {
+                navigate('/admin');
+            } else {
+                navigate('/');
+            }
+        }
+    } catch (err) {
+        console.error("Google login error:", err);
+        setError(
+            err.response?.data?.error || 
+            "Failed to login with Google. Please try again."
+        );
+    } finally {
+        setIsLoading(false);
+    }
+};
   return (
     <Container
       fluid
@@ -148,6 +198,27 @@ const Login = () => {
               >
                 {isLoading ? "Processing..." : "Sign In"}
               </Button>
+
+              <div className="position-relative my-4">
+                <hr className="text-secondary" />
+                <span className="position-absolute top-50 start-50 translate-middle px-3 bg-dark text-secondary">
+                  or
+                </span>
+              </div>
+
+              <div className="d-flex justify-content-center">
+                <GoogleLogin
+                  onSuccess={handleGoogleSuccess}
+                  onError={() => {
+                    console.log('Login Failed');
+                    setError("Google login failed. Please try again.");
+                  }}
+                  theme="filled_black"
+                  shape="pill"
+                  text="signin_with"
+                  size="large"
+                />
+              </div>
 
               <p className="text-center text-muted mt-3">
                 Don't have an account?{' '}
