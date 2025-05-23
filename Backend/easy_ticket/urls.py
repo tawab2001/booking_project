@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.db.models import Sum
+from rest_framework.views import APIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('users.urls')),
     path("admincustom/", include("admin_dashboard.urls")),
+    path('api/admin/', include('admin_dashboard.urls'))
 ]

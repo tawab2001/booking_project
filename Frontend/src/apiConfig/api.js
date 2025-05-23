@@ -22,5 +22,10 @@ export const ENDPOINTS = {
   GOOGLE_LOGIN: `${API_BASE_URL}login/google/`,
   PROFILE: `${API_BASE_URL}profile/`,
   REQUEST_RESET_PASSWORD: `${API_BASE_URL}password_reset/`,
-  RESET_PASSWORD: `${API_BASE_URL}password_reset_confirm/`  
+  RESET_PASSWORD: `${API_BASE_URL}password_reset_confirm/`,
+  ADMIN_STATS: `${API_BASE_URL}admin/stats/`,
+  ADMIN_USERS: `${API_BASE_URL}admin/users/`,
+  ADMIN_EVENTS: `${API_BASE_URL}admin/events/`,
+  ADMIN_SETTINGS: `${API_BASE_URL}admin/settings/`,
+  ADMIN_LOGIN: `${API_BASE_URL}admin/login/`, 
 };
