@@ -155,7 +155,6 @@ CORS_ALLOW_METHODS = [
     'POST',
     'PUT',
 ]
-<<<<<<< HEAD
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'authorization',
 ]
@@ -163,7 +162,6 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-=======
 CORS_ALLOW_HEADERS = [
     "accept",
     "accept-encoding",
@@ -176,7 +174,6 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 # CORS_ALLOW_HEADERS = ['*']
->>>>>>> 419a4115209be8e84363dc20db0eb72f335ef993
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
