@@ -483,3 +483,425 @@ INFO 2025-05-23 14:27:42,286 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1146
 INFO 2025-05-23 14:27:58,234 basehttp "PUT /api/admin/users/1/ HTTP/1.1" 200 146
 INFO 2025-05-23 14:28:09,377 basehttp "OPTIONS /api/admin/users/8/ HTTP/1.1" 200 0
 INFO 2025-05-23 14:28:09,592 basehttp "DELETE /api/admin/users/8/ HTTP/1.1" 200 58
+INFO 2025-05-23 15:22:50,749 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1017
+INFO 2025-05-23 15:22:51,050 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1017
+INFO 2025-05-23 15:23:27,919 basehttp "OPTIONS /api/login/google/ HTTP/1.1" 200 0
+INFO 2025-05-23 15:23:27,928 views Request started at 1748006607.9279263, server_time: 1748006607
+ERROR 2025-05-23 15:23:28,667 views Token verification failed: Token expired, 1748006607 < 1748006608, token_payload: {'iss': 'https://accounts.google.com', 'azp': '30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com', 'aud': '30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com', 'sub': '110708318663984141792', 'email': 'ahmedtawab017@gmail.com', 'email_verified': True, 'nbf': 1748002692, 'name': 'Ahmed Tawab', 'picture': 'https://lh3.googleusercontent.com/a/ACg8ocK-tzKiZLDYmeYigczQc9L3swp7KIo4oSD5_Il5tTXFBBRQZCIe=s96-c', 'given_name': 'Ahmed', 'family_name': 'Tawab', 'iat': 1748002992, 'exp': 1748006592, 'jti': 'c5377413be6313bd46f041544ff737158878b8ef'}, processing_time: 0.7399859428405762, server_time: 1748006608
+WARNING 2025-05-23 15:23:28,670 log Bad Request: /api/login/google/
+WARNING 2025-05-23 15:23:28,670 basehttp "POST /api/login/google/ HTTP/1.1" 400 59
+INFO 2025-05-23 15:23:54,891 views Request started at 1748006634.8912299, server_time: 1748006634
+ERROR 2025-05-23 15:23:55,396 views Token verification failed: Token expired, 1748006634 < 1748006635, token_payload: {'iss': 'https://accounts.google.com', 'azp': '30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com', 'aud': '30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com', 'sub': '110708318663984141792', 'email': 'ahmedtawab017@gmail.com', 'email_verified': True, 'nbf': 1748002719, 'name': 'Ahmed Tawab', 'picture': 'https://lh3.googleusercontent.com/a/ACg8ocK-tzKiZLDYmeYigczQc9L3swp7KIo4oSD5_Il5tTXFBBRQZCIe=s96-c', 'given_name': 'Ahmed', 'family_name': 'Tawab', 'iat': 1748003019, 'exp': 1748006619, 'jti': '19d118c7060041a7b2ce998eba2d20a19369d634'}, processing_time: 0.5054457187652588, server_time: 1748006635
+WARNING 2025-05-23 15:23:55,400 log Bad Request: /api/login/google/
+WARNING 2025-05-23 15:23:55,402 basehttp "POST /api/login/google/ HTTP/1.1" 400 59
+INFO 2025-05-23 15:25:24,118 basehttp "OPTIONS /api/login/ HTTP/1.1" 200 0
+INFO 2025-05-23 15:25:25,431 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-23 15:25:39,061 views Request started at 1748006739.061716, server_time: 1748006739
+ERROR 2025-05-23 15:25:40,426 views Token verification failed: Token expired, 1748006738 < 1748006740, token_payload: {'iss': 'https://accounts.google.com', 'azp': '30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com', 'aud': '30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com', 'sub': '110708318663984141792', 'email': 'ahmedtawab017@gmail.com', 'email_verified': True, 'nbf': 1748002823, 'name': 'Ahmed Tawab', 'picture': 'https://lh3.googleusercontent.com/a/ACg8ocK-tzKiZLDYmeYigczQc9L3swp7KIo4oSD5_Il5tTXFBBRQZCIe=s96-c', 'given_name': 'Ahmed', 'family_name': 'Tawab', 'iat': 1748003123, 'exp': 1748006723, 'jti': '19e288c6f201b8edbf3e014ae6f5691b510c6d62'}, processing_time: 1.3643462657928467, server_time: 1748006740
+WARNING 2025-05-23 15:25:40,427 log Bad Request: /api/login/google/
+WARNING 2025-05-23 15:25:40,427 basehttp "POST /api/login/google/ HTTP/1.1" 400 59
+INFO 2025-05-23 15:27:35,848 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-23 15:29:09,650 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-23 15:30:43,373 views Request started at 1748007043.373779, server_time: 1748007043
+ERROR 2025-05-23 15:30:43,750 views Token verification failed: Token expired, 1748007042 < 1748007043, token_payload: {'iss': 'https://accounts.google.com', 'azp': '30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com', 'aud': '30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com', 'sub': '110708318663984141792', 'email': 'ahmedtawab017@gmail.com', 'email_verified': True, 'nbf': 1748003127, 'name': 'Ahmed Tawab', 'picture': 'https://lh3.googleusercontent.com/a/ACg8ocK-tzKiZLDYmeYigczQc9L3swp7KIo4oSD5_Il5tTXFBBRQZCIe=s96-c', 'given_name': 'Ahmed', 'family_name': 'Tawab', 'iat': 1748003427, 'exp': 1748007027, 'jti': 'e0407d24267b44ec0555d30935d2976c72d34af6'}, processing_time: 0.3768589496612549, server_time: 1748007043
+WARNING 2025-05-23 15:30:43,753 log Bad Request: /api/login/google/
+WARNING 2025-05-23 15:30:43,754 basehttp "POST /api/login/google/ HTTP/1.1" 400 59
+INFO 2025-05-23 15:33:36,682 basehttp "OPTIONS /api/signup/user/google/ HTTP/1.1" 200 0
+WARNING 2025-05-23 15:33:36,996 log Bad Request: /api/signup/user/google/
+WARNING 2025-05-23 15:33:36,996 basehttp "POST /api/signup/user/google/ HTTP/1.1" 400 47
+INFO 2025-05-23 15:34:58,678 views Request started at 1748007298.6780918, server_time: 1748007298
+ERROR 2025-05-23 15:34:59,144 views Token verification failed: Token expired, 1748007298 < 1748007299, token_payload: {'iss': 'https://accounts.google.com', 'azp': '30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com', 'aud': '30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com', 'sub': '110708318663984141792', 'email': 'ahmedtawab017@gmail.com', 'email_verified': True, 'nbf': 1748003383, 'name': 'Ahmed Tawab', 'picture': 'https://lh3.googleusercontent.com/a/ACg8ocK-tzKiZLDYmeYigczQc9L3swp7KIo4oSD5_Il5tTXFBBRQZCIe=s96-c', 'given_name': 'Ahmed', 'family_name': 'Tawab', 'iat': 1748003683, 'exp': 1748007283, 'jti': 'f08047629f287281947ee188eb491c98fb308032'}, processing_time: 0.4662008285522461, server_time: 1748007299
+WARNING 2025-05-23 15:34:59,147 log Bad Request: /api/login/google/
+WARNING 2025-05-23 15:34:59,148 basehttp "POST /api/login/google/ HTTP/1.1" 400 59
+INFO 2025-05-23 15:35:45,535 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 15:35:46,608 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-23 15:35:51,947 log Bad Request: /api/login/google/
+WARNING 2025-05-23 15:35:51,948 basehttp "POST /api/login/google/ HTTP/1.1" 400 65
+INFO 2025-05-23 15:36:03,976 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-23 15:36:12,584 log Bad Request: /api/login/google/
+WARNING 2025-05-23 15:36:12,585 basehttp "POST /api/login/google/ HTTP/1.1" 400 65
+INFO 2025-05-23 15:36:37,646 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 15:36:38,648 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 15:39:50,591 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 15:39:51,419 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-23 15:41:23,652 log Unauthorized: /api/login/google/
+WARNING 2025-05-23 15:41:23,654 basehttp "POST /api/login/google/ HTTP/1.1" 401 58
+WARNING 2025-05-23 15:42:48,862 log Unauthorized: /api/login/google/
+WARNING 2025-05-23 15:42:48,864 basehttp "POST /api/login/google/ HTTP/1.1" 401 58
+ERROR 2025-05-23 15:43:03,068 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 15:43:03,069 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 33
+WARNING 2025-05-23 15:48:47,546 log Unauthorized: /api/login/google/
+WARNING 2025-05-23 15:48:47,548 basehttp "POST /api/login/google/ HTTP/1.1" 401 58
+ERROR 2025-05-23 15:49:15,713 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 15:49:15,714 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 33
+ERROR 2025-05-23 15:50:27,936 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 15:50:27,937 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 33
+INFO 2025-05-23 15:51:16,615 basehttp "OPTIONS /api/signup/user/google/ HTTP/1.1" 200 0
+ERROR 2025-05-23 15:51:17,802 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 15:51:17,803 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 33
+ERROR 2025-05-23 15:53:06,091 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 15:53:06,091 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 33
+WARNING 2025-05-23 15:54:45,538 log Bad Request: /api/signup/user/google/
+WARNING 2025-05-23 15:54:45,539 basehttp "POST /api/signup/user/google/ HTTP/1.1" 400 47
+INFO 2025-05-23 15:55:36,921 basehttp "OPTIONS /api/login/google/ HTTP/1.1" 200 0
+WARNING 2025-05-23 15:55:36,951 log Unauthorized: /api/login/google/
+WARNING 2025-05-23 15:55:36,955 basehttp "POST /api/login/google/ HTTP/1.1" 401 58
+ERROR 2025-05-23 15:55:53,654 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 15:55:53,655 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 33
+ERROR 2025-05-23 15:56:08,718 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 15:56:08,719 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 33
+ERROR 2025-05-23 15:57:35,790 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 15:57:35,790 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 33
+INFO 2025-05-23 15:58:58,064 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 15:58:59,649 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:05:01,099 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:05:02,277 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-23 16:05:58,558 log Unauthorized: /api/signup/user/google/
+WARNING 2025-05-23 16:05:58,559 basehttp "POST /api/signup/user/google/ HTTP/1.1" 401 58
+WARNING 2025-05-23 16:06:18,614 log Unauthorized: /api/login/google/
+WARNING 2025-05-23 16:06:18,615 basehttp "POST /api/login/google/ HTTP/1.1" 401 58
+INFO 2025-05-23 16:06:47,472 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-23 16:06:48,333 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:06:51,381 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-23 16:06:52,099 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-23 16:07:10,161 log Unauthorized: /api/signup/user/google/
+WARNING 2025-05-23 16:07:10,163 basehttp "POST /api/signup/user/google/ HTTP/1.1" 401 58
+INFO 2025-05-23 16:09:15,165 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:09:16,008 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:09:31,800 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:09:32,622 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:10:06,552 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:10:07,354 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:11:21,818 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:11:22,584 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:11:26,866 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:11:27,693 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:11:41,629 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:11:42,326 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:11:48,849 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:11:49,625 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-23 16:12:33,088 log Unauthorized: /api/signup/user/google/
+WARNING 2025-05-23 16:12:33,089 basehttp "POST /api/signup/user/google/ HTTP/1.1" 401 58
+INFO 2025-05-23 16:13:46,032 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:13:46,766 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:13:48,825 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:13:49,530 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:14:05,645 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:14:06,571 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:15:06,169 views Processing Google signup...
+ERROR 2025-05-23 16:15:06,171 views Missing credential or user info
+WARNING 2025-05-23 16:15:06,176 log Bad Request: /api/signup/user/google/
+WARNING 2025-05-23 16:15:06,180 basehttp "POST /api/signup/user/google/ HTTP/1.1" 400 62
+INFO 2025-05-23 16:15:22,725 views Processing Google signup...
+ERROR 2025-05-23 16:15:22,726 views Missing credential or user info
+WARNING 2025-05-23 16:15:22,727 log Bad Request: /api/signup/user/google/
+WARNING 2025-05-23 16:15:22,728 basehttp "POST /api/signup/user/google/ HTTP/1.1" 400 62
+INFO 2025-05-23 16:17:17,568 views Processing Google signup...
+INFO 2025-05-23 16:17:17,569 views Verifying Google token...
+ERROR 2025-05-23 16:17:17,570 views Google signup error: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py", line 365, in post
+    settings.GOOGLE_CLIENT_ID,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\conf\__init__.py", line 83, in __getattr__
+    val = getattr(_wrapped, name)
+AttributeError: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'. Did you mean: 'GOOGLE_OAUTH2_CLIENT_ID'?
+ERROR 2025-05-23 16:17:17,578 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 16:17:17,580 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 98
+INFO 2025-05-23 16:17:37,729 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:18:10,147 views Processing Google signup...
+INFO 2025-05-23 16:18:10,148 views Verifying Google token...
+ERROR 2025-05-23 16:18:10,148 views Google signup error: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py", line 365, in post
+    settings.GOOGLE_CLIENT_ID,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\conf\__init__.py", line 83, in __getattr__
+    val = getattr(_wrapped, name)
+AttributeError: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'. Did you mean: 'GOOGLE_OAUTH2_CLIENT_ID'?
+ERROR 2025-05-23 16:18:10,154 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 16:18:10,155 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 98
+INFO 2025-05-23 16:19:57,121 views Processing Google signup...
+ERROR 2025-05-23 16:19:57,121 views Missing credential or user info
+WARNING 2025-05-23 16:19:57,123 log Bad Request: /api/signup/user/google/
+WARNING 2025-05-23 16:19:57,124 basehttp "POST /api/signup/user/google/ HTTP/1.1" 400 62
+INFO 2025-05-23 16:28:00,997 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:28:30,171 basehttp "OPTIONS /api/login/google/ HTTP/1.1" 200 0
+WARNING 2025-05-23 16:28:30,187 log Unauthorized: /api/login/google/
+WARNING 2025-05-23 16:28:30,188 basehttp "POST /api/login/google/ HTTP/1.1" 401 58
+INFO 2025-05-23 16:31:23,970 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-23 16:31:24,913 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:31:29,089 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-23 16:31:30,202 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:34:00,598 basehttp "OPTIONS /api/signup/user/google/ HTTP/1.1" 200 0
+INFO 2025-05-23 16:34:00,607 views Processing Google signup...
+ERROR 2025-05-23 16:34:00,607 views Missing credential or user info
+WARNING 2025-05-23 16:34:00,608 log Bad Request: /api/signup/user/google/
+WARNING 2025-05-23 16:34:00,610 basehttp "POST /api/signup/user/google/ HTTP/1.1" 400 62
+INFO 2025-05-23 16:34:25,590 views Processing Google signup...
+ERROR 2025-05-23 16:34:25,590 views Missing credential or user info
+WARNING 2025-05-23 16:34:25,591 log Bad Request: /api/signup/user/google/
+WARNING 2025-05-23 16:34:25,592 basehttp "POST /api/signup/user/google/ HTTP/1.1" 400 62
+INFO 2025-05-23 16:36:27,841 views Processing Google signup...
+INFO 2025-05-23 16:36:27,842 views Verifying Google token...
+ERROR 2025-05-23 16:36:27,842 views Google signup error: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py", line 365, in post
+    settings.GOOGLE_CLIENT_ID,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\conf\__init__.py", line 83, in __getattr__
+    val = getattr(_wrapped, name)
+AttributeError: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'. Did you mean: 'GOOGLE_OAUTH2_CLIENT_ID'?
+ERROR 2025-05-23 16:36:27,870 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 16:36:27,871 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 98
+INFO 2025-05-23 16:37:10,149 views Processing Google signup...
+INFO 2025-05-23 16:37:10,149 views Verifying Google token...
+ERROR 2025-05-23 16:37:10,150 views Google signup error: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py", line 365, in post
+    settings.GOOGLE_CLIENT_ID,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\conf\__init__.py", line 83, in __getattr__
+    val = getattr(_wrapped, name)
+AttributeError: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'. Did you mean: 'GOOGLE_OAUTH2_CLIENT_ID'?
+ERROR 2025-05-23 16:37:10,152 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 16:37:10,152 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 98
+INFO 2025-05-23 16:39:54,660 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:39:55,542 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:45:55,318 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:45:56,131 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:46:01,031 views Processing Google signup...
+INFO 2025-05-23 16:46:01,032 views Verifying Google token...
+ERROR 2025-05-23 16:46:01,032 views Google signup error: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py", line 365, in post
+    settings.GOOGLE_CLIENT_ID,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\conf\__init__.py", line 83, in __getattr__
+    val = getattr(_wrapped, name)
+AttributeError: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'. Did you mean: 'GOOGLE_OAUTH2_CLIENT_ID'?
+ERROR 2025-05-23 16:46:01,035 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 16:46:01,036 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 98
+INFO 2025-05-23 16:47:41,364 views Processing Google signup...
+INFO 2025-05-23 16:47:41,364 views Verifying Google token...
+ERROR 2025-05-23 16:47:41,365 views Google signup error: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py", line 365, in post
+    settings.GOOGLE_CLIENT_ID,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\conf\__init__.py", line 83, in __getattr__
+    val = getattr(_wrapped, name)
+AttributeError: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'. Did you mean: 'GOOGLE_OAUTH2_CLIENT_ID'?
+ERROR 2025-05-23 16:47:41,368 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 16:47:41,368 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 98
+INFO 2025-05-23 16:50:13,106 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:50:14,231 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:50:35,758 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 16:50:36,510 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 19:35:29,685 basehttp "OPTIONS /api/signup/user/google/ HTTP/1.1" 200 0
+INFO 2025-05-23 19:35:29,702 views Processing Google signup...
+INFO 2025-05-23 19:35:29,702 views Verifying Google token...
+ERROR 2025-05-23 19:35:29,703 views Google signup error: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py", line 365, in post
+    settings.GOOGLE_CLIENT_ID,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\conf\__init__.py", line 83, in __getattr__
+    val = getattr(_wrapped, name)
+AttributeError: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'. Did you mean: 'GOOGLE_OAUTH2_CLIENT_ID'?
+ERROR 2025-05-23 19:35:29,708 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 19:35:29,709 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 98
+INFO 2025-05-23 19:46:47,095 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 19:46:55,491 views Processing Google signup...
+INFO 2025-05-23 19:46:55,492 views Verifying Google token...
+ERROR 2025-05-23 19:46:55,492 views Google signup error: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py", line 365, in post
+    settings.GOOGLE_CLIENT_ID,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\conf\__init__.py", line 83, in __getattr__
+    val = getattr(_wrapped, name)
+AttributeError: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'. Did you mean: 'GOOGLE_OAUTH2_CLIENT_ID'?
+ERROR 2025-05-23 19:46:55,496 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 19:46:55,497 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 98
+INFO 2025-05-23 19:47:21,241 views Processing Google signup...
+INFO 2025-05-23 19:47:21,242 views Verifying Google token...
+ERROR 2025-05-23 19:47:21,243 views Google signup error: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py", line 365, in post
+    settings.GOOGLE_CLIENT_ID,
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\conf\__init__.py", line 83, in __getattr__
+    val = getattr(_wrapped, name)
+AttributeError: 'Settings' object has no attribute 'GOOGLE_CLIENT_ID'. Did you mean: 'GOOGLE_OAUTH2_CLIENT_ID'?
+ERROR 2025-05-23 19:47:21,244 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 19:47:21,245 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 98
+INFO 2025-05-23 19:49:17,232 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 19:49:18,116 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 19:49:43,556 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 19:49:44,307 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 19:50:21,458 views Processing Google signup...
+INFO 2025-05-23 19:50:21,459 views Verifying Google token...
+INFO 2025-05-23 19:50:21,865 views Google token verified for email: a7medabdo03@gmail.com
+ERROR 2025-05-23 19:50:22,422 views Google signup error: CustomUser() got unexpected keyword arguments: 'is_organizer'
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py", line 381, in post
+    user = CustomUser.objects.create_user(
+        email=email,
+    ...<4 lines>...
+        is_organizer=False
+    )
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 175, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 162, in _create_user
+    user = self._create_user_object(username, email, password, **extra_fields)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 154, in _create_user_object
+    user = self.model(username=username, email=email, **extra_fields)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\base.py", line 569, in __init__
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: CustomUser() got unexpected keyword arguments: 'is_organizer'
+ERROR 2025-05-23 19:50:22,428 log Internal Server Error: /api/signup/user/google/
+ERROR 2025-05-23 19:50:22,429 basehttp "POST /api/signup/user/google/ HTTP/1.1" 500 106
+INFO 2025-05-23 19:51:55,703 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 19:51:56,905 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 19:53:09,021 basehttp "OPTIONS /api/login/google/ HTTP/1.1" 200 0
+WARNING 2025-05-23 19:53:09,035 log Unauthorized: /api/login/google/
+WARNING 2025-05-23 19:53:09,036 basehttp "POST /api/login/google/ HTTP/1.1" 401 58
+INFO 2025-05-23 20:09:40,318 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-23 20:10:11,925 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-23 20:10:19,997 log Unauthorized: /api/login/google/
+WARNING 2025-05-23 20:10:19,999 basehttp "POST /api/login/google/ HTTP/1.1" 401 58
+INFO 2025-05-23 20:19:57,280 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:25:07,340 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\models.py changed, reloading.
+INFO 2025-05-23 20:25:08,459 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:25:10,507 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\models.py changed, reloading.
+INFO 2025-05-23 20:25:11,183 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:25:37,561 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 20:25:38,309 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:25:40,372 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 20:25:41,238 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:25:57,296 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-23 20:25:58,072 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:26:04,168 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-23 20:26:04,998 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:26:11,415 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-23 20:26:12,110 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:26:22,288 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-23 20:26:23,019 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:26:27,122 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-23 20:26:28,020 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:30:29,679 basehttp "OPTIONS /api/login/ HTTP/1.1" 200 0
+INFO 2025-05-23 20:30:31,166 basehttp "POST /api/login/ HTTP/1.1" 200 606
+WARNING 2025-05-23 20:30:53,217 log Unauthorized: /api/login/google/
+WARNING 2025-05-23 20:30:53,218 basehttp "POST /api/login/google/ HTTP/1.1" 401 58
+INFO 2025-05-23 20:30:55,802 basehttp "OPTIONS /api/admin/login/ HTTP/1.1" 200 0
+INFO 2025-05-23 20:30:56,859 basehttp "POST /api/admin/login/ HTTP/1.1" 200 612
+INFO 2025-05-23 20:30:56,997 basehttp "OPTIONS /api/admin/stats/ HTTP/1.1" 200 0
+INFO 2025-05-23 20:30:56,997 basehttp "OPTIONS /api/admin/stats/ HTTP/1.1" 200 0
+INFO 2025-05-23 20:30:57,229 basehttp "GET /api/admin/stats/ HTTP/1.1" 200 91
+INFO 2025-05-23 20:30:57,525 basehttp "GET /api/admin/stats/ HTTP/1.1" 200 91
+INFO 2025-05-23 20:30:58,969 basehttp "OPTIONS /api/admin/users/ HTTP/1.1" 200 0
+INFO 2025-05-23 20:30:58,969 basehttp "OPTIONS /api/admin/users/ HTTP/1.1" 200 0
+INFO 2025-05-23 20:30:59,145 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1017
+INFO 2025-05-23 20:30:59,306 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1017
+INFO 2025-05-23 20:33:58,042 basehttp "GET /api/admin/stats/ HTTP/1.1" 200 91
+INFO 2025-05-23 20:33:58,201 basehttp "GET /api/admin/stats/ HTTP/1.1" 200 91
+WARNING 2025-05-23 20:34:45,461 log Unauthorized: /api/login/google/
+WARNING 2025-05-23 20:34:45,462 basehttp "POST /api/login/google/ HTTP/1.1" 401 58
+INFO 2025-05-23 20:36:20,428 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-23 20:37:17,445 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 20:37:18,199 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:37:53,752 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-23 20:37:54,510 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:38:49,913 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:39:07,547 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-23 20:39:47,999 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-23 20:39:48,742 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:43:22,556 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:43:27,866 views Processing Google login request
+ERROR 2025-05-23 20:43:28,301 views Token verification failed: Token expired, 1748025792 < 1748025808
+WARNING 2025-05-23 20:43:28,304 log Bad Request: /api/login/google/
+WARNING 2025-05-23 20:43:28,305 basehttp "POST /api/login/google/ HTTP/1.1" 400 44
+INFO 2025-05-23 20:44:46,461 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-23 20:44:47,210 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:44:58,581 views Processing Google login request
+ERROR 2025-05-23 20:44:58,952 views Token verification failed: Token expired, 1748025883 < 1748025898
+WARNING 2025-05-23 20:44:58,954 log Bad Request: /api/login/google/
+WARNING 2025-05-23 20:44:58,955 basehttp "POST /api/login/google/ HTTP/1.1" 400 44
+INFO 2025-05-23 20:45:51,471 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 20:45:52,261 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:46:30,530 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 20:46:31,267 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:47:47,909 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 20:47:48,800 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:47:55,962 views Processing Google login request
+INFO 2025-05-23 20:47:56,284 views Token verified for email: ahmedtawab017@gmail.com
+INFO 2025-05-23 20:47:56,592 views Existing user found: ahmedtawab017@gmail.com
+INFO 2025-05-23 20:47:56,596 basehttp "POST /api/login/google/ HTTP/1.1" 200 745
+INFO 2025-05-23 20:49:02,384 basehttp "OPTIONS /api/signup/organizer/google/ HTTP/1.1" 200 0
+INFO 2025-05-23 20:49:02,390 views Processing Google organizer signup request
+ERROR 2025-05-23 20:49:02,391 views Missing required data
+WARNING 2025-05-23 20:49:02,392 log Bad Request: /api/signup/organizer/google/
+WARNING 2025-05-23 20:49:02,393 basehttp "POST /api/signup/organizer/google/ HTTP/1.1" 400 52
+INFO 2025-05-23 20:50:51,064 views Processing Google organizer signup request
+ERROR 2025-05-23 20:50:51,738 views Error creating organizer account: CustomUser() got unexpected keyword arguments: 'is_organizer'
+ERROR 2025-05-23 20:50:51,739 log Internal Server Error: /api/signup/organizer/google/
+ERROR 2025-05-23 20:50:51,739 basehttp "POST /api/signup/organizer/google/ HTTP/1.1" 500 65
+INFO 2025-05-23 20:53:10,924 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\models.py changed, reloading.
+INFO 2025-05-23 20:53:11,664 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:56:25,274 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:56:32,296 views Processing Google organizer signup request
+WARNING 2025-05-23 20:56:32,825 log Bad Request: /api/signup/organizer/google/
+WARNING 2025-05-23 20:56:32,826 basehttp "POST /api/signup/organizer/google/ HTTP/1.1" 400 66
+INFO 2025-05-23 20:56:47,403 views Processing Google signup...
+ERROR 2025-05-23 20:56:47,404 views Missing credential or user info
+WARNING 2025-05-23 20:56:47,405 log Bad Request: /api/signup/user/google/
+WARNING 2025-05-23 20:56:47,407 basehttp "POST /api/signup/user/google/ HTTP/1.1" 400 62
+INFO 2025-05-23 20:57:18,910 views Processing Google login request
+INFO 2025-05-23 20:57:19,217 views Token verified for email: ahmedtawab017@gmail.com
+INFO 2025-05-23 20:57:19,804 views Existing user found: ahmedtawab017@gmail.com
+INFO 2025-05-23 20:57:19,808 basehttp "POST /api/login/google/ HTTP/1.1" 200 745
+INFO 2025-05-23 20:58:30,360 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 20:58:31,147 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:58:38,850 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 20:58:39,626 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:58:58,072 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 20:58:58,784 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:59:18,461 basehttp "OPTIONS /api/password_reset/ HTTP/1.1" 200 0
+INFO 2025-05-23 20:59:21,467 basehttp "POST /api/password_reset/ HTTP/1.1" 200 60
+INFO 2025-05-23 20:59:37,173 views Processing Google user signup...
+ERROR 2025-05-23 20:59:37,481 views Unexpected error: name 'transaction' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py", line 466, in post
+    with transaction.atomic():
+         ^^^^^^^^^^^
+NameError: name 'transaction' is not defined
+ERROR 2025-05-23 20:59:37,488 log Internal Server Error: /api/signup/organizer/google/
+ERROR 2025-05-23 20:59:37,489 basehttp "POST /api/signup/organizer/google/ HTTP/1.1" 500 44
+INFO 2025-05-23 21:00:46,742 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-23 21:00:47,897 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 21:00:51,552 views Processing Google user signup...
+INFO 2025-05-23 21:00:51,906 views Found existing user: ahmedtawab017@gmail.com
+INFO 2025-05-23 21:00:51,907 basehttp "POST /api/signup/organizer/google/ HTTP/1.1" 200 677
+INFO 2025-05-23 21:01:14,591 views Processing Google signup...
+ERROR 2025-05-23 21:01:14,592 views Missing credential or user info
+WARNING 2025-05-23 21:01:14,592 log Bad Request: /api/signup/user/google/
+WARNING 2025-05-23 21:01:14,593 basehttp "POST /api/signup/user/google/ HTTP/1.1" 400 62
+INFO 2025-05-23 21:02:42,420 views Processing Google signup...
+INFO 2025-05-23 21:02:42,420 views Verifying Google token...
+INFO 2025-05-23 21:02:42,747 views Google token verified for email: a7medabdo03@gmail.com
+INFO 2025-05-23 21:02:42,760 views User created: a7medabdo03@gmail.com
+INFO 2025-05-23 21:02:42,762 basehttp "POST /api/signup/user/google/ HTTP/1.1" 200 623
+INFO 2025-05-23 21:02:55,506 views Processing Google login request
+INFO 2025-05-23 21:02:55,807 views Token verified for email: a7medabdo03@gmail.com
+INFO 2025-05-23 21:02:56,018 views Existing user found: a7medabdo03@gmail.com
+INFO 2025-05-23 21:02:56,021 basehttp "POST /api/login/google/ HTTP/1.1" 200 759
+INFO 2025-05-23 21:03:49,816 basehttp "GET /admin HTTP/1.1" 301 0
+INFO 2025-05-23 21:03:53,072 basehttp "POST /api/admin/login/ HTTP/1.1" 200 612
+INFO 2025-05-23 21:03:53,359 basehttp "GET /api/admin/stats/ HTTP/1.1" 200 91
+INFO 2025-05-23 21:03:53,536 basehttp "GET /api/admin/stats/ HTTP/1.1" 200 91
+INFO 2025-05-23 21:03:54,659 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1144
+INFO 2025-05-23 21:03:54,822 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1144
