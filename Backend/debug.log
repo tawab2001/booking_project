@@ -416,3 +416,54 @@ ERROR 2025-05-23 13:56:17,025 log Internal Server Error: /api/admin/stats/
 ERROR 2025-05-23 13:56:17,026 basehttp "GET /api/admin/stats/ HTTP/1.1" 500 57
 ERROR 2025-05-23 13:56:17,412 log Internal Server Error: /api/admin/stats/
 ERROR 2025-05-23 13:56:17,413 basehttp "GET /api/admin/stats/ HTTP/1.1" 500 57
+ERROR 2025-05-23 13:59:42,110 log Internal Server Error: /api/admin/stats/
+ERROR 2025-05-23 13:59:42,111 basehttp "GET /api/admin/stats/ HTTP/1.1" 500 57
+ERROR 2025-05-23 13:59:42,534 log Internal Server Error: /api/admin/stats/
+ERROR 2025-05-23 13:59:42,535 basehttp "GET /api/admin/stats/ HTTP/1.1" 500 57
+INFO 2025-05-23 13:59:44,235 basehttp "OPTIONS /api/admin/users/ HTTP/1.1" 200 0
+INFO 2025-05-23 13:59:44,235 basehttp "OPTIONS /api/admin/users/ HTTP/1.1" 200 0
+INFO 2025-05-23 13:59:44,409 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1146
+INFO 2025-05-23 13:59:44,609 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1146
+INFO 2025-05-23 14:03:12,541 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1146
+INFO 2025-05-23 14:03:12,894 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1146
+ERROR 2025-05-23 14:03:17,042 log Internal Server Error: /api/admin/stats/
+ERROR 2025-05-23 14:03:17,043 basehttp "GET /api/admin/stats/ HTTP/1.1" 500 57
+ERROR 2025-05-23 14:03:17,339 log Internal Server Error: /api/admin/stats/
+ERROR 2025-05-23 14:03:17,340 basehttp "GET /api/admin/stats/ HTTP/1.1" 500 57
+INFO 2025-05-23 14:05:21,562 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\admin_dashboard\views.py changed, reloading.
+INFO 2025-05-23 14:05:23,179 autoreload Watching for file changes with StatReloader
+ERROR 2025-05-23 14:06:34,794 log Internal Server Error: /api/admin/stats/
+ERROR 2025-05-23 14:06:34,795 basehttp "GET /api/admin/stats/ HTTP/1.1" 500 195
+ERROR 2025-05-23 14:06:35,190 log Internal Server Error: /api/admin/stats/
+ERROR 2025-05-23 14:06:35,191 basehttp "GET /api/admin/stats/ HTTP/1.1" 500 195
+INFO 2025-05-23 14:08:00,069 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\admin_dashboard\views.py changed, reloading.
+INFO 2025-05-23 14:08:01,029 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 14:08:39,237 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\admin_dashboard\views.py changed, reloading.
+INFO 2025-05-23 14:08:39,968 autoreload Watching for file changes with StatReloader
+ERROR 2025-05-23 14:08:57,048 log Internal Server Error: /api/admin/stats/
+ERROR 2025-05-23 14:08:57,050 basehttp "GET /api/admin/stats/ HTTP/1.1" 500 195
+ERROR 2025-05-23 14:08:57,344 log Internal Server Error: /api/admin/stats/
+ERROR 2025-05-23 14:08:57,344 basehttp "GET /api/admin/stats/ HTTP/1.1" 500 195
+INFO 2025-05-23 14:12:04,057 basehttp "OPTIONS /api/api/admin/stats/ HTTP/1.1" 200 0
+INFO 2025-05-23 14:12:04,063 basehttp "OPTIONS /api/api/admin/stats/ HTTP/1.1" 200 0
+WARNING 2025-05-23 14:12:04,100 log Not Found: /api/api/admin/stats/
+WARNING 2025-05-23 14:12:04,102 basehttp "GET /api/api/admin/stats/ HTTP/1.1" 404 5027
+WARNING 2025-05-23 14:12:04,114 log Not Found: /api/api/admin/stats/
+WARNING 2025-05-23 14:12:04,115 basehttp "GET /api/api/admin/stats/ HTTP/1.1" 404 5027
+WARNING 2025-05-23 14:12:08,515 log Not Found: /api/api/admin/stats/
+WARNING 2025-05-23 14:12:08,517 basehttp "GET /api/api/admin/stats/ HTTP/1.1" 404 5027
+WARNING 2025-05-23 14:12:08,532 log Not Found: /api/api/admin/stats/
+WARNING 2025-05-23 14:12:08,534 basehttp "GET /api/api/admin/stats/ HTTP/1.1" 404 5027
+INFO 2025-05-23 14:12:57,104 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\admin_dashboard\views.py changed, reloading.
+INFO 2025-05-23 14:12:58,181 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 14:13:05,157 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\admin_dashboard\views.py changed, reloading.
+INFO 2025-05-23 14:13:06,021 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 14:13:38,074 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\tickets\models.py changed, reloading.
+INFO 2025-05-23 14:13:38,885 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 14:13:41,915 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\tickets\models.py changed, reloading.
+INFO 2025-05-23 14:13:42,739 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 14:22:25,411 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 14:22:26,646 basehttp "GET /api/admin/stats/ HTTP/1.1" 200 91
+INFO 2025-05-23 14:22:26,832 basehttp "GET /api/admin/stats/ HTTP/1.1" 200 91
+INFO 2025-05-23 14:22:29,932 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1146
+INFO 2025-05-23 14:22:30,097 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1146

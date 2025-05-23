@@ -12,6 +12,7 @@ from rest_framework.permissions import AllowAny
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from tickets.models import Ticket, TicketType
 import logging
 
 logger = logging.getLogger(__name__)
@@ -21,27 +22,34 @@ class AdminStatsView(APIView):
 
     def get(self, request):
         try:
-            # Get basic stats
+            logger.info('Fetching admin stats...')
+            total_users = CustomUser.objects.count()
+            logger.info(f'Total users: {total_users}')
+            total_events = Event.objects.count()
+            logger.info(f'Total events: {total_events}')
+            total_tickets = Ticket.objects.count()
+            logger.info(f'Total tickets: {total_tickets}')
+            # Calculate revenue by joining Ticket with TicketType
+            revenue = float(Ticket.objects.filter(status='active')
+                           .aggregate(total=Sum('ticket_type__price'))['total'] or 0)
+            logger.info(f'Revenue: {revenue}')
             stats = {
-                'totalUsers': CustomUser.objects.count(),
-                'totalEvents': Event.objects.count(),
-                'totalTickets': Ticket.objects.count(),
-                'revenue': float(Ticket.objects.filter(status='paid')
-                              .aggregate(total=Sum('price'))['total'] or 0)
+                'totalUsers': total_users,
+                'totalEvents': total_events,
+                'totalTickets': total_tickets,
+                'revenue': revenue
             }
-
             return Response({
                 'status': 'success',
                 'data': stats
             })
-            
         except Exception as e:
-            logger.error(f"Error fetching admin stats: {str(e)}")
+            logger.error(f"Error fetching admin stats: {str(e)}", exc_info=True)
             return Response({
                 'status': 'error',
-                'message': 'Failed to fetch statistics'
+                'message': f'Failed to fetch statistics: {str(e)}'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
+        
 class AdminUsersView(APIView):
     permission_classes = [IsAdminUser]
 
