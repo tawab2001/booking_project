@@ -62,6 +62,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ),
 }
 
@@ -154,6 +155,7 @@ CORS_ALLOW_METHODS = [
     'POST',
     'PUT',
 ]
+<<<<<<< HEAD
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'authorization',
 ]
@@ -161,6 +163,20 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+=======
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
+# CORS_ALLOW_HEADERS = ['*']
+>>>>>>> 419a4115209be8e84363dc20db0eb72f335ef993
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -206,12 +222,17 @@ EMAIL_HOST_USER = 'ahmedtawab017@gmail.com'
 EMAIL_HOST_PASSWORD = 'vcdt ddnj rxdj dmad'  
 DEFAULT_FROM_EMAIL = 'ahmedtawab017@gmail.com' 
 FRONTEND_URL = 'http://localhost:5173' 
-
+GOOGLE_CLIENT_ID ="30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com"
 GOOGLE_OAUTH2_CLIENT_ID = "30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com"
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'users.backends.GoogleOAuth2Backend',
+     'users.backends.EmailBackend',
 )
+GOOGLE_OAUTH_SETTINGS = {
+    'CLOCK_SKEW_IN_SECONDS': 60,  # Allow 1 minute clock skew
+    'TOKEN_EXPIRY_MARGIN': 300,    # 5 minutes margin for token expiry
+}
 
 
 

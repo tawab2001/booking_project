@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+<<<<<<< HEAD
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,11 +26,16 @@ from rest_framework_simplejwt.views import (
 )
 
 
+=======
+from django.db.models import Sum
+from rest_framework.views import APIView
+>>>>>>> 419a4115209be8e84363dc20db0eb72f335ef993
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('users.urls')),
     path("admincustom/", include("admin_dashboard.urls")),
+<<<<<<< HEAD
 
     path('api/events/', include('events.urls')),
 
@@ -39,3 +45,7 @@ urlpatterns = [
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+=======
+    path('api/admin/', include('admin_dashboard.urls'))
+]
+>>>>>>> 419a4115209be8e84363dc20db0eb72f335ef993

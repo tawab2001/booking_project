@@ -1,113 +1,253 @@
-from django.shortcuts import render
-from django.contrib.admin.views.decorators import staff_member_required
-from django.core.paginator import Paginator
-from django.utils import timezone
-from events.models import Event
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.permissions import IsAdminUser
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.db.models import Count, Sum
 from users.models import CustomUser
+from events.models import Event
 from tickets.models import Ticket
-from datetime import datetime
-from django.db.models import Sum, Count
+from django.contrib.auth import authenticate
+from rest_framework.permissions import AllowAny
+from django.contrib.auth.backends import ModelBackend
+from django.contrib.auth import get_user_model
+from django.db.models import Q
+from tickets.models import Ticket, TicketType
+import logging
 
-@staff_member_required
-def admin_dashboard(request):
-    context = {
-        'total_events': Event.objects.count(),
-        'active_events': Event.objects.filter(status='active').count(),
-        'total_users': CustomUser.objects.count(),
-        'new_users': CustomUser.objects.filter(date_joined__month=timezone.now().month).count(),
-        'tickets_sold': Ticket.objects.count(),
-        'revenue': Ticket.objects.aggregate(Sum('price'))['price__sum'] or 0,
-        'recent_events': Event.objects.order_by('-created_at')[:5],
-        'recent_users': CustomUser.objects.order_by('-date_joined')[:5],
-    }
-    return render(request, 'admin/dashboard.html', context)
+logger = logging.getLogger(__name__)
 
-@staff_member_required
-def admin_events(request):
-    events_list = Event.objects.all().order_by('-created_at')
-    paginator = Paginator(events_list, 10)  # 10 events per page
-    page = request.GET.get('page')
-    events = paginator.get_page(page)
-    
-    context = {
-        'events': events,
-        'total_events': events_list.count(),
-        'active_events': events_list.filter(status='active').count(),
-        'completed_events': events_list.filter(status='completed').count(),
-    }
-    return render(request, 'admin/events.html', context)
+class AdminStatsView(APIView):
+    permission_classes = [IsAdminUser]
 
-@staff_member_required
-def admin_users(request):
-    users_list = CustomUser.objects.all().order_by('-date_joined')
-    paginator = Paginator(users_list, 10)  # 10 users per page
-    page = request.GET.get('page')
-    users = paginator.get_page(page)
-    
-    context = {
-        'users': users,
-        'total_users': users_list.count(),
-        'active_users': users_list.filter(is_active=True).count(),
-        'staff_users': users_list.filter(is_staff=True).count(),
-    }
-    return render(request, 'admin/users.html', context)
-
-@staff_member_required
-def admin_tickets(request):
-    tickets_list = Ticket.objects.all().order_by('-created_at')
-    paginator = Paginator(tickets_list, 10)  # 10 tickets per page
-    page = request.GET.get('page')
-    tickets = paginator.get_page(page)
-    
-    context = {
-        'tickets': tickets,
-        'total_tickets': tickets_list.count(),
-        'total_revenue': tickets_list.aggregate(Sum('price'))['price__sum'] or 0,
-        'tickets_by_event': tickets_list.values('event__name').annotate(count=Count('id')),
-    }
-    return render(request, 'admin/tickets.html', context)
-
-@staff_member_required
-def admin_reports(request):
-    # Get date range from request or default to current month
-    start_date = request.GET.get('start_date', timezone.now().replace(day=1))
-    end_date = request.GET.get('end_date', timezone.now())
-
-    context = {
-        'revenue_by_day': Ticket.objects.filter(
-            created_at__range=[start_date, end_date]
-        ).values('created_at__date').annotate(
-            total=Sum('price')
-        ).order_by('created_at__date'),
+    def get(self, request):
+        try:
+            logger.info('Fetching admin stats...')
+            total_users = CustomUser.objects.count()
+            logger.info(f'Total users: {total_users}')
+            total_events = Event.objects.count()
+            logger.info(f'Total events: {total_events}')
+            total_tickets = Ticket.objects.count()
+            logger.info(f'Total tickets: {total_tickets}')
+            # Calculate revenue by joining Ticket with TicketType
+            revenue = float(Ticket.objects.filter(status='active')
+                           .aggregate(total=Sum('ticket_type__price'))['total'] or 0)
+            logger.info(f'Revenue: {revenue}')
+            stats = {
+                'totalUsers': total_users,
+                'totalEvents': total_events,
+                'totalTickets': total_tickets,
+                'revenue': revenue
+            }
+            return Response({
+                'status': 'success',
+                'data': stats
+            })
+        except Exception as e:
+            logger.error(f"Error fetching admin stats: {str(e)}", exc_info=True)
+            return Response({
+                'status': 'error',
+                'message': f'Failed to fetch statistics: {str(e)}'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
-        'events_by_category': Event.objects.values('category').annotate(
-            count=Count('id')
-        ),
-        
-        'top_selling_events': Event.objects.annotate(
-            tickets_sold=Count('ticket')
-        ).order_by('-tickets_sold')[:5],
-        
-        'user_registrations': CustomUser.objects.filter(
-            date_joined__range=[start_date, end_date]
-        ).values('date_joined__date').annotate(
-            count=Count('id')
-        ).order_by('date_joined__date'),
-    }
-    return render(request, 'admin/reports.html', context)
+class AdminUsersView(APIView):
+    permission_classes = [IsAdminUser]
 
-@staff_member_required
-def admin_settings(request):
-    if request.method == 'POST':
-        # Handle settings updates here
-        pass
+    def get(self, request, user_id=None):
+        try:
+            if user_id:
+                user = CustomUser.objects.get(id=user_id)
+                return Response({
+                    'status': 'success',
+                    'data': {
+                        'id': user.id,
+                        'username': user.username,
+                        'email': user.email,
+                        'is_active': user.is_active,
+                        'date_joined': user.date_joined
+                    }
+                })
+            
+            users = CustomUser.objects.all().values(
+                'id', 'username', 'email', 'date_joined', 'is_active'
+            )
+            return Response({
+                'status': 'success',
+                'data': list(users)
+            })
+        except CustomUser.DoesNotExist:
+            return Response({
+                'status': 'error',
+                'message': 'User not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def put(self, request, user_id):
+        try:
+            user = CustomUser.objects.get(id=user_id)
+            for key, value in request.data.items():
+                if key != 'password':  # Don't update password directly
+                    setattr(user, key, value)
+            user.save()
+            return Response({
+                'status': 'success',
+                'message': 'User updated successfully',
+                'data': {
+                    'id': user.id,
+                    'username': user.username,
+                    'email': user.email,
+                    'is_active': user.is_active
+                }
+            })
+        except CustomUser.DoesNotExist:
+            return Response({
+                'status': 'error',
+                'message': 'User not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, user_id):
+        try:
+            user = CustomUser.objects.get(id=user_id)
+            user.delete()
+            return Response({
+                'status': 'success',
+                'message': 'User deleted successfully'
+            })
+        except CustomUser.DoesNotExist:
+            return Response({
+                'status': 'error',
+                'message': 'User not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class AdminEventsView(APIView):
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        try:
+            events = Event.objects.all().values(
+                'id', 'title', 'date', 'location', 'status'
+            )
+            return Response(
+                {
+                    'data': list(events),
+                    'status': 'success'
+                }, 
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            return Response(
+                {
+                    'error': str(e),
+                    'status': 'error'
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+class AdminLoginView(APIView):
+    permission_classes = [AllowAny] 
+    def post(self, request):
+        try:
+            email = request.data.get('email')
+            password = request.data.get('password')
+
+            if not email or not password:
+                return Response({
+                    'status': 'error',
+                    'message': 'Email and password are required'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            user = authenticate(username=email, password=password)
+
+            if not user:
+                return Response({
+                    'status': 'error',
+                    'message': 'Invalid credentials'
+                }, status=status.HTTP_401_UNAUTHORIZED)
+
+            if not user.is_staff:
+                return Response({
+                    'status': 'error',
+                    'message': 'User is not an admin'
+                }, status=status.HTTP_403_FORBIDDEN)
+
+            refresh = RefreshToken.for_user(user)
+
+            return Response({
+                'status': 'success',
+                'access': str(refresh.access_token),
+                'refresh': str(refresh),
+                'user_type': 'admin',
+                'user_data': {
+                    'id': user.id,
+                    'email': user.email,
+                    'username': user.username,
+                    'is_staff': user.is_staff
+                }
+            })
+
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR) # Allow unauthenticated access
+
+    def put(self, request, user_id):
+        try:
+            user = CustomUser.objects.get(id=user_id)
+            for key, value in request.data.items():
+                if key != 'password':  # Don't update password directly
+                    setattr(user, key, value)
+            user.save()
+            return Response({
+                'status': 'success',
+                'message': 'User updated successfully',
+                'data': {
+                    'id': user.id,
+                    'username': user.username,
+                    'email': user.email,
+                    'is_active': user.is_active
+                }
+            })
+        except CustomUser.DoesNotExist:
+            return Response({
+                'status': 'error',
+                'message': 'User not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, user_id):
+        try:
+            user = CustomUser.objects.get(id=user_id)
+            user.delete()
+            return Response({
+                'status': 'success',
+                'message': 'User deleted successfully'
+            })
+        except CustomUser.DoesNotExist:
+            return Response({
+                'status': 'error',
+                'message': 'User not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-    context = {
-        'site_settings': {
-            'site_name': 'EasyTicket',
-            'contact_email': 'support@easyticket.com',
-            'default_currency': 'USD',
-            'timezone': 'UTC',
-        }
-    }
-    return render(request, 'admin/settings.html', context)

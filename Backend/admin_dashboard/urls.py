@@ -1,11 +1,11 @@
 from django.urls import path
-from . import views
-
+from .views import AdminLoginView, AdminStatsView, AdminUsersView, AdminEventsView
+from django.db.models import Sum
+from rest_framework.views import APIView
 urlpatterns = [
-    path('', views.admin_dashboard, name='admin_dashboard'),
-    path('events/', views.admin_events, name='admin_events'),
-    path('users/', views.admin_users, name='admin_users'),
-    path('tickets/', views.admin_tickets, name='admin_tickets'),
-    path('reports/', views.admin_reports, name='admin_reports'),
-    path('settings/', views.admin_settings, name='admin_settings'),
+path('stats/', AdminStatsView.as_view(), name='admin-stats'),
+    path('users/', AdminUsersView.as_view(), name='admin-users'),
+     path('users/<int:user_id>/', AdminUsersView.as_view(), name='admin-user-detail'),  # Add this line
+    path('events/', AdminEventsView.as_view(), name='admin-events'),
+        path('login/', AdminLoginView.as_view(), name='admin-login'),
 ]
