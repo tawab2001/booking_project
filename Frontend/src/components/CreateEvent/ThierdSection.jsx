@@ -1,36 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 
-const ThierdSection = () => {
-  const [ticketType, setTicketType] = useState("");
-  const [ticketDetails, setTicketDetails] = useState({
-    name: "",
-    quantity: "",
-    price: "",
-  });
-  const [salesDates, setSalesDates] = useState({
-    startSales: "",
-    endSales: "",
-  });
-  const [paymentMethod, setPaymentMethod] = useState("");
-
-  const handleInputChange = (e) => {
+const ThierdSection = ({ data, setData }) => {
+  const handleTicketChange = (e) => {
     const { name, value } = e.target;
-    setTicketDetails((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSalesDateChange = (e) => {
-    const { name, value } = e.target;
-    setSalesDates((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = () => {
-    console.log({
-      ticketType,
-      ticketDetails,
-      salesDates,
-      paymentMethod,
-    });
+    setData(prev => ({
+      ...prev,
+      tickets: {
+        ...prev.tickets,
+        [name]: value
+      }
+    }));
   };
 
   return (
@@ -48,13 +28,13 @@ const ThierdSection = () => {
                 </div>
 
                 <Form>
-                  {/* اختيار نوع التذكرة */}
                   <Form.Group className="mb-3">
-                    <Form.Label className="text-white">Ticket Type</Form.Label>
+                    <Form.Label>Ticket Type</Form.Label>
                     <Form.Select
+                      name="ticketType"
                       className="bg-black text-white border-secondary"
-                      value={ticketType}
-                      onChange={(e) => setTicketType(e.target.value)}
+                      value={data.tickets.ticketType}
+                      onChange={handleTicketChange}
                     >
                       <option value="">Select Ticket Type</option>
                       <option value="VIP">VIP</option>
@@ -62,16 +42,15 @@ const ThierdSection = () => {
                     </Form.Select>
                   </Form.Group>
 
-                  {/* تفاصيل التذكرة */}
                   <Row className="mb-3">
                     <Col>
                       <Form.Group>
-                        <Form.Label className="text-white">Ticket Name</Form.Label>
+                        <Form.Label>Ticket Name</Form.Label>
                         <Form.Control
                           type="text"
-                          name="name"
-                          value={ticketDetails.name}
-                          onChange={handleInputChange}
+                          name="ticketName"
+                          value={data.tickets.ticketName}
+                          onChange={handleTicketChange}
                           className="bg-black text-white border-secondary"
                           placeholder="e.g. VIP Ticket"
                         />
@@ -79,12 +58,12 @@ const ThierdSection = () => {
                     </Col>
                     <Col>
                       <Form.Group>
-                        <Form.Label className="text-white">Quantity</Form.Label>
+                        <Form.Label>Quantity</Form.Label>
                         <Form.Control
                           type="number"
                           name="quantity"
-                          value={ticketDetails.quantity}
-                          onChange={handleInputChange}
+                          value={data.tickets.quantity}
+                          onChange={handleTicketChange}
                           className="bg-black text-white border-secondary"
                           placeholder="e.g. 100"
                         />
@@ -92,12 +71,12 @@ const ThierdSection = () => {
                     </Col>
                     <Col>
                       <Form.Group>
-                        <Form.Label className="text-white">Price</Form.Label>
+                        <Form.Label>Price</Form.Label>
                         <Form.Control
                           type="number"
                           name="price"
-                          value={ticketDetails.price}
-                          onChange={handleInputChange}
+                          value={data.tickets.price}
+                          onChange={handleTicketChange}
                           className="bg-black text-white border-secondary"
                           placeholder="e.g. 50"
                         />
@@ -105,41 +84,40 @@ const ThierdSection = () => {
                     </Col>
                   </Row>
 
-                  {/* تواريخ المبيعات */}
                   <Row className="mb-3">
                     <Col>
                       <Form.Group>
-                        <Form.Label className="text-white">Start Sales</Form.Label>
+                        <Form.Label>Start Sales</Form.Label>
                         <Form.Control
                           type="datetime-local"
                           name="startSales"
-                          value={salesDates.startSales}
-                          onChange={handleSalesDateChange}
+                          value={data.tickets.startSales}
+                          onChange={handleTicketChange}
                           className="bg-black text-white border-secondary"
                         />
                       </Form.Group>
                     </Col>
                     <Col>
                       <Form.Group>
-                        <Form.Label className="text-white">End Sales</Form.Label>
+                        <Form.Label>End Sales</Form.Label>
                         <Form.Control
                           type="datetime-local"
                           name="endSales"
-                          value={salesDates.endSales}
-                          onChange={handleSalesDateChange}
+                          value={data.tickets.endSales}
+                          onChange={handleTicketChange}
                           className="bg-black text-white border-secondary"
                         />
                       </Form.Group>
                     </Col>
                   </Row>
 
-                  {/* طريقة الدفع */}
                   <Form.Group className="mb-3">
-                    <Form.Label className="text-white">Payment Method</Form.Label>
+                    <Form.Label>Payment Method</Form.Label>
                     <Form.Select
+                      name="paymentMethod"
                       className="bg-black text-white border-secondary"
-                      value={paymentMethod}
-                      onChange={(e) => setPaymentMethod(e.target.value)}
+                      value={data.tickets.paymentMethod}
+                      onChange={handleTicketChange}
                     >
                       <option value="">Select Payment Method</option>
                       <option value="Credit Card">Credit Card</option>
@@ -147,13 +125,6 @@ const ThierdSection = () => {
                       <option value="Cash">Cash</option>
                     </Form.Select>
                   </Form.Group>
-
-                  {/* زر الحفظ */}
-                  <div className="d-flex justify-content-end mt-4">
-                    <Button variant="warning" onClick={handleSubmit}>
-                      Save Ticket
-                    </Button>
-                  </div>
                 </Form>
               </Card.Body>
             </Card>

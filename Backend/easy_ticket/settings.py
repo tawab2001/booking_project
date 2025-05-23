@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path 
+from corsheaders.defaults import default_headers
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -53,6 +55,8 @@ INSTALLED_APPS = [
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework.authentication.TokenAuthentication',
+
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
@@ -131,6 +135,17 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5173',
     'http://127.0.0.1:3000',
 ]
+
+
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",  # حسب الحاجة
+]
+
+
+
+
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
     'DELETE',
@@ -140,6 +155,13 @@ CORS_ALLOW_METHODS = [
     'POST',
     'PUT',
 ]
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'authorization',
+]
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 CORS_ALLOW_HEADERS = [
     "accept",
     "accept-encoding",
