@@ -15,6 +15,7 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 import logging
 import time
+from django.db import transaction 
 
 class UserSignupView(APIView):
     permission_classes = [AllowAny]
@@ -277,176 +278,238 @@ class PasswordResetConfirmView(APIView):
             )
         
 logger = logging.getLogger(__name__)
-
 class GoogleLoginView(APIView):
     permission_classes = [AllowAny]
-    
+
     def post(self, request):
-        start_time = time.time()
-        logger.info(f"Request started at {start_time}, server_time: {int(time.time())}")
         try:
+            logger.info('Processing Google login request')
             credential = request.data.get('credential')
-            
+            user_info = request.data.get('user_info')
+
             if not credential:
-                logger.warning("No credential provided in request")
-                return Response(
-                    {'error': 'Credential is required'},
-                    status=status.HTTP_400_BAD_REQUEST
-                )
+                logger.error('Missing Google credential')
+                return Response({
+                    'status': 'error',
+                    'message': 'Google credential is required'
+                }, status=status.HTTP_400_BAD_REQUEST)
 
             try:
-                # Verify the token with increased clock skew tolerance
+                # Verify token with more lenient clock skew
                 idinfo = id_token.verify_oauth2_token(
                     credential,
                     requests.Request(),
-                    settings.GOOGLE_OAUTH2_CLIENT_ID,
-                    clock_skew_in_seconds=15  # Increased to 15 seconds
+                    settings.GOOGLE_CLIENT_ID,
+                    clock_skew_in_seconds=settings.GOOGLE_OAUTH_SETTINGS['CLOCK_SKEW_IN_SECONDS']
                 )
 
-                # Get user info from token
+                email = idinfo['email']
+                if not idinfo.get('email_verified'):
+                    logger.error(f'Email not verified: {email}')
+                    return Response({
+                        'status': 'error',
+                        'message': 'Email not verified'
+                    }, status=status.HTTP_400_BAD_REQUEST)
+
+                logger.info(f'Token verified for email: {email}')
+
+            except ValueError as e:
+                logger.error(f'Token verification failed: {str(e)}')
+                return Response({
+                    'status': 'error',
+                    'message': 'Invalid or expired token. Please try again.'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            # Get or create user
+            try:
+                user = CustomUser.objects.get(email=email)
+                logger.info(f'Existing user found: {email}')
+            except CustomUser.DoesNotExist:
+                # Create new user
+                user = CustomUser.objects.create_user(
+                    email=email,
+                    username=idinfo.get('name', email.split('@')[0]),
+                    first_name=idinfo.get('given_name', ''),
+                    last_name=idinfo.get('family_name', ''),
+                    is_active=True
+                )
+                logger.info(f'New user created: {email}')
+
+            # Generate tokens
+            refresh = RefreshToken.for_user(user)
+            
+            return Response({
+                'status': 'success',
+                'access': str(refresh.access_token),
+                'refresh': str(refresh),
+                'user_type': 'organizer' if hasattr(user, 'organizer_company') else 'user',
+                'user_data': {
+                    'id': user.id,
+                    'email': user.email,
+                    'username': user.username,
+                    'first_name': user.first_name,
+                    'last_name': user.last_name,
+                    'profile_picture': idinfo.get('picture', '')
+                }
+            })
+
+        except Exception as e:
+            logger.error(f'Unexpected error in Google login: {str(e)}', exc_info=True)
+            return Response({
+                'status': 'error',
+                'message': 'Login failed. Please try again.'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        
+class GoogleUserSignupView(APIView):
+    permission_classes = [AllowAny] 
+    def post(self, request):
+        try:
+            logger.info('Processing Google signup...')
+            credential = request.data.get('credential')
+            user_info = request.data.get('user_info')
+
+            if not credential or not user_info:
+                logger.error('Missing credential or user info')
+                return Response({
+                    'status': 'error',
+                    'message': 'Missing credential or user info'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            # Verify Google token
+            logger.info('Verifying Google token...')
+            idinfo = id_token.verify_oauth2_token(
+                credential,
+                requests.Request(),
+                settings.GOOGLE_OAUTH2_CLIENT_ID,
+                clock_skew_in_seconds=60
+            )
+
+            email = idinfo['email']
+            logger.info(f'Google token verified for email: {email}')
+
+            # Check if user exists
+            if CustomUser.objects.filter(email=email).exists():
+                logger.error(f'User with email {email} already exists')
+                return Response({
+                    'status': 'error',
+                    'message': 'User with this email already exists'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            # Create user
+            user = CustomUser.objects.create_user(
+                email=email,
+                username=user_info.get('name', email.split('@')[0]),
+                first_name=user_info.get('given_name', ''),
+                last_name=user_info.get('family_name', ''),
+                is_active=True,
+                is_organizer=False
+            )
+            logger.info(f'User created: {user.email}')
+
+            # Generate JWT tokens
+            refresh = RefreshToken.for_user(user)
+            user_type = 'user'
+
+            return Response({
+                'status': 'success',
+                'access': str(refresh.access_token),
+                'refresh': str(refresh),
+                'user_type': user_type,
+                'user_data': {
+                    'id': user.id,
+                    'email': user.email,
+                    'username': user.username,
+                    'is_organizer': user.is_organizer
+                }
+            })
+
+        except ValueError as e:
+            logger.error(f"Google token validation error: {str(e)}")
+            return Response({
+                'status': 'error',
+                'message': f'Invalid Google token: {str(e)}'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            logger.error(f"Google signup error: {str(e)}", exc_info=True)
+            return Response({
+                'status': 'error',
+                'message': f'Server error: {str(e)}'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class GoogleOrganizerSignupView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        try:
+            logger.info('Processing Google user signup...')
+            credential = request.data.get('token')  # Changed from 'credential'
+            user_data = request.data.get('user')    # Changed from 'user_info'
+
+            if not credential or not user_data:
+                logger.error('Missing token or user data')
+                return Response({
+                    'status': 'error',
+                    'message': 'Missing required data'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            try:
+                idinfo = id_token.verify_oauth2_token(
+                    credential,
+                    requests.Request(),
+                    settings.GOOGLE_CLIENT_ID,
+                    clock_skew_in_seconds=settings.GOOGLE_OAUTH_SETTINGS['CLOCK_SKEW_IN_SECONDS']
+                )
+
                 email = idinfo['email']
                 
-                # Get or create user
-                user = CustomUser.objects.filter(email=email).first()
-                if not user:
-                    username = email.split('@')[0]
-                    base_username = username
-                    counter = 1
-                    while CustomUser.objects.filter(username=username).exists():
-                        username = f"{base_username}{counter}"
-                        counter += 1
-                        
-                    user = CustomUser.objects.create_user(
+                # Create user if not exists
+                with transaction.atomic():
+                    user, created = CustomUser.objects.get_or_create(
                         email=email,
-                        username=username,
-                        first_name=idinfo.get('given_name', ''),
-                        last_name=idinfo.get('family_name', ''),
-                        password=None
+                        defaults={
+                            'username': user_data.get('username', email.split('@')[0]),
+                            'first_name': user_data.get('first_name', ''),
+                            'last_name': user_data.get('last_name', ''),
+                            'profile_picture': user_data.get('profile_picture', ''),
+                            'google_id': idinfo['sub'],
+                            'is_active': True
+                        }
                     )
+
+                    if created:
+                        logger.info(f'Created new user: {email}')
+                    else:
+                        logger.info(f'Found existing user: {email}')
 
                 # Generate tokens
                 refresh = RefreshToken.for_user(user)
-                
-                logger.info(f"User {email} logged in successfully, processing_time: {time.time() - start_time}")
                 return Response({
+                    'status': 'success',
+                    'message': 'Signup successful',
                     'access': str(refresh.access_token),
                     'refresh': str(refresh),
-                    'user_type': 'organizer' if hasattr(user, 'organizer') else 'user',
+                    'user_type': 'user',
                     'user_data': {
                         'id': user.id,
                         'email': user.email,
                         'username': user.username,
                         'first_name': user.first_name,
-                        'last_name': user.last_name
+                        'last_name': user.last_name,
+                        'profile_picture': user.profile_picture
                     }
                 })
 
-            except ValueError as ve:
-                try:
-                    decoded = jwt.decode(credential, options={"verify_signature": False})
-                    logger.error(
-                        f"Token verification failed: {str(ve)}, "
-                        f"token_payload: {decoded}, "
-                        f"processing_time: {time.time() - start_time}, "
-                        f"server_time: {int(time.time())}"
-                    )
-                except Exception as e:
-                    logger.error(f"Token decode failed: {str(e)}, processing_time: {time.time() - start_time}")
-                return Response(
-                    {'error': 'Google authentication failed. Please try again.'},
-                    status=status.HTTP_400_BAD_REQUEST
-                )
+            except ValueError as e:
+                logger.error(f'Token verification failed: {str(e)}')
+                return Response({
+                    'status': 'error',
+                    'message': 'Invalid token'
+                }, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
-            logger.error(f"Google login error: {str(e)}, processing_time: {time.time() - start_time}")
-            return Response(
-                {'error': 'An unexpected error occurred. Please try again.'},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
-class GoogleUserSignupView(APIView):
-    permission_classes = []
-
-    def post(self, request):
-        try:
-            user_data = request.data.get('user', {})
-            google_id = user_data.get('google_id')
-            email = user_data.get('email')
-
-            # Check if user exists
-            user = CustomUser.objects.filter(email=email).first()
-            if user:
-                return Response(
-                    {'error': 'User with this email already exists'},
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-
-            # Create new user
-            user = CustomUser.objects.create_user(
-                username=user_data.get('username'),
-                email=email,
-                first_name=user_data.get('first_name', ''),
-                last_name=user_data.get('last_name', ''),
-                password=user_data.get('password'),
-                mobile_number=user_data.get('mobile_number', ''),
-                google_id=google_id
-            )
-
+            logger.error(f'Unexpected error: {str(e)}', exc_info=True)
             return Response({
-                'message': 'User created successfully',
-                'user_id': user.id
-            }, status=status.HTTP_201_CREATED)
-
-        except Exception as e:
-            print(f"Error in Google signup: {str(e)}")
-            return Response(
-                {'error': 'Failed to create user'},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
-
-class GoogleOrganizerSignupView(APIView):
-    permission_classes = []
-
-    def post(self, request):
-        try:
-            user_data = request.data.get('user', {})
-            company_data = request.data
-            google_id = user_data.get('google_id')
-            email = user_data.get('email')
-
-            # Check if user exists
-            user = CustomUser.objects.filter(email=email).first()
-            if user:
-                return Response(
-                    {'error': 'User with this email already exists'},
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-
-            # Create user and organizer profile
-            user = CustomUser.objects.create_user(
-                username=user_data.get('username'),
-                email=email,
-                first_name=user_data.get('first_name', ''),
-                last_name=user_data.get('last_name', ''),
-                password=user_data.get('password'),
-                mobile_number=user_data.get('mobile_number', ''),
-                google_id=google_id,
-                is_organizer=True
-            )
-
-            # Create organizer profile
-            user.organizer.company_name = company_data.get('company_name', '')
-            user.organizer.country = company_data.get('country', '')
-            user.organizer.description = company_data.get('description', '')
-            user.organizer.save()
-
-            return Response({
-                'message': 'Organizer created successfully',
-                'user_id': user.id
-            }, status=status.HTTP_201_CREATED)
-
-        except Exception as e:
-            print(f"Error in Google organizer signup: {str(e)}")
-            return Response(
-                {'error': 'Failed to create organizer'},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+                'status': 'error',
+                'message': 'Signup failed'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

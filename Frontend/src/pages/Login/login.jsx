@@ -3,10 +3,9 @@ import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
-import axios from "axios";
+import axiosInstance from "../../apiConfig/axiosConfig";
 import { ENDPOINTS } from "../../apiConfig/api";
-import "bootstrap/dist/css/bootstrap.min.css";
-
+// import "bootstrap/dist/css/bootstrap.min.css";
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -25,7 +24,7 @@ const Login = () => {
     if (error) setError("");
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -36,17 +35,11 @@ const Login = () => {
 
     try {
       setIsLoading(true);
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         ENDPOINTS.LOGIN,
         {
           email: formData.email.trim(),
           password: formData.password
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
         }
       );
 
@@ -107,44 +100,44 @@ const handleGoogleSuccess = async (credentialResponse) => {
         setIsLoading(true);
         setError("");
         
-        // Only send the credential token
-        const response = await axios.post(
-            ENDPOINTS.GOOGLE_LOGIN,
-            {
-                credential: credentialResponse.credential
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
+        // Decode Google token
+        const decodedToken = jwtDecode(credentialResponse.credential);
+        
+        // Send login request
+        const response = await axiosInstance.post(ENDPOINTS.GOOGLE_LOGIN, {
+            credential: credentialResponse.credential,
+            user_info: {
+                email: decodedToken.email,
+                given_name: decodedToken.given_name,
+                family_name: decodedToken.family_name,
+                picture: decodedToken.picture,
+                name: decodedToken.name
             }
-        );
+        });
 
-        if (response.data?.access) {
-            // Store tokens
+        // Handle successful login
+        if (response?.data?.access) {
+            // Store auth data
             localStorage.setItem('token', response.data.access);
             localStorage.setItem('refresh', response.data.refresh);
             localStorage.setItem('userType', response.data.user_type);
 
             // Store user data
             if (response.data.user_data) {
-                localStorage.setItem('user_id', response.data.user_data.id);
                 localStorage.setItem('user_data', JSON.stringify(response.data.user_data));
             }
 
             // Redirect based on user type
-            if (response.data.user_type === 'organizer') {
-                navigate('/admin');
-            } else {
-                navigate('/');
-            }
+            navigate(response.data.user_type === 'organizer' ? '/admin' : '/');
+        } else {
+            throw new Error('Invalid response format');
         }
     } catch (err) {
         console.error("Google login error:", err);
         setError(
+            err.response?.data?.message || 
             err.response?.data?.error || 
-            "Failed to login with Google. Please try again."
+            "Google login failed. Please try again."
         );
     } finally {
         setIsLoading(false);

@@ -197,13 +197,17 @@ EMAIL_HOST_USER = 'ahmedtawab017@gmail.com'
 EMAIL_HOST_PASSWORD = 'vcdt ddnj rxdj dmad'  
 DEFAULT_FROM_EMAIL = 'ahmedtawab017@gmail.com' 
 FRONTEND_URL = 'http://localhost:5173' 
-
+GOOGLE_CLIENT_ID ="30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com"
 GOOGLE_OAUTH2_CLIENT_ID = "30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com"
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'users.backends.GoogleOAuth2Backend',
      'users.backends.EmailBackend',
 )
+GOOGLE_OAUTH_SETTINGS = {
+    'CLOCK_SKEW_IN_SECONDS': 60,  # Allow 1 minute clock skew
+    'TOKEN_EXPIRY_MARGIN': 300,    # 5 minutes margin for token expiry
+}
 
 
 

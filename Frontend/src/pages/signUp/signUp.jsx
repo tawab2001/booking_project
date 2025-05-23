@@ -379,51 +379,58 @@ const signupUser = async (userData) => {
     setIsSubmitting(false);
   }
 };
- const handleGoogleSuccess = async (credentialResponse) => {
+const handleGoogleSuccess = async (credentialResponse) => {
     try {
-      setIsSubmitting(true);
-      const decoded = jwtDecode(credentialResponse.credential);
-      
-      // Prepare data from Google account
-      const googleData = {
-        user: {
-          email: decoded.email,
-          username: decoded.email.split('@')[0],
-          first_name: decoded.given_name,
-          last_name: decoded.family_name,
-          password: Math.random().toString(36).slice(-8),
-          mobile_number: '',
-          google_id: decoded.sub
+        setIsSubmitting(true);
+        const decoded = jwtDecode(credentialResponse.credential);
+        
+        // Create request data matching backend expectations
+        const requestData = {
+            credential: credentialResponse.credential,
+            user_info: {
+                email: decoded.email,
+                name: decoded.name,
+                given_name: decoded.given_name,
+                family_name: decoded.family_name,
+                picture: decoded.picture
+            }
+        };
+
+        console.log('Sending Google signup request:', requestData);
+
+        const endpoint = userType === 'institution' 
+            ? ENDPOINTS.ORGANIZER_SIGNUP_GOOGLE 
+            : ENDPOINTS.USER_SIGNUP_GOOGLE;
+
+        const response = await axiosInstance.post(endpoint, requestData);
+
+        if (response?.data?.status === 'success') {
+            localStorage.setItem('signupSuccess', 'true');
+            navigate('/login', { 
+                state: { 
+                    message: 'Account created successfully! Please login.',
+                    email: decoded.email
+                }
+            });
+        } else {
+            throw new Error(response?.data?.message || 'Signup failed');
         }
-      };
-
-      if (userType === 'institution') {
-        googleData.company_name = decoded.name;
-        googleData.country = '';
-        googleData.description = '';
-      }
-
-      const endpoint = userType === 'institution' 
-        ? ENDPOINTS.ORGANIZER_SIGNUP_GOOGLE 
-        : ENDPOINTS.USER_SIGNUP_GOOGLE;
-
-      const response = await axiosInstance.post(endpoint, googleData);
-
-      if (response.data) {
-        localStorage.setItem('signupSuccess', 'true');
-        navigate('/login');
-      }
     } catch (error) {
-      console.error('Google signup error:', error);
-      setErrors(prev => ({
-        ...prev,
-        submit: error.response?.data?.error || 'Failed to sign up with Google. Please try again.'
-      }));
+        console.error('Google signup error:', {
+            message: error.message,
+            response: error.response?.data,
+            status: error.response?.status
+        });
+        
+        setErrors({
+            submit: error.response?.data?.message || 
+                   error.response?.data?.error || 
+                   'Failed to signup with Google. Please try again.'
+        });
     } finally {
-      setIsSubmitting(false);
+        setIsSubmitting(false);
     }
-  };
-
+};
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
