@@ -47,21 +47,25 @@ const UsersManagement = () => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.put(
-        `/admin/users/${selectedUser.id}/`, 
-        editForm
-      );
-      if (response.data.status === 'success') {
-        setUsers(users.map(user => 
-          user.id === selectedUser.id ? { ...user, ...editForm } : user
-        ));
-        setShowEditModal(false);
-      }
+        setError('');
+        const response = await axiosInstance.put(
+            `/admin/users/${selectedUser.id}/`, 
+            editForm
+        );
+        
+        if (response.data.status === 'success') {
+            setUsers(users.map(user => 
+                user.id === selectedUser.id 
+                    ? { ...user, ...response.data.data }
+                    : user
+            ));
+            setShowEditModal(false);
+        }
     } catch (error) {
-      setError('Failed to update user');
-      console.error('Error updating user:', error);
+        console.error('Error updating user:', error);
+        setError(error.response?.data?.message || 'Failed to update user');
     }
-  };
+};
 
   // Handle Delete
   const handleDelete = (user) => {

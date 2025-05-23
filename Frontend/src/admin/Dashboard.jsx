@@ -3,7 +3,6 @@ import { Row, Col, Card, Spinner, Alert, Button } from 'react-bootstrap';
 import { Users, Calendar, Ticket, DollarSign, RefreshCw } from 'lucide-react';
 import axiosInstance from '../apiConfig/axiosConfig';
 
-// Styles object
 const styles = {
   card: {
     transition: 'all 0.3s ease',
@@ -31,37 +30,40 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchStats = async () => {
-        try {
-            setLoading(true);
-            setError(null);
-            
-            const response = await axiosInstance.get('/admin/stats/');
-            
-            if (response?.data?.status === 'success') {
-                setStats({
-                    totalUsers: response.data.data?.totalUsers || 0,
-                    totalEvents: response.data.data?.totalEvents || 0,
-                    totalTickets: response.data.data?.totalTickets || 0,
-                    revenue: response.data.data?.revenue || 0
-                });
-            } else {
-                throw new Error('Invalid data received from server');
-            }
-        } catch (error) {
-            console.error('Error fetching stats:', error);
-            setError(error.message || 'Failed to load statistics');
-            // Reset stats on error
-            setStats({
-                totalUsers: 0,
-                totalEvents: 0,
-                totalTickets: 0,
-                revenue: 0
-            });
-        } finally {
-            setLoading(false);
+const fetchStats = async () => {
+    try {
+        setLoading(true);
+        setError(null);
+        
+        const response = await axiosInstance.get('/admin/stats/');
+        
+        if (response?.data?.status === 'success' && response?.data?.data) {
+            setStats(response.data.data);
+        } else {
+            throw new Error('Invalid data received from server');
         }
-    };
+    } catch (error) {
+        console.error('Error fetching stats:', error);
+        setError(error.message);
+        
+        // Reset stats on error
+        setStats({
+            totalUsers: 0,
+            totalEvents: 0,
+            totalTickets: 0,
+            revenue: 0
+        });
+        
+        // Auto-retry after 5 seconds if it's a connection error
+        if (error.message.includes('Connection failed')) {
+            setTimeout(() => {
+                fetchStats();
+            }, 5000);
+        }
+    } finally {
+        setLoading(false);
+    }
+};
 
   useEffect(() => {
     fetchStats();

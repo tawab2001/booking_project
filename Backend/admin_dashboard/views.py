@@ -12,6 +12,7 @@ from rest_framework.permissions import AllowAny
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from tickets.models import Ticket, TicketType
 import logging
 
 logger = logging.getLogger(__name__)
@@ -21,71 +22,116 @@ class AdminStatsView(APIView):
 
     def get(self, request):
         try:
-            # Get basic stats
+            logger.info('Fetching admin stats...')
+            total_users = CustomUser.objects.count()
+            logger.info(f'Total users: {total_users}')
+            total_events = Event.objects.count()
+            logger.info(f'Total events: {total_events}')
+            total_tickets = Ticket.objects.count()
+            logger.info(f'Total tickets: {total_tickets}')
+            # Calculate revenue by joining Ticket with TicketType
+            revenue = float(Ticket.objects.filter(status='active')
+                           .aggregate(total=Sum('ticket_type__price'))['total'] or 0)
+            logger.info(f'Revenue: {revenue}')
             stats = {
-                'totalUsers': CustomUser.objects.count(),
-                'totalEvents': Event.objects.count(),
-                'totalTickets': Ticket.objects.count(),
-                'revenue': float(Ticket.objects.filter(status='paid')
-                              .aggregate(total=Sum('price'))['total'] or 0)
+                'totalUsers': total_users,
+                'totalEvents': total_events,
+                'totalTickets': total_tickets,
+                'revenue': revenue
             }
-
             return Response({
                 'status': 'success',
                 'data': stats
             })
-            
         except Exception as e:
-            logger.error(f"Error fetching admin stats: {str(e)}")
+            logger.error(f"Error fetching admin stats: {str(e)}", exc_info=True)
             return Response({
                 'status': 'error',
-                'message': 'Failed to fetch statistics'
+                'message': f'Failed to fetch statistics: {str(e)}'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
+        
 class AdminUsersView(APIView):
     permission_classes = [IsAdminUser]
 
-    def get(self, request):
+    def get(self, request, user_id=None):
         try:
+            if user_id:
+                user = CustomUser.objects.get(id=user_id)
+                return Response({
+                    'status': 'success',
+                    'data': {
+                        'id': user.id,
+                        'username': user.username,
+                        'email': user.email,
+                        'is_active': user.is_active,
+                        'date_joined': user.date_joined
+                    }
+                })
+            
             users = CustomUser.objects.all().values(
                 'id', 'username', 'email', 'date_joined', 'is_active'
             )
-            return Response(
-                {
-                    'data': list(users),
-                    'status': 'success'
-                }, 
-                status=status.HTTP_200_OK
-            )
+            return Response({
+                'status': 'success',
+                'data': list(users)
+            })
+        except CustomUser.DoesNotExist:
+            return Response({
+                'status': 'error',
+                'message': 'User not found'
+            }, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
-            return Response(
-                {
-                    'error': str(e),
-                    'status': 'error'
-                },
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+            return Response({
+                'status': 'error',
+                'message': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    def post(self, request):
+    def put(self, request, user_id):
         try:
-            user_data = request.data
-            user = CustomUser.objects.create_user(**user_data)
-            return Response(
-                {
-                    'message': 'User created successfully',
+            user = CustomUser.objects.get(id=user_id)
+            for key, value in request.data.items():
+                if key != 'password':  # Don't update password directly
+                    setattr(user, key, value)
+            user.save()
+            return Response({
+                'status': 'success',
+                'message': 'User updated successfully',
+                'data': {
                     'id': user.id,
-                    'status': 'success'
-                }, 
-                status=status.HTTP_201_CREATED
-            )
+                    'username': user.username,
+                    'email': user.email,
+                    'is_active': user.is_active
+                }
+            })
+        except CustomUser.DoesNotExist:
+            return Response({
+                'status': 'error',
+                'message': 'User not found'
+            }, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
-            return Response(
-                {
-                    'error': str(e),
-                    'status': 'error'
-                },
-                status=status.HTTP_400_BAD_REQUEST
-            )
+            return Response({
+                'status': 'error',
+                'message': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, user_id):
+        try:
+            user = CustomUser.objects.get(id=user_id)
+            user.delete()
+            return Response({
+                'status': 'success',
+                'message': 'User deleted successfully'
+            })
+        except CustomUser.DoesNotExist:
+            return Response({
+                'status': 'error',
+                'message': 'User not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class AdminEventsView(APIView):
     permission_classes = [IsAdminUser]
