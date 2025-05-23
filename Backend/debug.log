@@ -467,3 +467,19 @@ INFO 2025-05-23 14:22:26,646 basehttp "GET /api/admin/stats/ HTTP/1.1" 200 91
 INFO 2025-05-23 14:22:26,832 basehttp "GET /api/admin/stats/ HTTP/1.1" 200 91
 INFO 2025-05-23 14:22:29,932 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1146
 INFO 2025-05-23 14:22:30,097 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1146
+INFO 2025-05-23 14:23:06,811 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1146
+INFO 2025-05-23 14:23:07,139 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1146
+INFO 2025-05-23 14:23:23,972 basehttp "OPTIONS /api/admin/users/1/ HTTP/1.1" 200 0
+WARNING 2025-05-23 14:23:24,020 log Not Found: /api/admin/users/1/
+WARNING 2025-05-23 14:23:24,020 basehttp "PUT /api/admin/users/1/ HTTP/1.1" 404 5946
+WARNING 2025-05-23 14:23:49,743 log Not Found: /api/admin/users/1/
+WARNING 2025-05-23 14:23:49,745 basehttp "PUT /api/admin/users/1/ HTTP/1.1" 404 5946
+INFO 2025-05-23 14:26:41,611 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\admin_dashboard\urls.py changed, reloading.
+INFO 2025-05-23 14:26:42,550 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 14:27:02,026 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\admin_dashboard\views.py changed, reloading.
+INFO 2025-05-23 14:27:02,959 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 14:27:42,073 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1146
+INFO 2025-05-23 14:27:42,286 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1146
+INFO 2025-05-23 14:27:58,234 basehttp "PUT /api/admin/users/1/ HTTP/1.1" 200 146
+INFO 2025-05-23 14:28:09,377 basehttp "OPTIONS /api/admin/users/8/ HTTP/1.1" 200 0
+INFO 2025-05-23 14:28:09,592 basehttp "DELETE /api/admin/users/8/ HTTP/1.1" 200 58

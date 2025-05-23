@@ -53,47 +53,85 @@ class AdminStatsView(APIView):
 class AdminUsersView(APIView):
     permission_classes = [IsAdminUser]
 
-    def get(self, request):
+    def get(self, request, user_id=None):
         try:
+            if user_id:
+                user = CustomUser.objects.get(id=user_id)
+                return Response({
+                    'status': 'success',
+                    'data': {
+                        'id': user.id,
+                        'username': user.username,
+                        'email': user.email,
+                        'is_active': user.is_active,
+                        'date_joined': user.date_joined
+                    }
+                })
+            
             users = CustomUser.objects.all().values(
                 'id', 'username', 'email', 'date_joined', 'is_active'
             )
-            return Response(
-                {
-                    'data': list(users),
-                    'status': 'success'
-                }, 
-                status=status.HTTP_200_OK
-            )
+            return Response({
+                'status': 'success',
+                'data': list(users)
+            })
+        except CustomUser.DoesNotExist:
+            return Response({
+                'status': 'error',
+                'message': 'User not found'
+            }, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
-            return Response(
-                {
-                    'error': str(e),
-                    'status': 'error'
-                },
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+            return Response({
+                'status': 'error',
+                'message': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    def post(self, request):
+    def put(self, request, user_id):
         try:
-            user_data = request.data
-            user = CustomUser.objects.create_user(**user_data)
-            return Response(
-                {
-                    'message': 'User created successfully',
+            user = CustomUser.objects.get(id=user_id)
+            for key, value in request.data.items():
+                if key != 'password':  # Don't update password directly
+                    setattr(user, key, value)
+            user.save()
+            return Response({
+                'status': 'success',
+                'message': 'User updated successfully',
+                'data': {
                     'id': user.id,
-                    'status': 'success'
-                }, 
-                status=status.HTTP_201_CREATED
-            )
+                    'username': user.username,
+                    'email': user.email,
+                    'is_active': user.is_active
+                }
+            })
+        except CustomUser.DoesNotExist:
+            return Response({
+                'status': 'error',
+                'message': 'User not found'
+            }, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
-            return Response(
-                {
-                    'error': str(e),
-                    'status': 'error'
-                },
-                status=status.HTTP_400_BAD_REQUEST
-            )
+            return Response({
+                'status': 'error',
+                'message': str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, user_id):
+        try:
+            user = CustomUser.objects.get(id=user_id)
+            user.delete()
+            return Response({
+                'status': 'success',
+                'message': 'User deleted successfully'
+            })
+        except CustomUser.DoesNotExist:
+            return Response({
+                'status': 'error',
+                'message': 'User not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class AdminEventsView(APIView):
     permission_classes = [IsAdminUser]
