@@ -1,9 +1,18 @@
+
+
 import React from "react";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 
-const FristSection = () => {
-  const handleContinue = () => {
-    console.log("Save Event Details");
+const FirstSection = ({ data, setData }) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData(prev => ({
+      ...prev,
+      basicInfo: {
+        ...prev.basicInfo,
+        [name]: value
+      }
+    }));
   };
 
   return (
@@ -25,6 +34,9 @@ const FristSection = () => {
                     <Form.Label className="text-white">Event Name</Form.Label>
                     <Form.Control
                       type="text"
+                      name="eventName"
+                      value={data.basicInfo.eventName}
+                      onChange={handleChange}
                       placeholder="e.g. Music Concert"
                       className="bg-black text-white border-secondary"
                     />
@@ -34,6 +46,9 @@ const FristSection = () => {
                     <Form.Label className="text-white">Event Description</Form.Label>
                     <Form.Control
                       as="textarea"
+                      name="description"
+                      value={data.basicInfo.description}
+                      onChange={handleChange}
                       rows={3}
                       placeholder="Describe your event here"
                       className="bg-black text-white border-secondary"
@@ -44,6 +59,9 @@ const FristSection = () => {
                     <Form.Label className="text-white">Phone Number</Form.Label>
                     <Form.Control
                       type="tel"
+                      name="phone"
+                      value={data.basicInfo.phone}
+                      onChange={handleChange}
                       placeholder="e.g. 01012345678"
                       className="bg-black text-white border-secondary"
                     />
@@ -53,6 +71,9 @@ const FristSection = () => {
                     <Form.Label className="text-white">Email</Form.Label>
                     <Form.Control
                       type="email"
+                      name="email"
+                      value={data.basicInfo.email}
+                      onChange={handleChange}
                       placeholder="example@email.com"
                       className="bg-black text-white border-secondary"
                     />
@@ -62,6 +83,9 @@ const FristSection = () => {
                     <Form.Label className="text-white">Address</Form.Label>
                     <Form.Control
                       type="text"
+                      name="address"
+                      value={data.basicInfo.address}
+                      onChange={handleChange}
                       placeholder="Full address"
                       className="bg-black text-white border-secondary"
                     />
@@ -71,30 +95,30 @@ const FristSection = () => {
                     <Form.Label className="text-white">Venue Name</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="e.g. City Hall"
+                      name="venue"
+                      value={data.basicInfo.venue}
+                      onChange={handleChange}
+                      placeholder="Venue or location name"
                       className="bg-black text-white border-secondary"
                     />
                   </Form.Group>
 
                   <Form.Group className="mb-3">
                     <Form.Label className="text-white">Category</Form.Label>
-                    <Form.Select className="bg-black text-white border-secondary">
-                      <option>Select category</option>
-                      <option>Music</option>
-                      <option>Sports</option>
-                      <option>Conference</option>
-                      <option>Other</option>
-                    </Form.Select>
-                  </Form.Group>
-
-                  <div className="d-flex justify-content-end mt-4">
-                    <Button
-                      variant="warning"
-                      onClick={handleContinue}
+                    <Form.Control
+                      as="select"
+                      name="category"
+                      value={data.basicInfo.category}
+                      onChange={handleChange}
+                      className="bg-black text-white border-secondary"
                     >
-                      Save Event Details
-                    </Button>
-                  </div>
+                      <option value="">Select Category</option>
+                      <option value="music">Music</option>
+                      <option value="art">Art</option>
+                      <option value="sports">Sports</option>
+                      <option value="education">Education</option>
+                    </Form.Control>
+                  </Form.Group>
                 </Form>
               </Card.Body>
             </Card>
@@ -105,4 +129,4 @@ const FristSection = () => {
   );
 };
 
-export default FristSection;
+export default FirstSection;

@@ -88,3 +88,1000 @@ INFO 2025-05-21 22:10:53,301 basehttp "PUT /api/profile/ HTTP/1.1" 200 91
 INFO 2025-05-21 22:10:53,307 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
 INFO 2025-05-21 22:10:53,482 basehttp "GET /api/profile/ HTTP/1.1" 200 91
 INFO 2025-05-21 22:13:22,080 basehttp "POST /api/login/ HTTP/1.1" 200 703
+INFO 2025-05-22 12:59:49,321 autoreload Watching for file changes with StatReloader
+INFO 2025-05-22 13:00:07,681 autoreload Watching for file changes with StatReloader
+INFO 2025-05-22 13:15:49,634 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-22 13:15:56,822 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 13:15:56,824 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 13:23:17,553 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 13:23:17,554 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+INFO 2025-05-22 13:24:30,699 basehttp "OPTIONS /api/login/ HTTP/1.1" 200 0
+WARNING 2025-05-22 13:24:30,827 log Unauthorized: /api/login/
+WARNING 2025-05-22 13:24:30,828 basehttp "POST /api/login/ HTTP/1.1" 401 31
+INFO 2025-05-22 13:24:44,850 basehttp "OPTIONS /api/login/google/ HTTP/1.1" 200 0
+INFO 2025-05-22 13:24:44,880 views Request started at 1747909484.8807733, server_time: 1747909484
+INFO 2025-05-22 13:24:45,482 views User marwafaisl2@gmail.com logged in successfully, processing_time: 0.6014184951782227
+INFO 2025-05-22 13:24:45,488 basehttp "POST /api/login/google/ HTTP/1.1" 200 622
+INFO 2025-05-22 13:24:50,897 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-22 13:24:50,919 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-22 13:24:51,011 basehttp "GET /api/profile/ HTTP/1.1" 200 84
+INFO 2025-05-22 13:24:51,181 basehttp "GET /api/profile/ HTTP/1.1" 200 84
+INFO 2025-05-22 13:25:08,235 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-22 13:25:08,235 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-22 13:25:08,344 basehttp "GET /api/profile/ HTTP/1.1" 200 84
+INFO 2025-05-22 13:25:08,536 basehttp "GET /api/profile/ HTTP/1.1" 200 84
+WARNING 2025-05-22 13:25:33,917 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 13:25:33,918 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 13:33:02,674 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 13:33:02,675 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 15:00:50,146 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 15:00:50,158 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+INFO 2025-05-22 15:15:57,536 autoreload D:\booking_project\Backend\easy_ticket\urls.py changed, reloading.
+INFO 2025-05-22 15:16:02,370 autoreload Watching for file changes with StatReloader
+INFO 2025-05-22 15:17:43,477 autoreload D:\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-22 15:17:46,735 autoreload Watching for file changes with StatReloader
+ERROR 2025-05-22 15:24:19,553 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 430, in login
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 343, in each_context
+    "available_apps": self.get_app_list(request),
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 546, in get_app_list
+    app_dict = self._build_app_dict(request, app_label)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 488, in _build_app_dict
+    has_module_perms = model_admin.has_module_permission(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 641, in has_module_permission
+    return request.user.has_module_perms(self.opts.app_label)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 620, in has_module_perms
+    return _user_has_module_perms(self, module)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 293, in _user_has_module_perms
+    for backend in auth.get_backends():
+                   ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 40, in get_backends
+    return _get_backends(return_tuples=False)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 29, in _get_backends
+    backend = load_backend(backend_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 23, in load_backend
+    return import_string(path)()
+           ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'users.backends'
+ERROR 2025-05-22 15:24:19,618 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 135809
+INFO 2025-05-22 15:24:24,873 basehttp "GET /admin/l HTTP/1.1" 302 0
+ERROR 2025-05-22 15:24:25,056 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 430, in login
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 343, in each_context
+    "available_apps": self.get_app_list(request),
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 546, in get_app_list
+    app_dict = self._build_app_dict(request, app_label)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 488, in _build_app_dict
+    has_module_perms = model_admin.has_module_permission(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 641, in has_module_permission
+    return request.user.has_module_perms(self.opts.app_label)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 620, in has_module_perms
+    return _user_has_module_perms(self, module)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 293, in _user_has_module_perms
+    for backend in auth.get_backends():
+                   ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 40, in get_backends
+    return _get_backends(return_tuples=False)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 29, in _get_backends
+    backend = load_backend(backend_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 23, in load_backend
+    return import_string(path)()
+           ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'users.backends'
+ERROR 2025-05-22 15:24:25,119 basehttp "GET /admin/login/?next=/admin/l HTTP/1.1" 500 135822
+WARNING 2025-05-22 15:24:30,187 log Not Found: /
+WARNING 2025-05-22 15:24:30,188 basehttp "GET / HTTP/1.1" 404 2787
+INFO 2025-05-22 15:24:52,499 basehttp "GET /admin/ HTTP/1.1" 302 0
+ERROR 2025-05-22 15:24:52,718 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 430, in login
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 343, in each_context
+    "available_apps": self.get_app_list(request),
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 546, in get_app_list
+    app_dict = self._build_app_dict(request, app_label)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 488, in _build_app_dict
+    has_module_perms = model_admin.has_module_permission(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 641, in has_module_permission
+    return request.user.has_module_perms(self.opts.app_label)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 620, in has_module_perms
+    return _user_has_module_perms(self, module)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 293, in _user_has_module_perms
+    for backend in auth.get_backends():
+                   ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 40, in get_backends
+    return _get_backends(return_tuples=False)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 29, in _get_backends
+    backend = load_backend(backend_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 23, in load_backend
+    return import_string(path)()
+           ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'users.backends'
+ERROR 2025-05-22 15:24:52,751 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 135809
+INFO 2025-05-22 15:26:57,431 autoreload Watching for file changes with StatReloader
+INFO 2025-05-22 15:27:08,462 basehttp "GET /admin/ HTTP/1.1" 302 0
+ERROR 2025-05-22 15:27:08,633 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 430, in login
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 343, in each_context
+    "available_apps": self.get_app_list(request),
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 546, in get_app_list
+    app_dict = self._build_app_dict(request, app_label)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 488, in _build_app_dict
+    has_module_perms = model_admin.has_module_permission(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 641, in has_module_permission
+    return request.user.has_module_perms(self.opts.app_label)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 620, in has_module_perms
+    return _user_has_module_perms(self, module)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 293, in _user_has_module_perms
+    for backend in auth.get_backends():
+                   ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 40, in get_backends
+    return _get_backends(return_tuples=False)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 29, in _get_backends
+    backend = load_backend(backend_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 23, in load_backend
+    return import_string(path)()
+           ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'users.backends'
+ERROR 2025-05-22 15:27:08,706 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 135461
+INFO 2025-05-22 15:28:54,654 autoreload D:\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-22 15:28:57,864 autoreload Watching for file changes with StatReloader
+INFO 2025-05-22 15:32:26,489 autoreload D:\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-22 15:32:29,177 autoreload Watching for file changes with StatReloader
+INFO 2025-05-22 15:32:41,403 autoreload Watching for file changes with StatReloader
+ERROR 2025-05-22 15:32:43,798 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 430, in login
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 343, in each_context
+    "available_apps": self.get_app_list(request),
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 546, in get_app_list
+    app_dict = self._build_app_dict(request, app_label)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 488, in _build_app_dict
+    has_module_perms = model_admin.has_module_permission(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 641, in has_module_permission
+    return request.user.has_module_perms(self.opts.app_label)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 620, in has_module_perms
+    return _user_has_module_perms(self, module)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 293, in _user_has_module_perms
+    for backend in auth.get_backends():
+                   ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 40, in get_backends
+    return _get_backends(return_tuples=False)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 29, in _get_backends
+    backend = load_backend(backend_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 23, in load_backend
+    return import_string(path)()
+           ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'users.backends'
+ERROR 2025-05-22 15:32:43,899 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 135598
+WARNING 2025-05-22 15:36:49,456 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 15:36:49,458 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+ERROR 2025-05-22 19:16:45,073 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 430, in login
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 343, in each_context
+    "available_apps": self.get_app_list(request),
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 546, in get_app_list
+    app_dict = self._build_app_dict(request, app_label)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 488, in _build_app_dict
+    has_module_perms = model_admin.has_module_permission(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 641, in has_module_permission
+    return request.user.has_module_perms(self.opts.app_label)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 620, in has_module_perms
+    return _user_has_module_perms(self, module)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 293, in _user_has_module_perms
+    for backend in auth.get_backends():
+                   ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 40, in get_backends
+    return _get_backends(return_tuples=False)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 29, in _get_backends
+    backend = load_backend(backend_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 23, in load_backend
+    return import_string(path)()
+           ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'users.backends'
+ERROR 2025-05-22 19:16:45,103 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 135598
+WARNING 2025-05-22 19:17:52,144 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 19:17:52,146 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 19:19:00,231 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 19:19:00,239 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 19:19:38,472 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 19:19:38,480 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 19:19:58,900 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 19:19:58,909 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 19:21:07,523 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 19:21:07,540 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 19:22:20,313 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 19:22:20,315 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 19:41:56,273 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 19:41:56,274 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 19:49:37,117 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 19:49:37,118 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 20:29:14,813 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 20:29:14,815 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+ERROR 2025-05-22 22:23:19,492 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 430, in login
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 343, in each_context
+    "available_apps": self.get_app_list(request),
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 546, in get_app_list
+    app_dict = self._build_app_dict(request, app_label)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 488, in _build_app_dict
+    has_module_perms = model_admin.has_module_permission(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 641, in has_module_permission
+    return request.user.has_module_perms(self.opts.app_label)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 620, in has_module_perms
+    return _user_has_module_perms(self, module)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 293, in _user_has_module_perms
+    for backend in auth.get_backends():
+                   ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 40, in get_backends
+    return _get_backends(return_tuples=False)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 29, in _get_backends
+    backend = load_backend(backend_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 23, in load_backend
+    return import_string(path)()
+           ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'users.backends'
+ERROR 2025-05-22 22:23:19,685 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 135598
+WARNING 2025-05-22 22:35:16,151 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 22:35:16,153 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+INFO 2025-05-22 22:40:18,106 basehttp "OPTIONS /api/login/ HTTP/1.1" 200 0
+WARNING 2025-05-22 22:40:18,577 log Unauthorized: /api/login/
+WARNING 2025-05-22 22:40:18,579 basehttp "POST /api/login/ HTTP/1.1" 401 31
+WARNING 2025-05-22 22:40:41,497 log Unauthorized: /api/login/
+WARNING 2025-05-22 22:40:41,498 basehttp "POST /api/login/ HTTP/1.1" 401 31
+WARNING 2025-05-22 22:40:54,494 log Unauthorized: /api/login/
+WARNING 2025-05-22 22:40:54,506 basehttp "POST /api/login/ HTTP/1.1" 401 31
+INFO 2025-05-22 22:41:19,144 basehttp "OPTIONS /api/login/google/ HTTP/1.1" 200 0
+INFO 2025-05-22 22:41:19,325 views Request started at 1747942879.3256717, server_time: 1747942879
+INFO 2025-05-22 22:41:20,436 views User marwafaisl2@gmail.com logged in successfully, processing_time: 1.1103923320770264
+INFO 2025-05-22 22:41:20,452 basehttp "POST /api/login/google/ HTTP/1.1" 200 622
+WARNING 2025-05-22 22:49:37,796 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 22:49:37,804 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 22:49:56,124 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 22:49:56,127 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 22:53:03,788 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 22:53:03,790 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+INFO 2025-05-22 22:56:48,107 autoreload D:\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-22 22:57:34,189 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-22 22:57:52,199 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 22:57:52,203 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+INFO 2025-05-22 23:01:58,348 autoreload D:\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-22 23:02:01,322 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-22 23:02:21,647 log Not Found: /
+WARNING 2025-05-22 23:02:21,650 basehttp "GET / HTTP/1.1" 404 2787
+INFO 2025-05-22 23:02:46,665 basehttp "GET /admin/ HTTP/1.1" 302 0
+ERROR 2025-05-22 23:02:46,889 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 430, in login
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 343, in each_context
+    "available_apps": self.get_app_list(request),
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 546, in get_app_list
+    app_dict = self._build_app_dict(request, app_label)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 488, in _build_app_dict
+    has_module_perms = model_admin.has_module_permission(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 641, in has_module_permission
+    return request.user.has_module_perms(self.opts.app_label)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 620, in has_module_perms
+    return _user_has_module_perms(self, module)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 293, in _user_has_module_perms
+    for backend in auth.get_backends():
+                   ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 40, in get_backends
+    return _get_backends(return_tuples=False)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 29, in _get_backends
+    backend = load_backend(backend_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 23, in load_backend
+    return import_string(path)()
+           ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'users.backends'
+ERROR 2025-05-22 23:02:46,929 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 135461
+INFO 2025-05-22 23:03:46,442 views Request started at 1747944226.4422593, server_time: 1747944226
+INFO 2025-05-22 23:03:47,993 views User marwafaisl2@gmail.com logged in successfully, processing_time: 1.5513300895690918
+INFO 2025-05-22 23:03:47,999 basehttp "POST /api/login/google/ HTTP/1.1" 200 622
+WARNING 2025-05-22 23:07:33,627 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:07:33,637 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 23:07:44,760 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:07:44,765 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 23:07:54,155 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:07:54,157 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 23:08:50,672 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:08:50,684 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 23:09:03,470 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:09:03,476 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 23:10:25,821 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:10:25,822 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 23:10:27,373 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:10:27,385 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 23:13:31,743 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:13:31,746 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 23:14:10,091 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:14:10,092 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+INFO 2025-05-22 23:16:57,048 basehttp "OPTIONS /api/signup/user/ HTTP/1.1" 200 0
+INFO 2025-05-22 23:16:59,652 basehttp "POST /api/signup/user/ HTTP/1.1" 201 295
+INFO 2025-05-22 23:17:21,921 basehttp "POST /api/login/ HTTP/1.1" 200 607
+WARNING 2025-05-22 23:19:08,441 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:19:08,446 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+ERROR 2025-05-22 23:28:48,664 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 430, in login
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 343, in each_context
+    "available_apps": self.get_app_list(request),
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 546, in get_app_list
+    app_dict = self._build_app_dict(request, app_label)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 488, in _build_app_dict
+    has_module_perms = model_admin.has_module_permission(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 641, in has_module_permission
+    return request.user.has_module_perms(self.opts.app_label)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 620, in has_module_perms
+    return _user_has_module_perms(self, module)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 293, in _user_has_module_perms
+    for backend in auth.get_backends():
+                   ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 40, in get_backends
+    return _get_backends(return_tuples=False)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 29, in _get_backends
+    backend = load_backend(backend_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 23, in load_backend
+    return import_string(path)()
+           ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'users.backends'
+ERROR 2025-05-22 23:28:48,683 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 135598
+INFO 2025-05-22 23:29:34,699 autoreload D:\booking_project\Backend\easy_ticket\urls.py changed, reloading.
+INFO 2025-05-22 23:29:38,720 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-22 23:29:41,612 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:29:41,619 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+INFO 2025-05-22 23:34:58,148 autoreload D:\booking_project\Backend\events\serializers.py changed, reloading.
+INFO 2025-05-22 23:35:02,115 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-22 23:36:09,598 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:36:09,599 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-22 23:39:05,931 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:39:05,933 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+INFO 2025-05-22 23:39:48,562 autoreload D:\booking_project\Backend\events\views.py changed, reloading.
+INFO 2025-05-22 23:39:51,279 autoreload Watching for file changes with StatReloader
+INFO 2025-05-22 23:40:01,679 autoreload D:\booking_project\Backend\events\views.py changed, reloading.
+INFO 2025-05-22 23:40:04,646 autoreload Watching for file changes with StatReloader
+INFO 2025-05-22 23:40:20,609 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-22 23:41:05,905 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:41:05,912 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+ERROR 2025-05-22 23:43:46,718 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 430, in login
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 343, in each_context
+    "available_apps": self.get_app_list(request),
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 546, in get_app_list
+    app_dict = self._build_app_dict(request, app_label)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 488, in _build_app_dict
+    has_module_perms = model_admin.has_module_permission(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 641, in has_module_permission
+    return request.user.has_module_perms(self.opts.app_label)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 620, in has_module_perms
+    return _user_has_module_perms(self, module)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 293, in _user_has_module_perms
+    for backend in auth.get_backends():
+                   ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 40, in get_backends
+    return _get_backends(return_tuples=False)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 29, in _get_backends
+    backend = load_backend(backend_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 23, in load_backend
+    return import_string(path)()
+           ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'users.backends'
+ERROR 2025-05-22 23:43:46,749 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 135598
+WARNING 2025-05-22 23:43:52,885 log Not Found: /
+WARNING 2025-05-22 23:43:52,890 basehttp "GET / HTTP/1.1" 404 2787
+WARNING 2025-05-22 23:58:48,332 log Unauthorized: /api/events/create/
+WARNING 2025-05-22 23:58:48,334 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+INFO 2025-05-23 14:39:20,960 autoreload D:\booking_project\Backend\events\serializers.py changed, reloading.
+INFO 2025-05-23 14:39:25,072 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 14:53:43,866 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-23 14:54:07,344 log Not Found: /api/events/create/
+WARNING 2025-05-23 14:54:07,346 basehttp "POST /api/events/create/ HTTP/1.1" 404 4869
+WARNING 2025-05-23 14:55:18,504 log Not Found: /
+WARNING 2025-05-23 14:55:18,506 basehttp "GET / HTTP/1.1" 404 2464
+WARNING 2025-05-23 14:55:18,737 log Not Found: /favicon.ico
+WARNING 2025-05-23 14:55:18,739 basehttp "GET /favicon.ico HTTP/1.1" 404 2515
+INFO 2025-05-23 14:55:29,911 basehttp "GET /admin HTTP/1.1" 301 0
+INFO 2025-05-23 14:55:29,967 basehttp "GET /admin/ HTTP/1.1" 302 0
+ERROR 2025-05-23 14:55:30,198 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 430, in login
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 343, in each_context
+    "available_apps": self.get_app_list(request),
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 546, in get_app_list
+    app_dict = self._build_app_dict(request, app_label)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 488, in _build_app_dict
+    has_module_perms = model_admin.has_module_permission(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 641, in has_module_permission
+    return request.user.has_module_perms(self.opts.app_label)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 620, in has_module_perms
+    return _user_has_module_perms(self, module)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 293, in _user_has_module_perms
+    for backend in auth.get_backends():
+                   ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 40, in get_backends
+    return _get_backends(return_tuples=False)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 29, in _get_backends
+    backend = load_backend(backend_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 23, in load_backend
+    return import_string(path)()
+           ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'users.backends'
+ERROR 2025-05-23 14:55:30,278 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 135517
+ERROR 2025-05-23 14:57:36,015 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 430, in login
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 343, in each_context
+    "available_apps": self.get_app_list(request),
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 546, in get_app_list
+    app_dict = self._build_app_dict(request, app_label)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 488, in _build_app_dict
+    has_module_perms = model_admin.has_module_permission(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 641, in has_module_permission
+    return request.user.has_module_perms(self.opts.app_label)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 620, in has_module_perms
+    return _user_has_module_perms(self, module)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 293, in _user_has_module_perms
+    for backend in auth.get_backends():
+                   ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 40, in get_backends
+    return _get_backends(return_tuples=False)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 29, in _get_backends
+    backend = load_backend(backend_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 23, in load_backend
+    return import_string(path)()
+           ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'users.backends'
+ERROR 2025-05-23 14:57:36,038 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 135654
+INFO 2025-05-23 15:03:38,222 autoreload D:\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-23 15:03:46,319 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-23 15:05:05,447 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 15:05:05,449 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-23 15:05:06,911 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 15:05:06,912 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+ERROR 2025-05-23 15:05:13,475 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 430, in login
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 343, in each_context
+    "available_apps": self.get_app_list(request),
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 546, in get_app_list
+    app_dict = self._build_app_dict(request, app_label)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 488, in _build_app_dict
+    has_module_perms = model_admin.has_module_permission(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 641, in has_module_permission
+    return request.user.has_module_perms(self.opts.app_label)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 620, in has_module_perms
+    return _user_has_module_perms(self, module)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 293, in _user_has_module_perms
+    for backend in auth.get_backends():
+                   ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 40, in get_backends
+    return _get_backends(return_tuples=False)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 29, in _get_backends
+    backend = load_backend(backend_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 23, in load_backend
+    return import_string(path)()
+           ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'users.backends'
+ERROR 2025-05-23 15:05:13,497 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 135705
+WARNING 2025-05-23 15:05:43,191 log Not Found: /api/admin
+WARNING 2025-05-23 15:05:43,192 basehttp "GET /api/admin HTTP/1.1" 404 5164
+INFO 2025-05-23 15:07:07,516 basehttp "GET /admin HTTP/1.1" 301 0
+INFO 2025-05-23 15:09:55,512 basehttp "GET /admin/ HTTP/1.1" 302 0
+ERROR 2025-05-23 15:09:55,594 log Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 430, in login
+    **self.each_context(request),
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 343, in each_context
+    "available_apps": self.get_app_list(request),
+                      ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 546, in get_app_list
+    app_dict = self._build_app_dict(request, app_label)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 488, in _build_app_dict
+    has_module_perms = model_admin.has_module_permission(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 641, in has_module_permission
+    return request.user.has_module_perms(self.opts.app_label)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 620, in has_module_perms
+    return _user_has_module_perms(self, module)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\models.py", line 293, in _user_has_module_perms
+    for backend in auth.get_backends():
+                   ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 40, in get_backends
+    return _get_backends(return_tuples=False)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 29, in _get_backends
+    backend = load_backend(backend_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 23, in load_backend
+    return import_string(path)()
+           ~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 30, in import_string
+    return cached_import(module_path, class_name)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\module_loading.py", line 15, in cached_import
+    module = import_module(module_path)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'users.backends'
+ERROR 2025-05-23 15:09:55,623 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 500 135568
+WARNING 2025-05-23 15:12:30,605 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 15:12:30,606 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-23 15:26:30,183 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 15:26:30,184 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-23 15:26:32,178 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 15:26:32,179 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+INFO 2025-05-23 15:26:48,946 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-23 15:26:55,255 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 15:26:55,257 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-23 15:26:56,080 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 15:26:56,090 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-23 15:26:56,806 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 15:26:56,807 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-23 15:27:17,060 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 15:27:17,061 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+INFO 2025-05-23 15:27:23,334 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4170
+INFO 2025-05-23 15:27:23,759 basehttp "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808
+INFO 2025-05-23 15:27:23,776 basehttp "GET /static/admin/css/base.css HTTP/1.1" 200 22120
+INFO 2025-05-23 15:27:23,808 basehttp "GET /static/admin/css/responsive.css HTTP/1.1" 200 16565
+INFO 2025-05-23 15:27:23,873 basehttp "GET /static/admin/css/login.css HTTP/1.1" 200 951
+INFO 2025-05-23 15:27:23,935 basehttp "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2025-05-23 15:27:23,945 basehttp "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+INFO 2025-05-23 15:27:24,022 basehttp "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-05-23 15:33:11,957 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 15:33:19,057 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4170
+INFO 2025-05-23 15:33:35,579 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2025-05-23 15:33:35,754 basehttp "GET /admin/ HTTP/1.1" 200 7281
+INFO 2025-05-23 15:33:35,937 basehttp "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2025-05-23 15:33:35,978 basehttp "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-05-23 15:33:35,978 basehttp "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2025-05-23 15:33:55,469 basehttp "GET /admin/auth/group/ HTTP/1.1" 200 8712
+INFO 2025-05-23 15:33:55,554 basehttp "GET /static/admin/css/changelists.css HTTP/1.1" 200 6878
+INFO 2025-05-23 15:33:55,620 basehttp "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-05-23 15:33:55,750 basehttp "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2025-05-23 15:33:55,752 basehttp "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+INFO 2025-05-23 15:33:55,888 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-05-23 15:33:55,889 basehttp "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777
+INFO 2025-05-23 15:33:55,973 basehttp "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO 2025-05-23 15:33:56,042 basehttp "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2025-05-23 15:33:56,085 basehttp "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO 2025-05-23 15:33:56,091 basehttp "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+INFO 2025-05-23 15:33:56,142 basehttp "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2025-05-23 15:33:56,198 basehttp "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+INFO 2025-05-23 15:33:56,321 basehttp "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO 2025-05-23 15:34:01,188 basehttp "GET /admin/users/organizercompany/ HTTP/1.1" 200 8445
+INFO 2025-05-23 15:34:01,389 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-05-23 15:34:04,351 basehttp "GET /admin/users/customuser/ HTTP/1.1" 200 10255
+INFO 2025-05-23 15:34:04,541 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-05-23 15:34:39,737 basehttp - Broken pipe from ('127.0.0.1', 53776)
+INFO 2025-05-23 15:34:39,783 basehttp "GET /admin/users/customuser/1/change/ HTTP/1.1" 200 23778
+INFO 2025-05-23 15:34:39,851 basehttp "GET /static/admin/css/forms.css HTTP/1.1" 200 8525
+INFO 2025-05-23 15:34:39,898 basehttp "GET /static/admin/js/calendar.js HTTP/1.1" 200 9141
+INFO 2025-05-23 15:34:39,900 basehttp "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19319
+INFO 2025-05-23 15:34:39,924 basehttp "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+INFO 2025-05-23 15:34:39,928 basehttp "GET /static/admin/css/widgets.css HTTP/1.1" 200 11991
+INFO 2025-05-23 15:34:39,987 basehttp "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO 2025-05-23 15:34:40,101 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-05-23 15:34:40,298 basehttp "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086
+INFO 2025-05-23 15:34:40,299 basehttp "GET /static/admin/img/icon-clock.svg HTTP/1.1" 200 677
+INFO 2025-05-23 15:34:59,324 basehttp "GET /admin/users/ HTTP/1.1" 200 6144
+INFO 2025-05-23 15:35:01,869 basehttp "GET /admin/ HTTP/1.1" 200 7281
+INFO 2025-05-23 15:35:14,207 basehttp "GET /admin/auth/group/add/ HTTP/1.1" 200 14408
+INFO 2025-05-23 15:35:14,309 basehttp "GET /static/admin/js/SelectBox.js HTTP/1.1" 200 4530
+INFO 2025-05-23 15:35:14,310 basehttp "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 200 15709
+INFO 2025-05-23 15:35:14,530 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-05-23 15:35:14,696 basehttp "GET /static/admin/img/selector-icons.svg HTTP/1.1" 200 3291
+WARNING 2025-05-23 15:35:43,389 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 15:35:43,390 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-23 15:35:44,359 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 15:35:44,361 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-23 15:35:45,388 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 15:35:45,389 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-23 15:44:03,240 log Not Found: /api/token/
+WARNING 2025-05-23 15:44:03,241 basehttp "POST /api/token/ HTTP/1.1" 404 5168
+WARNING 2025-05-23 15:45:07,953 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 15:45:07,954 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+WARNING 2025-05-23 15:45:53,127 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 15:45:53,128 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+INFO 2025-05-23 15:50:43,006 autoreload D:\booking_project\Backend\easy_ticket\urls.py changed, reloading.
+INFO 2025-05-23 15:50:46,495 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 15:51:02,854 autoreload D:\booking_project\Backend\easy_ticket\urls.py changed, reloading.
+INFO 2025-05-23 15:51:05,506 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 15:51:49,778 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-23 15:51:58,615 log Method Not Allowed: /api/token/
+WARNING 2025-05-23 15:51:58,618 basehttp "GET /api/token/ HTTP/1.1" 405 40
+WARNING 2025-05-23 15:52:08,729 log Bad Request: /api/token/
+WARNING 2025-05-23 15:52:08,730 basehttp "POST /api/token/ HTTP/1.1" 400 37
+WARNING 2025-05-23 15:53:17,522 log Bad Request: /api/token/
+WARNING 2025-05-23 15:53:17,523 basehttp "POST /api/token/ HTTP/1.1" 400 103
+INFO 2025-05-23 15:53:49,248 basehttp "POST /api/token/ HTTP/1.1" 200 483
+ERROR 2025-05-23 16:00:41,086 basehttp "POST /api/events/create/ HTTP/1.1" 500 154302
+INFO 2025-05-23 16:02:29,953 autoreload D:\booking_project\Backend\events\serializers.py changed, reloading.
+INFO 2025-05-23 16:02:34,688 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 16:02:52,693 autoreload Watching for file changes with StatReloader
+ERROR 2025-05-23 16:02:56,801 basehttp "POST /api/events/create/ HTTP/1.1" 500 154302
+ERROR 2025-05-23 17:18:47,863 basehttp "POST /api/events/create/ HTTP/1.1" 500 154302
+WARNING 2025-05-23 17:19:33,678 log Bad Request: /api/events/create/
+WARNING 2025-05-23 17:19:33,680 basehttp "POST /api/events/create/ HTTP/1.1" 400 39
+ERROR 2025-05-23 17:19:42,740 basehttp "POST /api/events/create/ HTTP/1.1" 500 153081
+INFO 2025-05-23 17:20:26,603 autoreload D:\booking_project\Backend\events\models.py changed, reloading.
+INFO 2025-05-23 17:20:31,103 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 17:20:46,419 autoreload D:\booking_project\Backend\events\models.py changed, reloading.
+INFO 2025-05-23 17:20:49,895 autoreload Watching for file changes with StatReloader
+ERROR 2025-05-23 17:20:58,125 basehttp "POST /api/events/create/ HTTP/1.1" 500 153081
+WARNING 2025-05-23 17:21:59,202 log Forbidden: /api/events/create/
+WARNING 2025-05-23 17:21:59,204 basehttp "POST /api/events/create/ HTTP/1.1" 403 108
+INFO 2025-05-23 17:23:57,860 autoreload D:\booking_project\Backend\events\serializers.py changed, reloading.
+INFO 2025-05-23 17:24:02,490 autoreload Watching for file changes with StatReloader
+ERROR 2025-05-23 17:24:08,575 basehttp "POST /api/events/create/ HTTP/1.1" 500 122590
+ERROR 2025-05-23 17:24:38,503 basehttp "POST /api/events/create/ HTTP/1.1" 500 122590
+INFO 2025-05-23 17:26:25,051 autoreload D:\booking_project\Backend\events\serializers.py changed, reloading.
+INFO 2025-05-23 17:26:29,365 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 17:26:40,780 autoreload D:\booking_project\Backend\events\serializers.py changed, reloading.
+INFO 2025-05-23 17:26:45,154 autoreload Watching for file changes with StatReloader
+ERROR 2025-05-23 17:26:56,351 basehttp "POST /api/events/create/ HTTP/1.1" 500 121422
+WARNING 2025-05-23 17:27:39,060 log Bad Request: /api/events/create/
+WARNING 2025-05-23 17:27:39,061 basehttp "POST /api/events/create/ HTTP/1.1" 400 225
+ERROR 2025-05-23 17:30:19,762 basehttp "POST /api/events/create/ HTTP/1.1" 500 121417
+ERROR 2025-05-23 17:30:25,656 basehttp "POST /api/events/create/ HTTP/1.1" 500 121417
+ERROR 2025-05-23 17:30:35,992 basehttp "POST /api/events/create/ HTTP/1.1" 500 121422
+INFO 2025-05-23 17:31:37,814 autoreload D:\booking_project\Backend\events\views.py changed, reloading.
+INFO 2025-05-23 17:31:43,406 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 17:31:55,849 basehttp "POST /api/events/create/ HTTP/1.1" 201 41
+WARNING 2025-05-23 17:43:01,363 log Forbidden: /api/events/create/
+WARNING 2025-05-23 17:43:01,366 basehttp "POST /api/events/create/ HTTP/1.1" 403 108
+WARNING 2025-05-23 17:43:35,640 log Forbidden: /api/events/create/
+WARNING 2025-05-23 17:43:35,642 basehttp "POST /api/events/create/ HTTP/1.1" 403 108
+INFO 2025-05-23 17:51:22,695 autoreload D:\booking_project\Backend\events\serializers.py changed, reloading.
+INFO 2025-05-23 17:51:26,800 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 17:51:36,373 autoreload D:\booking_project\Backend\events\models.py changed, reloading.
+INFO 2025-05-23 17:51:40,976 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 17:52:31,869 autoreload D:\booking_project\Backend\events\models.py changed, reloading.
+INFO 2025-05-23 17:52:35,437 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 17:54:34,033 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 17:54:39,956 basehttp "POST /api/events/create/ HTTP/1.1" 201 41
+WARNING 2025-05-23 18:02:54,156 log Forbidden: /api/events/create/
+WARNING 2025-05-23 18:02:54,158 basehttp "POST /api/events/create/ HTTP/1.1" 403 108
+INFO 2025-05-23 18:08:30,650 autoreload D:\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-23 18:08:35,199 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-23 18:08:46,823 log Forbidden: /api/events/create/
+WARNING 2025-05-23 18:08:46,825 basehttp "POST /api/events/create/ HTTP/1.1" 403 108
+INFO 2025-05-23 18:12:19,815 basehttp "OPTIONS /api/events/create/ HTTP/1.1" 200 0
+INFO 2025-05-23 18:12:33,852 basehttp "OPTIONS /api/events/create/ HTTP/1.1" 200 0
+INFO 2025-05-23 18:13:29,564 basehttp "OPTIONS /api/events/create/ HTTP/1.1" 200 0
+INFO 2025-05-23 18:14:58,746 basehttp "GET /admin/auth/group/add/ HTTP/1.1" 200 14408
+INFO 2025-05-23 18:14:58,992 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-05-23 18:16:06,499 basehttp "OPTIONS /api/events/create/ HTTP/1.1" 200 0
+INFO 2025-05-23 18:17:32,013 basehttp "OPTIONS /api/events/create/ HTTP/1.1" 200 0
+INFO 2025-05-23 18:19:57,843 autoreload D:\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-23 18:20:40,917 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 18:20:48,485 basehttp "POST /api/events/create/ HTTP/1.1" 201 41
+INFO 2025-05-23 18:21:14,368 basehttp "OPTIONS /api/events/create/ HTTP/1.1" 200 0
+WARNING 2025-05-23 18:21:14,879 log Unsupported Media Type: /api/events/create/
+WARNING 2025-05-23 18:21:14,880 basehttp "POST /api/events/create/ HTTP/1.1" 415 68
+INFO 2025-05-23 18:30:13,084 basehttp "POST /api/events/create/ HTTP/1.1" 201 41
+WARNING 2025-05-23 18:31:13,576 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 18:31:13,577 basehttp "POST /api/events/create/ HTTP/1.1" 401 172
+INFO 2025-05-23 18:33:37,847 basehttp "POST /api/token/ HTTP/1.1" 200 483
+WARNING 2025-05-23 18:35:25,373 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 18:35:25,442 basehttp "POST /api/events/create/ HTTP/1.1" 401 172
+WARNING 2025-05-23 18:36:54,510 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 18:36:54,511 basehttp "POST /api/events/create/ HTTP/1.1" 401 58
+INFO 2025-05-23 18:36:59,040 basehttp "POST /api/events/create/ HTTP/1.1" 201 41
+WARNING 2025-05-23 18:43:28,982 log Unauthorized: /api/events/create/
+WARNING 2025-05-23 18:43:28,983 basehttp "POST /api/events/create/ HTTP/1.1" 401 172
+WARNING 2025-05-23 18:56:52,522 log Bad Request: /api/events/create/
+WARNING 2025-05-23 18:56:52,524 basehttp "POST /api/events/create/ HTTP/1.1" 400 255
+INFO 2025-05-23 18:58:26,373 basehttp "POST /api/events/create/ HTTP/1.1" 201 41
+INFO 2025-05-23 19:03:17,052 basehttp "POST /api/events/create/ HTTP/1.1" 201 41
+WARNING 2025-05-23 19:05:18,289 log Bad Request: /api/events/create/
+WARNING 2025-05-23 19:05:18,290 basehttp "POST /api/events/create/ HTTP/1.1" 400 255
+INFO 2025-05-23 19:09:23,497 basehttp "POST /api/events/create/ HTTP/1.1" 201 41
+INFO 2025-05-23 19:36:23,346 basehttp "POST /api/events/create/ HTTP/1.1" 201 41
+INFO 2025-05-23 19:39:40,003 basehttp "POST /api/events/create/ HTTP/1.1" 201 41
+INFO 2025-05-23 19:41:09,233 basehttp "POST /api/events/create/ HTTP/1.1" 201 41
+INFO 2025-05-23 20:10:09,172 autoreload D:\booking_project\Backend\events\models.py changed, reloading.
+INFO 2025-05-23 20:10:15,539 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 20:25:39,887 autoreload D:\booking_project\Backend\events\models.py changed, reloading.
+INFO 2025-05-23 20:25:46,415 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 21:48:02,912 autoreload Watching for file changes with StatReloader
