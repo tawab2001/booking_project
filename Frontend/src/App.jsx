@@ -8,6 +8,7 @@ import Profile from './pages/Profile/profile';
 import SignUp from './pages/signUp/signUp';
 import Events from './pages/Events/events';
 import AddEvent from './pages/AddEvent/addevent';
+import EventDetails from './pages/EventDetails';
 import Booking from './pages/Booking/booking';
 import Contact from './pages/ContactUs/contactus';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
@@ -17,7 +18,6 @@ import Dashboard from './admin/Dashboard';
 import AdminRoute from './admin/AdminRoute';
 import UsersManagement from './admin/UsersManagement';
 import AdminLogin from './admin/AdminLogin';
-
 
 
 const router = createBrowserRouter([
@@ -30,6 +30,7 @@ const router = createBrowserRouter([
       { path: "profile", element: <Profile/> },
       { path: "events", element: <Events/> },
       { path: "addEvent", element: <AddEvent/>},
+      { path: "event/:id", element: <EventDetails/>},
       { path: "booking/:eventId", element: <Booking/>},
       { path: "contactus", element: <Contact/> },
       { path: "reset-password", element: <RequestReset/> },

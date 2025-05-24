@@ -1,0 +1,148 @@
+INFO 2025-05-23 23:15:09,615 autoreload Watching for file changes with StatReloader
+INFO 2025-05-23 23:17:31,624 autoreload D:\booking_project\Backend\events\views.py changed, reloading.
+INFO 2025-05-23 23:17:33,840 autoreload Watching for file changes with StatReloader
+ERROR 2025-05-23 23:18:12,683 log Internal Server Error: /admin/auth/group/add/
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column users_customuser.is_organizer does not exist
+LINE 1: ...ser"."email", "users_customuser"."mobile_number", "users_cus...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\options.py", line 719, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 234, in inner
+    if not self.has_permission(request):
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\admin\sites.py", line 207, in has_permission
+    return request.user.is_active and request.user.is_staff
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\functional.py", line 251, in inner
+    self._setup()
+    ~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\utils\functional.py", line 404, in _setup
+    self._wrapped = self._setupfunc()
+                    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\middleware.py", line 39, in <lambda>
+    request.user = SimpleLazyObject(lambda: get_user(request))
+                                            ~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\middleware.py", line 19, in get_user
+    request._cached_user = auth.get_user(request)
+                           ~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\__init__.py", line 311, in get_user
+    user = backend.get_user(user_id)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\contrib\auth\backends.py", line 232, in get_user
+    user = UserModel._default_manager.get(pk=user_id)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 629, in get
+    num = len(clone)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 366, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 1945, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\sql\compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\AIA\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: column users_customuser.is_organizer does not exist
+LINE 1: ...ser"."email", "users_customuser"."mobile_number", "users_cus...
+                                                             ^
+
+ERROR 2025-05-23 23:18:12,755 basehttp "GET /admin/auth/group/add/ HTTP/1.1" 500 189199
+INFO 2025-05-24 11:20:53,452 autoreload Watching for file changes with StatReloader
+INFO 2025-05-24 11:24:04,059 autoreload Watching for file changes with StatReloader
+INFO 2025-05-24 11:24:29,622 basehttp "POST /api/events/create/ HTTP/1.1" 201 41
+INFO 2025-05-24 11:26:03,537 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-24 11:26:03,538 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+WARNING 2025-05-24 11:26:03,550 log Unauthorized: /api/profile/
+WARNING 2025-05-24 11:26:03,561 basehttp "GET /api/profile/ HTTP/1.1" 401 172
+WARNING 2025-05-24 11:26:03,585 log Unauthorized: /api/profile/
+WARNING 2025-05-24 11:26:03,618 basehttp "GET /api/profile/ HTTP/1.1" 401 172
+INFO 2025-05-24 11:26:08,852 basehttp "OPTIONS /api/admin/login/ HTTP/1.1" 200 0
+WARNING 2025-05-24 11:26:09,224 log Not Found: /api/admin/login/
+WARNING 2025-05-24 11:26:09,226 basehttp "POST /api/admin/login/ HTTP/1.1" 404 5548
+WARNING 2025-05-24 11:26:23,902 log Not Found: /api/admin/login/
+WARNING 2025-05-24 11:26:23,905 basehttp "POST /api/admin/login/ HTTP/1.1" 404 5548
+INFO 2025-05-24 11:26:31,139 basehttp "OPTIONS /api/login/ HTTP/1.1" 200 0
+INFO 2025-05-24 11:26:35,617 basehttp "POST /api/login/ HTTP/1.1" 200 607
+INFO 2025-05-24 11:26:40,505 basehttp "GET /api/profile/ HTTP/1.1" 200 92
+INFO 2025-05-24 11:26:40,666 basehttp "GET /api/profile/ HTTP/1.1" 200 92
+INFO 2025-05-24 11:43:02,332 basehttp "OPTIONS /api/events/ HTTP/1.1" 200 0
+WARNING 2025-05-24 11:43:02,351 log Not Found: /api/events/
+WARNING 2025-05-24 11:43:02,357 basehttp "GET /api/events/ HTTP/1.1" 404 5650
+WARNING 2025-05-24 11:43:59,231 log Not Found: /api/events/
+WARNING 2025-05-24 11:43:59,232 basehttp "GET /api/events/ HTTP/1.1" 404 5650
+WARNING 2025-05-24 11:43:59,268 log Not Found: /api/events/
+WARNING 2025-05-24 11:43:59,286 basehttp "GET /api/events/ HTTP/1.1" 404 5650
+WARNING 2025-05-24 11:47:47,153 log Not Found: /api/events/
+WARNING 2025-05-24 11:47:47,155 basehttp "GET /api/events/ HTTP/1.1" 404 5650
+WARNING 2025-05-24 11:47:47,172 log Not Found: /api/events/
+WARNING 2025-05-24 11:47:47,175 basehttp "GET /api/events/ HTTP/1.1" 404 5650
+INFO 2025-05-24 11:55:51,325 autoreload D:\booking_project\Backend\events\views.py changed, reloading.
+INFO 2025-05-24 11:55:53,782 autoreload Watching for file changes with StatReloader
+INFO 2025-05-24 11:55:58,515 autoreload D:\booking_project\Backend\events\views.py changed, reloading.
+INFO 2025-05-24 11:56:00,355 autoreload Watching for file changes with StatReloader
+INFO 2025-05-24 11:56:06,387 autoreload D:\booking_project\Backend\events\views.py changed, reloading.
+INFO 2025-05-24 11:56:08,161 autoreload Watching for file changes with StatReloader
+INFO 2025-05-24 11:56:16,178 autoreload D:\booking_project\Backend\events\views.py changed, reloading.
+INFO 2025-05-24 11:56:18,730 autoreload Watching for file changes with StatReloader
+INFO 2025-05-24 11:57:05,924 autoreload D:\booking_project\Backend\events\views.py changed, reloading.
+INFO 2025-05-24 11:57:09,540 autoreload Watching for file changes with StatReloader
+INFO 2025-05-24 11:57:34,061 autoreload D:\booking_project\Backend\events\urls.py changed, reloading.
+INFO 2025-05-24 11:57:36,647 autoreload Watching for file changes with StatReloader
+INFO 2025-05-24 11:58:19,413 autoreload D:\booking_project\Backend\events\urls.py changed, reloading.
+INFO 2025-05-24 11:58:21,396 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-24 11:59:51,498 log Not Found: /api/events/
+WARNING 2025-05-24 11:59:51,499 basehttp "GET /api/events/ HTTP/1.1" 404 5930
+INFO 2025-05-24 12:02:33,413 autoreload D:\booking_project\Backend\events\views.py changed, reloading.
+INFO 2025-05-24 12:02:35,649 autoreload Watching for file changes with StatReloader
+INFO 2025-05-24 12:02:52,074 autoreload D:\booking_project\Backend\events\urls.py changed, reloading.
+INFO 2025-05-24 12:02:54,095 autoreload Watching for file changes with StatReloader
+INFO 2025-05-24 12:02:58,362 autoreload D:\booking_project\Backend\events\urls.py changed, reloading.
+INFO 2025-05-24 12:03:01,001 autoreload Watching for file changes with StatReloader
+INFO 2025-05-24 12:03:05,776 autoreload D:\booking_project\Backend\events\urls.py changed, reloading.
+INFO 2025-05-24 12:03:07,469 autoreload Watching for file changes with StatReloader
+INFO 2025-05-24 12:03:33,439 autoreload Watching for file changes with StatReloader
