@@ -513,3 +513,79 @@ class GoogleOrganizerSignupView(APIView):
                 'status': 'error',
                 'message': 'Signup failed'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class ContactView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        try:
+            data = request.data
+            name = data.get('name')
+            email = data.get('email')
+            subject = data.get('subject')
+            message = data.get('message')
+
+            if not all([name, email, subject, message]):
+                return Response({
+                    'status': 'error',
+                    'message': 'All fields are required'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            try:
+                # Get admin email with fallback
+                admin_email = getattr(settings, 'ADMIN_EMAIL', settings.EMAIL_HOST_USER)
+
+                # Send email to admin
+                admin_message = f"""
+                New Contact Form Submission:
+                From: {name}
+                Email: {email}
+                Subject: {subject}
+                Message:
+                {message}
+                """
+
+                send_mail(
+                    subject=f'Contact Form: {subject}',
+                    message=admin_message,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[admin_email],
+                    fail_silently=False
+                )
+
+                # Send confirmation email to user
+                user_message = f"""
+                Dear {name},
+
+                Thank you for contacting us. We have received your message and will get back to you soon.
+
+                Best regards,
+                EasyTicket Team
+                """
+
+                send_mail(
+                    subject='Thank you for contacting EasyTicket',
+                    message=user_message,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[email],
+                    fail_silently=True
+                )
+
+                return Response({
+                    'status': 'success',
+                    'message': 'Your message has been sent successfully'
+                }, status=status.HTTP_200_OK)
+
+            except Exception as e:
+                logger.error(f"Email sending error: {str(e)}")
+                return Response({
+                    'status': 'error',
+                    'message': 'Failed to send email - please try again later'
+                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        except Exception as e:
+            logger.error(f"Contact form error: {str(e)}")
+            return Response({
+                'status': 'error',
+                'message': 'Server error - please try again later'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
