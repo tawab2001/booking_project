@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Card, Form, Button, Alert, Navbar } from 'react-bootstrap';
-import { Send, MapPin, Phone, Mail, Clock, Ticket } from 'lucide-react';
+import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
+import { Send, MapPin, Phone, Mail, Clock } from 'lucide-react';
+import axiosInstance from '../../apiConfig/axiosConfig';
+
+// Contact Info Item Component
 const ContactInfoItem = ({ icon, title, content }) => (
   <div className="d-flex">
     <div className="bg-warning rounded-circle p-2 me-3">
@@ -25,6 +28,7 @@ const ContactForm = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const validateForm = () => {
     const newErrors = {};
@@ -68,28 +72,41 @@ const ContactForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (validateForm()) {
       setIsSubmitting(true);
+      setSubmitError('');
       
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setShowSuccess(true);
-        setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
+      try {
+        // Fixed the API endpoint URL - removed duplicate /api/
+        const response = await axiosInstance.post('/contact/', formData);
         
-        setTimeout(() => {
-          setShowSuccess(false);
-        }, 5000);
-      }, 1500);
+        if (response.data.status === 'success') {
+          setShowSuccess(true);
+          setFormData({
+            name: '',
+            email: '',
+            subject: '',
+            message: ''
+          });
+          
+          setTimeout(() => {
+            setShowSuccess(false);
+          }, 5000);
+        }
+      } catch (error) {
+        console.error('Contact form error:', error);
+        setSubmitError(
+          error.response?.data?.message || 
+          'Failed to send message. Please try again.'
+        );
+      } finally {
+        setIsSubmitting(false);
+      }
     }
-  };
+};
 
   return (
     <Card className="border-0 shadow-sm">
@@ -97,8 +114,14 @@ const ContactForm = () => {
         <Card.Title className="mb-4 fs-4">Send Us a Message</Card.Title>
         
         {showSuccess && (
-          <Alert variant="success" className="mb-4">
-            Thank you for your message! We'll get back to you as soon as possible.
+          <Alert variant="success" className="mb-4" dismissible>
+            Thank you for your message! We'll get back to you soon.
+          </Alert>
+        )}
+        
+        {submitError && (
+          <Alert variant="danger" className="mb-4" dismissible onClose={() => setSubmitError('')}>
+            {submitError}
           </Alert>
         )}
         
