@@ -14,8 +14,45 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 from tickets.models import Ticket, TicketType
 import logging
+from django.utils import timezone
+from dateutil.relativedelta import relativedelta
+
 
 logger = logging.getLogger(__name__)
+
+# class AdminStatsView(APIView):
+#     permission_classes = [IsAdminUser]
+
+#     def get(self, request):
+#         try:
+#             logger.info('Fetching admin stats...')
+#             total_users = CustomUser.objects.count()
+#             logger.info(f'Total users: {total_users}')
+#             total_events = Event.objects.count()
+#             logger.info(f'Total events: {total_events}')
+#             total_tickets = Ticket.objects.count()
+#             logger.info(f'Total tickets: {total_tickets}')
+#             # Calculate revenue by joining Ticket with TicketType
+#             revenue = float(Ticket.objects.filter(status='active')
+#                            .aggregate(total=Sum('ticket_type__price'))['total'] or 0)
+#             logger.info(f'Revenue: {revenue}')
+#             stats = {
+#                 'totalUsers': total_users,
+#                 'totalEvents': total_events,
+#                 'totalTickets': total_tickets,
+#                 'revenue': revenue
+#             }
+#             return Response({
+#                 'status': 'success',
+#                 'data': stats
+#             })
+#         except Exception as e:
+#             logger.error(f"Error fetching admin stats: {str(e)}", exc_info=True)
+#             return Response({
+#                 'status': 'error',
+#                 'message': f'Failed to fetch statistics: {str(e)}'
+#             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 class AdminStatsView(APIView):
     permission_classes = [IsAdminUser]
@@ -23,33 +60,95 @@ class AdminStatsView(APIView):
     def get(self, request):
         try:
             logger.info('Fetching admin stats...')
+            
+            # Current stats
             total_users = CustomUser.objects.count()
-            logger.info(f'Total users: {total_users}')
             total_events = Event.objects.count()
-            logger.info(f'Total events: {total_events}')
             total_tickets = Ticket.objects.count()
-            logger.info(f'Total tickets: {total_tickets}')
-            # Calculate revenue by joining Ticket with TicketType
             revenue = float(Ticket.objects.filter(status='active')
-                           .aggregate(total=Sum('ticket_type__price'))['total'] or 0)
-            logger.info(f'Revenue: {revenue}')
-            stats = {
-                'totalUsers': total_users,
-                'totalEvents': total_events,
-                'totalTickets': total_tickets,
-                'revenue': revenue
+                          .aggregate(total=Sum('ticket_type__price'))['total'] or 0)
+            
+            # Previous month stats using startSales instead of created_at
+            current_date = timezone.now()
+            last_month = current_date - relativedelta(months=1)
+            
+            prev_users = CustomUser.objects.filter(date_joined__lt=last_month).count()
+            prev_events = Event.objects.filter(startSales__lt=last_month).count()
+            prev_tickets = Ticket.objects.filter(created_date__lt=last_month).count()
+            prev_revenue = float(Ticket.objects.filter(
+                status='active',
+                created_date__lt=last_month
+            ).aggregate(total=Sum('ticket_type__price'))['total'] or 0)
+
+            # Monthly stats for trends
+            monthly_stats = {
+                'labels': [],
+                'users': [],
+                'events': [],
+                'tickets': [],
+                'revenue': []
             }
+
+            # Get last 6 months data
+            for i in range(6):
+                month_start = current_date - relativedelta(months=i)
+                month_end = month_start + relativedelta(months=1)
+                
+                # Format month label
+                monthly_stats['labels'].insert(0, month_start.strftime('%B %Y'))
+                
+                # Get monthly data
+                monthly_users = CustomUser.objects.filter(
+                    date_joined__range=(month_start, month_end)
+                ).count()
+                
+                monthly_events = Event.objects.filter(
+                    startSales__range=(month_start, month_end)
+                ).count()
+                
+                monthly_tickets = Ticket.objects.filter(
+                    created_date__range=(month_start, month_end)
+                ).count()
+                
+                monthly_revenue = float(Ticket.objects.filter(
+                    status='active',
+                    created_date__range=(month_start, month_end)
+                ).aggregate(total=Sum('ticket_type__price'))['total'] or 0)
+                
+                monthly_stats['users'].insert(0, monthly_users)
+                monthly_stats['events'].insert(0, monthly_events)
+                monthly_stats['tickets'].insert(0, monthly_tickets)
+                monthly_stats['revenue'].insert(0, monthly_revenue)
+
+            # Prepare response data
+            stats = {
+                'current': {
+                    'totalUsers': total_users,
+                    'totalEvents': total_events,
+                    'totalTickets': total_tickets,
+                    'revenue': revenue
+                },
+                'previous': {
+                    'totalUsers': prev_users,
+                    'totalEvents': prev_events,
+                    'totalTickets': prev_tickets,
+                    'revenue': prev_revenue
+                },
+                'monthly': monthly_stats
+            }
+
+            logger.info('Successfully fetched admin stats')
             return Response({
                 'status': 'success',
                 'data': stats
             })
+
         except Exception as e:
             logger.error(f"Error fetching admin stats: {str(e)}", exc_info=True)
             return Response({
                 'status': 'error',
                 'message': f'Failed to fetch statistics: {str(e)}'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
 class AdminUsersView(APIView):
     permission_classes = [IsAdminUser]
 
