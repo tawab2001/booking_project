@@ -55,12 +55,14 @@ const handleSubmit = async (e) => {
           localStorage.setItem("user_data", JSON.stringify(response.data.user_data));
         }
 
-        console.log("Login successful");
+        console.log("Login successful", response.data); // Add logging
 
-        // Redirect based on user type
-        if (response.data.user_type === 'organizer') {
-          navigate('/admin');
+        // تحديث التوجيه بناءً على نوع المستخدم
+        if (response.data.user_type === 'organizer' || response.data.user_data?.is_staff) {
+          console.log("Redirecting to organizer dashboard"); // Add logging
+          navigate('/admindashboard');
         } else {
+          console.log("Redirecting to home"); // Add logging
           navigate('/');
         }
       } else {
@@ -93,7 +95,7 @@ const handleSubmit = async (e) => {
     } finally {
       setIsLoading(false);
     }
-  };
+};
 
 const handleGoogleSuccess = async (credentialResponse) => {
     try {

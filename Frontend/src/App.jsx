@@ -17,6 +17,7 @@ import Dashboard from './admin/Dashboard';
 import AdminRoute from './admin/AdminRoute';
 import UsersManagement from './admin/UsersManagement';
 import AdminLogin from './admin/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard/admindashboard';
 
 
 
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       { path: "contactus", element: <Contact/> },
       { path: "reset-password", element: <RequestReset/> },
       { path: "reset-password/:token", element: <ResetPassword/> },
+      {path:"admindashboard", element: <AdminDashboard/>}
     ]
   },
   { path: "signup", element: <SignUp/> },
