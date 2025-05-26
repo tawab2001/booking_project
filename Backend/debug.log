@@ -382,3 +382,196 @@ INFO 2025-05-25 15:42:35,220 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
 INFO 2025-05-25 15:42:35,220 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
 INFO 2025-05-25 15:42:35,541 basehttp "GET /api/profile/ HTTP/1.1" 200 91
 INFO 2025-05-25 15:42:35,809 basehttp "GET /api/profile/ HTTP/1.1" 200 91
+INFO 2025-05-26 14:08:03,029 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\models.py changed, reloading.
+INFO 2025-05-26 14:08:04,481 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:08:29,874 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-26 14:08:30,710 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:09:04,277 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-26 14:09:05,055 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:09:20,140 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-26 14:09:20,892 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:09:23,276 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-26 14:09:24,102 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:09:28,806 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-26 14:09:29,563 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:09:33,096 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-26 14:09:33,889 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:09:50,206 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-26 14:09:51,019 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:09:53,467 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-26 14:09:54,298 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:09:56,757 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-26 14:09:57,546 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:10:00,100 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-26 14:10:00,904 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:10:05,003 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-26 14:10:05,813 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:10:51,809 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-26 14:10:52,562 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:10:58,567 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-26 14:10:59,342 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:11:02,763 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-26 14:11:03,970 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:11:21,894 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-26 14:11:22,588 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:11:33,515 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-26 14:11:34,247 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:11:40,696 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-26 14:11:41,436 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:11:45,028 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-26 14:11:45,868 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:11:57,271 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-26 14:11:58,040 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:12:35,451 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 14:19:34,681 basehttp "OPTIONS /api/login/ HTTP/1.1" 200 0
+INFO 2025-05-26 14:19:35,961 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-26 14:22:06,036 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-26 14:22:06,041 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-26 14:22:06,309 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 14:22:06,516 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 14:22:16,815 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 14:22:16,983 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 14:22:43,311 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 14:22:43,534 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 14:23:12,644 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 14:23:12,817 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 14:27:20,862 basehttp "PUT /api/profile/ HTTP/1.1" 200 205
+INFO 2025-05-26 14:27:21,074 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+WARNING 2025-05-26 14:31:21,578 log Bad Request: /api/profile/
+WARNING 2025-05-26 14:31:21,579 basehttp "PUT /api/profile/ HTTP/1.1" 400 27
+INFO 2025-05-26 14:33:18,946 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+WARNING 2025-05-26 14:33:45,906 log Bad Request: /api/profile/
+WARNING 2025-05-26 14:33:45,907 basehttp "PUT /api/profile/ HTTP/1.1" 400 27
+INFO 2025-05-26 14:35:43,514 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 14:35:43,839 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+WARNING 2025-05-26 14:35:49,970 log Bad Request: /api/profile/
+WARNING 2025-05-26 14:35:49,971 basehttp "PUT /api/profile/ HTTP/1.1" 400 27
+INFO 2025-05-26 14:37:10,001 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 14:37:10,627 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 14:37:44,190 basehttp "PUT /api/profile/ HTTP/1.1" 200 291
+INFO 2025-05-26 14:37:44,371 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:41:55,898 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:41:56,146 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:42:03,774 basehttp "PUT /api/profile/ HTTP/1.1" 200 291
+INFO 2025-05-26 14:42:03,973 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:44:33,414 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:45:18,083 basehttp "PUT /api/profile/ HTTP/1.1" 200 291
+INFO 2025-05-26 14:45:37,850 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-26 14:45:42,123 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:45:42,317 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:45:51,702 basehttp "PUT /api/profile/ HTTP/1.1" 200 291
+INFO 2025-05-26 14:46:04,387 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-26 14:46:09,035 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:46:09,232 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:49:45,914 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:50:02,616 basehttp "PUT /api/profile/ HTTP/1.1" 200 291
+INFO 2025-05-26 14:50:27,186 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-26 14:50:31,072 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:50:31,250 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:54:57,442 basehttp "PUT /api/profile/ HTTP/1.1" 200 291
+INFO 2025-05-26 14:56:24,696 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-26 14:56:30,194 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:56:30,390 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:56:34,957 basehttp "PUT /api/profile/ HTTP/1.1" 200 291
+INFO 2025-05-26 14:56:44,332 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-26 14:56:48,011 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 14:56:48,208 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 15:01:03,491 basehttp "PUT /api/profile/ HTTP/1.1" 200 291
+INFO 2025-05-26 15:04:04,208 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-26 15:04:07,968 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 15:04:08,331 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 15:04:20,170 basehttp "OPTIONS /api/login/google/ HTTP/1.1" 200 0
+INFO 2025-05-26 15:04:20,178 views Processing Google login request
+INFO 2025-05-26 15:04:20,860 views Token verified for email: ahmedtawab017@gmail.com
+INFO 2025-05-26 15:04:21,030 views Existing user found: ahmedtawab017@gmail.com
+INFO 2025-05-26 15:04:21,033 basehttp "POST /api/login/google/ HTTP/1.1" 200 745
+INFO 2025-05-26 15:04:24,507 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 15:04:24,705 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 15:07:59,288 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 15:07:59,692 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 15:08:06,617 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 15:08:12,455 basehttp "PUT /api/profile/ HTTP/1.1" 200 205
+INFO 2025-05-26 15:08:15,026 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 15:08:15,403 basehttp "GET /api/profile/ HTTP/1.1" 200 169
+INFO 2025-05-26 15:11:05,675 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\models.py changed, reloading.
+INFO 2025-05-26 15:11:07,833 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 15:11:09,589 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\models.py changed, reloading.
+INFO 2025-05-26 15:11:10,627 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 15:11:15,947 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\models.py changed, reloading.
+INFO 2025-05-26 15:11:17,047 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 15:11:29,502 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\models.py changed, reloading.
+INFO 2025-05-26 15:11:30,536 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 15:11:35,835 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\models.py changed, reloading.
+INFO 2025-05-26 15:11:37,568 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 15:11:51,147 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\models.py changed, reloading.
+INFO 2025-05-26 15:11:52,118 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 15:13:47,795 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-26 15:13:48,610 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 15:14:43,331 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-26 15:14:44,174 autoreload Watching for file changes with StatReloader
+INFO 2025-05-26 15:15:29,405 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-26 15:15:45,472 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-26 15:15:51,670 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 15:15:51,996 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 15:16:05,403 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-26 15:16:09,635 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 15:16:09,837 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 15:16:21,589 basehttp "POST /api/login/ HTTP/1.1" 200 694
+INFO 2025-05-26 15:38:40,159 basehttp "GET /api/profile/ HTTP/1.1" 200 252
+INFO 2025-05-26 15:38:40,342 basehttp "GET /api/profile/ HTTP/1.1" 200 252
+INFO 2025-05-26 15:39:43,278 basehttp "PUT /api/profile/ HTTP/1.1" 200 140
+INFO 2025-05-26 15:39:50,179 basehttp "PUT /api/profile/ HTTP/1.1" 200 140
+INFO 2025-05-26 15:41:28,254 basehttp "GET /api/profile/ HTTP/1.1" 200 252
+INFO 2025-05-26 15:41:28,566 basehttp "GET /api/profile/ HTTP/1.1" 200 252
+INFO 2025-05-26 15:44:18,825 basehttp "GET /api/profile/ HTTP/1.1" 200 252
+INFO 2025-05-26 15:44:19,083 basehttp "GET /api/profile/ HTTP/1.1" 200 252
+INFO 2025-05-26 15:44:22,522 basehttp "PUT /api/profile/ HTTP/1.1" 200 140
+WARNING 2025-05-26 15:44:27,498 log Bad Request: /api/profile/
+WARNING 2025-05-26 15:44:27,499 basehttp "PUT /api/profile/ HTTP/1.1" 400 44
+WARNING 2025-05-26 15:44:34,083 log Bad Request: /api/profile/
+WARNING 2025-05-26 15:44:34,084 basehttp "PUT /api/profile/ HTTP/1.1" 400 44
+WARNING 2025-05-26 15:44:36,080 log Bad Request: /api/profile/
+WARNING 2025-05-26 15:44:36,081 basehttp "PUT /api/profile/ HTTP/1.1" 400 44
+WARNING 2025-05-26 15:44:39,515 log Bad Request: /api/profile/
+WARNING 2025-05-26 15:44:39,515 basehttp "PUT /api/profile/ HTTP/1.1" 400 44
+WARNING 2025-05-26 15:44:40,447 log Bad Request: /api/profile/
+WARNING 2025-05-26 15:44:40,448 basehttp "PUT /api/profile/ HTTP/1.1" 400 44
+WARNING 2025-05-26 15:44:40,698 log Bad Request: /api/profile/
+WARNING 2025-05-26 15:44:40,699 basehttp "PUT /api/profile/ HTTP/1.1" 400 44
+WARNING 2025-05-26 15:44:40,783 log Bad Request: /api/profile/
+WARNING 2025-05-26 15:44:40,784 basehttp "PUT /api/profile/ HTTP/1.1" 400 44
+INFO 2025-05-26 15:44:42,443 basehttp "GET /api/profile/ HTTP/1.1" 200 252
+INFO 2025-05-26 15:44:42,984 basehttp "GET /api/profile/ HTTP/1.1" 200 252
+WARNING 2025-05-26 15:44:48,520 log Bad Request: /api/profile/
+WARNING 2025-05-26 15:44:48,520 basehttp "PUT /api/profile/ HTTP/1.1" 400 44
+INFO 2025-05-26 15:45:04,963 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-26 15:45:07,837 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 15:45:08,021 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+WARNING 2025-05-26 15:45:11,770 log Bad Request: /api/profile/
+WARNING 2025-05-26 15:45:11,770 basehttp "PUT /api/profile/ HTTP/1.1" 400 44
+INFO 2025-05-26 15:46:21,970 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 15:46:23,855 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 15:46:40,839 basehttp "POST /api/login/ HTTP/1.1" 200 694
+INFO 2025-05-26 15:46:43,858 basehttp "GET /api/profile/ HTTP/1.1" 200 252
+INFO 2025-05-26 15:46:44,211 basehttp "GET /api/profile/ HTTP/1.1" 200 252
+WARNING 2025-05-26 15:46:53,607 log Bad Request: /api/profile/
+WARNING 2025-05-26 15:46:53,608 basehttp "PUT /api/profile/ HTTP/1.1" 400 44
+INFO 2025-05-26 15:46:58,871 basehttp "PUT /api/profile/ HTTP/1.1" 200 140
+INFO 2025-05-26 15:47:37,275 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-26 15:47:44,256 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-26 15:47:46,180 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 15:47:46,384 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+WARNING 2025-05-26 15:47:49,640 log Bad Request: /api/profile/
+WARNING 2025-05-26 15:47:49,641 basehttp "PUT /api/profile/ HTTP/1.1" 400 44
+INFO 2025-05-26 15:49:55,211 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-26 15:49:59,629 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 15:49:59,971 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 15:58:37,787 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-26 15:58:39,651 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 15:58:39,981 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 16:01:59,507 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 16:02:00,126 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 16:02:31,420 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 16:02:31,903 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 16:02:37,215 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-26 16:02:43,542 basehttp "PUT /api/profile/ HTTP/1.1" 200 141

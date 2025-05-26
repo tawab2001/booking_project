@@ -101,6 +101,57 @@ class LoginView(APIView):
                 {'error': str(e)},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+# class UserProfileView(APIView):
+#     authentication_classes = [JWTAuthentication]
+#     permission_classes = [IsAuthenticated]
+
+    # def get(self, request):
+    #     try:
+    #         user = request.user
+    #         data = {
+    #             'id': user.id,
+    #             'username': user.username,
+    #             'email': user.email,
+    #             'mobile_number': user.mobile_number,
+    #         }
+            
+    #         if hasattr(user, 'organizer_company'):
+    #             company = user.organizer_company
+    #             data.update({
+    #                 'company_name': company.company_name,
+    #                 'description': company.description,
+    #                 'country': company.country,
+    #             })
+            
+    #         return Response(data, status=status.HTTP_200_OK)
+    #     except Exception as e:
+    #         return Response(
+    #             {'error': str(e)}, 
+    #             status=status.HTTP_400_BAD_REQUEST
+    #         )
+
+    # def put(self, request):
+    #     try:
+    #         user = request.user
+    #         serializer = UserSerializer(
+    #             user, 
+    #             data=request.data, 
+    #             partial=True
+    #         )
+    #         if serializer.is_valid():
+    #             serializer.save()
+    #             return Response(serializer.data)
+    #         return Response(
+    #             serializer.errors, 
+    #             status=status.HTTP_400_BAD_REQUEST
+    #         )
+    #     except Exception as e:
+    #         return Response(
+    #             {'error': str(e)}, 
+    #             status=status.HTTP_400_BAD_REQUEST
+    #         )
+
+
 class UserProfileView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
@@ -113,6 +164,11 @@ class UserProfileView(APIView):
                 'username': user.username,
                 'email': user.email,
                 'mobile_number': user.mobile_number,
+                'social_accounts': {
+                    'facebook_url': user.facebook_url or '',
+                    'instagram_url': user.instagram_url or '',
+                    'whatsapp_number': user.whatsapp_number or ''
+                }
             }
             
             if hasattr(user, 'organizer_company'):
@@ -140,7 +196,10 @@ class UserProfileView(APIView):
             )
             if serializer.is_valid():
                 serializer.save()
-                return Response(serializer.data)
+                return Response({
+                    'message': 'Profile updated successfully',
+                    'data': serializer.data
+                })
             return Response(
                 serializer.errors, 
                 status=status.HTTP_400_BAD_REQUEST
@@ -149,7 +208,7 @@ class UserProfileView(APIView):
             return Response(
                 {'error': str(e)}, 
                 status=status.HTTP_400_BAD_REQUEST
-            )
+            )    
         
 class RequestPasswordResetView(APIView):
     permission_classes = [AllowAny]
