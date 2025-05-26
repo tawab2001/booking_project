@@ -1,0 +1,99 @@
+/* profile.css */
+
+/* Customize react-toastify */
+.Toastify__toast {
+  border-radius: 8px;
+  font-family: 'Arial', sans-serif;
+}
+
+.Toastify__toast--success {
+  background: #343a40; /* Dark background */
+  color: #ffc107; /* Warning yellow text */
+  border: 1px solid #ffc107;
+}
+
+.Toastify__toast-body {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.Toastify__progress-bar--success {
+  background: #ffc107; /* Yellow progress bar */
+}
+
+/* Existing styles */
+.profile-container {
+  padding: 2rem 0;
+  min-height: 100vh;
+  background: #212529;
+}
+
+.profile-card {
+  background: #343a40;
+  color: #f8f9fa;
+  border: 1px solid #495057;
+  border-radius: 10px;
+}
+
+.profile-card-title {
+  color: #ffc107;
+}
+
+.profile-button {
+  font-weight: 500;
+}
+
+.profile-input {
+  background: #495057;
+  color: #f8f9fa;
+  border: 1px solid #6c757d;
+}
+
+.profile-input::placeholder {
+  color: #adb5bd;
+}
+
+.profile-alert {
+  border-radius: 8px;
+}
+
+.profile-sidebar {
+  background: #343a40;
+  border: 1px solid #495057;
+  border-radius: 10px;
+}
+
+.profile-avatar {
+  border: 3px solid #ffc107;
+}
+
+.profile-username {
+  color: #ffc107;
+}
+
+.profile-role {
+  color: #adb5bd;
+}
+
+.profile-nav-link {
+  color: #f8f9fa;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.profile-nav-link.active {
+  background: #ffc107;
+  color: #212529;
+}
+
+.social-link {
+  color: #f8f9fa;
+  text-decoration: none;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.social-link:hover {
+  color: #ffc107;
+}

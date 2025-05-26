@@ -98,14 +98,15 @@ function Header() {
   };
 
   // Array of nav links for dynamic indexing (for animation delay)
-  const navLinks = [
+    const navLinks = [
     { to: '/home', label: 'Home', ariaLabel: 'Home page' },
     { to: '/events', label: 'Events', ariaLabel: 'Events page' },
     ...(isLoggedIn
       ? userType === 'organizer'
         ? [
-            { to: '/admin', label: 'Dashboard', ariaLabel: 'Dashboard page' },
+            { to: '/admindashboard', label: 'Dashboard', ariaLabel: 'Dashboard page' },
             { to: '/addEvent', label: 'Add Event', ariaLabel: 'Add Event page' },
+            { to: '/profile', label: 'Company Profile', ariaLabel: 'Company Profile page' }, // Added profile for organizers
           ]
         : [{ to: '/profile', label: 'Profile', ariaLabel: 'Profile page' }]
       : []),
