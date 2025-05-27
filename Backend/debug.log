@@ -1048,28 +1048,3 @@ INFO 2025-05-27 15:09:25,300 basehttp "GET /api/profile/ HTTP/1.1" 200 367
 INFO 2025-05-27 15:09:25,703 basehttp "GET /api/profile/ HTTP/1.1" 200 367
 INFO 2025-05-27 15:09:35,544 basehttp "OPTIONS /api/login/ HTTP/1.1" 200 0
 INFO 2025-05-27 15:09:37,468 basehttp "POST /api/login/ HTTP/1.1" 200 694
-INFO 2025-05-27 16:11:37,229 basehttp "GET /api/profile/ HTTP/1.1" 200 367
-INFO 2025-05-27 16:11:37,520 basehttp "GET /api/profile/ HTTP/1.1" 200 367
-INFO 2025-05-27 16:11:54,434 basehttp "OPTIONS /api/login/google/ HTTP/1.1" 200 0
-INFO 2025-05-27 16:11:54,449 views Processing Google login request
-INFO 2025-05-27 16:11:55,488 views Token verified for email: ahmedtawab017@gmail.com
-INFO 2025-05-27 16:11:55,761 views Existing user found: ahmedtawab017@gmail.com
-INFO 2025-05-27 16:11:55,765 basehttp "POST /api/login/google/ HTTP/1.1" 200 745
-INFO 2025-05-27 16:54:41,677 autoreload Watching for file changes with StatReloader
-INFO 2025-05-27 16:54:49,340 basehttp "GET /api/profile/ HTTP/1.1" 200 275
-INFO 2025-05-27 16:54:49,672 basehttp "GET /api/profile/ HTTP/1.1" 200 275
-INFO 2025-05-27 16:54:58,819 basehttp "POST /api/login/ HTTP/1.1" 200 606
-INFO 2025-05-27 16:55:00,988 basehttp "GET /api/profile/ HTTP/1.1" 200 367
-INFO 2025-05-27 16:55:01,186 basehttp "GET /api/profile/ HTTP/1.1" 200 367
-INFO 2025-05-27 16:55:15,509 basehttp "OPTIONS /api/admin/login/ HTTP/1.1" 200 0
-INFO 2025-05-27 16:55:16,620 basehttp "POST /api/admin/login/ HTTP/1.1" 200 612
-INFO 2025-05-27 16:55:16,668 basehttp "OPTIONS /api/admin/stats/?period=30d HTTP/1.1" 200 0
-INFO 2025-05-27 16:55:16,670 basehttp "OPTIONS /api/admin/stats/?period=30d HTTP/1.1" 200 0
-INFO 2025-05-27 16:55:17,023 basehttp "GET /api/admin/stats/?period=30d HTTP/1.1" 200 390
-INFO 2025-05-27 16:55:17,261 basehttp "GET /api/admin/stats/?period=30d HTTP/1.1" 200 390
-INFO 2025-05-27 16:55:18,721 basehttp "OPTIONS /api/admin/users/ HTTP/1.1" 200 0
-INFO 2025-05-27 16:55:18,721 basehttp "OPTIONS /api/admin/users/ HTTP/1.1" 200 0
-INFO 2025-05-27 16:55:19,047 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1019
-INFO 2025-05-27 16:55:19,241 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1019
-INFO 2025-05-27 16:55:21,220 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1019
-INFO 2025-05-27 16:55:59,460 basehttp "POST /api/login/ HTTP/1.1" 200 694
