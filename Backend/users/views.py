@@ -9,6 +9,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.core.mail import send_mail
 from django.conf import settings
+from .serializers import AvatarUploadSerializer
 import jwt
 from datetime import datetime, timedelta
 from google.oauth2 import id_token
@@ -16,6 +17,14 @@ from google.auth.transport import requests
 import logging
 import time
 from django.db import transaction 
+from rest_framework.parsers import MultiPartParser, FormParser
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+from django.conf import settings
+import logging
+
+
 
 class UserSignupView(APIView):
     permission_classes = [AllowAny]
@@ -155,15 +164,19 @@ class LoginView(APIView):
 class UserProfileView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
 
     def get(self, request):
         try:
             user = request.user
+            avatar_url = user.avatar if user.avatar else None
             data = {
                 'id': user.id,
                 'username': user.username,
                 'email': user.email,
                 'mobile_number': user.mobile_number,
+                'avatar': avatar_url,
+
                 'social_accounts': {
                     'facebook_url': user.facebook_url or '',
                     'instagram_url': user.instagram_url or '',
@@ -648,3 +661,60 @@ class ContactView(APIView):
                 'status': 'error',
                 'message': 'Server error - please try again later'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+logger = logging.getLogger(__name__)
+
+# Make sure cloudinary is configured
+cloudinary.config(
+    cloud_name=settings.CLOUDINARY_STORAGE['CLOUD_NAME'],
+    api_key=settings.CLOUDINARY_STORAGE['API_KEY'],
+    api_secret=settings.CLOUDINARY_STORAGE['API_SECRET']
+)
+
+class AvatarUploadView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        try:
+            logger.info("Starting avatar upload process")
+            
+            if 'avatar' not in request.FILES:
+                return Response(
+                    {'error': 'No image file provided'}, 
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            file = request.FILES['avatar']
+            
+            # Upload to Cloudinary
+            try:
+                upload_result = cloudinary.uploader.upload(
+                    file,
+                    folder='avatars',
+                    resource_type='auto',
+                    allowed_formats=['jpg', 'png', 'gif'],
+                    transformation=[
+                        {'width': 400, 'height': 400, 'crop': 'fill'}
+                    ]
+                )
+                logger.info(f"Image uploaded successfully to Cloudinary: {upload_result['secure_url']}")
+            except Exception as cloud_error:
+                logger.error(f"Cloudinary upload error: {str(cloud_error)}")
+                raise Exception(f"Failed to upload to Cloudinary: {str(cloud_error)}")
+            
+            # Update user's avatar URL
+            request.user.avatar = upload_result['secure_url']
+            request.user.save()
+
+            return Response({
+                'status': 'success',
+                'avatar': upload_result['secure_url']
+            })
+            
+        except Exception as e:
+            logger.error(f"Error uploading avatar: {str(e)}")
+            return Response(
+                {'error': str(e)}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

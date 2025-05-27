@@ -32,7 +32,7 @@ export const uploadToCloudinary = async (file) => {
     }
 
     const data = await response.json();
-    console.log('Upload successful:', data); // للتأكد من نجاح الرفع
+    console.log('Upload successful:', data); 
     return data.secure_url;
   } catch (error) {
     console.error('Cloudinary Upload Error:', error);

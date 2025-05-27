@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import UserSignupView,ContactView, OrganizerSignupView, PasswordResetConfirmView ,LoginView, UserProfileView, RequestPasswordResetView, GoogleLoginView,GoogleUserSignupView, GoogleOrganizerSignupView
+from .views import UserSignupView,ContactView,AvatarUploadView, OrganizerSignupView, PasswordResetConfirmView ,LoginView, UserProfileView, RequestPasswordResetView, GoogleLoginView,GoogleUserSignupView, GoogleOrganizerSignupView
 
 urlpatterns = [
     path('signup/user/', UserSignupView.as_view(), name='user-signup'),
@@ -12,7 +12,11 @@ urlpatterns = [
     path('signup/user/google/', GoogleUserSignupView.as_view(), name='google_user_signup'),
     path('signup/organizer/google/', GoogleOrganizerSignupView.as_view(), name='google_organizer_signup'),
     path('contact/', ContactView.as_view(), name='contact'),
+    path('profile/', UserProfileView.as_view(), name='user-profile'),
+    path('profile/avatar/', AvatarUploadView.as_view(), name='avatar-upload'),
 ]
+
+
 
 # from django.urls import path
 # from .views import (
