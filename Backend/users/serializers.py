@@ -156,3 +156,9 @@ class OrganizerCompanySerializer(serializers.ModelSerializer):
         
         return super().update(instance, validated_data)
 
+class AvatarUploadSerializer(serializers.Serializer):
+    avatar = serializers.ImageField(required=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ['avatar']

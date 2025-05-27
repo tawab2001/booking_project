@@ -575,3 +575,470 @@ INFO 2025-05-26 16:02:31,420 basehttp "GET /api/profile/ HTTP/1.1" 200 261
 INFO 2025-05-26 16:02:31,903 basehttp "GET /api/profile/ HTTP/1.1" 200 261
 INFO 2025-05-26 16:02:37,215 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
 INFO 2025-05-26 16:02:43,542 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-26 16:51:16,047 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-26 16:51:16,047 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-26 16:51:16,773 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 16:51:17,074 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 16:51:20,060 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-26 16:53:47,082 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-26 19:41:04,200 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-26 19:41:04,201 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-26 19:41:04,512 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 19:41:04,737 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 19:41:19,078 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 19:41:19,260 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 19:41:23,527 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-26 21:48:23,037 basehttp "OPTIONS /api/signup/user/google/ HTTP/1.1" 200 0
+INFO 2025-05-26 21:48:23,073 views Processing Google signup...
+INFO 2025-05-26 21:48:23,075 views Verifying Google token...
+INFO 2025-05-26 21:48:23,653 views Google token verified for email: a7medabdo03@gmail.com
+ERROR 2025-05-26 21:48:24,085 views User with email a7medabdo03@gmail.com already exists
+WARNING 2025-05-26 21:48:24,088 log Bad Request: /api/signup/user/google/
+WARNING 2025-05-26 21:48:24,088 basehttp "POST /api/signup/user/google/ HTTP/1.1" 400 66
+INFO 2025-05-26 21:48:44,752 basehttp "OPTIONS /api/login/google/ HTTP/1.1" 200 0
+INFO 2025-05-26 21:48:44,767 views Processing Google login request
+INFO 2025-05-26 21:48:45,053 views Token verified for email: ahmedtawab017@gmail.com
+INFO 2025-05-26 21:48:45,374 views Existing user found: ahmedtawab017@gmail.com
+INFO 2025-05-26 21:48:45,383 basehttp "POST /api/login/google/ HTTP/1.1" 200 745
+INFO 2025-05-26 21:49:04,147 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-26 21:49:04,147 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-26 21:49:04,587 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 21:49:04,861 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 21:49:21,685 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-26 21:49:27,337 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-26 21:50:00,605 basehttp "OPTIONS /api/contact/ HTTP/1.1" 200 0
+INFO 2025-05-26 21:50:05,820 basehttp "POST /api/contact/ HTTP/1.1" 200 72
+INFO 2025-05-26 21:51:38,976 basehttp "OPTIONS /api/login/ HTTP/1.1" 200 0
+INFO 2025-05-26 21:51:40,436 basehttp "POST /api/login/ HTTP/1.1" 200 694
+INFO 2025-05-26 21:52:05,092 basehttp "GET /api/profile/ HTTP/1.1" 200 252
+INFO 2025-05-26 21:52:05,540 basehttp "GET /api/profile/ HTTP/1.1" 200 252
+INFO 2025-05-26 21:52:22,939 basehttp "PUT /api/profile/ HTTP/1.1" 200 140
+INFO 2025-05-26 21:55:07,678 basehttp "GET /api/profile/ HTTP/1.1" 200 252
+INFO 2025-05-26 21:55:07,987 basehttp "GET /api/profile/ HTTP/1.1" 200 252
+INFO 2025-05-26 22:01:52,655 basehttp "OPTIONS /api/admin/login/ HTTP/1.1" 200 0
+INFO 2025-05-26 22:01:54,281 basehttp "POST /api/admin/login/ HTTP/1.1" 200 612
+INFO 2025-05-26 22:01:54,374 basehttp "OPTIONS /api/admin/stats/?period=30d HTTP/1.1" 200 0
+INFO 2025-05-26 22:01:54,382 basehttp "OPTIONS /api/admin/stats/?period=30d HTTP/1.1" 200 0
+INFO 2025-05-26 22:01:54,995 basehttp "GET /api/admin/stats/?period=30d HTTP/1.1" 200 390
+INFO 2025-05-26 22:01:55,369 basehttp "GET /api/admin/stats/?period=30d HTTP/1.1" 200 390
+INFO 2025-05-26 22:02:24,008 basehttp "OPTIONS /api/admin/users/ HTTP/1.1" 200 0
+INFO 2025-05-26 22:02:24,014 basehttp "OPTIONS /api/admin/users/ HTTP/1.1" 200 0
+INFO 2025-05-26 22:02:24,475 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1144
+INFO 2025-05-26 22:02:24,738 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1144
+INFO 2025-05-26 22:02:27,309 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1144
+INFO 2025-05-26 22:02:30,231 basehttp "OPTIONS /api/admin/users/4/ HTTP/1.1" 200 0
+INFO 2025-05-26 22:02:30,457 basehttp "PUT /api/admin/users/4/ HTTP/1.1" 200 148
+INFO 2025-05-26 22:02:39,507 basehttp "OPTIONS /api/admin/users/1/ HTTP/1.1" 200 0
+INFO 2025-05-26 22:02:40,089 basehttp "DELETE /api/admin/users/1/ HTTP/1.1" 200 58
+INFO 2025-05-26 22:02:50,525 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1019
+INFO 2025-05-26 22:02:50,782 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1019
+INFO 2025-05-26 22:03:02,807 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-26 22:06:48,233 basehttp "POST /api/admin/login/ HTTP/1.1" 200 612
+INFO 2025-05-26 22:06:48,705 basehttp "GET /api/admin/stats/?period=30d HTTP/1.1" 200 390
+INFO 2025-05-26 22:06:49,042 basehttp "GET /api/admin/stats/?period=30d HTTP/1.1" 200 390
+INFO 2025-05-26 22:06:58,766 basehttp "OPTIONS /api/admin/stats/?period=7d HTTP/1.1" 200 0
+INFO 2025-05-26 22:06:59,015 basehttp "GET /api/admin/stats/?period=7d HTTP/1.1" 200 390
+INFO 2025-05-26 22:07:00,637 basehttp "GET /api/admin/stats/?period=30d HTTP/1.1" 200 390
+INFO 2025-05-26 22:07:01,841 basehttp "OPTIONS /api/admin/stats/?period=90d HTTP/1.1" 200 0
+INFO 2025-05-26 22:07:02,134 basehttp "GET /api/admin/stats/?period=90d HTTP/1.1" 200 390
+INFO 2025-05-26 22:07:03,418 basehttp "GET /api/admin/stats/?period=30d HTTP/1.1" 200 390
+INFO 2025-05-26 22:07:04,506 basehttp "GET /api/admin/stats/?period=7d HTTP/1.1" 200 390
+INFO 2025-05-26 22:13:04,931 basehttp "GET /api/admin/stats/?period=7d HTTP/1.1" 200 390
+INFO 2025-05-26 22:13:11,756 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1019
+INFO 2025-05-26 22:13:12,009 basehttp "GET /api/admin/users/ HTTP/1.1" 200 1019
+INFO 2025-05-26 22:14:38,575 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 22:14:38,767 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-26 22:14:41,721 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-26 22:15:08,936 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-26 22:15:23,739 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-26 22:15:38,130 basehttp "GET /api/admin/stats/?period=30d HTTP/1.1" 200 390
+INFO 2025-05-26 22:15:38,483 basehttp "GET /api/admin/stats/?period=30d HTTP/1.1" 200 390
+INFO 2025-05-27 01:45:32,222 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-27 01:45:32,223 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-27 01:45:32,838 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 01:45:33,023 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 01:45:45,983 basehttp "OPTIONS /api/profile//avatar HTTP/1.1" 200 0
+WARNING 2025-05-27 01:45:46,049 log Not Found: /api/profile//avatar
+WARNING 2025-05-27 01:45:46,051 basehttp "POST /api/profile//avatar HTTP/1.1" 404 5816
+WARNING 2025-05-27 01:45:47,557 log Not Found: /api/profile//avatar
+WARNING 2025-05-27 01:45:47,558 basehttp "POST /api/profile//avatar HTTP/1.1" 404 5816
+INFO 2025-05-27 01:47:03,159 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 01:49:58,265 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 01:51:30,126 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 01:51:30,408 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 02:12:02,005 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:20:39,355 autoreload Watching for file changes with StatReloader
+WARNING 2025-05-27 02:20:46,215 log Method Not Allowed: /api/profile/
+WARNING 2025-05-27 02:20:46,216 basehttp "GET /api/profile/ HTTP/1.1" 405 40
+WARNING 2025-05-27 02:20:46,571 log Method Not Allowed: /api/profile/
+WARNING 2025-05-27 02:20:46,572 basehttp "GET /api/profile/ HTTP/1.1" 405 40
+WARNING 2025-05-27 02:25:48,482 log Method Not Allowed: /api/profile/
+WARNING 2025-05-27 02:25:48,483 basehttp "GET /api/profile/ HTTP/1.1" 405 40
+WARNING 2025-05-27 02:25:48,768 log Method Not Allowed: /api/profile/
+WARNING 2025-05-27 02:25:48,769 basehttp "GET /api/profile/ HTTP/1.1" 405 40
+WARNING 2025-05-27 02:26:27,328 log Method Not Allowed: /api/profile/
+WARNING 2025-05-27 02:26:27,329 basehttp "GET /api/profile/ HTTP/1.1" 405 40
+INFO 2025-05-27 02:26:58,240 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 02:26:59,203 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:27:06,186 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 02:27:06,627 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 02:28:39,715 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-27 02:28:40,903 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:35:29,112 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 02:35:29,510 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 02:36:06,453 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\models.py changed, reloading.
+INFO 2025-05-27 02:36:07,584 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:37:42,471 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-27 02:37:43,464 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:38:04,439 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 02:38:05,353 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:38:18,251 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 02:38:19,119 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:39:49,141 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 02:39:50,119 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:40:01,969 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 02:40:02,847 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:40:07,337 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 02:40:08,210 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:40:11,522 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 02:40:12,297 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:40:19,154 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 02:40:20,155 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:45:42,322 basehttp "OPTIONS /api/profile/avatar/ HTTP/1.1" 200 0
+WARNING 2025-05-27 02:45:42,350 log Not Found: /api/profile/avatar/
+WARNING 2025-05-27 02:45:42,352 basehttp "POST /api/profile/avatar/ HTTP/1.1" 404 5816
+INFO 2025-05-27 02:48:45,032 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-27 02:48:46,454 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:48:51,185 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-27 02:48:52,045 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:49:05,833 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-27 02:49:06,918 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:49:50,542 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 02:49:50,826 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+WARNING 2025-05-27 02:49:55,472 log Not Found: /api/profile/avatar/
+WARNING 2025-05-27 02:49:55,489 basehttp "POST /api/profile/avatar/ HTTP/1.1" 404 5816
+INFO 2025-05-27 02:51:10,861 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-27 02:51:11,982 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:51:24,431 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-27 02:51:25,434 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:51:42,526 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-27 02:51:43,399 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:51:51,329 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-27 02:51:52,225 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:52:12,490 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-27 02:52:13,435 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:52:18,940 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-27 02:52:19,869 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:53:22,583 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 02:53:23,721 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:53:27,240 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 02:53:28,573 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:53:31,424 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 02:53:32,416 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:53:40,508 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 02:53:41,446 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:53:55,389 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 02:53:56,456 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:54:26,204 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-27 02:54:27,120 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:54:36,895 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-27 02:54:37,803 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:54:45,448 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\urls.py changed, reloading.
+INFO 2025-05-27 02:54:46,393 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:55:03,015 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 02:55:03,449 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+ERROR 2025-05-27 02:55:10,973 log Internal Server Error: /api/profile/avatar/
+ERROR 2025-05-27 02:55:10,974 basehttp "POST /api/profile/avatar/ HTTP/1.1" 500 31
+INFO 2025-05-27 02:56:38,157 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-27 02:56:39,217 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:56:50,770 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\serializers.py changed, reloading.
+INFO 2025-05-27 02:56:51,725 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:57:20,492 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 02:57:21,434 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 02:58:33,986 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 02:58:34,471 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 02:58:56,253 views Starting avatar upload process
+INFO 2025-05-27 02:58:56,254 views Uploading to Cloudinary
+ERROR 2025-05-27 02:58:56,256 views Error uploading avatar: Must supply api_key
+ERROR 2025-05-27 02:58:56,257 log Internal Server Error: /api/profile/avatar/
+ERROR 2025-05-27 02:58:56,257 basehttp "POST /api/profile/avatar/ HTTP/1.1" 500 53
+INFO 2025-05-27 02:59:03,098 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 02:59:03,419 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 02:59:09,420 views Starting avatar upload process
+INFO 2025-05-27 02:59:09,421 views Uploading to Cloudinary
+ERROR 2025-05-27 02:59:09,422 views Error uploading avatar: Must supply api_key
+ERROR 2025-05-27 02:59:09,422 log Internal Server Error: /api/profile/avatar/
+ERROR 2025-05-27 02:59:09,423 basehttp "POST /api/profile/avatar/ HTTP/1.1" 500 53
+INFO 2025-05-27 03:01:21,581 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:01:25,807 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 03:01:26,140 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 03:01:30,919 views Starting avatar upload process
+INFO 2025-05-27 03:01:30,921 views Uploading to Cloudinary
+ERROR 2025-05-27 03:01:30,923 views Error uploading avatar: Must supply api_key
+ERROR 2025-05-27 03:01:30,923 log Internal Server Error: /api/profile/avatar/
+ERROR 2025-05-27 03:01:30,924 basehttp "POST /api/profile/avatar/ HTTP/1.1" 500 53
+INFO 2025-05-27 03:02:33,719 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-27 03:02:34,792 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:02:43,169 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-27 03:02:44,096 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:02:50,198 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-27 03:02:51,157 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:03:26,564 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-27 03:04:54,336 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:04:59,813 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 03:05:00,074 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+ERROR 2025-05-27 03:05:04,934 views Error uploading avatar: name 'cloudinary' is not defined
+ERROR 2025-05-27 03:05:04,935 log Internal Server Error: /api/profile/avatar/
+ERROR 2025-05-27 03:05:04,936 basehttp "POST /api/profile/avatar/ HTTP/1.1" 500 44
+INFO 2025-05-27 03:06:37,442 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 03:06:38,414 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:06:59,361 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\easy_ticket\settings.py changed, reloading.
+INFO 2025-05-27 03:07:00,591 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:07:08,855 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 03:07:09,779 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:07:28,919 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:07:43,513 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:07:51,464 views Starting avatar upload process
+INFO 2025-05-27 03:07:54,024 views Image uploaded successfully to Cloudinary: https://res.cloudinary.com/dh5d7jlyc/image/upload/v1748304457/avatars/rxtmgqs7gqq2oh8h6vhc.jpg
+INFO 2025-05-27 03:07:54,030 basehttp "POST /api/profile/avatar/ HTTP/1.1" 200 126
+INFO 2025-05-27 03:08:04,658 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-27 03:08:07,661 basehttp "PUT /api/profile/ HTTP/1.1" 200 141
+INFO 2025-05-27 03:08:22,006 basehttp "OPTIONS /api/login/ HTTP/1.1" 200 0
+INFO 2025-05-27 03:08:23,176 basehttp "POST /api/login/ HTTP/1.1" 200 606
+INFO 2025-05-27 03:08:25,045 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 03:08:25,268 basehttp "GET /api/profile/ HTTP/1.1" 200 261
+INFO 2025-05-27 03:11:09,275 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 03:11:10,313 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:11:21,700 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 03:11:22,600 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:11:41,912 views Starting avatar upload process
+INFO 2025-05-27 03:11:44,526 views Image uploaded successfully to Cloudinary: https://res.cloudinary.com/dh5d7jlyc/image/upload/v1748304687/avatars/tycxzuikivch0ld3jv6j.jpg
+INFO 2025-05-27 03:11:44,542 basehttp "POST /api/profile/avatar/ HTTP/1.1" 200 126
+INFO 2025-05-27 03:11:53,606 basehttp "POST /api/login/ HTTP/1.1" 200 606
+ERROR 2025-05-27 03:11:55,613 log Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\response.py", line 74, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\renderers.py", line 100, in render
+    ret = json.dumps(
+        data, cls=self.encoder_class,
+        indent=indent, ensure_ascii=self.ensure_ascii,
+        allow_nan=not self.strict, separators=separators
+    )
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\utils\encoders.py", line 66, in default
+    return tuple(item for item in obj)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\utils\encoders.py", line 66, in <genexpr>
+    return tuple(item for item in obj)
+                                  ^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\base.py", line 78, in __iter__
+    for chunk in self.chunks():
+                 ~~~~~~~~~~~^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\base.py", line 55, in chunks
+    self.seek(0)
+    ^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\utils.py", line 45, in <lambda>
+    seek = property(lambda self: self.file.seek)
+                                 ^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\files.py", line 51, in _get_file
+    self._file = self.storage.open(self.name, "rb")
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\storage\base.py", line 22, in open
+    return self._open(name, mode)
+           ~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\storage\filesystem.py", line 81, in _open
+    return File(open(self.path(name), mode))
+                ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\Elnour Tech\\Documents\\GitHub\\booking_project\\Backend\\media\\https:\\res.cloudinary.com\\dh5d7jlyc\\image\\upload\\v1748304687\\avatars\\tycxzuikivch0ld3jv6j.jpg'
+ERROR 2025-05-27 03:11:55,624 basehttp "GET /api/profile/ HTTP/1.1" 500 22061
+ERROR 2025-05-27 03:11:55,943 log Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\response.py", line 74, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\renderers.py", line 100, in render
+    ret = json.dumps(
+        data, cls=self.encoder_class,
+        indent=indent, ensure_ascii=self.ensure_ascii,
+        allow_nan=not self.strict, separators=separators
+    )
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\utils\encoders.py", line 66, in default
+    return tuple(item for item in obj)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\utils\encoders.py", line 66, in <genexpr>
+    return tuple(item for item in obj)
+                                  ^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\base.py", line 78, in __iter__
+    for chunk in self.chunks():
+                 ~~~~~~~~~~~^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\base.py", line 55, in chunks
+    self.seek(0)
+    ^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\utils.py", line 45, in <lambda>
+    seek = property(lambda self: self.file.seek)
+                                 ^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\files.py", line 51, in _get_file
+    self._file = self.storage.open(self.name, "rb")
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\storage\base.py", line 22, in open
+    return self._open(name, mode)
+           ~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\storage\filesystem.py", line 81, in _open
+    return File(open(self.path(name), mode))
+                ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\Elnour Tech\\Documents\\GitHub\\booking_project\\Backend\\media\\https:\\res.cloudinary.com\\dh5d7jlyc\\image\\upload\\v1748304687\\avatars\\tycxzuikivch0ld3jv6j.jpg'
+ERROR 2025-05-27 03:11:55,949 basehttp "GET /api/profile/ HTTP/1.1" 500 22061
+INFO 2025-05-27 03:12:18,659 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 03:12:19,625 autoreload Watching for file changes with StatReloader
+ERROR 2025-05-27 03:12:32,226 log Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\response.py", line 74, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\renderers.py", line 100, in render
+    ret = json.dumps(
+        data, cls=self.encoder_class,
+        indent=indent, ensure_ascii=self.ensure_ascii,
+        allow_nan=not self.strict, separators=separators
+    )
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\utils\encoders.py", line 66, in default
+    return tuple(item for item in obj)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\utils\encoders.py", line 66, in <genexpr>
+    return tuple(item for item in obj)
+                                  ^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\base.py", line 78, in __iter__
+    for chunk in self.chunks():
+                 ~~~~~~~~~~~^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\base.py", line 55, in chunks
+    self.seek(0)
+    ^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\utils.py", line 45, in <lambda>
+    seek = property(lambda self: self.file.seek)
+                                 ^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\files.py", line 51, in _get_file
+    self._file = self.storage.open(self.name, "rb")
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\storage\base.py", line 22, in open
+    return self._open(name, mode)
+           ~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\storage\filesystem.py", line 81, in _open
+    return File(open(self.path(name), mode))
+                ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\Elnour Tech\\Documents\\GitHub\\booking_project\\Backend\\media\\https:\\res.cloudinary.com\\dh5d7jlyc\\image\\upload\\v1748304687\\avatars\\tycxzuikivch0ld3jv6j.jpg'
+ERROR 2025-05-27 03:12:32,243 basehttp "GET /api/profile/ HTTP/1.1" 500 22061
+ERROR 2025-05-27 03:12:32,659 log Internal Server Error: /api/profile/
+Traceback (most recent call last):
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\response.py", line 74, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\renderers.py", line 100, in render
+    ret = json.dumps(
+        data, cls=self.encoder_class,
+        indent=indent, ensure_ascii=self.ensure_ascii,
+        allow_nan=not self.strict, separators=separators
+    )
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\utils\encoders.py", line 66, in default
+    return tuple(item for item in obj)
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\rest_framework\utils\encoders.py", line 66, in <genexpr>
+    return tuple(item for item in obj)
+                                  ^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\base.py", line 78, in __iter__
+    for chunk in self.chunks():
+                 ~~~~~~~~~~~^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\base.py", line 55, in chunks
+    self.seek(0)
+    ^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\utils.py", line 45, in <lambda>
+    seek = property(lambda self: self.file.seek)
+                                 ^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\db\models\fields\files.py", line 51, in _get_file
+    self._file = self.storage.open(self.name, "rb")
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\storage\base.py", line 22, in open
+    return self._open(name, mode)
+           ~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\Elnour Tech\AppData\Local\Programs\Python\Python313\Lib\site-packages\django\core\files\storage\filesystem.py", line 81, in _open
+    return File(open(self.path(name), mode))
+                ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\Elnour Tech\\Documents\\GitHub\\booking_project\\Backend\\media\\https:\\res.cloudinary.com\\dh5d7jlyc\\image\\upload\\v1748304687\\avatars\\tycxzuikivch0ld3jv6j.jpg'
+ERROR 2025-05-27 03:12:32,681 basehttp "GET /api/profile/ HTTP/1.1" 500 22061
+INFO 2025-05-27 03:13:19,648 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\models.py changed, reloading.
+INFO 2025-05-27 03:13:20,614 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:13:35,678 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 03:13:36,603 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:13:50,667 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 03:13:51,614 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:13:59,448 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 03:14:00,351 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:14:09,613 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 03:14:10,684 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:14:17,511 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 03:14:18,425 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:14:20,855 autoreload C:\Users\Elnour Tech\Documents\GitHub\booking_project\Backend\users\views.py changed, reloading.
+INFO 2025-05-27 03:14:21,821 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:15:01,942 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 03:15:06,194 basehttp "GET /api/profile/ HTTP/1.1" 200 367
+INFO 2025-05-27 03:15:06,610 basehttp "GET /api/profile/ HTTP/1.1" 200 367

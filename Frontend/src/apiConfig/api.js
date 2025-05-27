@@ -10,13 +10,15 @@ export const ENDPOINTS = {
   LOGIN: `${API_BASE_URL}login/`,
   GOOGLE_LOGIN: `${API_BASE_URL}login/google/`,
   PROFILE: `${API_BASE_URL}profile/`,
+  UPLOAD_AVATAR: `${API_BASE_URL}profile/avatar/`,
   REQUEST_RESET_PASSWORD: `${API_BASE_URL}password_reset/`,
   RESET_PASSWORD: `${API_BASE_URL}password_reset_confirm/`,
   ADMIN_STATS: `${API_BASE_URL}admin/stats/`,
   ADMIN_USERS: `${API_BASE_URL}admin/users/`,
   ADMIN_EVENTS: `${API_BASE_URL}admin/events/`,
   ADMIN_SETTINGS: `${API_BASE_URL}admin/settings/`,
-  ADMIN_LOGIN: `${API_BASE_URL}admin/login/`, 
+  ADMIN_LOGIN: `${API_BASE_URL}admin/login/`,
+
 };
 
 
