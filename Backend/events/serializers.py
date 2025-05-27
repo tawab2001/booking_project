@@ -18,5 +18,6 @@ class EventSerializer(serializers.ModelSerializer):
         return super().to_internal_value(data)
 
     def create(self, validated_data):
+        # احذف أي مفتاح "user" لو جاي بالغلط من الفرونت أو البوستمان
         validated_data.pop('user', None)
         return Event.objects.create(**validated_data)
