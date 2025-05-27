@@ -23,5 +23,5 @@ class Event(models.Model):
     paymentMethod = models.CharField(max_length=100, blank=True, null=True)
 
 
-    def __str__(self):
+    def _str_(self):
         return self.title
