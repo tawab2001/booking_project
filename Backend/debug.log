@@ -1042,3 +1042,12 @@ INFO 2025-05-27 03:14:21,821 autoreload Watching for file changes with StatReloa
 INFO 2025-05-27 03:15:01,942 autoreload Watching for file changes with StatReloader
 INFO 2025-05-27 03:15:06,194 basehttp "GET /api/profile/ HTTP/1.1" 200 367
 INFO 2025-05-27 03:15:06,610 basehttp "GET /api/profile/ HTTP/1.1" 200 367
+INFO 2025-05-27 15:09:24,347 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-27 15:09:24,350 basehttp "OPTIONS /api/profile/ HTTP/1.1" 200 0
+INFO 2025-05-27 15:09:25,300 basehttp "GET /api/profile/ HTTP/1.1" 200 367
+INFO 2025-05-27 15:09:25,703 basehttp "GET /api/profile/ HTTP/1.1" 200 367
+INFO 2025-05-27 15:09:35,544 basehttp "OPTIONS /api/login/ HTTP/1.1" 200 0
+INFO 2025-05-27 15:09:37,468 basehttp "POST /api/login/ HTTP/1.1" 200 694
+INFO 2025-05-27 15:49:33,661 autoreload Watching for file changes with StatReloader
+INFO 2025-05-27 15:49:45,853 basehttp "GET /api/profile/ HTTP/1.1" 200 367
+INFO 2025-05-27 15:49:46,050 basehttp "GET /api/profile/ HTTP/1.1" 200 367
