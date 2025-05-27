@@ -146,3 +146,29 @@ INFO 2025-05-24 12:03:01,001 autoreload Watching for file changes with StatReloa
 INFO 2025-05-24 12:03:05,776 autoreload D:\booking_project\Backend\events\urls.py changed, reloading.
 INFO 2025-05-24 12:03:07,469 autoreload Watching for file changes with StatReloader
 INFO 2025-05-24 12:03:33,439 autoreload Watching for file changes with StatReloader
+INFO 2025-05-24 12:03:38,014 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 12:03:58,785 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 12:03:58,956 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 12:04:24,220 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 12:04:24,832 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 12:04:52,122 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 12:04:52,597 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 12:23:10,647 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 12:23:11,297 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 12:43:31,990 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 12:43:32,413 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 12:56:23,439 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 12:56:23,579 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 13:02:18,075 basehttp "OPTIONS /api/events/14/ HTTP/1.1" 200 0
+INFO 2025-05-24 13:02:18,230 basehttp "GET /api/events/14/ HTTP/1.1" 200 320
+INFO 2025-05-24 13:02:18,384 basehttp "GET /api/events/14/ HTTP/1.1" 200 320
+INFO 2025-05-24 13:02:24,298 basehttp "GET /api/events/14/ HTTP/1.1" 200 320
+INFO 2025-05-24 13:02:24,438 basehttp "GET /api/events/14/ HTTP/1.1" 200 320
+INFO 2025-05-24 13:02:39,313 basehttp "GET /api/events/14/ HTTP/1.1" 200 320
+INFO 2025-05-24 13:02:39,533 basehttp "GET /api/events/14/ HTTP/1.1" 200 320
+INFO 2025-05-24 13:03:15,312 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 13:03:15,425 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 13:03:19,836 basehttp "GET /api/events/14/ HTTP/1.1" 200 320
+INFO 2025-05-24 13:03:19,964 basehttp "GET /api/events/14/ HTTP/1.1" 200 320
+INFO 2025-05-24 13:03:47,253 basehttp "GET /api/events/ HTTP/1.1" 200 322
+INFO 2025-05-24 13:03:47,519 basehttp "GET /api/events/ HTTP/1.1" 200 322
