@@ -396,8 +396,7 @@ const handleGoogleSuccess = async (credentialResponse) => {
             }
         };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
   const UserTypeSelector = () => (
     <div className="p-4">
       <h2 className="text-center text-white mb-4 fs-4">I want to register as:</h2>
@@ -574,8 +573,7 @@ const handleGoogleSuccess = async (credentialResponse) => {
       </form>
     </div>
   );
-=======
-=======
+
         console.log('Sending Google signup request:', requestData);
 
         const endpoint = userType === 'institution' 
@@ -611,7 +609,7 @@ const handleGoogleSuccess = async (credentialResponse) => {
         setIsSubmitting(false);
     }
 };
->>>>>>> aaa8c9f47842caa96e1a162c5ca022ef7b756e4a
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -645,12 +643,7 @@ const handleGoogleSuccess = async (credentialResponse) => {
       }
     }
   };
-<<<<<<< HEAD
->>>>>>> 8ec029018d2f5e2612c48178633a258315daef69
 
-=======
- 
->>>>>>> aaa8c9f47842caa96e1a162c5ca022ef7b756e4a
   return (
  <div className="container-fluid py-5">
     <div className="row justify-content-center">

@@ -60,10 +60,6 @@ const router = createBrowserRouter([
   }
 ]);
 function App() {
-<<<<<<< HEAD
-
-=======
->>>>>>> aaa8c9f47842caa96e1a162c5ca022ef7b756e4a
   return (
     <RouterProvider router={router} />
   );
