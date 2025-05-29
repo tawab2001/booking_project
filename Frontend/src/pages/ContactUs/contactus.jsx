@@ -240,7 +240,7 @@ const ContactInfo = () => (
           <div 
             className="bg-light w-100 h-100 d-flex align-items-center justify-content-center"
             style={{ 
-              backgroundImage: 'url(https://images.pexels.com/photos/16013312/pexels-photo-16013312/free-photo-of-smartphone-with-google-maps.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)',
+              backgroundImage: 'url(https://maps.app.goo.gl/Msn4uqg2ioiqYcA59)',
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}
@@ -268,7 +268,7 @@ const PageTitle = ({ title, subtitle }) => (
   </Row>
 );
 
-// Main Contact Component
+
 function Contact() {
   return (
     <div className="d-flex flex-column min-vh-100">
