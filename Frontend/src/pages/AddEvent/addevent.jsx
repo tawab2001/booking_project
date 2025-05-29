@@ -34,10 +34,18 @@ const AddEvent = () => {
       cover_image: null
     },
     tickets: {
-      ticketType: "",
-      ticketName: "",
-      quantity: "",
-      price: "",
+      vip: {
+        enabled: false,
+        name: "",
+        quantity: "",
+        price: ""
+      },
+      regular: {
+        enabled: false,
+        name: "",
+        quantity: "",
+        price: ""
+      },
       startSales: "",
       endSales: "",
       paymentMethod: ""
@@ -56,12 +64,25 @@ const AddEvent = () => {
           basicInfo.address?.trim() &&
           basicInfo.venue?.trim()
         );
+
       case 2:
         const schedule = eventData.schedule;
         return schedule.dates.length > 0 && schedule.dates[0].startDate;
+
       case 3:
         const tickets = eventData.tickets;
-        return tickets.ticketName && tickets.quantity && tickets.price;
+        const hasVipTickets = tickets.vip.enabled &&
+          tickets.vip.name &&
+          tickets.vip.quantity &&
+          tickets.vip.price;
+        const hasRegularTickets = tickets.regular.enabled &&
+          tickets.regular.name &&
+          tickets.regular.quantity &&
+          tickets.regular.price;
+        return (hasVipTickets || hasRegularTickets) &&
+          tickets.paymentMethod &&
+          tickets.startSales &&
+          tickets.endSales;
       default:
         return true;
     }
@@ -115,13 +136,27 @@ const AddEvent = () => {
       }
 
       // Ticket Information
-      formData.append('ticketType', eventData.tickets.ticketType);
-      formData.append('ticketName', eventData.tickets.ticketName);
-      formData.append('quantity', eventData.tickets.quantity);
-      formData.append('price', eventData.tickets.price);
+      const ticketsData = {
+        vip: eventData.tickets.vip.enabled ? {
+          name: eventData.tickets.vip.name,
+          quantity: parseInt(eventData.tickets.vip.quantity),
+          price: parseFloat(eventData.tickets.vip.price)
+        } : null,
+        regular: eventData.tickets.regular.enabled ? {
+          name: eventData.tickets.regular.name,
+          quantity: parseInt(eventData.tickets.regular.quantity),
+          price: parseFloat(eventData.tickets.regular.price)
+        } : null,
+        // paymentMethod: eventData.tickets.paymentMethod
+      };
+
+      formData.append('tickets', JSON.stringify(ticketsData));
+
       formData.append('startSales', eventData.tickets.startSales);
       formData.append('endSales', eventData.tickets.endSales);
       formData.append('paymentMethod', eventData.tickets.paymentMethod);
+
+
 
       // Log form data for debugging
       for (let [key, value] of formData.entries()) {
@@ -171,8 +206,8 @@ const AddEvent = () => {
 
         <div className="d-flex justify-content-between mt-4 px-4">
           {currentSection > 1 && (
-            <button 
-              className="btn btn-secondary" 
+            <button
+              className="btn btn-secondary"
               onClick={handlePrevious}
               disabled={isSubmitting}
             >
@@ -180,8 +215,8 @@ const AddEvent = () => {
             </button>
           )}
           {currentSection < 3 && (
-            <button 
-              className="btn btn-warning" 
+            <button
+              className="btn btn-warning"
               onClick={handleNext}
               disabled={isSubmitting}
             >
@@ -189,8 +224,8 @@ const AddEvent = () => {
             </button>
           )}
           {currentSection === 3 && (
-            <button 
-              className="btn btn-success" 
+            <button
+              className="btn btn-success"
               onClick={handleSubmit}
               disabled={isSubmitting}
             >

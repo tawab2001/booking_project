@@ -14,10 +14,10 @@ class Event(models.Model):
 
     dates = models.JSONField(blank=True, null=True)
 
-    ticketType = models.CharField(max_length=100, blank=True, null=True)
-    ticketName = models.CharField(max_length=100, blank=True, null=True)
-    quantity = models.PositiveIntegerField(blank=True, null=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    tickets = models.JSONField(blank=True, null=True)  # New field for ticket types
+
+
+   
     startSales = models.DateTimeField(blank=True, null=True)
     endSales = models.DateTimeField(blank=True, null=True)
     paymentMethod = models.CharField(max_length=100, blank=True, null=True)
