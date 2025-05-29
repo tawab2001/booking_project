@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Card, Button, Row, Col, Form } from 'react-bootstrap';
 import { Minus, Plus, CreditCard } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const TICKET_TYPES = [
   { id: 1, name: 'General Admission', price: 50, description: 'Basic entry to the event', max: 10 },

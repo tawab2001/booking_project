@@ -1,130 +1,11 @@
-// import React, { useState } from "react";
-// import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import { ENDPOINTS } from "../../apiConfig/api";
-// import "bootstrap/dist/css/bootstrap.min.css";
-
-// const Login = () => {
-//   const navigate = useNavigate();
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [error, setError] = useState("");
-//   const [isLoading, setIsLoading] = useState(false);
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setError("");
-
-//     if (!email || !password) {
-//       setError("Please fill in all fields");
-//       return;
-//     }
-
-//     try {
-//       setIsLoading(true);
-//       const response = await axios.post(
-//         ENDPOINTS.LOGIN,
-//         {
-//           email,
-//           password,
-//         },
-//         {
-//           headers: {
-//             "Content-Type": "application/json",
-//             Accept: "application/json",
-//           },
-//         }
-//       );
-
-//       // Store the token in localStorage
-//       localStorage.setItem("token", response.data.token);
-      
-//       // Log success and redirect
-//       console.log("Login successful:", response.data);
-//       navigate("/dashboard"); // or wherever you want to redirect after login
-
-//     } catch (err) {
-//       console.error("Login error:", err.response?.data || err.message);
-//       setError(
-//         err.response?.data?.detail || 
-//         err.response?.data?.message || 
-//         "An error occurred during login"
-//       );
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-
-//   return (
-//     <Container
-//       fluid
-//       className="min-vh-100 d-flex align-items-center justify-content-center bg-light p-0"
-//       style={{ width: "100%", height: "100%" }}
-//     >
-//       <Row className="justify-content-center m-0" style={{ width: "100%" }}>
-//         <Col
-//           xs={11}
-//           sm={8}
-//           md={6}
-//           lg={4}
-//           className="d-flex align-items-center justify-content-center"
-//         >
-//           <div className="p-4 shadow rounded bg-dark text-light w-100">
-//             <div className="text-center mb-4">
-//               <h1 className="text-warning">easyTicket</h1>
-//               <p className="text-muted">Sign in to manage tickets</p>
-//             </div>
-
-//             {error && <Alert variant="danger">{error}</Alert>}
-
-//             <Form onSubmit={handleSubmit} className="d-flex flex-column gap-3">
-//               <Form.Group>
-//                 <Form.Label>Email Address</Form.Label>
-//                 <Form.Control
-//                   type="email"
-//                   placeholder="Enter email address"
-//                   value={email}
-//                   onChange={(e) => setEmail(e.target.value)}
-//                   className="bg-dark text-light border-secondary"
-//                 />
-//               </Form.Group>
-
-//               <Form.Group>
-//                 <Form.Label>Password</Form.Label>
-//                 <Form.Control
-//                   type="password"
-//                   placeholder="Enter password"
-//                   value={password}
-//                   onChange={(e) => setPassword(e.target.value)}
-//                   className="bg-dark text-light border-secondary"
-//                 />
-//               </Form.Group>
-
-//               <Button
-//                 variant="warning"
-//                 type="submit"
-//                 className="w-100 mt-2"
-//                 disabled={isLoading}
-//               >
-//                 {isLoading ? "Processing..." : "Sign In"}
-//               </Button>
-//             </Form>
-//           </div>
-//         </Col>
-//       </Row>
-//     </Container>
-//   );
-// };
-
-// export default Login;
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
+import axiosInstance from "../../apiConfig/axiosConfig";
 import { ENDPOINTS } from "../../apiConfig/api";
-import "bootstrap/dist/css/bootstrap.min.css";
-
+// import "bootstrap/dist/css/bootstrap.min.css";
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -143,7 +24,7 @@ const Login = () => {
     if (error) setError("");
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -154,55 +35,57 @@ const Login = () => {
 
     try {
       setIsLoading(true);
-      const response = await axios.post(  // Changed from get to post
+      const response = await axiosInstance.post(
         ENDPOINTS.LOGIN,
         {
           email: formData.email.trim(),
           password: formData.password
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
         }
       );
 
-      if (response.data.token) {
+      // Check for token in the correct response structure
+      if (response.data?.access) {
         // Store auth data
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.data.access);
+        localStorage.setItem("refresh", response.data.refresh);
         localStorage.setItem("userType", response.data.user_type);
-        
-        console.log("Login successful");
-        
-        // Redirect based on user type
-        const redirectPath = response.data.user_type === 'organizer' 
-          ? '/organizer-dashboard'
-          : '/user-dashboard';
-        navigate(redirectPath);
+
+        if (response.data.user_data) {
+          localStorage.setItem("user_id", response.data.user_data.id);
+          localStorage.setItem("user_data", JSON.stringify(response.data.user_data));
+        }
+
+        console.log("Login successful", response.data); // Add logging
+
+        // تحديث التوجيه بناءً على نوع المستخدم
+        if (response.data.user_type === 'organizer' || response.data.user_data?.is_staff) {
+          console.log("Redirecting to organizer dashboard"); // Add logging
+          navigate('/admindashboard');
+        } else {
+          console.log("Redirecting to home"); // Add logging
+          navigate('/');
+        }
       } else {
-        throw new Error("Authentication failed");
+        throw new Error("Invalid response format");
       }
 
     } catch (err) {
       console.error("Login error:", err.response?.data || err);
-      
+
       let errorMessage = "An error occurred during login";
-      
-      if (err.response?.data) {
-        if (err.response.status === 404) {
-          errorMessage = "This email is not registered. Please sign up first.";
+
+      if (err.response) {
+        if (err.response.status === 500) {
+          errorMessage = "Server error. Please try again later.";
+        } else if (err.response.status === 404) {
+          errorMessage = "This email is not registered.";
         } else if (err.response.status === 401) {
           errorMessage = "Invalid email or password.";
-        } else if (typeof err.response.data === 'object') {
-          errorMessage = err.response.data.error || 
-                        err.response.data.detail ||
-                        err.response.data.message;
-        } else {
-          errorMessage = err.response.data;
+        } else if (err.response.data?.detail) {
+          errorMessage = err.response.data.detail;
         }
       }
-      
+
       setError(errorMessage);
       // Clear password on error
       setFormData(prev => ({
@@ -212,8 +95,56 @@ const Login = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+};
 
+const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+        setIsLoading(true);
+        setError("");
+        
+        // Decode Google token
+        const decodedToken = jwtDecode(credentialResponse.credential);
+        
+        // Send login request
+        const response = await axiosInstance.post(ENDPOINTS.GOOGLE_LOGIN, {
+            credential: credentialResponse.credential,
+            user_info: {
+                email: decodedToken.email,
+                given_name: decodedToken.given_name,
+                family_name: decodedToken.family_name,
+                picture: decodedToken.picture,
+                name: decodedToken.name
+            }
+        });
+
+        // Handle successful login
+        if (response?.data?.access) {
+            // Store auth data
+            localStorage.setItem('token', response.data.access);
+            localStorage.setItem('refresh', response.data.refresh);
+            localStorage.setItem('userType', response.data.user_type);
+
+            // Store user data
+            if (response.data.user_data) {
+                localStorage.setItem('user_data', JSON.stringify(response.data.user_data));
+            }
+
+            // Redirect based on user type
+            navigate(response.data.user_type === 'organizer' ? '/admin' : '/');
+        } else {
+            throw new Error('Invalid response format');
+        }
+    } catch (err) {
+        console.error("Google login error:", err);
+        setError(
+            err.response?.data?.message || 
+            err.response?.data?.error || 
+            "Google login failed. Please try again."
+        );
+    } finally {
+        setIsLoading(false);
+    }
+};
   return (
     <Container
       fluid
@@ -263,10 +194,36 @@ const Login = () => {
                 {isLoading ? "Processing..." : "Sign In"}
               </Button>
 
+              <div className="position-relative my-4">
+                <hr className="text-secondary" />
+                <span className="position-absolute top-50 start-50 translate-middle px-3 bg-dark text-secondary">
+                  or
+                </span>
+              </div>
+
+              <div className="d-flex justify-content-center">
+                <GoogleLogin
+                  onSuccess={handleGoogleSuccess}
+                  onError={() => {
+                    console.log('Login Failed');
+                    setError("Google login failed. Please try again.");
+                  }}
+                  theme="filled_black"
+                  shape="pill"
+                  text="signin_with"
+                  size="large"
+                />
+              </div>
+
               <p className="text-center text-muted mt-3">
                 Don't have an account?{' '}
                 <a href="/signup" className="text-warning text-decoration-none">
                   Sign up
+                </a>
+              </p>
+              <p className="text-center text-muted mt-3">
+                <a href="/reset-password" className="text-warning text-decoration-none">
+                  Forgot Password?
                 </a>
               </p>
             </Form>
