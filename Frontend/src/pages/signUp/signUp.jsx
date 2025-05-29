@@ -645,9 +645,9 @@ const handleGoogleSuccess = async (credentialResponse) => {
   };
 
   return (
- <div className="container-fluid py-5">
-    <div className="row justify-content-center">
-      <div className="col-12 col-md-8 col-lg-6">
+    <div className="container-fluid min-vh-100 d-flex align-items-center justify-content-center py-5">
+    <div className="row justify-content-center w-100">
+      <div className="col-12 col-md-10 col-lg-7 col-xl-6">
         <div className="bg-dark border border-secondary rounded-3 shadow">
           <div className="p-4 text-center border-bottom border-secondary">
             <h1 className="h3 text-warning mb-2">EasyTicket</h1>
@@ -656,18 +656,18 @@ const handleGoogleSuccess = async (credentialResponse) => {
           {!userType ? (
             <UserTypeSelector setUserTypeAndFormData={setUserTypeAndFormData} />
           ) : (
-      <SignUpForm
-        userType={userType}
-        setUserType={setUserType}
-        formData={formData}
-        errors={errors}
-        showPassword={showPassword}
-        setShowPassword={setShowPassword}
-        isSubmitting={isSubmitting}
-        handleChange={handleChange}
-        handleSignupSubmit={handleSubmit}
-        handleGoogleSuccess={handleGoogleSuccess}
-      />
+            <SignUpForm
+              userType={userType}
+              setUserType={setUserType}
+              formData={formData}
+              errors={errors}
+              showPassword={showPassword}
+              setShowPassword={setShowPassword}
+              isSubmitting={isSubmitting}
+              handleChange={handleChange}
+              handleSignupSubmit={handleSubmit}
+              handleGoogleSuccess={handleGoogleSuccess}
+            />
           )}
         </div>
       </div>
