@@ -3,9 +3,11 @@ import { Calendar, MapPin, Search, Clock } from 'lucide-react';
 import { Container, Row, Col, Button, Card, Form, Alert, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import eventApi from '../../apiConfig/eventApi';
+import { placeholderImage } from '../../assets/placeholder';
 
 const EventCard = ({ image, title, date, time, location, onView, onBook }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   return (
     <Card 
@@ -19,7 +21,8 @@ const EventCard = ({ image, title, date, time, location, onView, onBook }) => {
     >
       <Card.Img 
         variant="top" 
-        src={image || 'https://via.placeholder.com/400x200'} 
+        src={imageError ? placeholderImage : (image || placeholderImage)}
+        onError={() => setImageError(true)}
         style={{ height: '200px', objectFit: 'cover' }} 
       />
       <Card.Body>

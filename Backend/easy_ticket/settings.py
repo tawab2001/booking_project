@@ -13,23 +13,33 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path 
 from corsheaders.defaults import default_headers
+from dotenv import load_dotenv
 
-
+# Load environment variables
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Payment settings
+PAYPAL_MODE = "sandbox"  # Change to "live" for production
+PAYPAL_CLIENT_ID = os.getenv('PAcB_TLetjBymVxpDUrOUBtAC3yTGuurN3dLZM7Uf949ODzkzQEbZ3wOO6vm0DJhMMXtmrSl7kxCgerfW')
+PAYPAL_SECRET = os.getenv('ED6-ql-neZyiKzyzuI8JwJUoF5VYS3IZP_fDF3vF-ft135UD_Q_bVN6PKGvxrpAPlTMMc7aeua2jHnfY')
+
+
+# Frontend URL
+FRONTEND_URL = os.getenv('FRONTEND_URL', 'http://localhost:5173')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--q1-$0_bqm5j+0(a7kvs*_d^-2%95o19)2zd^oucdt%nr3=ogz'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure--q1-$0_bqm5j+0(a7kvs*_d^-2%95o19)2zd^oucdt%nr3=ogz')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',') if os.getenv('ALLOWED_HOSTS') else []
 
 
 # Application definition
@@ -224,7 +234,6 @@ EMAIL_HOST_USER = 'ahmedtawab017@gmail.com'
 EMAIL_HOST_PASSWORD = 'vcdt ddnj rxdj dmad'  
 DEFAULT_FROM_EMAIL = 'ahmedtawab017@gmail.com'
 ADMIN_EMAIL = 'ahmedtawab017@gmail.com'
-FRONTEND_URL = 'http://localhost:5173' 
 GOOGLE_CLIENT_ID ="30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com"
 GOOGLE_OAUTH2_CLIENT_ID = "30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com"
 AUTHENTICATION_BACKENDS = (
