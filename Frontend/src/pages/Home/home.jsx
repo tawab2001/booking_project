@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Container, Row, Col, Form, Button, Card, Alert } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import { Calendar, MapPin, Clock, Star, Award, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import eventApi from '../../apiConfig/eventApi';
-// Mock Data - Keep these for static sections
+
+// Mock Data
 const heroImages = [
   'https://images.pexels.com/photos/2263436/pexels-photo-2263436.jpeg',
   'https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg',
@@ -75,28 +75,31 @@ const reviews = [
   }
 ];
 
-// Category options (same as Add Event + 4 more)
-const CATEGORY_OPTIONS = [
-  { value: "music", label: "Music" },
-  { value: "art", label: "Art" },
-  { value: "sports", label: "Sports" },
-  { value: "education", label: "Education" },
-  { value: "technology", label: "Technology" },
-  { value: "business", label: "Business" },
-  { value: "health", label: "Health" },
-  { value: "conference", label: "Conference" }
+const featuredPackages = [
+  {
+    id: 1,
+    title: "Summer Music Festival",
+    description: "A three-day music festival featuring top artists from around the world.",
+    price: "$199",
+    imageUrl: "https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg"
+  },
+  {
+    id: 2,
+    title: "Premier League Finals",
+    description: "Experience the excitement of the Premier League championship match live.",
+    price: "$299",
+    imageUrl: "https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg"
+  },
+  {
+    id: 3,
+    title: "Broadway Theater Weekend",
+    description: "A weekend package including tickets to two top Broadway shows.",
+    price: "$399",
+    imageUrl: "https://images.pexels.com/photos/713149/pexels-photo-713149.jpeg"
+  }
 ];
 
-// Welcome texts for hero slider
-const welcomeTexts = [
-  "Book your spot at the best events easily and quickly!",
-  "Discover music, sports, education, and more events!",
-  "Enjoy fast and secure booking for all occasions.",
-  "Join the largest events community in Egypt.",
-  "Don't miss exclusive offers and special discounts!"
-];
-
-// Components
+// Event Card Component
 const EventCard = ({ image, title, date, time, location, onView, onBook }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -165,17 +168,6 @@ const ReviewCard = ({ text, rating, name }) => {
 function Home() {
   const navigate = useNavigate();
   const [currentImage, setCurrentImage] = useState(0);
-  const [userType, setUserType] = useState(null);
-  const [events, setEvents] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchDate, setSearchDate] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-
-  // Hero welcome text slider
-  const [welcomeIndex, setWelcomeIndex] = useState(0);
-  const welcomeInterval = useRef();
 
   useEffect(() => {
     const storedUserType = localStorage.getItem('userType');
@@ -184,55 +176,18 @@ function Home() {
     const interval = setInterval(() => {
       setCurrentImage((prevIndex) => (prevIndex + 1) % heroImages.length);
     }, 4000);
-
-    fetchEvents();
-
-    welcomeInterval.current = setInterval(() => {
-      setWelcomeIndex((prev) => (prev + 1) % welcomeTexts.length);
-    }, 3500);
-
-    return () => {
-      clearInterval(interval);
-      clearInterval(welcomeInterval.current);
-    };
+    return () => clearInterval(interval);
   }, []);
 
-  const fetchEvents = async () => {
-    try {
-      setIsLoading(true);
-      const response = await eventApi.getAllEvents();
-      setEvents(response);
-      setError(null);
-    } catch (err) {
-      console.error('Failed to fetch events:', err);
-      setError('Failed to load events');
-    } finally {
-      setIsLoading(false);
-    }
+  const handleView = (id) => {
+
   };
-
-  const handleAddEvent = () => navigate('/addEvent');
-  const handleView = (id) => navigate(`/event/${id}`);
-  const handleBook = (id) => navigate(`/booking/${id}`);
-
-  // Filtering events
-  const filteredEvents = events.filter(event => {
-    const categoryMatch = selectedCategory ? event.category === selectedCategory : true;
-    const nameMatch = searchTerm
-      ? event.title?.toLowerCase().includes(searchTerm.toLowerCase())
-      : true;
-    const dateMatch = searchDate
-      ? event.dates && event.dates[0] && event.dates[0].startDate === searchDate
-      : true;
-    return categoryMatch && nameMatch && dateMatch;
-  });
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
       {/* Hero Section */}
       <div
         style={{
-          backgroundImage: `url(${heroImages[currentImage]})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           height: '70vh',
@@ -247,128 +202,62 @@ function Home() {
           height: '100%',
           backgroundColor: 'rgba(0,0,0,0.5)'
         }}></div>
-        
-        <Container style={{ position: 'relative', height: '100%' }} className="d-flex align-items-center justify-content-center">
-          <div className="text-center text-white">
-            <h1 className="display-4 mb-4">Find Your Perfect Event</h1>
-            <h2
-              className="mb-4"
-              style={{
-                minHeight: 48,
-                transition: 'all 0.5s',
-                fontWeight: 'bold'
-              }}
-            >
-              {welcomeTexts[welcomeIndex]}
-            </h2>
-            <Button
-              variant="warning"
-              size="lg"
-              className="rounded-pill px-5 mb-3"
-              onClick={() => window.scrollTo({ top: 600, behavior: 'smooth' })}
-            >
-              Discover Events
-            </Button>
-            {userType === 'organizer' && (
-              <Button 
-                variant="dark" 
-                className="mt-3 ms-2"
-                onClick={handleAddEvent}
-              >
-                Add Event
-              </Button>
-            )}
-          </div>
-        </Container>
-      </div>
-
-      {/* Events Section */}
-      <section style={{ padding: '3rem 0', backgroundColor: '#f8f9fa' }}>
-        <Container>
-          <h2 className="text-center mb-4">
-            <span style={{ color: '#ffc107' }}>🎉</span> Latest Events
-          </h2>
-          {/* Category Filter - single row, scrollable if needed */}
-          <div className="d-flex justify-content-center mb-4 overflow-auto" style={{whiteSpace: 'nowrap'}}>
-            <Button
-              variant={selectedCategory === '' ? "warning" : "outline-warning"}
-              className="rounded-pill px-4 mx-1 flex-shrink-0"
-              onClick={() => setSelectedCategory('')}
-            >
-              All
-            </Button>
-            {CATEGORY_OPTIONS.map((cat) => (
-              <Button
-                key={cat.value}
-                variant={selectedCategory === cat.value ? "warning" : "outline-warning"}
-                className="rounded-pill px-4 mx-1 text-capitalize flex-shrink-0"
-                onClick={() => setSelectedCategory(cat.value)}
-              >
-                {cat.label}
-              </Button>
-            ))}
-          </div>
-          {/* Search & Date Filter */}
-          <Form className="d-flex flex-column flex-md-row gap-3 justify-content-center align-items-center mb-4">
+        <Container style={{ position: 'relative', textAlign: 'center' }}>
+          <h1 className="display-4 mb-4">Find Your Perfect Event</h1>
+          <Form className="d-flex flex-column flex-md-row gap-3 justify-content-center align-items-center">
             <Form.Control
               type="text"
               placeholder="Event Name"
               style={{ maxWidth: '300px' }}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
             />
             <Form.Control
               type="date"
               style={{ maxWidth: '300px' }}
-              value={searchDate}
-              onChange={(e) => setSearchDate(e.target.value)}
             />
+            <Button variant="warning">
+              Search
+            </Button>
           </Form>
-          {isLoading ? (
-            <div className="text-center">
-              <div className="spinner-border text-warning" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
-          ) : error ? (
-            <Alert variant="danger" className="text-center">{error}</Alert>
-          ) : filteredEvents.length === 0 ? (
-            <p className="text-center text-muted">No events found</p>
-          ) : (
-            <Row>
-              {filteredEvents.map((event) => (
-                <Col key={event.id} md={4} className="mb-4">
-                  <EventCard
-                    image={event.cover_image || event.social_image}
-                    title={event.title}
-                    date={event.dates?.[0]?.startDate || 'Date TBA'}
-                    time={event.dates?.[0]?.startTime || 'Time TBA'}
-                    location={event.venue}
-                    onView={() => handleView(event.id)}
-                    onBook={() => handleBook(event.id)}
-                  />
-                </Col>
-              ))}
-            </Row>
-          )}
+          <Button variant="dark" className="mt-3">
+            Add Event
+          </Button>
         </Container>
       </section>
 
-      {/* Special Offers Section */}
-      <section style={{ padding: '3rem 0', backgroundColor: 'white' }}>
+      {/* Events Section */}
+      <section style={{ padding: '3rem 0', backgroundColor: '#f8f9fa' }}>
         <Container>
-          <h2 className="text-center mb-4">
-            <span style={{ color: '#ffc107' }}>🔥</span> Special Offers
+          <h2 className="text-center mb-4" style={{ color: '#212529' }}>
+            <span style={{ color: '#ffc107' }}>🔥</span> Special Offers <span style={{ color: '#ffc107' }}>🔥</span>
           </h2>
           <Row>
             {specialOffers.map((offer) => (
               <Col key={offer.id} md={4} className="mb-4">
-                <Card className="h-100 shadow text-center">
-                  <Card.Body>
-                    <Card.Title className="mb-2">{offer.title}</Card.Title>
-                    <Card.Text>{offer.description}</Card.Text>
-                  </Card.Body>
-                </Card>
+                <EventCard
+                  {...offer}
+                  onView={() => handleView(offer.id)}
+                  onBook={() => handleBook(offer.id)}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      {/* Upcoming Matches Section */}
+      <section style={{ padding: '3rem 0', backgroundColor: '#f8f9fa' }}>
+        <Container>
+          <h2 className="text-center mb-4" style={{ color: '#212529' }}>
+            <span style={{ color: '#ffc107' }}>🏆</span> Upcoming Matches <span style={{ color: '#ffc107' }}>🏆</span>
+          </h2>
+          <Row>
+            {upcomingMatches.map((match) => (
+              <Col key={match.id} md={6} className="mb-4">
+                <EventCard
+                  {...match}
+                  onView={() => handleView(match.id)}
+                  onBook={() => handleBook(match.id)}
+                />
               </Col>
             ))}
           </Row>
