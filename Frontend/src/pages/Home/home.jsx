@@ -4,8 +4,6 @@ import { Calendar, MapPin, Clock, Star, Award, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import eventApi from '../../apiConfig/eventApi';
-
-
 // Mock Data - Keep these for static sections
 const heroImages = [
   'https://images.pexels.com/photos/2263436/pexels-photo-2263436.jpeg',
@@ -439,3 +437,4 @@ function Home() {
 }
 
 export default Home;
+
