@@ -1,6 +1,7 @@
 import './App.css'
 import React from 'react';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Applayout from './components/AppLayout';
 import Home from './pages/Home/home';
 import Login from './pages/Login/login';
@@ -61,7 +62,13 @@ const router = createBrowserRouter([
 ]);
 function App() {
   return (
-    <RouterProvider router={router} />
+    <PayPalScriptProvider options={{
+      "client-id": "AcB_TLetjBymVxpDUrOUBtAC3yTGuurN3dLZM7Uf949ODzkzQEbZ3wOO6vm0DJhMMXtmrSl7kxCgerfW",
+      currency: "USD",
+      intent: "capture"
+    }}>
+      <RouterProvider router={router} />
+    </PayPalScriptProvider>
   );
 }
 export default App;
