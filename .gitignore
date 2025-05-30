@@ -1,2 +1,4 @@
 node_modules
 Backend/debug.log
+__pycache__/
+*.pyc

@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Alert, Card, Nav, Image } from 'react-bootstrap';
 import { Facebook, Instagram, Phone, Upload } from 'lucide-react';
@@ -38,10 +35,24 @@ const Profile = () => {
 
       const response = await axiosInstance.get(ENDPOINTS.PROFILE);
       console.log('Profile API Response:', JSON.stringify(response.data, null, 2));
+      
       if (!response.data || !response.data.id) {
         throw new Error('Invalid profile data received');
       }
-      setUserData(response.data);
+
+      // Get stored social accounts from localStorage
+      const storedSocialAccounts = JSON.parse(localStorage.getItem('social_accounts'));
+      const storedUserData = JSON.parse(localStorage.getItem('user_data'));
+
+      const updatedUserData = {
+        ...response.data,
+        social_accounts: storedSocialAccounts || storedUserData?.social_accounts || response.data.social_accounts || {}
+      };
+
+      setUserData(updatedUserData);
+      // Update localStorage with full user data
+      localStorage.setItem('user_data', JSON.stringify(updatedUserData));
+      
       setError('');
     } catch (error) {
       setError('Failed to load profile data');
@@ -49,8 +60,7 @@ const Profile = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('userType');
         localStorage.removeItem('user_id');
-        localStorage.removeItem('user_data');
-        navigate('/login');
+        // Don't remove user_data and social_accounts here to persist them
       }
       console.error('Profile Error:', error.response?.data || error.message);
     } finally {
@@ -58,48 +68,49 @@ const Profile = () => {
     }
   };
 
-const handleImageUpload = async (e) => {
-  try {
-    const file = e.target.files[0];
-    if (!file) return;
+  const handleImageUpload = async (e) => {
+    try {
+      const file = e.target.files[0];
+      if (!file) return;
 
-    // Validate file type
-    const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
-    if (!validTypes.includes(file.type)) {
-      toast.error('Please upload an image file (JPEG, PNG, GIF)');
-      return;
+      // Validate file type
+      const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      if (!validTypes.includes(file.type)) {
+        toast.error('Please upload an image file (JPEG, PNG, GIF)');
+        return;
+      }
+
+      // Validate file size
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('Image size should be less than 5MB');
+        return;
+      }
+
+      setUploadingImage(true);
+      const formData = new FormData();
+      formData.append('avatar', file);
+
+      const response = await axiosInstance.post(ENDPOINTS.UPLOAD_AVATAR, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (response.data?.avatar) {
+        setUserData(prev => ({
+          ...prev,
+          avatar: response.data.avatar
+        }));
+        toast.success('Profile picture updated successfully!');
+      }
+    } catch (error) {
+      console.error('Image Upload Error:', error);
+      toast.error('Failed to upload image. Please try again.');
+    } finally {
+      setUploadingImage(false);
     }
+  };
 
-    // Validate file size
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error('Image size should be less than 5MB');
-      return;
-    }
-
-    setUploadingImage(true);
-    const formData = new FormData();
-    formData.append('avatar', file);
-
-    const response = await axiosInstance.post(ENDPOINTS.UPLOAD_AVATAR, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-
-    if (response.data?.avatar) {
-      setUserData(prev => ({
-        ...prev,
-        avatar: response.data.avatar
-      }));
-      toast.success('Profile picture updated successfully!');
-    }
-  } catch (error) {
-    console.error('Image Upload Error:', error);
-    toast.error('Failed to upload image. Please try again.');
-  } finally {
-    setUploadingImage(false);
-  }
-};
   const handleDetailsUpdate = async (e) => {
     e.preventDefault();
     try {
@@ -164,35 +175,42 @@ const handleImageUpload = async (e) => {
       const formData = new FormData(e.target);
       const updateData = {
         mobile_number: userData?.mobile_number || '',
-        facebook_url: formData.get('facebook_url')?.trim() || '',
-        instagram_url: formData.get('instagram_url')?.trim() || '',
-        whatsapp_number: formData.get('whatsapp_number')?.trim() || '',
+        social_accounts: {
+          facebook_url: formData.get('facebook_url')?.trim() || '',
+          instagram_url: formData.get('instagram_url')?.trim() || '',
+          whatsapp_number: formData.get('whatsapp_number')?.trim() || '',
+        }
       };
 
-      if (updateData.facebook_url && !updateData.facebook_url.includes('facebook.com')) {
+      if (updateData.social_accounts.facebook_url && !updateData.social_accounts.facebook_url.includes('facebook.com')) {
         setError('Please enter a valid Facebook URL');
         return;
       }
-      if (updateData.instagram_url && !updateData.instagram_url.includes('instagram.com')) {
+      if (updateData.social_accounts.instagram_url && !updateData.social_accounts.instagram_url.includes('instagram.com')) {
         setError('Please enter a valid Instagram URL');
         return;
       }
-      if (updateData.whatsapp_number && !/^\+?\d{10,}$/.test(updateData.whatsapp_number)) {
+      if (updateData.social_accounts.whatsapp_number && !/^\+?\d{10,}$/.test(updateData.social_accounts.whatsapp_number)) {
         setError('Please enter a valid WhatsApp number');
         return;
       }
 
-      Object.keys(updateData).forEach((key) => {
-        if (!updateData[key]) {
-          delete updateData[key];
-        }
-      });
+      // Store social accounts in localStorage
+      localStorage.setItem('social_accounts', JSON.stringify(updateData.social_accounts));
 
       console.log('Sending Social Update Data:', JSON.stringify(updateData, null, 2));
       const response = await axiosInstance.put(ENDPOINTS.PROFILE, updateData);
 
       if (response.data) {
-        setUserData((prev) => ({ ...prev, ...response.data.data }));
+        const updatedUserData = {
+          ...userData,
+          ...response.data.data,
+          social_accounts: updateData.social_accounts
+        };
+        setUserData(updatedUserData);
+        // Update localStorage with full user data
+        localStorage.setItem('user_data', JSON.stringify(updatedUserData));
+        
         toast.success('Social Accounts updated successfully!', {
           position: 'top-right',
           autoClose: 3000,
