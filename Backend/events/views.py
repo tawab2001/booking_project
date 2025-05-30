@@ -102,4 +102,4 @@ class EventViewSet(generics.GenericAPIView):
                         available_quantity=int(details.get('quantity', 0)),
                     )
 
-            return Response(serializer.data)
+        return Response(serializer.data)

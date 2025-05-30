@@ -21,6 +21,9 @@ import AdminRoute from './admin/AdminRoute';
 import UsersManagement from './admin/UsersManagement';
 import AdminLogin from './admin/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard/admindashboard';
+import ErrorBoundary from './components/ErrorBoundary';
+import EventManagement from './admin/eventmangement';
+
 
 
 
@@ -28,6 +31,7 @@ const router = createBrowserRouter([
   {
     path: "",  
     element: <Applayout/>,
+    errorElement: <ErrorBoundary />,
     children: [
       { path: "", element: <Home/> },
       { path: "home", element: <Home/> },
@@ -52,12 +56,16 @@ const router = createBrowserRouter([
         <DashboardLayout />
       </AdminRoute>
     ),
+    errorElement: <ErrorBoundary />,
     children: [
       { path: "", element: <Dashboard /> },
       { path: "users", element: <UsersManagement /> },
-      // { path: "events", element: <EventsManagement /> },
-      // { path: "settings", element: <Settings /> }
+      { path: "events", element: <EventManagement /> },
     ]
+  },
+  {
+    path: '*',
+    element: <ErrorBoundary />
   }
 ]);
 function App() {

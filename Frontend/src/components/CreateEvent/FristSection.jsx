@@ -105,7 +105,7 @@ const FirstSection = ({ data, setData }) => {
                       value={data.basicInfo.category || ''}
                       onChange={handleChange}
                       className={styles.firstSectionInput}
-                    >
+                      />
                       <option value="">Select Category</option>
                       <option value="music">Music</option>
                       <option value="art">Art</option>

@@ -430,7 +430,7 @@ function Booking() {
             </Card.Body>
           </Card>
         ) : (
-          <div className="bg-white rounded-3 shadow-sm overflow-hidden">
+        <div className="bg-white rounded-3 shadow-sm overflow-hidden">
             <div 
               className="position-relative text-white text-center py-5"
               style={{
@@ -477,7 +477,7 @@ function Booking() {
                 <p className="lead mb-0">{event?.venue}</p>
                 <p className="mb-0">{event?.dates?.[0]?.startDate} at {event?.dates?.[0]?.startTime}</p>
               </div>
-            </div>
+          </div>
 
             {error && (
               <Alert variant="danger" className="mx-4 mt-4" onClose={() => setError(null)} dismissible>
@@ -485,16 +485,16 @@ function Booking() {
               </Alert>
             )}
 
-            <Form noValidate validated={validated} onSubmit={handleConfirmBooking}>
-              <div className="p-4">
-                <section className="mb-5">
-                  <h2 className="mb-4">Select Tickets</h2>
+          <Form noValidate validated={validated} onSubmit={handleConfirmBooking}>
+            <div className="p-4">
+              <section className="mb-5">
+                <h2 className="mb-4">Select Tickets</h2>
                   {ticketTypes.map((ticketType) => (
-                    <div key={ticketType.id} className="mb-3">
-                      <Row>
-                        <Col md={7}>
-                          <h5>{ticketType.name}</h5>
-                          <p className="text-muted">{ticketType.description}</p>
+                  <div key={ticketType.id} className="mb-3">
+                    <Row>
+                      <Col md={7}>
+                        <h5>{ticketType.name}</h5>
+                        <p className="text-muted">{ticketType.description}</p>
                           <h6>
                             ${Number(ticketType.price).toFixed(2)}
                             <span className="text-muted"> + ${Number(ticketType.surcharge).toFixed(2)} surcharge</span>
@@ -502,51 +502,51 @@ function Booking() {
                           <small className="text-muted">
                             Available: {ticketType.available_quantity} | Max per person: {ticketType.max_per_person}
                           </small>
-                        </Col>
-                        <Col md={5} className="d-flex align-items-center justify-content-end">
-                          <div className="d-flex align-items-center">
-                            <Button
-                              variant="outline-warning"
-                              onClick={() => handleQuantityChange(ticketType.id, -1)}
-                              disabled={!bookingData.tickets.find(t => t.id === ticketType.id)?.quantity}
-                              className="rounded-circle"
-                            >
-                              <Minus />
-                            </Button>
-                            <Form.Control
-                              type="number"
-                              min="0"
+                      </Col>
+                      <Col md={5} className="d-flex align-items-center justify-content-end">
+                        <div className="d-flex align-items-center">
+                          <Button
+                            variant="outline-warning"
+                            onClick={() => handleQuantityChange(ticketType.id, -1)}
+                            disabled={!bookingData.tickets.find(t => t.id === ticketType.id)?.quantity}
+                            className="rounded-circle"
+                          >
+                            <Minus />
+                          </Button>
+                          <Form.Control
+                            type="number"
+                            min="0"
                               max={Math.min(ticketType.max_per_person, ticketType.available_quantity)}
-                              value={bookingData.tickets.find(t => t.id === ticketType.id)?.quantity || 0}
+                            value={bookingData.tickets.find(t => t.id === ticketType.id)?.quantity || 0}
                               onChange={(e) => handleQuantityChange(ticketType.id, e.target.value)}
-                              className="mx-2 text-center"
-                              style={{ width: '60px' }}
-                            />
-                            <Button
-                              variant="outline-warning"
-                              onClick={() => handleQuantityChange(ticketType.id, 1)}
-                              disabled={
+                            className="mx-2 text-center"
+                            style={{ width: '60px' }}
+                          />
+                          <Button
+                            variant="outline-warning"
+                            onClick={() => handleQuantityChange(ticketType.id, 1)}
+                            disabled={
                                 (bookingData.tickets.find(t => t.id === ticketType.id)?.quantity || 0) >= 
                                 Math.min(ticketType.max_per_person, ticketType.available_quantity)
-                              }
-                              className="rounded-circle"
-                            >
-                              <Plus />
-                            </Button>
-                          </div>
-                        </Col>
-                      </Row>
-                    </div>
-                  ))}
-                </section>
+                            }
+                            className="rounded-circle"
+                          >
+                            <Plus />
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
+                  </div>
+                ))}
+              </section>
 
                 {event?.paymentMethod && (
-                  <section className="mb-5">
+              <section className="mb-5">
                     <h2 className="mb-4">Payment Method</h2>
-                    <div
+                <div
                       className="border rounded-3 p-3 mb-3 border-warning bg-warning bg-opacity-10"
-                    >
-                      <div className="d-flex align-items-center">
+                >
+                  <div className="d-flex align-items-center">
                         {PAYMENT_ICONS[event.paymentMethod] && (
                           <span className="me-2">
                             {React.createElement(PAYMENT_ICONS[event.paymentMethod], {
@@ -557,7 +557,7 @@ function Booking() {
                           </span>
                         )}
                         <h5 className="mb-0">{event.paymentMethod}</h5>
-                      </div>
+                  </div>
                     </div>
                   </section>
                 )}
@@ -572,21 +572,21 @@ function Booking() {
                         <h4>${Number(bookingData.totalAmount).toFixed(2)}</h4>
                       </Col>
                     </Row>
-                  </div>
-                </section>
+                </div>
+              </section>
 
-                <div className="d-flex justify-content-end">
+              <div className="d-flex justify-content-end">
                   <Button 
                     variant="warning" 
                     type="submit" 
                     disabled={!bookingData.tickets.some(ticket => ticket.quantity > 0)}
                   >
-                    Confirm Booking
-                  </Button>
-                </div>
+                  Confirm Booking
+                </Button>
               </div>
-            </Form>
-          </div>
+            </div>
+          </Form>
+        </div>
         )}
       </Container>
     </div>
