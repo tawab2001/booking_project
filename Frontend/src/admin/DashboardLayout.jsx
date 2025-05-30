@@ -1,54 +1,134 @@
-import React from 'react';
-import { Container, Row, Col, Nav } from 'react-bootstrap';
-import { Outlet, Link, useNavigate } from 'react-router-dom';
-import { BarChart, Users, Calendar, Settings, LogOut } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Nav } from 'react-bootstrap';
+import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
+import { 
+  LayoutDashboard, 
+  Users, 
+  Calendar, 
+  LogOut, 
+  Menu, 
+  X,
+  Briefcase
+} from 'lucide-react';
+import './DashboardLayout.css';
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
   
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 992);
+      if (window.innerWidth >= 992) {
+        setShowSidebar(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      setShowSidebar(false);
+    }
+  }, [location, isMobile]);
+
   const handleLogout = () => {
     localStorage.clear();
     navigate('/login');
   };
 
-  return (
-    <Container fluid className="p-0">
-      <Row className="g-0">
-        {/* Sidebar */}
-        <Col md={2} className="bg-dark min-vh-100">
-          <div className="p-3">
-            <h4 className="text-warning mb-4">Admin Panel</h4>
-            <Nav className="flex-column gap-2">
-              <Nav.Link as={Link} to="/admin" className="text-white d-flex align-items-center gap-2">
-                <BarChart size={18} /> Dashboard
-              </Nav.Link>
-              <Nav.Link as={Link} to="/admin/users" className="text-white d-flex align-items-center gap-2">
-                <Users size={18} /> Users
-              </Nav.Link>
-              <Nav.Link as={Link} to="/admin/events" className="text-white d-flex align-items-center gap-2">
-                <Calendar size={18} /> Events
-              </Nav.Link>
-              <Nav.Link as={Link} to="/admin/settings" className="text-white d-flex align-items-center gap-2">
-                <Settings size={18} /> Settings
-              </Nav.Link>
-              <button 
-                onClick={handleLogout}
-                className="btn btn-link text-white text-decoration-none d-flex align-items-center gap-2 ps-2"
-              >
-                <LogOut size={18} /> Logout
-              </button>
-            </Nav>
-          </div>
-        </Col>
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
 
-        {/* Main Content */}
-        <Col md={10} className="bg-light">
-          <div className="p-4">
-            <Outlet />
-          </div>
-        </Col>
-      </Row>
-    </Container>
+  const Logo = () => (
+    <div className="sidebar-title">
+      <Briefcase />
+      <span>Admin Panel</span>
+    </div>
+  );
+
+  const NavLinks = () => (
+    <Nav className="flex-column">
+      <Nav.Link 
+        as={Link} 
+        to="/admin" 
+        className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}
+        onClick={() => isMobile && setShowSidebar(false)}
+      >
+        <LayoutDashboard />
+        <span>Dashboard</span>
+      </Nav.Link>
+      <Nav.Link 
+        as={Link} 
+        to="/admin/users" 
+        className={`nav-link ${location.pathname === '/admin/users' ? 'active' : ''}`}
+        onClick={() => isMobile && setShowSidebar(false)}
+      >
+        <Users />
+        <span>Users</span>
+      </Nav.Link>
+      <Nav.Link 
+        as={Link} 
+        to="/admin/events" 
+        className={`nav-link ${location.pathname === '/admin/events' ? 'active' : ''}`}
+        onClick={() => isMobile && setShowSidebar(false)}
+      >
+        <Calendar />
+        <span>Events</span>
+      </Nav.Link>
+    </Nav>
+  );
+
+  return (
+    <div className="dashboard-wrapper">
+      {/* Mobile Header */}
+      <header className="mobile-header">
+        <div className="mobile-title">
+          <Briefcase />
+          <span>Admin Panel</span>
+        </div>
+        <button 
+          className="toggle-button"
+          onClick={toggleSidebar}
+          aria-label="Toggle navigation"
+        >
+          {showSidebar ? <X /> : <Menu />}
+        </button>
+      </header>
+
+      {/* Sidebar */}
+      <aside className={`sidebar ${showSidebar ? 'show' : ''}`}>
+        <div className="sidebar-content">
+          <Logo />
+          <NavLinks />
+          <button 
+            onClick={handleLogout}
+            className="logout-button"
+          >
+            <LogOut />
+            <span>Logout</span>
+          </button>
+        </div>
+      </aside>
+
+      {/* Overlay */}
+      <div 
+        className={`sidebar-overlay ${showSidebar ? 'show' : ''}`}
+        onClick={() => setShowSidebar(false)}
+      />
+
+      {/* Main Content */}
+      <div className="dashboard-container">
+        <main className="main-content">
+          <Outlet />
+        </main>
+      </div>
+    </div>
   );
 };
 

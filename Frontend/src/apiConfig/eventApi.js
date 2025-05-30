@@ -87,7 +87,14 @@ const eventApi = {
 
     getAllEvents: async (params = {}) => {
         try {
-            const response = await api.get('events/', { params });
+            // Convert params object to URLSearchParams
+            const queryString = Object.keys(params)
+                .filter(key => params[key] !== undefined && params[key] !== '')
+                .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+                .join('&');
+
+            const url = `events/${queryString ? `?${queryString}` : ''}`;
+            const response = await api.get(url);
             return response.data;
         } catch (error) {
             console.error('Get events error:', error);

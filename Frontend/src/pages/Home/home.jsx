@@ -87,6 +87,9 @@ const CATEGORY_OPTIONS = [
   { value: "conference", label: "Conference" }
 ];
 
+// Replace placeholder URL with a base64 SVG placeholder
+const defaultPlaceholder = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjZGVkZWRlIi8+CiAgICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjNTU1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2UgQXZhaWxhYmxlPC90ZXh0Pgo8L3N2Zz4=";
+
 // Components
 const EventCard = ({ image, title, date, time, location, onView, onBook }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -103,7 +106,7 @@ const EventCard = ({ image, title, date, time, location, onView, onBook }) => {
     >
       <Card.Img 
         variant="top" 
-        src={image || 'https://via.placeholder.com/400x200'} 
+        src={image || defaultPlaceholder} 
         style={{ height: '200px', objectFit: 'cover' }} 
       />
       <Card.Body>
@@ -156,14 +159,13 @@ function Home() {
   const [currentImage, setCurrentImage] = useState(0);
   const [userType, setUserType] = useState(null);
   const [events, setEvents] = useState([]);
+  const [allEvents, setAllEvents] = useState([]); // Store all events
+  const [filteredEvents, setFilteredEvents] = useState([]); // Store filtered events
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Category filter state
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedCity, setSelectedCity] = useState('');
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
 
   // Welcome texts for the hero slider
   const welcomeTexts = [
@@ -196,41 +198,46 @@ function Home() {
     };
   }, []);
 
-  // استبدل fetchEvents ليأخذ الفلاتر كـ arguments
-  const fetchEvents = async (filters = {}) => {
+  // Fetch events only once
+  const fetchEvents = async () => {
     try {
       setIsLoading(true);
-      // بناء الكويري سترينج حسب الفلاتر المختارة
-      const params = new URLSearchParams();
-      if (filters.category) params.append('category', filters.category);
-      if (filters.city) params.append('city', filters.city);
-      if (filters.minPrice) params.append('min_price', filters.minPrice);
-      if (filters.maxPrice) params.append('max_price', filters.maxPrice);
-
-      // عدل endpoint حسب باك اندك (مثلاً: /api/events)
-      const response = await eventApi.getAllEvents(params.toString());
-      setEvents(response);
+      const response = await eventApi.getAllEvents();
+      setAllEvents(response); // Store all events
+      setEvents(response); // Initialize events with all events
       setError(null);
     } catch (err) {
+      console.error('Error fetching events:', err);
       setError('Failed to load events');
     } finally {
       setIsLoading(false);
     }
   };
 
-  // استدعاء الفetch عند تغيير أي فلتر
+  // Filter events when category changes
   useEffect(() => {
-    fetchEvents({
-      category: selectedCategory,
-      city: selectedCity,
-      minPrice,
-      maxPrice,
-    });
-  }, [selectedCategory, selectedCity, minPrice, maxPrice]);
+    if (selectedCategory === '') {
+      setEvents(allEvents); // Show all events when no category is selected
+    } else {
+      const filtered = allEvents.filter(event => 
+        event.category?.toLowerCase() === selectedCategory.toLowerCase()
+      );
+      setEvents(filtered);
+    }
+  }, [selectedCategory, allEvents]);
+
+  // Fetch events only once when component mounts
+  useEffect(() => {
+    fetchEvents();
+  }, []);
 
   const handleAddEvent = () => navigate('/addEvent');
   const handleView = (id) => navigate(`/event/${id}`);
   const handleBook = (id) => navigate(`/booking/${id}`);
+
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+  };
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
@@ -289,7 +296,7 @@ function Home() {
             <Button
               variant={selectedCategory === '' ? "warning" : "outline-warning"}
               className="rounded-pill px-4 mx-1 flex-shrink-0"
-              onClick={() => setSelectedCategory('')}
+              onClick={() => handleCategorySelect('')}
             >
               All
             </Button>
@@ -298,58 +305,13 @@ function Home() {
                 key={cat.value}
                 variant={selectedCategory === cat.value ? "warning" : "outline-warning"}
                 className="rounded-pill px-4 mx-1 text-capitalize flex-shrink-0"
-                onClick={() => setSelectedCategory(cat.value)}
+                onClick={() => handleCategorySelect(cat.value)}
               >
                 {cat.label}
               </Button>
             ))}
           </div>
-          {/* Filters: City, Price */}
-          <div className="d-flex flex-wrap justify-content-center gap-2 mb-4">
-            {/* City Filter */}
-            <select
-              className="form-select w-auto"
-              value={selectedCity}
-              onChange={e => setSelectedCity(e.target.value)}
-            >
-              <option value="">All Cities</option>
-              {/* يمكنك تعديل القيم حسب المدن المتوفرة لديك */}
-              <option value="Cairo">Cairo</option>
-              <option value="Alexandria">Alexandria</option>
-              <option value="Giza">Giza</option>
-              <option value="Aswan">Aswan</option>
-              <option value="Luxor">Luxor</option>
-            </select>
-            {/* Min Price */}
-            <input
-              type="number"
-              className="form-control w-auto"
-              placeholder="Min Price"
-              value={minPrice}
-              onChange={e => setMinPrice(e.target.value)}
-              min={0}
-            />
-            {/* Max Price */}
-            <input
-              type="number"
-              className="form-control w-auto"
-              placeholder="Max Price"
-              value={maxPrice}
-              onChange={e => setMaxPrice(e.target.value)}
-              min={0}
-            />
-            {/* Reset Filters Button */}
-            <Button
-              variant="outline-secondary"
-              onClick={() => {
-                setSelectedCity('');
-                setMinPrice('');
-                setMaxPrice('');
-              }}
-            >
-              Reset
-            </Button>
-          </div>
+
           {isLoading ? (
             <div className="text-center">
               <div className="spinner-border text-warning" role="status">
@@ -359,7 +321,7 @@ function Home() {
           ) : error ? (
             <Alert variant="danger" className="text-center">{error}</Alert>
           ) : events.length === 0 ? (
-            <p className="text-center text-muted">No events found</p>
+            <p className="text-center text-muted">No events found for this category</p>
           ) : (
             <Row>
               {events.map((event) => (

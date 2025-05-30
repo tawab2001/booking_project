@@ -17,7 +17,6 @@ import logging
 from django.utils import timezone
 from dateutil.relativedelta import relativedelta
 
-
 logger = logging.getLogger(__name__)
 
 # class AdminStatsView(APIView):
