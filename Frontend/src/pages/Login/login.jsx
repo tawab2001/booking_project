@@ -154,7 +154,7 @@ const handleGoogleSuccess = async (credentialResponse) => {
         <Col xs={11} sm={8} md={6} lg={4}>
           <div className="p-4 shadow rounded bg-dark text-light w-100">
             <div className="text-center mb-4">
-              <h1 className="text-warning">easyTicket</h1>
+              <h1 className="text-warning">EasyTicket</h1>
               <p className="text-muted">Sign in to manage tickets</p>
             </div>
 
@@ -215,7 +215,7 @@ const handleGoogleSuccess = async (credentialResponse) => {
                 />
               </div>
 
-              <p className="text-center text-muted mt-3">
+              <p className="text-center text-white mt-3">
                 Don't have an account?{' '}
                 <a href="/signup" className="text-warning text-decoration-none">
                   Sign up

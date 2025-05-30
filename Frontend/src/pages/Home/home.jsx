@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Card, Alert } from 'react-bootstrap';
+import React, { useState, useEffect, useRef } from 'react';
+import { Container, Row, Col, Button, Card, Alert } from 'react-bootstrap';
 import { Calendar, MapPin, Clock, Star, Award, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import eventApi from '../../apiConfig/eventApi';
 
-
-// Mock Data - Keep these for static sections
+// Mock Data
 const heroImages = [
   'https://images.pexels.com/photos/2263436/pexels-photo-2263436.jpeg',
   'https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg',
@@ -77,6 +76,17 @@ const reviews = [
   }
 ];
 
+const CATEGORY_OPTIONS = [
+  { value: "music", label: "Music" },
+  { value: "art", label: "Art" },
+  { value: "sports", label: "Sports" },
+  { value: "education", label: "Education" },
+  { value: "technology", label: "Technology" },
+  { value: "business", label: "Business" },
+  { value: "health", label: "Health" },
+  { value: "conference", label: "Conference" }
+];
+
 // Components
 const EventCard = ({ image, title, date, time, location, onView, onBook }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -121,26 +131,24 @@ const EventCard = ({ image, title, date, time, location, onView, onBook }) => {
   );
 };
 
-const ReviewCard = ({ text, rating, name }) => {
-  return (
-    <Card className="h-100 shadow-sm">
-      <Card.Body>
-        <p className="mb-3">"{text}"</p>
-        <div className="d-flex mb-2">
-          {[...Array(rating)].map((_, i) => (
-            <Star
-              key={i}
-              style={{ color: '#ffc107' }}
-              size={18}
-              fill="currentColor"
-            />
-          ))}
-        </div>
-        <p className="mb-0 fw-bold">— {name}</p>
-      </Card.Body>
-    </Card>
-  );
-};
+const ReviewCard = ({ text, rating, name }) => (
+  <Card className="h-100 shadow-sm">
+    <Card.Body>
+      <p className="mb-3">"{text}"</p>
+      <div className="d-flex mb-2">
+        {[...Array(rating)].map((_, i) => (
+          <Star
+            key={i}
+            style={{ color: '#ffc107' }}
+            size={18}
+            fill="currentColor"
+          />
+        ))}
+      </div>
+      <p className="mb-0 fw-bold">— {name}</p>
+    </Card.Body>
+  </Card>
+);
 
 // Main Component
 function Home() {
@@ -150,8 +158,23 @@ function Home() {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchDate, setSearchDate] = useState('');
+
+  // Category filter state
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+
+  // Welcome texts for the hero slider
+  const welcomeTexts = [
+    "Book your spot at the best events easily and quickly!",
+    "Discover music, sports, education, and more events!",
+    "Enjoy fast and secure booking for all occasions.",
+    "Join the largest events community in Egypt.",
+    "Don't miss exclusive offers and special discounts!"
+  ];
+  const [welcomeIndex, setWelcomeIndex] = useState(0);
+  const welcomeInterval = useRef();
 
   useEffect(() => {
     const storedUserType = localStorage.getItem('userType');
@@ -161,34 +184,53 @@ function Home() {
       setCurrentImage((prevIndex) => (prevIndex + 1) % heroImages.length);
     }, 4000);
 
+    welcomeInterval.current = setInterval(() => {
+      setWelcomeIndex((prev) => (prev + 1) % welcomeTexts.length);
+    }, 3500);
+
     fetchEvents();
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      clearInterval(welcomeInterval.current);
+    };
   }, []);
 
-  const fetchEvents = async () => {
+  // استبدل fetchEvents ليأخذ الفلاتر كـ arguments
+  const fetchEvents = async (filters = {}) => {
     try {
       setIsLoading(true);
-      const response = await eventApi.getAllEvents();
+      // بناء الكويري سترينج حسب الفلاتر المختارة
+      const params = new URLSearchParams();
+      if (filters.category) params.append('category', filters.category);
+      if (filters.city) params.append('city', filters.city);
+      if (filters.minPrice) params.append('min_price', filters.minPrice);
+      if (filters.maxPrice) params.append('max_price', filters.maxPrice);
+
+      // عدل endpoint حسب باك اندك (مثلاً: /api/events)
+      const response = await eventApi.getAllEvents(params.toString());
       setEvents(response);
       setError(null);
     } catch (err) {
-      console.error('Failed to fetch events:', err);
       setError('Failed to load events');
     } finally {
       setIsLoading(false);
     }
   };
 
+  // استدعاء الفetch عند تغيير أي فلتر
+  useEffect(() => {
+    fetchEvents({
+      category: selectedCategory,
+      city: selectedCity,
+      minPrice,
+      maxPrice,
+    });
+  }, [selectedCategory, selectedCity, minPrice, maxPrice]);
+
   const handleAddEvent = () => navigate('/addEvent');
   const handleView = (id) => navigate(`/event/${id}`);
   const handleBook = (id) => navigate(`/booking/${id}`);
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // Implement search functionality here
-    console.log('Searching:', { searchTerm, searchDate });
-  };
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
@@ -214,31 +256,24 @@ function Home() {
         <Container style={{ position: 'relative', height: '100%' }} className="d-flex align-items-center justify-content-center">
           <div className="text-center text-white">
             <h1 className="display-4 mb-4">Find Your Perfect Event</h1>
-            <Form onSubmit={handleSearch} className="d-flex flex-column flex-md-row gap-3 justify-content-center align-items-center">
-              <Form.Control
-                type="text"
-                placeholder="Event Name"
-                style={{ maxWidth: '300px' }}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <Form.Control
-                type="date"
-                style={{ maxWidth: '300px' }}
-                value={searchDate}
-                onChange={(e) => setSearchDate(e.target.value)}
-              />
-              <Button variant="warning" type="submit">Search</Button>
-            </Form>
-            {userType === 'organizer' && (
-              <Button 
-                variant="dark" 
-                className="mt-3"
-                onClick={handleAddEvent}
-              >
-                Add Event
-              </Button>
-            )}
+            <h2
+              className="mb-4"
+              style={{
+                minHeight: 48,
+                transition: 'all 0.5s',
+                fontWeight: 'bold'
+              }}
+            >
+              {welcomeTexts[welcomeIndex]}
+            </h2>
+            <Button
+              variant="warning"
+              size="lg"
+              className="rounded-pill px-5"
+              onClick={() => window.scrollTo({ top: 600, behavior: 'smooth' })}
+            >
+              Discover Events
+            </Button>
           </div>
         </Container>
       </div>
@@ -249,6 +284,72 @@ function Home() {
           <h2 className="text-center mb-4">
             <span style={{ color: '#ffc107' }}>🎉</span> Latest Events
           </h2>
+          {/* Category Pills */}
+          <div className="d-flex justify-content-center mb-4 overflow-auto" style={{whiteSpace: 'nowrap'}}>
+            <Button
+              variant={selectedCategory === '' ? "warning" : "outline-warning"}
+              className="rounded-pill px-4 mx-1 flex-shrink-0"
+              onClick={() => setSelectedCategory('')}
+            >
+              All
+            </Button>
+            {CATEGORY_OPTIONS.map((cat) => (
+              <Button
+                key={cat.value}
+                variant={selectedCategory === cat.value ? "warning" : "outline-warning"}
+                className="rounded-pill px-4 mx-1 text-capitalize flex-shrink-0"
+                onClick={() => setSelectedCategory(cat.value)}
+              >
+                {cat.label}
+              </Button>
+            ))}
+          </div>
+          {/* Filters: City, Price */}
+          <div className="d-flex flex-wrap justify-content-center gap-2 mb-4">
+            {/* City Filter */}
+            <select
+              className="form-select w-auto"
+              value={selectedCity}
+              onChange={e => setSelectedCity(e.target.value)}
+            >
+              <option value="">All Cities</option>
+              {/* يمكنك تعديل القيم حسب المدن المتوفرة لديك */}
+              <option value="Cairo">Cairo</option>
+              <option value="Alexandria">Alexandria</option>
+              <option value="Giza">Giza</option>
+              <option value="Aswan">Aswan</option>
+              <option value="Luxor">Luxor</option>
+            </select>
+            {/* Min Price */}
+            <input
+              type="number"
+              className="form-control w-auto"
+              placeholder="Min Price"
+              value={minPrice}
+              onChange={e => setMinPrice(e.target.value)}
+              min={0}
+            />
+            {/* Max Price */}
+            <input
+              type="number"
+              className="form-control w-auto"
+              placeholder="Max Price"
+              value={maxPrice}
+              onChange={e => setMaxPrice(e.target.value)}
+              min={0}
+            />
+            {/* Reset Filters Button */}
+            <Button
+              variant="outline-secondary"
+              onClick={() => {
+                setSelectedCity('');
+                setMinPrice('');
+                setMaxPrice('');
+              }}
+            >
+              Reset
+            </Button>
+          </div>
           {isLoading ? (
             <div className="text-center">
               <div className="spinner-border text-warning" role="status">

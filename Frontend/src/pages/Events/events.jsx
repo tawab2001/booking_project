@@ -93,6 +93,16 @@ const Events = () => {
     // TODO: Implement search functionality
   };
 
+  // فلترة الأحداث حسب البحث
+  const filteredEvents = events.filter((event) => {
+    const search = searchTerm.toLowerCase();
+    return (
+      event.title?.toLowerCase().includes(search) ||
+      event.venue?.toLowerCase().includes(search) ||
+      event.dates?.[0]?.startDate?.toLowerCase().includes(search)
+    );
+  });
+
   return (
     <Container className="py-5">
       <div className="text-center mb-4">
@@ -127,11 +137,11 @@ const Events = () => {
         </div>
       ) : error ? (
         <Alert variant="danger" className="text-center">{error}</Alert>
-      ) : events.length === 0 ? (
+      ) : filteredEvents.length === 0 ? (
         <p className="text-center text-muted">No events found</p>
       ) : (
         <Row>
-          {events.map((event) => (
+          {filteredEvents.map((event) => (
             <Col key={event.id} md={4} className="mb-4">
               <EventCard
                 image={event.cover_image || event.social_image}

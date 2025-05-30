@@ -396,6 +396,184 @@ const handleGoogleSuccess = async (credentialResponse) => {
             }
         };
 
+
+  const UserTypeSelector = () => (
+    <div className="p-4">
+      <h2 className="text-center text-white mb-4 fs-4">I want to register as:</h2>
+      <div className="row g-4">
+        <div className="col-md-6">
+          <button
+            onClick={() => setUserType('institution')}
+            className="btn btn-outline-warning w-100 h-100 p-4 d-flex flex-column align-items-center"
+          >
+            <div className="bg-dark rounded-circle p-4 mb-3">
+              <Building2 className="text-warning" size={32} />
+            </div>
+            <h3 className="fs-5 text-white mb-2">Institution</h3>
+            <p className="text-secondary small text-center mb-0">
+              Register your company or organization
+            </p>
+          </button>
+        </div>
+        <div className="col-md-6">
+          <button
+            onClick={() => setUserType('individual')}
+            className="btn btn-outline-warning w-100 h-100 p-4 d-flex flex-column align-items-center"
+          >
+            <div className="bg-dark rounded-circle p-4 mb-3">
+              <User className="text-warning" size={32} />
+            </div>
+            <h3 className="fs-5 text-white mb-2">Individual</h3>
+            <p className="text-secondary small text-center mb-0">
+              Register as an individual user
+            </p>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  const SignUpForm = () => (
+    <div className="p-4">
+      <button
+        onClick={() => setUserType(null)}
+        className="btn btn-link text-warning p-0 mb-4 text-decoration-none"
+      >
+        <ArrowLeft size={16} className="me-2" />
+        Back
+      </button>
+
+      <form onSubmit={handleSubmit}>
+        {userType === 'institution' ? (
+          <>
+            <FormField 
+              label="Institution Name" 
+              name="name" 
+              type="text" 
+              value={formData.name} 
+              error={errors.name} 
+              // onChange={handleChange} 
+            />
+            <FormField 
+              label="Email Address" 
+              name="email" 
+              type="email" 
+              value={formData.email} 
+              error={errors.email} 
+              // onChange={handleChange} 
+            />
+            <FormField 
+              label="Password" 
+              name="password" 
+              type={showPassword ? "text" : "password"} 
+              value={formData.password} 
+              error={errors.password} 
+              // onChange={handleChange}
+            >
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="btn btn-link position-absolute end-0 top-50 translate-middle-y text-secondary"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </FormField>
+            <FormField 
+              label="Confirm Password" 
+              name="confirmPassword" 
+              type={showPassword ? "text" : "password"} 
+              value={formData.confirmPassword} 
+              error={errors.confirmPassword} 
+              // onChange={handleChange} 
+            />
+            <FormField 
+              label="Country" 
+              name="country" 
+              type="text" 
+              value={formData.country} 
+              error={errors.country} 
+              // onChange={handleChange} 
+            />
+            <div className="mb-3">
+              <label className="form-label text-white">Company Description</label>
+              <textarea
+                name="companyDescription"
+                value={formData.companyDescription}
+                onChange={handleChange}
+                className="form-control bg-dark text-white border-secondary"
+                rows={4}
+              ></textarea>
+            </div>
+          </>
+        ) : (
+          <>
+            <FormField 
+              label="Username" 
+              name="username" 
+              type="text" 
+              value={formData.username} 
+              error={errors.username} 
+              onChange={handleChange} 
+            />
+            <FormField 
+              label="Email Address" 
+              name="email" 
+              type="email" 
+              value={formData.email} 
+              error={errors.email} 
+              onChange={handleChange} 
+            />
+            <FormField 
+              label="Password" 
+              name="password" 
+              type={showPassword ? "text" : "password"} 
+              value={formData.password} 
+              error={errors.password} 
+              onChange={handleChange}
+            >
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="btn btn-link position-absolute end-0 top-50 translate-middle-y text-secondary"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </FormField>
+            <FormField 
+              label="Confirm Password" 
+              name="confirmPassword" 
+              type={showPassword ? "text" : "password"} 
+              value={formData.confirmPassword} 
+              error={errors.confirmPassword} 
+              onChange={handleChange} 
+            />
+            <FormField 
+              label="Phone Number" 
+              name="phoneNumber" 
+              type="tel" 
+              value={formData.phoneNumber} 
+              error={errors.phoneNumber} 
+              onChange={handleChange} 
+            />
+          </>
+        )}
+
+        <div className="mt-4">
+          <button type="submit" className="btn btn-warning w-100">
+            Create Account
+          </button>
+        </div>
+
+        <p className="text-center text-secondary small mt-4">
+          Already have an account?{' '}
+          <a href="/login" className="text-warning text-decoration-none">
+            Sign in
+          </a>
+        </p>
+      </form>
+    </div>
+  );
+
         console.log('Sending Google signup request:', requestData);
 
         const endpoint = userType === 'institution' 
@@ -431,6 +609,7 @@ const handleGoogleSuccess = async (credentialResponse) => {
         setIsSubmitting(false);
     }
 };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -464,11 +643,11 @@ const handleGoogleSuccess = async (credentialResponse) => {
       }
     }
   };
- 
+
   return (
- <div className="container-fluid py-5">
-    <div className="row justify-content-center">
-      <div className="col-12 col-md-8 col-lg-6">
+    <div className="container-fluid min-vh-100 d-flex align-items-center justify-content-center py-5">
+    <div className="row justify-content-center w-100">
+      <div className="col-12 col-md-10 col-lg-7 col-xl-6">
         <div className="bg-dark border border-secondary rounded-3 shadow">
           <div className="p-4 text-center border-bottom border-secondary">
             <h1 className="h3 text-warning mb-2">EasyTicket</h1>
@@ -477,18 +656,18 @@ const handleGoogleSuccess = async (credentialResponse) => {
           {!userType ? (
             <UserTypeSelector setUserTypeAndFormData={setUserTypeAndFormData} />
           ) : (
-      <SignUpForm
-        userType={userType}
-        setUserType={setUserType}
-        formData={formData}
-        errors={errors}
-        showPassword={showPassword}
-        setShowPassword={setShowPassword}
-        isSubmitting={isSubmitting}
-        handleChange={handleChange}
-        handleSignupSubmit={handleSubmit}
-        handleGoogleSuccess={handleGoogleSuccess}
-      />
+            <SignUpForm
+              userType={userType}
+              setUserType={setUserType}
+              formData={formData}
+              errors={errors}
+              showPassword={showPassword}
+              setShowPassword={setShowPassword}
+              isSubmitting={isSubmitting}
+              handleChange={handleChange}
+              handleSignupSubmit={handleSubmit}
+              handleGoogleSuccess={handleGoogleSuccess}
+            />
           )}
         </div>
       </div>
