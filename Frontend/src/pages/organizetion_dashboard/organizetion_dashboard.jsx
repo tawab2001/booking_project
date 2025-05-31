@@ -18,6 +18,39 @@ const OrganizerDashboard = () => {
   const [events, setEvents] = useState([]);
   const navigate = useNavigate();
 
+  // Custom styles
+  const styles = {
+    badge: {
+      padding: '0.5em 0.75em',
+      fontWeight: 500
+    },
+    alert: {
+      borderRadius: '8px',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    },
+    alertSuccess: {
+      borderLeft: '4px solid #198754'
+    },
+    alertDanger: {
+      borderLeft: '4px solid #dc3545'
+    },
+    modal: {
+      content: {
+        borderRadius: '12px'
+      },
+      header: {
+        borderBottom: '1px solid #dee2e6',
+        backgroundColor: '#f8f9fa',
+        borderRadius: '12px 12px 0 0'
+      },
+      footer: {
+        borderTop: '1px solid #dee2e6',
+        backgroundColor: '#f8f9fa',
+        borderRadius: '0 0 12px 12px'
+      }
+    }
+  };
+
   useEffect(() => {
     fetchDashboardData();
   }, []);
@@ -110,6 +143,7 @@ const OrganizerDashboard = () => {
           dismissible 
           onClose={() => setSuccessMessage(null)}
           className="mb-4 d-flex align-items-center"
+          style={{ ...styles.alert, ...styles.alertSuccess }}
         >
           <CheckCircle className="me-2" size={20} />
           {successMessage}
@@ -123,6 +157,7 @@ const OrganizerDashboard = () => {
           dismissible 
           onClose={() => setError(null)} 
           className="mb-4 d-flex align-items-center"
+          style={{ ...styles.alert, ...styles.alertDanger }}
         >
           <AlertCircle className="me-2" size={20} />
           <div>
@@ -167,8 +202,10 @@ const OrganizerDashboard = () => {
             <Card.Title>Recent Events</Card.Title>
             <Button 
               variant="primary" 
-              onClick={() => navigate('/organizer/events/create')}
+              onClick={() => navigate('/addEvent')}
+              className="d-flex align-items-center"
             >
+              <i className="bi bi-plus-circle me-2"></i>
               Create New Event
             </Button>
           </div>
@@ -242,7 +279,7 @@ const OrganizerDashboard = () => {
 
       {/* Delete Confirmation Modal */}
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton style={styles.modal.header}>
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -250,7 +287,7 @@ const OrganizerDashboard = () => {
           <p className="fw-bold text-danger">{eventToDelete?.title}</p>
           <p className="mb-0">This action cannot be undone.</p>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer style={styles.modal.footer}>
           <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
             Cancel
           </Button>
@@ -262,42 +299,6 @@ const OrganizerDashboard = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      <style jsx>{`
-        .badge {
-          padding: 0.5em 0.75em;
-          font-weight: 500;
-        }
-        
-        .alert {
-          border-radius: 8px;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .alert-success {
-          border-left: 4px solid #198754;
-        }
-        
-        .alert-danger {
-          border-left: 4px solid #dc3545;
-        }
-        
-        .modal-content {
-          border-radius: 12px;
-        }
-        
-        .modal-header {
-          border-bottom: 1px solid #dee2e6;
-          background-color: #f8f9fa;
-          border-radius: 12px 12px 0 0;
-        }
-        
-        .modal-footer {
-          border-top: 1px solid #dee2e6;
-          background-color: #f8f9fa;
-          border-radius: 0 0 12px 12px;
-        }
-      `}</style>
     </Container>
   );
 };

@@ -44,7 +44,10 @@ api.interceptors.response.use(
         console.error('[API Error]', {
             status: error.response?.status,
             data: error.response?.data,
-            url: error.config?.url
+            message: error.response?.data?.message,
+            url: error.config?.url,
+            method: error.config?.method,
+            requestData: error.config?.data
         });
 
         if (error.response?.status === 401) {
@@ -64,6 +67,11 @@ api.interceptors.response.use(
 
         if (error.response?.status === 404) {
             return Promise.reject(new Error('The requested resource was not found'));
+        }
+
+        if (error.response?.status === 500) {
+            console.error('Server Error Details:', error.response?.data);
+            return Promise.reject(new Error('Server error occurred. Please try again later.'));
         }
 
         return Promise.reject(new Error(error.response?.data?.message || error.message || 'An error occurred'));
@@ -117,26 +125,54 @@ const organizerApi = {
     },
 
     // Update an existing event
-    updateEvent: async (eventId, formData) => {
+    updateEvent: async (eventId, eventData) => {
         try {
-            const data = formData instanceof FormData ? formData : new FormData();
-            
-            if (!(formData instanceof FormData)) {
-                Object.entries(formData).forEach(([key, value]) => {
-                    if (value !== null && value !== undefined) {
-                        if (typeof value === 'object') {
-                            data.append(key, JSON.stringify(value));
-                        } else {
-                            data.append(key, value);
-                        }
-                    }
-                });
-            }
+            console.log('Updating event with data:', eventData); // Debug log
 
-            return await api.put(`organizer/events/${eventId}/`, data);
+            // Convert the eventData to FormData
+            const formData = new FormData();
+            
+            // Append basic fields
+            formData.append('title', eventData.title);
+            formData.append('description', eventData.description);
+            formData.append('venue', eventData.venue);
+            formData.append('address', eventData.address);
+            formData.append('category', eventData.category);
+            formData.append('phone', eventData.phone);
+            formData.append('email', eventData.email);
+            
+            // Append dates as JSON string
+            formData.append('dates', JSON.stringify(eventData.dates));
+            
+            // Append sales dates
+            formData.append('startSales', eventData.startSales);
+            formData.append('endSales', eventData.endSales);
+            
+            // Append tickets as JSON string
+            formData.append('tickets', JSON.stringify(eventData.tickets));
+
+            const response = await api.put(`/organizer/events/${eventId}/`, formData);
+            console.log('Update event response:', response); // Debug log
+            
+            if (!response) {
+                throw new Error('Invalid response from server');
+            }
+            
+            return response;
         } catch (error) {
-            console.error('Update event error:', error);
-            throw error;
+            console.error('Error updating event:', {
+                message: error.message,
+                response: error.response?.data,
+                status: error.response?.status,
+                data: error.config?.data
+            });
+            
+            // Throw a more specific error message
+            if (error.response?.status === 500) {
+                throw new Error('Server error occurred while updating the event. Please try again later.');
+            }
+            
+            throw error.response?.data?.message || error.message || 'Failed to update event';
         }
     },
 
@@ -160,6 +196,20 @@ const organizerApi = {
         } catch (error) {
             console.error('Get dashboard stats error:', error);
             throw error;
+        }
+    },
+
+    getEventDetails: async (eventId) => {
+        try {
+            const response = await api.get(`/organizer/events/${eventId}/`);
+            if (!response.data) {
+                throw new Error('No data received from server');
+            }
+            // Return the data directly without nested .data property
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching event details:', error);
+            throw error.response?.data?.message || 'Failed to fetch event details';
         }
     }
 };

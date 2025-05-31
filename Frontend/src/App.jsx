@@ -23,6 +23,7 @@ import AdminDashboard from './pages/organizetion_dashboard/organizetion_dashboar
 import ErrorBoundary from './components/ErrorBoundary';
 import EventManagement from './admin/eventmangement';
 import ProtectedRoute from './components/ProtectedRoute';
+import EditEvent from './pages/organizetion_dashboard/EditEvent';
 
 const router = createBrowserRouter([
   {
@@ -65,8 +66,12 @@ const router = createBrowserRouter([
         element: <ResetPassword/> 
       },
       {
-        path: "admindashboard", 
+        path: "admindashboard",
         element: <ProtectedRoute><AdminDashboard/></ProtectedRoute>
+      },
+      {
+        path: "organizer/events/edit/:eventId",
+        element: <ProtectedRoute><EditEvent/></ProtectedRoute>
       }
     ]
   },
