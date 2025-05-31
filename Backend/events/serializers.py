@@ -24,13 +24,53 @@
     
 
 from rest_framework import serializers
-from .models import Event
-import json
+from .models import Event, TicketType, Ticket
+
+class TicketTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TicketType
+        fields = ['id', 'name', 'price', 'available_quantity', 'description']
+
+class TicketSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = ['id', 'final_price', 'purchase_date', 'is_used']
 
 class EventSerializer(serializers.ModelSerializer):
+    ticket_types = TicketTypeSerializer(many=True, read_only=True)
+    total_tickets_sold = serializers.SerializerMethodField()
+    total_revenue = serializers.SerializerMethodField()
+    min_price = serializers.SerializerMethodField()
+    max_price = serializers.SerializerMethodField()
+
     class Meta:
         model = Event
-        fields = '__all__'
+        fields = [
+            'id', 'title', 'description', 'phone', 'email', 
+            'address', 'venue', 'category', 'social_image', 
+            'cover_image', 'dates', 'tickets', 'startSales', 
+            'endSales', 'paymentMethod', 'created_at', 'updated_at',
+            'is_active', 'organizer', 'ticket_types', 'total_tickets_sold',
+            'total_revenue', 'min_price', 'max_price'
+        ]
+        read_only_fields = ['created_at', 'updated_at']
+
+    def get_total_tickets_sold(self, obj):
+        return sum(ticket_type.tickets.count() for ticket_type in obj.ticket_types.all())
+
+    def get_total_revenue(self, obj):
+        total = 0
+        for ticket_type in obj.ticket_types.all():
+            total += sum(ticket.final_price for ticket in ticket_type.tickets.all())
+        return round(total, 2)
+
+    def get_min_price(self, obj):
+        prices = [tt.price for tt in obj.ticket_types.all()]
+        return min(prices) if prices else 0
+
+    def get_max_price(self, obj):
+        prices = [tt.price for tt in obj.ticket_types.all()]
+        return max(prices) if prices else 0
 
     def to_internal_value(self, data):
         # Handle dates JSON field

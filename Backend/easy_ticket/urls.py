@@ -31,9 +31,9 @@ from rest_framework.views import APIView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('users.urls')),
-    path('api/admin/', include('admin_dashboard.urls')),  # Changed from "admincustom/"
-    path('api/events/', include('events.urls')),
-    path('api/', include('tickets.urls')),  # Added tickets URLs
+    path('api/', include('events.urls')),
+    path('api/', include('tickets.urls')),
+    path('api/admin/', include('admin_dashboard.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

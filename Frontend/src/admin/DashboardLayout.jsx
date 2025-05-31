@@ -35,7 +35,7 @@ const DashboardLayout = () => {
       setShowSidebar(false);
     }
   }, [location, isMobile]);
-
+  
   const handleLogout = () => {
     localStorage.clear();
     navigate('/login');
@@ -101,19 +101,19 @@ const DashboardLayout = () => {
         </button>
       </header>
 
-      {/* Sidebar */}
+        {/* Sidebar */}
       <aside className={`sidebar ${showSidebar ? 'show' : ''}`}>
         <div className="sidebar-content">
           <Logo />
           <NavLinks />
-          <button 
-            onClick={handleLogout}
+              <button 
+                onClick={handleLogout}
             className="logout-button"
-          >
+              >
             <LogOut />
             <span>Logout</span>
-          </button>
-        </div>
+              </button>
+          </div>
       </aside>
 
       {/* Overlay */}
@@ -122,13 +122,13 @@ const DashboardLayout = () => {
         onClick={() => setShowSidebar(false)}
       />
 
-      {/* Main Content */}
+        {/* Main Content */}
       <div className="dashboard-container">
         <main className="main-content">
-          <Outlet />
+            <Outlet />
         </main>
       </div>
-    </div>
+          </div>
   );
 };
 

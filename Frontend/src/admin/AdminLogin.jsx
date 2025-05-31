@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Alert, Container, Card } from 'react-bootstrap';
 import axiosInstance from '../apiConfig/axiosConfig';
 import { useNavigate } from 'react-router-dom';
+import { ENDPOINTS } from '../apiConfig/api';
 
 const AdminLogin = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -14,7 +15,7 @@ const AdminLogin = () => {
         setError('');
         try {
             setIsLoading(true);
-            const response = await axiosInstance.post('/admin/login/', {
+            const response = await axiosInstance.post(ENDPOINTS.ADMIN_LOGIN, {
                 email: formData.email,
                 password: formData.password
             });

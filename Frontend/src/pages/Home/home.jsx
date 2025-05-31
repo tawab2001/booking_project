@@ -182,6 +182,9 @@ function Home() {
     const storedUserType = localStorage.getItem('userType');
     setUserType(storedUserType);
 
+    // Mark that user has visited home page
+    localStorage.setItem('hasVisitedHome', 'true');
+
     const interval = setInterval(() => {
       setCurrentImage((prevIndex) => (prevIndex + 1) % heroImages.length);
     }, 4000);

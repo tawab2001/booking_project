@@ -28,6 +28,25 @@ class TicketTypeViewSet(viewsets.ModelViewSet):
             return [IsAuthenticated()]
         return [AllowAny()]
 
+    def create(self, request, *args, **kwargs):
+        # Check if a ticket type with the same name already exists for this event
+        event_id = request.data.get('event')
+        name = request.data.get('name')
+        
+        if event_id and name:
+            existing_ticket_type = TicketType.objects.filter(
+                event_id=event_id,
+                name__iexact=name
+            ).first()
+            
+            if existing_ticket_type:
+                # Return the existing ticket type instead of creating a new one
+                serializer = self.get_serializer(existing_ticket_type)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+        # If no existing ticket type found, create a new one
+        return super().create(request, *args, **kwargs)
+
 class TicketViewSet(viewsets.ModelViewSet):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer

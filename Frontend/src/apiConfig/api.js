@@ -1,5 +1,3 @@
-
-
 export const API_BASE_URL = "http://127.0.0.1:8000/api/";
 
 export const ENDPOINTS = {
@@ -16,9 +14,13 @@ export const ENDPOINTS = {
   ADMIN_STATS: `${API_BASE_URL}admin/stats/`,
   ADMIN_USERS: `${API_BASE_URL}admin/users/`,
   ADMIN_EVENTS: `${API_BASE_URL}admin/events/`,
-  ADMIN_SETTINGS: `${API_BASE_URL}admin/settings/`,
+  // ADMIN_SETTINGS: `${API_BASE_URL}admin/settings/`,
   ADMIN_LOGIN: `${API_BASE_URL}admin/login/`,
-
+  // Organizer Dashboard Endpoints
+  ORGANIZER_EVENTS: `${API_BASE_URL}organizer/events/`,
+  ORGANIZER_STATS: `${API_BASE_URL}organizer/stats/`,
+  ORGANIZER_EVENT_DETAIL: (eventId) => `${API_BASE_URL}organizer/events/${eventId}/`,
+  ORGANIZER_EVENT_CREATE: `${API_BASE_URL}organizer/events/create/`,
 };
 
 

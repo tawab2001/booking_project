@@ -50,13 +50,41 @@ function Booking() {
         paymentMethod: eventData.paymentMethod
       }));
 
-      let processedTicketTypes = ticketTypesData;
-      if ((!ticketTypesData || ticketTypesData.length === 0) && eventData.tickets) {
+      // If we have ticket types data, use it directly
+      if (ticketTypesData && ticketTypesData.length > 0) {
+        const processedData = ticketTypesData.map(type => ({
+          ...type,
+          price: parseFloat(type.price || 0),
+          final_price: parseFloat(type.final_price || type.price || 0) + parseFloat(type.surcharge || 2.00),
+          surcharge: parseFloat(type.surcharge || 2.00),
+          available_quantity: parseInt(type.available_quantity || 0),
+          max_per_person: parseInt(type.max_per_person || 1)
+        }));
+        
+        setTicketTypes(processedData);
+        setBookingData(prev => ({
+          ...prev,
+          tickets: processedData.map(type => ({
+            id: type.id,
+            name: type.name,
+            price: type.price,
+            final_price: type.final_price,
+            quantity: 0
+          }))
+        }));
+      } 
+      // Only create ticket types if none exist and event has ticket data
+      else if (eventData.tickets) {
         try {
-          const createdTypes = await Promise.all(
-            Object.entries(eventData.tickets)
-              .filter(([_, details]) => details !== null)
-              .map(async ([type, details]) => {
+          const existingTypes = new Set(ticketTypesData.map(type => type.name.toLowerCase()));
+          const ticketTypesToCreate = Object.entries(eventData.tickets)
+            .filter(([type, details]) => 
+              details !== null && !existingTypes.has(type.toLowerCase())
+            );
+
+          if (ticketTypesToCreate.length > 0) {
+            const createdTypes = await Promise.all(
+              ticketTypesToCreate.map(async ([type, details]) => {
                 try {
                   const response = await ticketApi.createTicketType({
                     event: eventData.id,
@@ -72,35 +100,37 @@ function Booking() {
                   return null;
                 }
               })
-          );
+            );
 
-          processedTicketTypes = createdTypes.filter(type => type !== null);
+            const processedData = createdTypes
+              .filter(type => type !== null)
+              .map(type => ({
+                ...type,
+                price: parseFloat(type.price || 0),
+                final_price: parseFloat(type.final_price || type.price || 0) + parseFloat(type.surcharge || 2.00),
+                surcharge: parseFloat(type.surcharge || 2.00),
+                available_quantity: parseInt(type.available_quantity || 0),
+                max_per_person: parseInt(type.max_per_person || 1)
+              }));
+
+            setTicketTypes(processedData);
+            setBookingData(prev => ({
+              ...prev,
+              tickets: processedData.map(type => ({
+                id: type.id,
+                name: type.name,
+                price: type.price,
+                final_price: type.final_price,
+                quantity: 0
+              }))
+            }));
+          }
         } catch (error) {
           console.error('Failed to create ticket types:', error);
-          processedTicketTypes = [];
+          setError('Failed to load ticket types. Please try again later.');
         }
       }
-
-      const processedData = processedTicketTypes.map(type => ({
-        ...type,
-        price: parseFloat(type.price || 0),
-        final_price: parseFloat(type.final_price || type.price || 0) + parseFloat(type.surcharge || 2.00),
-        surcharge: parseFloat(type.surcharge || 2.00),
-        available_quantity: parseInt(type.available_quantity || 0),
-        max_per_person: parseInt(type.max_per_person || 1)
-      }));
       
-      setTicketTypes(processedData);
-      setBookingData(prev => ({
-        ...prev,
-        tickets: processedData.map(type => ({
-          id: type.id,
-          name: type.name,
-          price: type.price,
-          final_price: type.final_price,
-          quantity: 0
-        }))
-      }));
       setLoading(false);
     } catch (err) {
       console.error('Error fetching data:', err);

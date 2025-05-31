@@ -514,12 +514,13 @@ class GoogleOrganizerSignupView(APIView):
 
     def post(self, request):
         try:
-            logger.info('Processing Google user signup...')
-            credential = request.data.get('token')  # Changed from 'credential'
-            user_data = request.data.get('user')    # Changed from 'user_info'
+            logger.info('Processing Google organizer signup...')
+            credential = request.data.get('token')
+            user_data = request.data.get('user')
+            company_data = request.data.get('company')
 
-            if not credential or not user_data:
-                logger.error('Missing token or user data')
+            if not credential or not user_data or not company_data:
+                logger.error('Missing token, user data, or company data')
                 return Response({
                     'status': 'error',
                     'message': 'Missing required data'
@@ -535,8 +536,9 @@ class GoogleOrganizerSignupView(APIView):
 
                 email = idinfo['email']
                 
-                # Create user if not exists
+                # Create user and company in a transaction
                 with transaction.atomic():
+                    # Create or get user
                     user, created = CustomUser.objects.get_or_create(
                         email=email,
                         defaults={
@@ -545,14 +547,28 @@ class GoogleOrganizerSignupView(APIView):
                             'last_name': user_data.get('last_name', ''),
                             'profile_picture': user_data.get('profile_picture', ''),
                             'google_id': idinfo['sub'],
-                            'is_active': True
+                            'is_active': True,
+                            'is_organizer': True
                         }
                     )
 
                     if created:
                         logger.info(f'Created new user: {email}')
                     else:
-                        logger.info(f'Found existing user: {email}')
+                        # Update existing user
+                        user.is_organizer = True
+                        user.save()
+                        logger.info(f'Updated existing user: {email}')
+
+                    # Create or update organizer company
+                    company, _ = OrganizerCompany.objects.get_or_create(
+                        user=user,
+                        defaults={
+                            'company_name': company_data.get('company_name', ''),
+                            'description': company_data.get('description', ''),
+                            'country': company_data.get('country', '')
+                        }
+                    )
 
                 # Generate tokens
                 refresh = RefreshToken.for_user(user)
@@ -561,14 +577,17 @@ class GoogleOrganizerSignupView(APIView):
                     'message': 'Signup successful',
                     'access': str(refresh.access_token),
                     'refresh': str(refresh),
-                    'user_type': 'user',
+                    'user_type': 'organizer',
                     'user_data': {
                         'id': user.id,
                         'email': user.email,
                         'username': user.username,
                         'first_name': user.first_name,
                         'last_name': user.last_name,
-                        'profile_picture': user.profile_picture
+                        'profile_picture': user.profile_picture,
+                        'company_name': company.company_name,
+                        'description': company.description,
+                        'country': company.country
                     }
                 })
 
