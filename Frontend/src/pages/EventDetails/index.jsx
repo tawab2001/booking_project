@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams  ,useNavigate} from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Badge, Button, Alert, Spinner } from 'react-bootstrap';
-import { Calendar, MapPin, Clock, Phone, Mail, Award } from 'lucide-react';
+import { Calendar, MapPin, Clock, Phone, Mail } from 'lucide-react';
 import eventApi from '../../apiConfig/eventApi';
 
 const EventDetails = () => {
@@ -57,9 +57,20 @@ const EventDetails = () => {
         );
     }
 
+    const formatDate = (dateString) => {
+        if (!dateString) return 'Not specified';
+        return new Date(dateString).toLocaleString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    };
+
     return (
         <div className="bg-light min-vh-100">
-            {/* Hero Section with Cover Image */}
+            {/* Hero Section */}
             <div 
                 className="position-relative" 
                 style={{ 
@@ -107,7 +118,7 @@ const EventDetails = () => {
                             </div>
                         </div>
 
-                        {/* Organizer Info */}
+                        {/* Contact Info */}
                         <div className="bg-white rounded shadow-sm p-4">
                             <h4 className="mb-4">Contact Information</h4>
                             <div className="d-flex align-items-center mb-3">
@@ -123,25 +134,75 @@ const EventDetails = () => {
 
                     {/* Sidebar */}
                     <Col lg={4}>
-                        {/* Booking Card */}
                         <div className="bg-white rounded shadow-sm p-4 sticky-top" style={{ top: '2rem' }}>
                             <h4 className="mb-3">Ticket Information</h4>
-                            <div className="mb-3">
-                                <div className="d-flex justify-content-between mb-2">
-                                    <span>Price:</span>
-                                    <span className="fw-bold">${event.tickets?.price}</span>
+                            
+                            {/* VIP Tickets */}
+                            {event.tickets?.vip && (
+                                <div className="mb-4">
+                                    <h5 className="text-warning mb-3">VIP Tickets</h5>
+                                    <div className="d-flex justify-content-between mb-2">
+                                        <span>Name:</span>
+                                        <span>{event.tickets.vip.name}</span>
+                                    </div>
+                                    <div className="d-flex justify-content-between mb-2">
+                                        <span>Price:</span>
+                                        <span className="fw-bold">${event.tickets.vip.price}</span>
+                                    </div>
+                                    <div className="d-flex justify-content-between mb-2">
+                                        <span>Available:</span>
+                                        <span>{event.tickets.vip.quantity} tickets</span>
+                                    </div>
                                 </div>
+                            )}
+
+                            {/* Regular Tickets */}
+                            {event.tickets?.regular && (
+                                <div className="mb-4">
+                                    <h5 className="text-secondary mb-3">Regular Tickets</h5>
+                                    <div className="d-flex justify-content-between mb-2">
+                                        <span>Name:</span>
+                                        <span>{event.tickets.regular.name}</span>
+                                    </div>
+                                    <div className="d-flex justify-content-between mb-2">
+                                        <span>Price:</span>
+                                        <span className="fw-bold">${event.tickets.regular.price}</span>
+                                    </div>
+                                    <div className="d-flex justify-content-between mb-2">
+                                        <span>Available:</span>
+                                        <span>{event.tickets.regular.quantity} tickets</span>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Sales Period */}
+                            <div className="mb-4">
                                 <div className="d-flex justify-content-between mb-2">
-                                    <span>Available:</span>
-                                    <span>{event.tickets?.quantity} tickets</span>
+                                    <span>Sales Start:</span>
+                                    <span>{formatDate(event.startSales)}</span>
                                 </div>
                                 <div className="d-flex justify-content-between mb-3">
                                     <span>Sales End:</span>
-                                    <span>{event.tickets?.endSales}</span>
+                                    <span>{formatDate(event.endSales)}</span>
                                 </div>
                             </div>
-                            <Button variant="warning" className="w-100" onClick={handleBooking}>
-                                Book Now
+
+                            {/* Payment Method */}
+                            <div className="d-flex justify-content-between mb-4">
+                                <span>Payment Method:</span>
+                                <span>{event.paymentMethod}</span>
+                            </div>
+
+                            <Button 
+                                variant="warning" 
+                                className="w-100" 
+                                onClick={handleBooking}
+                                disabled={!event.tickets?.vip?.quantity && !event.tickets?.regular?.quantity}
+                            >
+                                {(!event.tickets?.vip?.quantity && !event.tickets?.regular?.quantity) 
+                                    ? 'Sold Out' 
+                                    : 'Book Now'
+                                }
                             </Button>
                         </div>
                     </Col>
