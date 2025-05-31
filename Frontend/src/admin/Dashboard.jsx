@@ -62,9 +62,34 @@ const Dashboard = () => {
     try {
       setLoading(true);
       setError(null);
+      
       const response = await axiosInstance.get(`/admin/stats/?period=${selectedPeriod}`);
+      
       if (response?.data?.status === 'success') {
-        setStats(response.data.data);
+        // Ensure data is properly formatted
+        const formattedData = {
+          current: {
+            totalUsers: parseInt(response.data.data.current.totalUsers) || 0,
+            totalEvents: parseInt(response.data.data.current.totalEvents) || 0,
+            totalTickets: parseInt(response.data.data.current.totalTickets) || 0,
+            revenue: parseFloat(response.data.data.current.revenue) || 0
+          },
+          previous: {
+            totalUsers: parseInt(response.data.data.previous.totalUsers) || 0,
+            totalEvents: parseInt(response.data.data.previous.totalEvents) || 0,
+            totalTickets: parseInt(response.data.data.previous.totalTickets) || 0,
+            revenue: parseFloat(response.data.data.previous.revenue) || 0
+          },
+          monthly: {
+            labels: response.data.data.monthly.labels || [],
+            users: response.data.data.monthly.users?.map(v => parseInt(v)) || [],
+            events: response.data.data.monthly.events?.map(v => parseInt(v)) || [],
+            tickets: response.data.data.monthly.tickets?.map(v => parseInt(v)) || [],
+            revenue: response.data.data.monthly.revenue?.map(v => parseFloat(v)) || []
+          }
+        };
+
+        setStats(formattedData);
       } else {
         throw new Error('Invalid data received from server');
       }
@@ -76,11 +101,18 @@ const Dashboard = () => {
     }
   };
 
+  // Add auto-refresh every 5 minutes
   useEffect(() => {
     fetchStats(period);
+    
+    const intervalId = setInterval(() => {
+      fetchStats(period);
+    }, 5 * 60 * 1000); // 5 minutes
+
+    return () => clearInterval(intervalId);
   }, [period]);
 
-  const chartData = {
+  const chartData = React.useMemo(() => ({
     labels: stats.monthly.labels,
     datasets: [
       {
@@ -90,6 +122,10 @@ const Dashboard = () => {
         backgroundColor: 'rgba(59, 130, 246, 0.1)',
         fill: true,
         tension: 0.4,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        pointBackgroundColor: '#3b82f6',
+        borderWidth: 2
       },
       {
         label: 'Events',
@@ -98,6 +134,10 @@ const Dashboard = () => {
         backgroundColor: 'rgba(34, 197, 94, 0.1)',
         fill: true,
         tension: 0.4,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        pointBackgroundColor: '#22c55e',
+        borderWidth: 2
       },
       {
         label: 'Revenue',
@@ -107,39 +147,127 @@ const Dashboard = () => {
         fill: true,
         yAxisID: 'revenue',
         tension: 0.4,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        pointBackgroundColor: '#06b6d4',
+        borderWidth: 2
       },
     ],
-  };
+  }), [stats.monthly]);
 
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    interaction: {
+      mode: 'index',
+      intersect: false,
+    },
     plugins: {
       legend: {
         position: 'top',
-        labels: { boxWidth: 20, padding: 20, font: { size: 12 } },
+        labels: { 
+          boxWidth: 20, 
+          padding: 20, 
+          font: { size: 12 },
+          usePointStyle: true
+        },
       },
-      tooltip: { backgroundColor: '#1f2937', bodyFont: { size: 12 } },
+      tooltip: { 
+        backgroundColor: '#1f2937',
+        bodyFont: { size: 12 },
+        padding: 12,
+        displayColors: true,
+        callbacks: {
+          label: function(context) {
+            let label = context.dataset.label || '';
+            if (label) {
+              label += ': ';
+            }
+            if (context.parsed.y !== null) {
+              if (context.dataset.label === 'Revenue') {
+                label += new Intl.NumberFormat('en-US', {
+                  style: 'currency',
+                  currency: 'USD'
+                }).format(context.parsed.y);
+              } else {
+                label += context.parsed.y;
+              }
+            }
+            return label;
+          }
+        }
+      },
     },
     scales: {
       y: {
         beginAtZero: true,
-        title: { display: true, text: 'Count', font: { size: 12 } },
-        grid: { color: 'rgba(0, 0, 0, 0.05)' },
+        title: { 
+          display: true, 
+          text: 'Count', 
+          font: { size: 12 } 
+        },
+        grid: { 
+          color: 'rgba(0, 0, 0, 0.05)',
+          drawBorder: false
+        },
+        ticks: {
+          padding: 8,
+          stepSize: 1
+        }
       },
       revenue: {
         position: 'right',
         beginAtZero: true,
-        title: { display: true, text: 'Revenue ($)', font: { size: 12 } },
-        grid: { display: false },
+        title: { 
+          display: true, 
+          text: 'Revenue ($)', 
+          font: { size: 12 } 
+        },
+        grid: { 
+          display: false 
+        },
+        ticks: {
+          padding: 8,
+          callback: function(value) {
+            return '$' + value.toLocaleString();
+          }
+        }
       },
-      x: { grid: { display: false } },
+      x: { 
+        grid: { 
+          display: false 
+        },
+        ticks: {
+          padding: 8
+        }
+      },
     },
-    animation: { duration: 1000, easing: 'easeOutQuart' },
+    animations: {
+      tension: {
+        duration: 1000,
+        easing: 'linear',
+        from: 0.8,
+        to: 0.4,
+        loop: false
+      },
+      numbers: {
+        type: 'number',
+        duration: 1000,
+        delay: (ctx) => ctx.dataIndex * 100
+      }
+    },
+    transitions: {
+      active: {
+        animation: {
+          duration: 300
+        }
+      }
+    }
   };
 
   const handlePeriodChange = (newPeriod) => {
     setPeriod(newPeriod);
+    fetchStats(newPeriod);
   };
 
   return (

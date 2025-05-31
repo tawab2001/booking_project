@@ -68,48 +68,48 @@ const Profile = () => {
     }
   };
 
-  const handleImageUpload = async (e) => {
-    try {
-      const file = e.target.files[0];
-      if (!file) return;
+const handleImageUpload = async (e) => {
+  try {
+    const file = e.target.files[0];
+    if (!file) return;
 
-      // Validate file type
-      const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
-      if (!validTypes.includes(file.type)) {
-        toast.error('Please upload an image file (JPEG, PNG, GIF)');
-        return;
-      }
-
-      // Validate file size
-      if (file.size > 5 * 1024 * 1024) {
-        toast.error('Image size should be less than 5MB');
-        return;
-      }
-
-      setUploadingImage(true);
-      const formData = new FormData();
-      formData.append('avatar', file);
-
-      const response = await axiosInstance.post(ENDPOINTS.UPLOAD_AVATAR, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      if (response.data?.avatar) {
-        setUserData(prev => ({
-          ...prev,
-          avatar: response.data.avatar
-        }));
-        toast.success('Profile picture updated successfully!');
-      }
-    } catch (error) {
-      console.error('Image Upload Error:', error);
-      toast.error('Failed to upload image. Please try again.');
-    } finally {
-      setUploadingImage(false);
+    // Validate file type
+    const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (!validTypes.includes(file.type)) {
+      toast.error('Please upload an image file (JPEG, PNG, GIF)');
+      return;
     }
-  };
+
+    // Validate file size
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image size should be less than 5MB');
+      return;
+    }
+
+    setUploadingImage(true);
+    const formData = new FormData();
+    formData.append('avatar', file);
+
+    const response = await axiosInstance.post(ENDPOINTS.UPLOAD_AVATAR, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    if (response.data?.avatar) {
+      setUserData(prev => ({
+        ...prev,
+        avatar: response.data.avatar
+      }));
+      toast.success('Profile picture updated successfully!');
+    }
+  } catch (error) {
+    console.error('Image Upload Error:', error);
+    toast.error('Failed to upload image. Please try again.');
+  } finally {
+    setUploadingImage(false);
+  }
+};
 
   const handleDetailsUpdate = async (e) => {
     e.preventDefault();
@@ -176,9 +176,9 @@ const Profile = () => {
       const updateData = {
         mobile_number: userData?.mobile_number || '',
         social_accounts: {
-          facebook_url: formData.get('facebook_url')?.trim() || '',
-          instagram_url: formData.get('instagram_url')?.trim() || '',
-          whatsapp_number: formData.get('whatsapp_number')?.trim() || '',
+        facebook_url: formData.get('facebook_url')?.trim() || '',
+        instagram_url: formData.get('instagram_url')?.trim() || '',
+        whatsapp_number: formData.get('whatsapp_number')?.trim() || '',
         }
       };
 

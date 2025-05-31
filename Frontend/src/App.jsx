@@ -10,7 +10,6 @@ import SignUp from './pages/signUp/signUp';
 import Events from './pages/Events/events';
 import AddEvent from './pages/AddEvent/addevent';
 import EventDetails from './pages/EventDetails';
-
 import Booking from './pages/Booking/booking';
 import Contact from './pages/ContactUs/contactus';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
@@ -20,12 +19,10 @@ import Dashboard from './admin/Dashboard';
 import AdminRoute from './admin/AdminRoute';
 import UsersManagement from './admin/UsersManagement';
 import AdminLogin from './admin/AdminLogin';
-import AdminDashboard from './pages/AdminDashboard/admindashboard';
+import AdminDashboard from './pages/organizetion_dashboard/organizetion_dashboard';
 import ErrorBoundary from './components/ErrorBoundary';
 import EventManagement from './admin/eventmangement';
-
-
-
+import ProtectedRoute from './components/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -35,15 +32,42 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <Home/> },
       { path: "home", element: <Home/> },
-      { path: "profile", element: <Profile/> },
-      { path: "events", element: <Events/> },
-      { path: "addEvent", element: <AddEvent/>},
-      { path: "event/:id", element: <EventDetails/>},
-      { path: "booking/:eventId", element: <Booking/>},
-      { path: "contactus", element: <Contact/> },
-      { path: "reset-password", element: <RequestReset/> },
-      { path: "reset-password/:token", element: <ResetPassword/> },
-      {path:"admindashboard", element: <AdminDashboard/>}
+      { 
+        path: "profile", 
+        element: <ProtectedRoute><Profile/></ProtectedRoute> 
+      },
+      { 
+        path: "events", 
+        element: <ProtectedRoute><Events/></ProtectedRoute> 
+      },
+      { 
+        path: "addEvent", 
+        element: <ProtectedRoute><AddEvent/></ProtectedRoute>
+      },
+      { 
+        path: "event/:id", 
+        element: <ProtectedRoute><EventDetails/></ProtectedRoute>
+      },
+      { 
+        path: "booking/:eventId", 
+        element: <ProtectedRoute><Booking/></ProtectedRoute>
+      },
+      { 
+        path: "contactus", 
+        element: <ProtectedRoute><Contact/></ProtectedRoute> 
+      },
+      { 
+        path: "reset-password", 
+        element: <RequestReset/> 
+      },
+      { 
+        path: "reset-password/:token", 
+        element: <ResetPassword/> 
+      },
+      {
+        path: "admindashboard", 
+        element: <ProtectedRoute><AdminDashboard/></ProtectedRoute>
+      }
     ]
   },
   { path: "signup", element: <SignUp/> },
@@ -68,6 +92,7 @@ const router = createBrowserRouter([
     element: <ErrorBoundary />
   }
 ]);
+
 function App() {
   return (
     <PayPalScriptProvider options={{
@@ -79,4 +104,5 @@ function App() {
     </PayPalScriptProvider>
   );
 }
+
 export default App;

@@ -28,7 +28,6 @@ class AdminSettings(models.Model):
     language = models.CharField(max_length=10, default='en')
     timezone = models.CharField(max_length=50, default='UTC+2')
     last_updated = models.DateTimeField(auto_now=True)
-    updated_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         verbose_name = 'Admin Settings'
@@ -42,3 +41,4 @@ class AdminSettings(models.Model):
         settings = cls.objects.first()
         if not settings:
             settings = cls.objects.create()
+        return settings

@@ -302,7 +302,7 @@
 .chart-section::-webkit-scrollbar {
   width: 6px;
   height: 6px;
-}
+  }
 
 .chart-section::-webkit-scrollbar-track {
   background: #f1f5f9;
