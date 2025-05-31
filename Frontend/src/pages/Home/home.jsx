@@ -327,7 +327,7 @@ function Home() {
               {events.map((event) => (
                 <Col key={event.id} md={4} className="mb-4">
                   <EventCard
-                    image={event.cover_image || event.social_image}
+                    image={event.social_image}
                     title={event.title}
                     date={event.dates?.[0]?.startDate || 'Date TBA'}
                     time={event.dates?.[0]?.startTime || 'Time TBA'}
