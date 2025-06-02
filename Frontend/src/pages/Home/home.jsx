@@ -55,27 +55,6 @@ const featuredPackages = [
   }
 ];
 
-const reviews = [
-  {
-    id: 1,
-    name: "Sara Ahmed",
-    text: "The booking process was super easy!",
-    rating: 5
-  },
-  {
-    id: 2,
-    name: "Mohamed Ali",
-    text: "Great experience. Will book again.",
-    rating: 4
-  },
-  {
-    id: 3,
-    name: "Layla Hassan",
-    text: "Smooth process and helpful support.",
-    rating: 5
-  }
-];
-
 const CATEGORY_OPTIONS = [
   { value: "music", label: "Music" },
   { value: "art", label: "Art" },
@@ -164,6 +143,34 @@ function Home() {
   const [selectedCity, setSelectedCity] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+
+  const [reviews, setReviews] = useState([
+    {
+      id: 1,
+      name: "Sara Ahmed",
+      text: "The booking process was super easy!",
+      rating: 5
+    },
+    {
+      id: 2,
+      name: "Mohamed Ali",
+      text: "Great experience. Will book again.",
+      rating: 4
+    },
+    {
+      id: 3,
+      name: "Layla Hassan",
+      text: "Smooth process and helpful support.",
+      rating: 5
+    }
+  ]);
+
+  const [newReview, setNewReview] = useState({
+    name: "",
+    text: "",
+    rating: 0
+  });
+  const [reviewError, setReviewError] = useState("");
 
   // Welcome texts for the hero slider
   const welcomeTexts = [
@@ -445,10 +452,26 @@ function Home() {
         </Container>
       </section>
 
+      {/* About EasyTicket Section */}
+      <section style={{ padding: '2.5rem 0', background: '#f8f9fa', borderTop: '1px solid #eee', borderBottom: '1px solid #eee' }}>
+        <Container>
+          <h2 className="text-center mb-3" style={{ color: '#ffb300', fontWeight: 'bold' }}>About EasyTicket</h2>
+          <p className="mx-auto" style={{ maxWidth: 750, color: '#444', fontSize: '1.1rem', textAlign: 'center' }}>
+            EasyTicket is your gateway to all events in Egypt. We make it easy to discover, book, and enjoy concerts, sports, theater, and more. Our platform guarantees original tickets, fair prices, and a smooth booking experience for everyone.
+            <br /><br />
+            Our vision is to make event access simple and safe for all. We believe in equal opportunities for booking, using the latest technology to ensure your tickets are always secure and authentic.
+            <br /><br />
+            Whether you’re a fan of music, sports, or any kind of entertainment, EasyTicket helps you find and book your favorite events quickly and confidently.
+          </p>
+        </Container>
+      </section>
+
       {/* Testimonials */}
-      <section style={{ padding: '3rem 0', backgroundColor: '#f8f9fa' }}>
+      <section style={{ padding: '3rem 0', backgroundColor: 'white' }}>
         <Container>
           <h2 className="text-center mb-4">What Our Users Say</h2>
+          
+          {/* Reviews Cards */}
           <Row>
             {reviews.map((review) => (
               <Col key={review.id} md={4} className="mb-4">
@@ -456,6 +479,58 @@ function Home() {
               </Col>
             ))}
           </Row>
+
+          {/* Review Form */}
+          <div className="mb-5" style={{ maxWidth: 500, margin: "0 auto" }}>
+            <h5 className="mb-3 text-center" style={{ color: "#ffb300" }}>Add Your Review</h5>
+            {reviewError && <Alert variant="danger">{reviewError}</Alert>}
+            <form
+              onSubmit={e => {
+                e.preventDefault();
+                if (!newReview.name || !newReview.text || !newReview.rating) {
+                  setReviewError("Please fill all fields and select a rating.");
+                  return;
+                }
+                setReviews([
+                  { ...newReview, id: Date.now() },
+                  ...reviews
+                ]);
+                setNewReview({ name: "", text: "", rating: 0 });
+                setReviewError("");
+              }}
+            >
+              <input
+                type="text"
+                className="form-control mb-2"
+                placeholder="Your Name"
+                value={newReview.name}
+                onChange={e => setNewReview({ ...newReview, name: e.target.value })}
+              />
+              <textarea
+                className="form-control mb-2"
+                placeholder="Your Review"
+                rows={2}
+                value={newReview.text}
+                onChange={e => setNewReview({ ...newReview, text: e.target.value })}
+              />
+              <div className="mb-2 d-flex align-items-center">
+                <span className="me-2">Rating:</span>
+                {[1,2,3,4,5].map(num => (
+                  <span
+                    key={num}
+                    style={{
+                      cursor: "pointer",
+                      color: newReview.rating >= num ? "#ffc107" : "#ccc",
+                      fontSize: 22
+                    }}
+                    onClick={() => setNewReview({ ...newReview, rating: num })}
+                    onMouseOver={() => setNewReview({ ...newReview, rating: num })}
+                  >★</span>
+                ))}
+              </div>
+              <Button type="submit" variant="warning" className="w-100">Submit Review</Button>
+            </form>
+          </div>
         </Container>
       </section>
     </div>
