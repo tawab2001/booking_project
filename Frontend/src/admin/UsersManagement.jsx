@@ -78,16 +78,78 @@ const UsersManagement = () => {
 
   const confirmDelete = async () => {
     try {
+      setError('');
       const response = await axiosInstance.delete(`/admin/users/${selectedUser.id}/`);
       if (response.data.status === 'success') {
         setUsers(users.filter(user => user.id !== selectedUser.id));
         setShowDeleteModal(false);
       }
     } catch (error) {
-      setError('Failed to delete user');
       console.error('Error deleting user:', error);
+      const errorMessage = error.response?.data?.message || 
+                         error.response?.data?.error || 
+                         'Failed to delete user. Please try again later.';
+      setError(errorMessage);
+      // Keep modal open to show error
+      // setShowDeleteModal(false);
     }
   };
+
+  // Enhanced Delete Modal
+  const DeleteModal = () => (
+    <Modal 
+      show={showDeleteModal} 
+      onHide={() => {
+        setShowDeleteModal(false);
+        setError(''); // Clear any errors when closing
+      }}
+      centered
+    >
+      <Modal.Header closeButton className="bg-dark text-white">
+        <Modal.Title>Delete User</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {error ? (
+          <Alert variant="danger" className="mb-3">
+            <Alert.Heading>Cannot Delete User</Alert.Heading>
+            <p style={{ whiteSpace: 'pre-line' }}>{error}</p>
+            <hr />
+            <p className="mb-0">
+              Please handle the associated data before attempting to delete this user.
+            </p>
+          </Alert>
+        ) : (
+          <>
+            <p>
+              Are you sure you want to delete user "{selectedUser?.username}"?
+            </p>
+            <p className="text-danger">
+              <strong>Warning:</strong> This action cannot be undone.
+            </p>
+          </>
+        )}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button 
+          variant="secondary" 
+          onClick={() => {
+            setShowDeleteModal(false);
+            setError(''); // Clear any errors when canceling
+          }}
+        >
+          {error ? 'Close' : 'Cancel'}
+        </Button>
+        {!error && (
+          <Button 
+            variant="danger" 
+            onClick={confirmDelete}
+          >
+            Delete
+          </Button>
+        )}
+      </Modal.Footer>
+    </Modal>
+  );
 
   return (
     <Container fluid className="p-4">
@@ -244,30 +306,7 @@ const UsersManagement = () => {
       </Modal>
 
       {/* Enhanced Delete Modal */}
-      <Modal 
-        show={showDeleteModal} 
-        onHide={() => setShowDeleteModal(false)}
-        centered
-      >
-        <Modal.Header closeButton className="bg-danger text-white">
-          <Modal.Title>Confirm Delete</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="text-center py-3">
-            <Trash2 size={48} className="text-danger mb-3" />
-            <p>Are you sure you want to delete user "<strong>{selectedUser?.username}</strong>"?</p>
-            <p className="text-muted small">This action cannot be undone.</p>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="light" onClick={() => setShowDeleteModal(false)}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={confirmDelete}>
-            Delete User
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <DeleteModal />
     </Container>
   );
 };

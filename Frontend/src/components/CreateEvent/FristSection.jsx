@@ -1,3 +1,6 @@
+import styles from './EventFormStyles.module.css';
+import { Container, Row, Col, Card, Form } from 'react-bootstrap';
+
 const FirstSection = ({ data, setData }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,7 +36,7 @@ const FirstSection = ({ data, setData }) => {
                       value={data.basicInfo.eventName || ''}
                       onChange={handleChange}
                       placeholder="e.g. Music Concert"
-                      className={styles.firstSectionInput}
+                      className={styles.input}
                     />
                   </Form.Group>
 
@@ -46,7 +49,7 @@ const FirstSection = ({ data, setData }) => {
                       onChange={handleChange}
                       rows={3}
                       placeholder="Describe your event here"
-                      className={styles.firstSectionInput}
+                      className={styles.input}
                     />
                   </Form.Group>
 
@@ -58,7 +61,7 @@ const FirstSection = ({ data, setData }) => {
                       value={data.basicInfo.phone || ''}
                       onChange={handleChange}
                       placeholder="e.g. 01012345678"
-                      className={styles.firstSectionInput}
+                      className={styles.input}
                     />
                   </Form.Group>
 
@@ -70,7 +73,7 @@ const FirstSection = ({ data, setData }) => {
                       value={data.basicInfo.email || ''}
                       onChange={handleChange}
                       placeholder="example@email.com"
-                      className={styles.firstSectionInput}
+                      className={styles.input}
                     />
                   </Form.Group>
 
@@ -82,7 +85,7 @@ const FirstSection = ({ data, setData }) => {
                       value={data.basicInfo.address || ''}
                       onChange={handleChange}
                       placeholder="Full address"
-                      className={styles.firstSectionInput}
+                      className={styles.input}
                     />
                   </Form.Group>
 
@@ -94,7 +97,7 @@ const FirstSection = ({ data, setData }) => {
                       value={data.basicInfo.venue || ''}
                       onChange={handleChange}
                       placeholder="Venue or location name"
-                      className={styles.firstSectionInput}
+                      className={styles.input}
                     />
                   </Form.Group>
 
@@ -104,7 +107,7 @@ const FirstSection = ({ data, setData }) => {
                       name="category"
                       value={data.basicInfo.category || ''}
                       onChange={handleChange}
-                      className={styles.firstSectionInput}
+                      className={styles.select}
                     >
                       <option value="">Select Category</option>
                       <option value="music">Music</option>
@@ -112,8 +115,7 @@ const FirstSection = ({ data, setData }) => {
                       <option value="sports">Sports</option>
                       <option value="technology">Technology</option>
                       <option value="education">Education</option>
-                      <option value="business">Business</option>
-                      <option value="health">Health</option>
+
                     </Form.Select>
                   </Form.Group>
                 </Form>

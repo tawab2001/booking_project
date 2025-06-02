@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Alert } from "react-bootstrap";
+import { Alert, Modal, Button } from "react-bootstrap";
 import FristSection from '../../components/CreateEvent/FristSection';
 import SecondSection from '../../components/CreateEvent/SecondSection';
 import ThierdSection from '../../components/CreateEvent/ThierdSection';
@@ -11,6 +11,8 @@ const AddEvent = () => {
   const [currentSection, setCurrentSection] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [createdEventId, setCreatedEventId] = useState(null);
 
   const [eventData, setEventData] = useState({
     basicInfo: {
@@ -147,32 +149,27 @@ const AddEvent = () => {
           quantity: parseInt(eventData.tickets.regular.quantity),
           price: parseFloat(eventData.tickets.regular.price)
         } : null,
-        // paymentMethod: eventData.tickets.paymentMethod
       };
 
       formData.append('tickets', JSON.stringify(ticketsData));
-
       formData.append('startSales', eventData.tickets.startSales);
       formData.append('endSales', eventData.tickets.endSales);
       formData.append('paymentMethod', eventData.tickets.paymentMethod);
 
-
-
-      // Log form data for debugging
-      for (let [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-      }
+      localStorage.setItem("lastCreatedEvent", JSON.stringify(eventData));
+      const userName = localStorage.getItem("userName"); 
+      localStorage.setItem("eventCreatedBy", userName || "Unknown User");
 
       const response = await eventApi.createEvent(formData);
-
       console.log('Event created:', response);
-      alert('Event created successfully!');
-      navigate('/home');
+      
+      // Store event ID and show success modal
+      setCreatedEventId(response.data.id);
+      setShowSuccessModal(true);
 
     } catch (error) {
       console.error('Submit Error:', error);
       if (typeof error.response?.data === 'object') {
-        // Format backend validation errors
         const errorMessages = Object.entries(error.response.data)
           .map(([key, value]) => `${key}: ${value}`)
           .join('\n');
@@ -183,6 +180,16 @@ const AddEvent = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleSuccessModalClose = () => {
+    setShowSuccessModal(false);
+    navigate('/home');
+  };
+
+  const handleViewEvent = () => {
+    setShowSuccessModal(false);
+    navigate(`/event/${createdEventId}`);
   };
 
   return (
@@ -235,6 +242,28 @@ const AddEvent = () => {
             </button>
           )}
         </div>
+
+        {/* Success Modal */}
+        <Modal show={showSuccessModal} onHide={handleSuccessModalClose} centered>
+          <Modal.Header className="bg-success text-white">
+            <Modal.Title>
+              <i className="fas fa-check-circle me-2"></i>
+              Event Created Successfully!
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p className="mb-3">Your event "{eventData.basicInfo.eventName}" has been created successfully.</p>
+            <p className="mb-0">What would you like to do next?</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleSuccessModalClose}>
+              Return to Home
+            </Button>
+            <Button variant="success" onClick={handleViewEvent}>
+              View Event
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </div>
   );

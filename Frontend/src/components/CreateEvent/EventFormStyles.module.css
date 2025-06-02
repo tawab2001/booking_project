@@ -89,13 +89,22 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 0.5rem;
+    width: 100%;
     transition: border-color 0.3s ease;
-    width: 100% !important;
+
   }
   
   .select:hover,
   .select:focus {
     border-color: #ffcc00;
+    box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+    outline: none;
+  }
+  
+  .select option {
+    background-color: #222;
+    color: #fff;
+    padding: 8px;
   }
   
   .switch {
