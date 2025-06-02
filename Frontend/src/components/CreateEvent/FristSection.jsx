@@ -17,7 +17,7 @@ const FirstSection = ({ data, setData }) => {
     <div className={styles.container}>
       <Container fluid="lg" className="py-4">
         <Row className="g-4">
-          <Col lg={8}>
+          <Col lg={12}>
             <Card className={styles.firstSectionCard}>
               <Card.Body className="p-4">
                 <div className={styles.sectionDivider}>
@@ -113,7 +113,9 @@ const FirstSection = ({ data, setData }) => {
                       <option value="music">Music</option>
                       <option value="art">Art</option>
                       <option value="sports">Sports</option>
+                      <option value="technology">Technology</option>
                       <option value="education">Education</option>
+
                     </Form.Select>
                   </Form.Group>
                 </Form>
