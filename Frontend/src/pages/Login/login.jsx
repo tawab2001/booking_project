@@ -57,7 +57,7 @@ const handleSubmit = async (e) => {
 
         console.log("Login successful", response.data); // Add logging
 
-        // تحديث التوجيه بناءً على نوع المستخدم
+       
         if (response.data.user_type === 'organizer' || response.data.user_data?.is_staff) {
           console.log("Redirecting to organizer dashboard"); // Add logging
           navigate('/admindashboard');
@@ -98,52 +98,56 @@ const handleSubmit = async (e) => {
 };
 
 const handleGoogleSuccess = async (credentialResponse) => {
-    try {
-        setIsLoading(true);
-        setError("");
-        
-        // Decode Google token
-        const decodedToken = jwtDecode(credentialResponse.credential);
-        
-        // Send login request
-        const response = await axiosInstance.post(ENDPOINTS.GOOGLE_LOGIN, {
-            credential: credentialResponse.credential,
-            user_info: {
-                email: decodedToken.email,
-                given_name: decodedToken.given_name,
-                family_name: decodedToken.family_name,
-                picture: decodedToken.picture,
-                name: decodedToken.name
-            }
-        });
+  try {
+    setIsLoading(true);
+    setError("");
 
-        // Handle successful login
-        if (response?.data?.access) {
-            // Store auth data
-            localStorage.setItem('token', response.data.access);
-            localStorage.setItem('refresh', response.data.refresh);
-            localStorage.setItem('userType', response.data.user_type);
+    // Decode Google token
+    const decodedToken = jwtDecode(credentialResponse.credential);
 
-            // Store user data
-            if (response.data.user_data) {
-                localStorage.setItem('user_data', JSON.stringify(response.data.user_data));
-            }
+    // Send login request
+    const response = await axiosInstance.post(ENDPOINTS.GOOGLE_LOGIN, {
+      credential: credentialResponse.credential,
+      user_info: {
+        email: decodedToken.email,
+        given_name: decodedToken.given_name,
+        family_name: decodedToken.family_name,
+        picture: decodedToken.picture,
+        name: decodedToken.name,
+      },
+    });
 
-            // Redirect based on user type
-            navigate(response.data.user_type === 'organizer' ? '/admin' : '/');
-        } else {
-            throw new Error('Invalid response format');
-        }
-    } catch (err) {
-        console.error("Google login error:", err);
-        setError(
-            err.response?.data?.message || 
-            err.response?.data?.error || 
-            "Google login failed. Please try again."
-        );
-    } finally {
-        setIsLoading(false);
+    // Handle successful login
+    if (response?.data?.access) {
+      // Store auth data
+      localStorage.setItem("token", response.data.access);
+      localStorage.setItem("refresh", response.data.refresh);
+      localStorage.setItem("userType", response.data.user_type);
+
+      // Store user data
+      if (response.data.user_data) {
+        localStorage.setItem("user_data", JSON.stringify(response.data.user_data));
+      }
+
+      // ✅ Redirect based on user type
+      if (response.data.user_type === "organizer" || response.data.user_data?.is_staff) {
+        navigate("/admindashboard");
+      } else {
+        navigate("/");
+      }
+    } else {
+      throw new Error("Invalid response format");
     }
+  } catch (err) {
+    console.error("Google login error:", err);
+    setError(
+      err.response?.data?.message ||
+      err.response?.data?.error ||
+      "Google login failed. Please try again."
+    );
+  } finally {
+    setIsLoading(false);
+  }
 };
   return (
     <Container
