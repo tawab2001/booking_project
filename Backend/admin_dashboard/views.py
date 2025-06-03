@@ -56,58 +56,84 @@ logger = logging.getLogger(__name__)
 #             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+logger = logging.getLogger(__name__)
+
 class AdminStatsView(APIView):
     permission_classes = [IsAdminUser]
 
     def get(self, request):
+        logger.info('Fetching admin stats...')
         try:
-            logger.info('Fetching admin stats...')
-            
+            # Get period from query params (default: 30 days)
+            period = request.query_params.get('period', '30d')
+            if period == '7d':
+                days = 7
+            elif period == '90d':
+                days = 90
+            else:
+                days = 30  # Default to 30d
+
             # Current stats
-            total_users = CustomUser.objects.filter(is_active=True).count()
-            total_events = Event.objects.filter(is_active=True).count()
-            
-            # Calculate total tickets and revenue from TicketType and Ticket models
+            current_date = timezone.now()
+            start_date = current_date - timezone.timedelta(days=days)
+
+            total_users = CustomUser.objects.filter(
+                is_active=True,
+                date_joined__gte=start_date
+            ).count()
+            total_events = Event.objects.filter(
+                is_active=True,
+                created_at__gte=start_date
+            ).count()
+
+            # Calculate total tickets and revenue
             total_tickets = 0
             revenue = 0
-            
-            for event in Event.objects.filter(is_active=True):
-                # Get all ticket types for this event
+            for event in Event.objects.filter(is_active=True, created_at__gte=start_date):
                 ticket_types = TicketType.objects.filter(event=event)
                 for ticket_type in ticket_types:
-                    # Add to total tickets
-                    total_tickets += ticket_type.available_quantity
-                    # Calculate revenue from sold tickets
-                    sold_tickets = Ticket.objects.filter(ticket_type=ticket_type)
-                    revenue += sum(ticket.final_price for ticket in sold_tickets)
-            
-            # Previous month stats
-            current_date = timezone.now()
-            last_month = current_date - relativedelta(months=1)
-            
-            prev_users = CustomUser.objects.filter(
-                is_active=True,
-                date_joined__lt=last_month
-            ).count()
-            
-            prev_events = Event.objects.filter(
-                is_active=True,
-                created_at__lt=last_month
-            ).count()
-            
-            # Calculate previous month tickets and revenue
-            prev_tickets = 0
-            prev_revenue = 0
-            
-            for event in Event.objects.filter(is_active=True, created_at__lt=last_month):
-                ticket_types = TicketType.objects.filter(event=event)
-                for ticket_type in ticket_types:
-                    prev_tickets += ticket_type.available_quantity
+                    total_tickets += ticket_type.available_quantity or 0
                     sold_tickets = Ticket.objects.filter(
                         ticket_type=ticket_type,
-                        purchase_date__lt=last_month
+                        created_date__gte=start_date  # Changed from purchase_date
                     )
-                    prev_revenue += sum(ticket.final_price for ticket in sold_tickets)
+                    revenue += sum(
+                        ticket.final_price or 0 for ticket in sold_tickets
+                        if ticket.final_price is not None
+                    )
+
+            # Previous period stats
+            prev_start_date = start_date - timezone.timedelta(days=days)
+            prev_users = CustomUser.objects.filter(
+                is_active=True,
+                date_joined__gte=prev_start_date,
+                date_joined__lt=start_date
+            ).count()
+            prev_events = Event.objects.filter(
+                is_active=True,
+                created_at__gte=prev_start_date,
+                created_at__lt=start_date
+            ).count()
+
+            prev_tickets = 0
+            prev_revenue = 0
+            for event in Event.objects.filter(
+                is_active=True,
+                created_at__gte=prev_start_date,
+                created_at__lt=start_date
+            ):
+                ticket_types = TicketType.objects.filter(event=event)
+                for ticket_type in ticket_types:
+                    prev_tickets += ticket_type.available_quantity or 0
+                    sold_tickets = Ticket.objects.filter(
+                        ticket_type=ticket_type,
+                        created_date__gte=prev_start_date,  # Changed from purchase_date
+                        created_date__lt=start_date
+                    )
+                    prev_revenue += sum(
+                        ticket.final_price or 0 for ticket in sold_tickets
+                        if ticket.final_price is not None
+                    )
 
             # Monthly stats for trends
             monthly_stats = {
@@ -117,68 +143,68 @@ class AdminStatsView(APIView):
                 'tickets': [],
                 'revenue': []
             }
-
-            # Get last 6 months data
             for i in range(6):
-                month_start = current_date - relativedelta(months=i)
+                month_start = (current_date - relativedelta(months=i)).replace(
+                    day=1, hour=0, minute=0, second=0, microsecond=0
+                )
                 month_end = month_start + relativedelta(months=1)
-                
-                # Format month label
+
                 monthly_stats['labels'].insert(0, month_start.strftime('%B %Y'))
-                
-                # Get monthly data
+
                 monthly_users = CustomUser.objects.filter(
                     is_active=True,
-                    date_joined__range=(month_start, month_end)
+                    date_joined__gte=month_start,
+                    date_joined__lt=month_end
                 ).count()
-                
                 monthly_events = Event.objects.filter(
                     is_active=True,
-                    created_at__range=(month_start, month_end)
+                    created_at__gte=month_start,
+                    created_at__lt=month_end
                 ).count()
-                
-                # Calculate monthly tickets and revenue
+
                 monthly_tickets = 0
                 monthly_revenue = 0
-                
                 for event in Event.objects.filter(
                     is_active=True,
-                    created_at__range=(month_start, month_end)
+                    created_at__gte=month_start,
+                    created_at__lt=month_end
                 ):
                     ticket_types = TicketType.objects.filter(event=event)
                     for ticket_type in ticket_types:
-                        monthly_tickets += ticket_type.available_quantity
+                        monthly_tickets += ticket_type.available_quantity or 0
                         sold_tickets = Ticket.objects.filter(
                             ticket_type=ticket_type,
-                            purchase_date__range=(month_start, month_end)
+                            created_date__gte=month_start,  # Changed from purchase_date
+                            created_date__lt=month_end
                         )
-                        monthly_revenue += sum(ticket.final_price for ticket in sold_tickets)
-                
+                        monthly_revenue += sum(
+                            ticket.final_price or 0 for ticket in sold_tickets
+                            if ticket.final_price is not None
+                        )
+
                 monthly_stats['users'].insert(0, monthly_users)
                 monthly_stats['events'].insert(0, monthly_events)
                 monthly_stats['tickets'].insert(0, monthly_tickets)
                 monthly_stats['revenue'].insert(0, monthly_revenue)
 
-            # Prepare response data
             stats = {
                 'current': {
                     'totalUsers': total_users,
                     'totalEvents': total_events,
                     'totalTickets': total_tickets,
-                    'revenue': revenue
+                    'revenue': float(revenue)
                 },
                 'previous': {
                     'totalUsers': prev_users,
                     'totalEvents': prev_events,
                     'totalTickets': prev_tickets,
-                    'revenue': prev_revenue
+                    'revenue': float(prev_revenue)
                 },
                 'monthly': monthly_stats
             }
 
             logger.info('Successfully fetched admin stats')
-            logger.debug(f'Stats data: {stats}')  # Add debug logging
-            
+            logger.debug(f'Stats data: {stats}')
             return Response({
                 'status': 'success',
                 'data': stats
@@ -191,47 +217,47 @@ class AdminStatsView(APIView):
                 'message': f'Failed to fetch statistics: {str(e)}'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+logger = logging.getLogger(__name__)
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_user_events_stats(request):
     try:
-        # Get the current user
         user = request.user
-        
-        # Get all events created by the user or where creator is null (for existing events)
         user_events = Event.objects.filter(Q(creator=user) | Q(creator__isnull=True))
         
-        # Calculate total statistics
         total_events = user_events.count()
         total_tickets = Ticket.objects.filter(event__in=user_events).count()
         total_revenue = Ticket.objects.filter(
             event__in=user_events,
             status='active'
         ).aggregate(
-            total=Sum('ticket_type__price')
+            total=Sum('final_price')
         )['total'] or 0
         
-        # Get events with their statistics
         events_data = []
         for event in user_events:
             tickets = Ticket.objects.filter(event=event)
             tickets_sold = tickets.count()
             revenue = tickets.filter(status='active').aggregate(
-                total=Sum('ticket_type__price')
+                total=Sum('final_price')
             )['total'] or 0
+            
+            ticket_type = TicketType.objects.filter(event=event).first()
             
             events_data.append({
                 'id': event.id,
                 'name': event.title,
-                'date': event.dates.get('start_date') if event.dates else None,  # Get start_date from dates JSON field
+                'date': event.dates.get('start_date') if hasattr(event, 'dates') and event.dates else None,
                 'ticketsSold': tickets_sold,
-                'totalTickets': len(event.tickets) if event.tickets else 0,  # Get total from tickets JSON field
-                'price': event.tickets[0].get('price', 0) if event.tickets else 0,  # Get price from first ticket type
-                'revenue': revenue,
-                'status': 'ACTIVE' if event.endSales and event.endSales > timezone.now() else 'ENDED'
+                'totalTickets': TicketType.objects.filter(event=event).aggregate(
+                    total=Sum('available_quantity')
+                )['total'] or 0,
+                'price': float(ticket_type.price) if ticket_type else 0,
+                'revenue': float(revenue),
+                'status': 'ACTIVE' if hasattr(event, 'end_sales') and event.end_sales and event.end_sales > timezone.now() else 'ENDED'
             })
         
-        # Get monthly statistics
         today = timezone.now()
         last_90_days = today - timedelta(days=90)
         
@@ -243,7 +269,7 @@ def get_user_events_stats(request):
             select={'month': "DATE_TRUNC('month', created_date)"}
         ).values('month').annotate(
             tickets=Count('id'),
-            revenue=Sum('ticket_type__price')
+            revenue=Sum('final_price')
         ).order_by('month')
         
         response_data = {
@@ -252,13 +278,13 @@ def get_user_events_stats(request):
                 'current': {
                     'totalEvents': total_events,
                     'totalTickets': total_tickets,
-                    'revenue': total_revenue
+                    'revenue': float(total_revenue)
                 },
                 'events': events_data,
                 'monthly': {
                     'labels': [stat['month'].strftime('%B %Y') for stat in monthly_stats],
                     'tickets': [stat['tickets'] for stat in monthly_stats],
-                    'revenue': [stat['revenue'] for stat in monthly_stats]
+                    'revenue': [float(stat['revenue'] or 0) for stat in monthly_stats]
                 }
             }
         }
@@ -272,7 +298,6 @@ def get_user_events_stats(request):
             'status': 'error',
             'message': str(e)
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 class AdminUsersView(APIView):
     permission_classes = [IsAdminUser]
 

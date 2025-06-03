@@ -100,11 +100,17 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <PayPalScriptProvider options={{
-      "client-id": "AcB_TLetjBymVxpDUrOUBtAC3yTGuurN3dLZM7Uf949ODzkzQEbZ3wOO6vm0DJhMMXtmrSl7kxCgerfW",
-      currency: "USD",
-      intent: "capture"
-    }}>
+    <PayPalScriptProvider 
+      options={{
+        "client-id": "AcB_TLetjBymVxpDUrOUBtAC3yTGuurN3dLZM7Uf949ODzkzQEbZ3wOO6vm0DJhMMXtmrSl7kxCgerfW",
+        currency: "USD",
+        intent: "capture",
+        components: "buttons",
+        "enable-funding": "paypal"
+      }}
+      onError={(err) => console.error("PayPal Script Error:", err)}
+      deferLoading={false}
+    >
       <RouterProvider router={router} />
     </PayPalScriptProvider>
   );

@@ -1,30 +1,7 @@
-# from rest_framework import serializers
-# from .models import Event
-# import json
-
-# class EventSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Event
-#         fields = '__all__'
-
-#     def to_internal_value(self, data):
-#         import json
-#         if isinstance(data.get('dates'), str):
-#             try:
-#                 data['dates'] = json.loads(data['dates'])
-#             except Exception:
-#                 pass
-
-#         return super().to_internal_value(data)
-
-#     def create(self, validated_data):
-#         # احذف أي مفتاح "user" لو جاي بالغلط من الفرونت أو البوستمان
-#         validated_data.pop('user', None)
-#         return Event.objects.create(**validated_data)
-    
+   
 
 from rest_framework import serializers
-from .models import Event, TicketType, Ticket
+from .models import Event, TicketType, Ticket,Withdrawal
 
 class TicketTypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -48,7 +25,7 @@ class EventSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'title', 'description', 'phone', 'email', 
             'address', 'venue', 'category', 'social_image', 
-            'cover_image', 'dates', 'tickets', 'startSales', 
+            'cover_image', 'dates', 'startSales', 
             'endSales', 'paymentMethod', 'created_at', 'updated_at',
             'is_active', 'organizer', 'ticket_types', 'total_tickets_sold',
             'total_revenue', 'min_price', 'max_price'
@@ -73,35 +50,44 @@ class EventSerializer(serializers.ModelSerializer):
         return max(prices) if prices else 0
 
     def to_internal_value(self, data):
-        # Handle dates JSON field
         if isinstance(data.get('dates'), str):
             try:
                 data['dates'] = json.loads(data['dates'])
             except Exception:
                 pass
-                
-        # Handle tickets JSON field
         if isinstance(data.get('tickets'), str):
             try:
                 data['tickets'] = json.loads(data['tickets'])
             except Exception:
                 pass
-
         return super().to_internal_value(data)
 
     def create(self, validated_data):
-        # Remove user if accidentally sent
         validated_data.pop('user', None)
         return Event.objects.create(**validated_data)
 
     def validate_tickets(self, value):
-        """
-        Validate that at least one ticket type is provided
-        """
         if not value:
             raise serializers.ValidationError("At least one ticket type is required")
-        
         if not (value.get('vip') or value.get('regular')):
             raise serializers.ValidationError("At least one ticket type (VIP or Regular) must be provided")
-            
         return value
+
+class WithdrawalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Withdrawal
+        fields = ['amount', 'payment_method', 'payment_details']
+        extra_kwargs = {
+            'amount': {'required': True},
+            'payment_method': {'required': True},
+            'payment_details': {'required': True}
+        }
+
+    def validate_amount(self, value):
+        if value <= 0:
+            raise serializers.ValidationError("Amount must be greater than zero")
+        return value
+
+    def validate_payment_method(self, value):
+        if value not in ['paypal', 'bank_transfer']:
+            raise serializers.ValidationError("Invalid payment method")
