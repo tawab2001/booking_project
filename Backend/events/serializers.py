@@ -1,7 +1,8 @@
    
-
+from django.utils import timezone
 from rest_framework import serializers
 from .models import Event, TicketType, Ticket,Withdrawal
+import json
 
 class TicketTypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -72,7 +73,12 @@ class EventSerializer(serializers.ModelSerializer):
         if not (value.get('vip') or value.get('regular')):
             raise serializers.ValidationError("At least one ticket type (VIP or Regular) must be provided")
         return value
-
+    def get_status(self, obj):
+        if not obj.is_active:
+            return "Ended"
+        if obj.endSales and obj.endSales < timezone.now():
+            return "Ended"
+        return "Active"
 class WithdrawalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Withdrawal
