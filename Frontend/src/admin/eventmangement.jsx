@@ -144,13 +144,13 @@ const EventManagement = () => {
                         >
                           <Eye size={16} />
                         </Button>
-                        <Button
+                        {/* <Button
                           variant="danger"
                           size="sm"
                           onClick={() => confirmDelete(event.id)}
                         >
                           <Trash2 size={16} />
-                        </Button>
+                        </Button> */}
                       </td>
                     </tr>
                   ))}
@@ -160,7 +160,7 @@ const EventManagement = () => {
           )}
 
           {/* Delete Confirmation Modal */}
-          <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+          {/* <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
             <Modal.Header closeButton>
               <Modal.Title>Confirm Delete</Modal.Title>
             </Modal.Header>
@@ -175,7 +175,7 @@ const EventManagement = () => {
                 Delete
               </Button>
             </Modal.Footer>
-          </Modal>
+          </Modal> */}
         </>
       )}
 

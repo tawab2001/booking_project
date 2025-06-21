@@ -93,7 +93,7 @@ const Events = () => {
     // TODO: Implement search functionality
   };
 
-  // فلترة الأحداث حسب البحث
+ 
   const filteredEvents = events.filter((event) => {
     const search = searchTerm.toLowerCase();
     return (
