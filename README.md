@@ -38,8 +38,11 @@ EasyTicket is a full-stack web application built as a graduation project at the 
 ### home page
 ![home page](screenshots/home1.png)
 ![home page](screenshots/home2.png)
+### admin login
+![admin login](screenshots/log%20in%20admin.png)
 ### admin dashboard
-![admin dashboard](screenshots/admin%20panal.png)
+![admin dashboard](screenshots/admin%20dashboard.png)
+
 ### event details page
 ![event details page](screenshots/detils.png)
 ## add event
