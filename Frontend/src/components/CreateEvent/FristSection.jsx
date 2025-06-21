@@ -247,9 +247,7 @@ const FirstSection = ({ data, setData }) => {
                       <option value="sports">Sports</option>
                       <option value="technology">Technology</option>
                       <option value="education">Education</option>
-                      <option value="business">Business</option>
-                      <option value="health">Health</option>
-                     <option value="confrance">confrance</option>
+
                     </Form.Select>
                   </Form.Group>
                 </Form>

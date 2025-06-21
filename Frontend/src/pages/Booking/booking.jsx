@@ -676,6 +676,7 @@ function Booking() {
         paymentMethod: eventData.paymentMethod
       }));
 
+
       const groupedTickets = ticketTypesData.reduce((acc, ticket) => {
         const key = ticket.name.toLowerCase();
         if (!acc[key]) {
@@ -688,6 +689,7 @@ function Booking() {
             max_per_person: parseInt(ticket.max_per_person || 1)
           };
         } else {
+
           acc[key].available_quantity += parseInt(ticket.available_quantity || 0);
         }
         return acc;
@@ -764,6 +766,7 @@ function Booking() {
       
       if (allBookedTickets.length > 0) {
         setBookedTickets(allBookedTickets);
+
         setBookingSuccess(true);
       }
     } catch (err) {
@@ -794,37 +797,20 @@ function Booking() {
                 font-family: 'Poppins', sans-serif;
                 padding: 20px;
                 margin: 0;
-                background: #fff;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 100vh;
-              }
-              .qr-container {
-                max-width: 400px;
-                background: white;
-                border-radius: 10px;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-                padding: 20px;
-                text-align: center;
-              }
-              .qr-code {
-                background: white;
-                padding: 15px;
-                border-radius: 8px;
-                display: inline-block;
-                margin-bottom: 15px;
-                border: 1px solid #eee;
+
+                
               }
               .qr-code img {
                 width: 200px;
                 height: 200px;
                 display: block;
+
               }
               .info-label {
                 color: #666;
                 font-size: 12px;
                 text-transform: uppercase;
+                letter-spacing: 1px;
                 margin-bottom: 5px;
               }
               .info-value {
@@ -836,6 +822,7 @@ function Booking() {
               .ticket-id {
                 font-family: monospace;
                 background: #f8f9fa;
+
                 padding: 5px 10px;
                 border-radius: 5px;
                 font-size: 14px;
@@ -847,6 +834,7 @@ function Booking() {
                 }
                 .qr-container {
                   box-shadow: none;
+
                 }
               }
             </style>
@@ -1031,26 +1019,7 @@ function Booking() {
                   alt="${event?.title} logo"
                   class="event-logo"
                 />
-              ` : ''}
-              <h1>${event?.title || 'Event Ticket'}</h1>
-            </div>
-            <div class="ticket-body">
-              <div class="ticket-info">
-                <div class="info-row">
-                  <div class="info-label">Ticket Type</div>
-                  <div class="info-value">${ticket.ticket_type_details.name}</div>
-                </div>
-                <div class="info-row">
-                  <div class="info-label">Event Date & Time</div>
-                  <div class="info-value">
-                    ${new Date(event?.dates?.[0]?.startDate).toLocaleDateString('en-US', { 
-                      weekday: 'long', 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
-                    })}
-                    <br/>
-                    ${event?.dates?.[0]?.startTime || 'TBA'}
+
                   </div>
                 </div>
                 <div class="info-row">
@@ -1059,30 +1028,7 @@ function Booking() {
                   <div class="info-value" style="font-size: 14px; color: #666; margin-top: 5px;">
                     ${event?.address || ''}
                   </div>
-                </div>
-                <div class="info-row">
-                  <div class="info-label">Price</div>
-                  <div class="info-value">$${Number(ticket.final_price).toFixed(2)}</div>
-                </div>
-                <div class="info-row">
-                  <div class="info-label">Status</div>
-                  <div class="ticket-status">${ticket.status}</div>
-                </div>
-                <div class="info-row">
-                  <div class="info-label">Ticket ID</div>
-                  <div class="ticket-id">${ticket.id}</div>
-                </div>
-              </div>
-              <div class="qr-section">
-                <div class="qr-code">
-                  <img src="data:image/png;base64,${ticket.ticket_qr}" alt="Ticket QR Code" />
-                </div>
-                <div style="margin-bottom: 15px;">
-                  <h4 style="color: #333; margin: 0 0 5px 0;">Scan QR Code at Event Entry</h4>
-                  <p style="color: #666; margin: 0; font-size: 14px;">
-                    Present this QR code at the venue entrance for validation
-                  </p>
-                </div>
+
               </div>
             </div>
             <div class="ticket-footer">
@@ -1143,13 +1089,7 @@ function Booking() {
                   <h5>{ticket.ticket_type_details.name}</h5>
                   <p className="mb-2">Status: {ticket.status}</p>
                   <p className="mb-2">Price: ${ticket.final_price}</p>
-                  <div className="d-flex gap-2 flex-wrap">
-                    <Button variant="warning" onClick={() => handlePrintTicket(ticket.id)}>
-                      Print Ticket
-                    </Button>
-                    {/* <Button variant="info" onClick={() => handlePrintOrganizerQR(ticket.id)}>
-                      Print Organizer QR
-                    </Button> */}
+
                     <Button 
                       variant="success" 
                       onClick={() => {
