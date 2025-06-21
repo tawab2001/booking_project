@@ -40,7 +40,6 @@ const ticketApi = {
     getTicketTypes: async (eventId) => {
         try {
             const response = await api.get(`tickets/types/?event=${eventId}`);
-            console.log('Ticket types response:', response.data);
             return response.data;
         } catch (error) {
             console.error('Get ticket types error:', error);
