@@ -12,6 +12,7 @@ EasyTicket is a full-stack web application built as a graduation project at the 
 - Commission-based revenue model ($2 profit per ticket)
 - Secure authentication and authorization system
 
+## Tech Stack
 
 ### Backend
 - Django
