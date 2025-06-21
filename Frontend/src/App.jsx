@@ -23,6 +23,8 @@ import AdminDashboard from './pages/organizetion_dashboard/organizetion_dashboar
 import ErrorBoundary from './components/ErrorBoundary';
 import EventManagement from './admin/eventmangement';
 import ProtectedRoute from './components/ProtectedRoute';
+import EditEvent from './pages/organizetion_dashboard/EditEvent';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
     element: <Applayout/>,
     errorElement: <ErrorBoundary />,
     children: [
-      { path: "", element: <Home/> },
+      { path: "/", element: <Home/> },
       { path: "home", element: <Home/> },
       { 
         path: "profile", 
@@ -65,8 +67,12 @@ const router = createBrowserRouter([
         element: <ResetPassword/> 
       },
       {
-        path: "admindashboard", 
+        path: "admindashboard",
         element: <ProtectedRoute><AdminDashboard/></ProtectedRoute>
+      },
+      {
+        path: "organizer/events/edit/:eventId",
+        element: <ProtectedRoute><EditEvent/></ProtectedRoute>
       }
     ]
   },
@@ -95,13 +101,21 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <PayPalScriptProvider options={{
-      "client-id": "AcB_TLetjBymVxpDUrOUBtAC3yTGuurN3dLZM7Uf949ODzkzQEbZ3wOO6vm0DJhMMXtmrSl7kxCgerfW",
-      currency: "USD",
-      intent: "capture"
-    }}>
-      <RouterProvider router={router} />
-    </PayPalScriptProvider>
+    <GoogleOAuthProvider clientId="30494993317-v50imvkvdnuf5jp4thadqv55573svnva.apps.googleusercontent.com">
+      <PayPalScriptProvider 
+        options={{
+          "client-id": "AcB_TLetjBymVxpDUrOUBtAC3yTGuurN3dLZM7Uf949ODzkzQEbZ3wOO6vm0DJhMMXtmrSl7kxCgerfW",
+          currency: "USD",
+          intent: "capture",
+          components: "buttons",
+          "enable-funding": "paypal"
+        }}
+        onError={(err) => console.error("PayPal Script Error:", err)}
+        deferLoading={false}
+      >
+        <RouterProvider router={router} />
+      </PayPalScriptProvider>
+    </GoogleOAuthProvider>
   );
 }
 
