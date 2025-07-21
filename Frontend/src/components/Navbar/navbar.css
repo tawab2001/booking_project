@@ -57,12 +57,7 @@
 
 /* Navbar styles */
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1030; /* تأكد أن الهيدر فوق باقي العناصر */
-  background: #111 !important; /* اللون الأسود */
+  background: linear-gradient(90deg, #1f2937 0%, #374151 100%);
   padding: 1rem 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   animation: fadeIn 0.5s ease-out;
@@ -121,15 +116,6 @@
 
 .nav-link:hover::after {
   width: 100%;
-}
-
-.nav-link.active {
-  color: #facc15 !important; /* اللون الأصفر */
-  font-weight: bold;
-}
-
-.nav-link.active::after {
-  width: 100%; /* الخط السفلي يظهر بالكامل */
 }
 
 @media (prefers-reduced-motion: reduce) {

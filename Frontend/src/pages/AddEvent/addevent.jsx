@@ -222,15 +222,13 @@ const AddEvent = () => {
             </button>
           )}
           {currentSection < 3 && (
-            <div className={currentSection === 1 ? "ms-auto" : ""}>
-              <button
-                className="btn btn-warning"
-                onClick={handleNext}
-                disabled={isSubmitting}
-              >
-                Next
-              </button>
-            </div>
+            <button
+              className="btn btn-warning"
+              onClick={handleNext}
+              disabled={isSubmitting}
+            >
+              Next
+            </button>
           )}
           {currentSection === 3 && (
             <button

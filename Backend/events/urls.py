@@ -5,8 +5,7 @@ from .views import (
     EventListView,
     OrganizerEventListView,
     OrganizerEventDetailView,
-    OrganizerDashboardStatsView,
-    WithdrawalView
+    OrganizerDashboardStatsView
 )
 
 urlpatterns = [
@@ -19,6 +18,4 @@ urlpatterns = [
     path('organizer/stats/', OrganizerDashboardStatsView.as_view(), name='organizer-dashboard-stats'),
     path('organizer/events/', OrganizerEventListView.as_view(), name='organizer-event-list'),
     path('organizer/events/<int:event_id>/', OrganizerEventDetailView.as_view(), name='organizer-event-detail'),
-    path('organizer/dashboard/', OrganizerDashboardStatsView.as_view(), name='organizer-dashboard'),
-    path('organizer/withdraw/', WithdrawalView.as_view(), name='organizer-withdraw'),
 ]

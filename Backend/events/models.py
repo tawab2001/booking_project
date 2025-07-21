@@ -66,34 +66,3 @@ class Ticket(models.Model):
     
     def __str__(self):
         return f"{self.ticket_type.event.title} - {self.ticket_type.name} - {self.user.email}"
-    
-
-class Withdrawal(models.Model):
-    STATUS_CHOICES = (
-        ('pending', 'Pending'),
-        ('completed', 'Completed'),
-        ('failed', 'Failed'),
-    )
-    PAYMENT_METHODS = (
-        ('paypal', 'PayPal'),
-        ('bank_transfer', 'Bank Transfer'),
-    )
-
-    user = models.ForeignKey(
-        CustomUser,
-        on_delete=models.CASCADE,
-        related_name='withdrawals',
-    )
-    amount = models.DecimalField(max_digits=12, decimal_places=2)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    payment_method = models.CharField(max_length=20, choices=PAYMENT_METHODS)
-    payment_details = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        db_table = 'events_withdrawal'
-        ordering = ['-created_at']
-
-    def __str__(self):
-        return f"Withdrawal of {self.amount} by {self.user.email} - {self.status}"

@@ -80,12 +80,11 @@
 
 import React from 'react';
 import { Container, Nav, Navbar, Button } from 'react-bootstrap';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css'; // Import the separate CSS file
 
 function Header() {
   const navigate = useNavigate();
-  const location = useLocation();
   const isLoggedIn = !!localStorage.getItem('token'); // Fallback for safety
   const userType = localStorage.getItem('userType') || 'guest'; // Fallback for safety
 
@@ -115,14 +114,7 @@ function Header() {
   ];
 
   return (
-    <Navbar
-      expand="lg"
-      bg="dark"
-      data-bs-theme="dark"
-      className="navbar"
-      style={{ background: "#111", borderBottom: "1px solid #222" }}
-      aria-label="Main navigation"
-    >
+    <Navbar expand="lg" className="navbar" aria-label="Main navigation">
       <Container>
         <Navbar.Brand as={Link} to="/home" className="navbar-brand">
           EasyTicket
@@ -135,7 +127,7 @@ function Header() {
                 key={link.to}
                 as={Link}
                 to={link.to}
-                className={`nav-link ${location.pathname === link.to ? 'active' : ''}`}
+                className="nav-link"
                 style={{ animationDelay: `${index * 0.1}s` }}
                 aria-label={link.ariaLabel}
               >

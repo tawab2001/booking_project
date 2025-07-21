@@ -199,7 +199,7 @@ const SecondSection = ({ data, setData }) => {
             {/* Dates Section */}
             <div className="mb-4">
               <div className="d-flex justify-content-between align-items-center mb-3">
-                <h3 className="fs-sectionTitle">{styles.sectionTitle}</h3>
+                <h3 className="fs-sectionTitle">Event Dates</h3>
                 <Button className={styles.button} size="sm" onClick={addNewDate}>
                   <Plus size={16} className="me-1" />
                   Add Date

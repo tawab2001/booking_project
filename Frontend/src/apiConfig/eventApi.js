@@ -61,19 +61,27 @@ api.interceptors.response.use(
 const eventApi = {
     createEvent: async (formData) => {
         try {
+            // Ensure we're working with FormData
             const data = formData instanceof FormData ? formData : new FormData();
+            
+            // If plain object, convert to FormData
             if (!(formData instanceof FormData)) {
                 Object.entries(formData).forEach(([key, value]) => {
                     if (value !== null && value !== undefined) {
-                        data.append(key, typeof value === 'object' ? JSON.stringify(value) : value);
+                        if (typeof value === 'object') {
+                            data.append(key, JSON.stringify(value));
+                        } else {
+                            data.append(key, value);
+                        }
                     }
                 });
             }
-            const response = await api.post('events/create/', data);
+
+            const response = await api.post('events/create/', formData);
             return response.data;
         } catch (error) {
             console.error('Create event error:', error);
-            throw error;
+            throw error.response?.data || { message: 'Failed to create event' };
         }
     },
 

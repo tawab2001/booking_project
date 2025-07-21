@@ -210,5 +210,3 @@ const EventManagement = () => {
 };
 
 export default EventManagement;
-
-
